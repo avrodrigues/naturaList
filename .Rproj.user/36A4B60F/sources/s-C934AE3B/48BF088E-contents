@@ -1,0 +1,171 @@
+#script de testes
+
+library(devtools)
+library(roxygen2)
+
+occ.rec <- read.csv("../www/Alsophila_setosa.csv", sep = "\t", encoding = "UTF-8")
+spec.data <- read.csv("../www/fern_specialists.csv", encoding = "UTF-8")
+source("R/classify_occ.R")
+source("R/grid_filter.R")
+source("R/internal_functions.R")
+
+r.occ.rec <- reduce.df(occ.rec, na.rm = TRUE)
+
+
+include.criteria(r.occ.rec, as.data.frame(sapply(spec.data, as.character), stringsAsFactors = F) )
+
+
+pttn.all.specialist(spec.data)
+
+c.occ <- classify_occ(occ.rec, spec.data, na.rm.coords = T)
+
+
+
+
+crit.func <- function(occ, crit.levels, spec = NULL){
+  if(!is.null(spec)){
+    spec.list <- as.data.frame(sapply(spec, as.character), stringsAsFactors = F)
+  }
+
+  lowest_level <- paste0(length(crit.levels), "_", "no_criteria_met")
+  naturaList_levels <- rep(lowest_level, nrow(occ))
+
+  for(i in length(crit.levels):1){
+
+    if(crit.levels[i] == "field_obs"){
+      field_obs_level <- paste0(i, "_", "field_obs")
+      FObs <- which(occ$basis.of.rec %in% "HUMAN_OBSERVATION")
+      naturaList_levels[FObs] <- field_obs_level
+    }
+    if(crit.levels[i] == "sci_colection"){
+      sci_col_level <- paste0(i, "_", "sci_colection")
+      SCol <- which(occ$basis.of.rec %in% "PRESERVED_SPECIMEN")
+      naturaList_levels[SCol] <- sci_col_level
+    }
+    if(crit.levels[i] == "image"){
+      image_level <- paste0(i, "_", "image")
+      Img <- which(occ$media.type %in% "STILLIMAGE")
+      naturaList_levels[Img] <- image_level
+    }
+    if(crit.levels[i] == "taxonomist"){
+      tax_level <- paste0(i, "_", "taxonomist")
+      Tax <- has.det.ID(occ)
+      naturaList_levels[Tax] <- tax_level
+    }
+    if(crit.levels[i] == "det_by_spec"){
+
+      DSpec <- which(occ$vec.crit %in% "f")
+      naturaList_levels[DSpec] <- spec_level
+
+      if(!is.null(spec.list)){
+        DSpec <- unlist(lapply(1:nrow(spec.list),
+                                    function(x) func.det.by.esp(occ, x, spec.list)))
+
+        naturaList_levels[DSpec] <- apply(occ[DSpec,], 1,
+                                            function(x) specialist.conference(x, spec.list))
+      }
+    }
+  }
+  cbind(occ, naturaList_levels)
+}
+
+c_levels = c("det_by_spec","image",
+             "taxonomist",
+
+             "sci_colection",
+             "field_obs",
+             "no_criteria_met")
+#vc.crit <- rep(letters[1:6], sample(1:10, 6))
+#df.crit <- data.frame(vec.crit = sample(vc.crit, length(vc.crit)))
+
+class.occ <- crit.func(r.occ.rec, c_levels, spec.data)
+
+
+### inserindo perguntas no prompt
+
+class.occ
+
+check.spec <- function(class.occ, crit.levels, determined.by){
+
+  sub <- class.occ$naturaList_levels == "1_det_by_spec_verify"
+  if(any(sub)){
+    cat(paste("There is", sum(sub), "specialists' names to be checked"))
+
+    sub.occ <- class.occ[sub,]
+    rowid.sub <- rownames(class.occ[sub,])
+    answer <- vector("character", length(rowid.sub))
+
+    for(i in 1:nrow(sub.occ)){
+      ask <- paste(sub.occ[, determined.by], "\n", "Is this an specialist? (y/n)")
+      answer[i] <- readline(ask)
+      if(!any(answer[i] %in% c("y", "n"))) stop("Answer only 'y' or 'n'")
+    }
+
+    c.spec <- ifelse(answer == 'y', 1, 2)
+    levels_checked <- paste0(c.spec, "_", c_levels[c.spec])
+
+    class.occ[rowid.sub, "naturaList_levels"] <- levels_checked
+  }
+  class.occ
+}
+
+
+
+c.occ <- classify_occ(occ.rec, spec.data, na.rm.coords = T)
+y
+y
+y
+y
+
+c_levels = c("det_by_spec",
+             "field_obs",
+             "sci_colection",
+             "no_criteria_met")
+
+classify_occ(c.occ,
+             spec.data,
+             na.rm.coords = T,
+             crit.levels = c_levels)
+
+y
+y
+y
+y
+
+table(c.occ$naturaList_levels)
+
+
+####### Grid filter
+
+ras <- raster(resolution = c(5,5), 
+       xmn = -60, 
+       xmx = -30,
+       ymn = -30,
+       ymx = -20)
+
+ras <- setValues(ras, rep(1,ncell(ras)))
+
+plot(ras)
+points(c.occ[, c("decimalLongitude", "decimalLatitude")], pch = 16)
+table(c.occ$naturaList_levels)
+
+gf.occ.resol <- grid_filter(c.occ, grid.resolution = c(2,2))
+points(gf.occ.resol[, c("decimalLongitude", "decimalLatitude")], col = "red", pch = 16)
+table(gf.occ.resol$naturaList_levels)
+
+gf.occ <- grid_filter(c.occ, r = ras)
+points(gf.occ[, c("decimalLongitude", "decimalLatitude")], col = "blue", pch = 16)
+table(gf.occ$naturaList_levels)
+
+
+map_module(gf.occ)
+naturListdf <- map_module(c.occ)
+map_module(gf.occ.resol)
+
+str(gf.occ.resol)
+str(gf.occ)
+
+sapply(c.occ, class) == sapply(gf.occ, class) 
+
+
+as.Date(as.character(c.occ$dateIdentified))
