@@ -18,7 +18,7 @@ classify_occ(occ, spec = NULL, na.rm.coords = TRUE,
 \arguments{
 \item{occ}{dataframe with occurrence records information.}
 
-\item{spec}{dataframe with specialists' names}
+\item{spec}{dataframe with specialists' names. See details.}
 
 \item{na.rm.coords}{logical. If TRUE, remove occurrences with NA in latitude or longitude}
 
@@ -51,12 +51,18 @@ The criteria allowed are \code{det_by_spec}, \code{taxonomist},
 \item{occ.id}{column of \code{occ} with link or code for the occurence record.}
 }
 \description{
-Classify occurrence records in levels of confidence in species determination based on two data frames
+Classify occurrence records in levels of confidence in species determination
 }
 \details{
-basis.of.rec is a character vector with one of the following types:.... as in GBIF data 'basisOfRecord'
+specialist dataframe must have one column for each name and abreviation.
+First collumn must have the lastname. Subsequente colummns should have names and abbreviation
+for each name. See an exemple with /code{data(specList)}
 
-media.type uses the same pattern as GBIF data column mediaType.....
+basis.of.rec is a character vector with one of the following types of record:
+/code{PRESERVED_SPECIMEN} or /code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
+
+media.type uses the same pattern as GBIF data column mediaType indicating the existence
+of an associated image by /code{STILLIMAGE}.
 }
 \author{
 Arthur V. Rodrigues
