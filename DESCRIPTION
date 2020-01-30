@@ -6,7 +6,6 @@ Authors@R: c(
     person("Arthur", "Rodrigues", "Vinicius", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
     person("Gabriel", "Nakamura", role = "aut"),
 	person("Leandro", "Duarte", role = "ctb"))
-
 Description: This package allow to classify occurrence records based on confidence levels of species identification. 
     Furthermore, implement tools to filter occurrence inside grid cells and to manually check for possibles errors with 
 	an interactive shiny application.
