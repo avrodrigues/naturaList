@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574887016418.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1750771750",
+    "id" : "738B32E8",
+    "lastKnownWriteTime" : 1574885455,
+    "last_content_update" : 1574885455,
+    "path" : "C:/Users/avrodrigues/OneDrive/R/naturaList/script_testes.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "113,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

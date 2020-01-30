@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574887081932.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3618446728",
+    "id" : "C2B4F878",
+    "lastKnownWriteTime" : 1574885460,
+    "last_content_update" : 1574885460,
+    "path" : "C:/Users/avrodrigues/OneDrive/R/naturaList/naturaList/R/internal_functions.R",
+    "project_path" : "R/internal_functions.R",
+    "properties" : {
+        "cursorPosition" : "4,4",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

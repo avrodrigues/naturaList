@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574972885755.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3866436661",
+    "id" : "BF06060A",
+    "lastKnownWriteTime" : 1574971573,
+    "last_content_update" : 1574971573,
+    "path" : "C:/Users/Arthur/OneDrive/R/naturaList/naturaList/R/grid_filter.R",
+    "project_path" : "R/grid_filter.R",
+    "properties" : {
+        "cursorPosition" : "2,39",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
