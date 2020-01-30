@@ -3,7 +3,7 @@
 #' @description Classify occurrence records in levels of confidence in species determination
 #'
 #' @param occ dataframe with occurrence records information.
-#' @param spec dataframe with specialists' names
+#' @param spec dataframe with specialists' names. See details.
 #' @param na.rm.coords logical. If TRUE, remove occurrences with NA in latitude or longitude
 #' @param crit.levels character. Vector with levels of confidence in decreasing order.
 #'        The criteria allowed are \code{det_by_spec}, \code{taxonomist},
@@ -23,8 +23,13 @@
 #' @param media.type column of \code{occ} with the media type of recording. See details.
 #' @param occ.id column of \code{occ} with link or code for the occurence record.
 #'
-#' @details basis.of.rec is a character vector with one of the following types:.... as in GBIF data 'basisOfRecord'
-#' @details media.type uses the same pattern as GBIF data column mediaType.....
+#' @details specialist dataframe must have one column for each name and abreviation.
+#' First collumn must have the lastname. Subsequente colummns should have names and abbreviation for each name. See an exemple with /code{data(specList)}
+#'
+#' @details basis.of.rec is a character vector with one of the following types of record:
+#' /code{PRESERVED_SPECIMEN} or /code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
+#' @details media.type uses the same pattern as GBIF data column mediaType indicating the existence
+#' of an associated image by /code{STILLIMAGE}.
 #'
 #' @author Arthur V. Rodrigues
 #'
@@ -104,12 +109,7 @@ classify_occ <- function(occ,
                                           function(x) specialist.conference(x, spec.list))
       }
     }
-  }
-  # end of classification
-
-  #df$vetor.criterio <- vetor.criterio
-
-
+  } # end of classification
 
   rowID <- r.occ$rowID
 
