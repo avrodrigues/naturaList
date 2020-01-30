@@ -56,13 +56,13 @@ Classify occurrence records in levels of confidence in species determination
 \details{
 specialist dataframe must have one column for each name and abreviation.
 First collumn must have the lastname. Subsequente colummns should have names and abbreviation
-for each name. See an exemple with /code{data(specList)}
+for each name. See an exemple with \code{data(specList)}
 
 basis.of.rec is a character vector with one of the following types of record:
-/code{PRESERVED_SPECIMEN} or /code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
+\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
 
 media.type uses the same pattern as GBIF data column mediaType indicating the existence
-of an associated image by /code{STILLIMAGE}.
+of an associated image by \code{STILLIMAGE}.
 }
 \author{
 Arthur V. Rodrigues
