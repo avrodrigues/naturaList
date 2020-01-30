@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "3658599161",
     "id" : "5124509B",
-    "lastKnownWriteTime" : 1580401274,
-    "last_content_update" : 1580401274808,
+    "lastKnownWriteTime" : 1580406776,
+    "last_content_update" : 1580406776909,
     "path" : "C:/Users/Arthur/OneDrive/R/naturaList/naturaList/R/classify_occ.R",
     "project_path" : "R/classify_occ.R",
     "properties" : {
-        "cursorPosition" : "37,0",
-        "scrollLine" : "28"
+        "cursorPosition" : "27,55",
+        "scrollLine" : "8"
     },
     "read_only" : false,
     "read_only_alternatives" : [
