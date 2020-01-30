@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575031780428.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1675124595",
+    "id" : "5124509B",
+    "lastKnownWriteTime" : 1580396606,
+    "last_content_update" : 1580396606692,
+    "path" : "C:/Users/Arthur/OneDrive/R/naturaList/naturaList/R/classify_occ.R",
+    "project_path" : "R/classify_occ.R",
+    "properties" : {
+        "cursorPosition" : "27,2",
+        "scrollLine" : "8"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
