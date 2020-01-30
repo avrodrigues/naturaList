@@ -24,8 +24,8 @@
 #' @param occ.id column of \code{occ} with link or code for the occurence record.
 #'
 #' @details specialist dataframe must have one column for each name and abreviation.
-#' First collumn must have the lastname. Subsequente colummns should have names and abbreviation for each name. See an exemple with /code{data(specList)}
-#'
+#' First collumn must have the lastname. Subsequente colummns should have names and abbreviation
+#' for each name. See an exemple with /code{data(specList)}
 #' @details basis.of.rec is a character vector with one of the following types of record:
 #' /code{PRESERVED_SPECIMEN} or /code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
 #' @details media.type uses the same pattern as GBIF data column mediaType indicating the existence
