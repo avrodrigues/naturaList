@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574950815158.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2D2216B5",
+    "lastKnownWriteTime" : 1563297689,
+    "last_content_update" : 1563297689,
+    "path" : "C:/Users/Arthur/OneDrive/R/naturaList/functions.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "168,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
