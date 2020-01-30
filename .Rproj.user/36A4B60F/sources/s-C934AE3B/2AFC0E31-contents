@@ -1,0 +1,31 @@
+## teste2 - testando funções naturaList
+
+library(devtools)
+library(roxygen2)
+library(naturaList)
+
+alsophila_setosa <- read.csv("../www/Alsophila_setosa.csv", sep = "\t", encoding = "UTF-8")
+specialists_data <- read.csv("../www/fern_specialists.csv", encoding = "UTF-8")
+
+# classification
+cl.data <- classify_occ(alsophila_setosa, specialists_data)
+y
+y
+y
+y
+
+cl.data
+table(cl.data$naturaList_levels)
+
+
+# grid filtering
+gr.filter <- grid_filter(cl.data, grid.resolution = c(1.5,1.5))
+table(gr.filter$naturaList_levels)
+
+
+#check for ouliers in occurence points
+a.setosa.occ <- map_module(gr.filter)
+table(a.setosa.occ$naturaList_levels)
+
+a.setosa.occ <- map_module(gr.filter)
+table(a.setosa.occ$naturaList_levels)
