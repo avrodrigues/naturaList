@@ -21,6 +21,10 @@ speciaLists
 }
 \description{
 A dataset containing the specialists of ferns and lycophytes of Brazil formated
-to be used by \code{naturaList} package
+to be used by \code{naturaList} package.
+}
+\details{
+This data serves as a format example for \code{spec} argument in
+\code{\link{classify_occ}}
 }
 \keyword{datasets}
