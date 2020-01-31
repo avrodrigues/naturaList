@@ -12,10 +12,10 @@
 #' Specialists of ferns and lycophytes of Brazil
 #'
 #' A dataset containing the specialists of ferns and lycophytes of Brazil formated
-#' to be used by \code{naturaList} package.
+#' to be used by \code{naturaList} package. This data serves as a format example for \code{spec} argument in
+#' \code{\link{classify_occ}}.
 #'
-#' @details This data serves as a format example for \code{spec} argument in
-#' \code{\link{classify_occ}}
+#' @details
 #'
 #' @format A data frame with 27 rows and 8 columns:
 #' \describe{
@@ -27,6 +27,6 @@
 #'     was repeated three times.}
 #'   }
 #'
-#'   @source The specialists names was derived from the authors of paper:
+#' @source The specialists names was derived from the authors of paper:
 #'   \url{http://dx.doi.org/10.1590/2175-7860201566410}
 "speciaLists"
