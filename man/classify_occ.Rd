@@ -20,49 +20,65 @@ classify_occ(occ, spec = NULL, na.rm.coords = TRUE,
 
 \item{spec}{dataframe with specialists' names. See details.}
 
-\item{na.rm.coords}{logical. If TRUE, remove occurrences with NA in latitude or longitude}
+\item{na.rm.coords}{logical. If TRUE, remove occurrences with NA in latitude
+or longitude}
 
-\item{crit.levels}{character. Vector with levels of confidence in decreasing order.
-The criteria allowed are \code{det_by_spec}, \code{taxonomist},
-\code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}. See datails.}
+\item{crit.levels}{character. Vector with levels of confidence in decreasing
+order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
+\code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
+ See datails.}
 
-\item{institution.source}{column of \code{occ} with the name of the institution that provided the data}
+\item{institution.source}{column of \code{occ} with the name of the
+institution that provided the data}
 
-\item{collection.code}{column of \code{occ} with the codes for institution names}
+\item{collection.code}{column of \code{occ} with the codes for institution
+names}
 
 \item{catalog.number}{column of \code{occ} with catalog number}
 
 \item{year.event}{column with of \code{occ} the year of the collection event}
 
-\item{date.identified}{column of \code{occ} with the date of species determination}
+\item{date.identified}{column of \code{occ} with the date of species
+determination}
 
 \item{scientific.name}{column of \code{occ} with the species names}
 
-\item{determined.by}{column of \code{occ} with the name of who determined the species}
+\item{determined.by}{column of \code{occ} with the name of who determined the
+species}
 
 \item{longitude}{column with of \code{occ} longitude in decimal degrees}
 
 \item{latitude}{column with of \code{occ} latitude in decimal degrees}
 
-\item{basis.of.rec}{column of \code{occ} with the recording types, as in GBIF. See details.}
+\item{basis.of.rec}{column of \code{occ} with the recording types, as in GBIF.
+See details.}
 
-\item{media.type}{column of \code{occ} with the media type of recording. See details.}
+\item{media.type}{column of \code{occ} with the media type of recording.
+See details.}
 
 \item{occ.id}{column of \code{occ} with link or code for the occurence record.}
 }
+\value{
+the \code{occ} data frame plus the classification of each record
+in a new column, named \code{naturaList_levels}.
+}
 \description{
-Classify occurrence records in levels of confidence in species determination
+Classify occurrence records in levels of confidence in species
+determination
 }
 \details{
-specialist dataframe must have one column for each name and abreviation.
-First collumn must have the lastname. Subsequente colummns should have names and abbreviation
-for each name. See an exemple with \code{data(specList)}
+Specialist dataframe must have one column for each name and
+abreviation.
+First collumn must have the lastname. Subsequente colummns should have names
+and abbreviation
+for each name. See an exemple with \code{data(speciaList)}
 
-basis.of.rec is a character vector with one of the following types of record:
-\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in GBIF data 'basisOfRecord'.
+\code{basis.of.rec} is a character vector with one of the following
+types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
+GBIF data 'basisOfRecord'.
 
-media.type uses the same pattern as GBIF data column mediaType indicating the existence
-of an associated image by \code{STILLIMAGE}.
+media.type uses the same pattern as GBIF mediaType column,
+indicating the existence of an associated image with \code{STILLIMAGE}.
 }
 \author{
 Arthur V. Rodrigues
