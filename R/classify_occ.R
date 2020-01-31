@@ -3,48 +3,54 @@
 #' @description Classify occurrence records in levels of confidence in species
 #' determination
 #'
-#' @param occ dataframe with occurrence records information.
-#' @param spec dataframe with specialists' names. See details.
-#' @param na.rm.coords logical. If TRUE, remove occurrences with NA in latitude
-#' or longitude
-#' @param crit.levels character. Vector with levels of confidence in decreasing
-#' order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
-#' \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
-#'  See datails.
-#' @param institution.source column of \code{occ} with the name of the
-#' institution that provided the data
-#' @param collection.code column of \code{occ} with the codes for institution
-#'  names
-#' @param catalog.number column of \code{occ} with catalog number
-#' @param year.event column with of \code{occ} the year of the collection event
-#' @param date.identified column of \code{occ} with the date of species
-#' determination
-#' @param scientific.name column of \code{occ} with the species names
-#' @param determined.by column of \code{occ} with the name of who determined the
-#'  species
-#' @param longitude column with of \code{occ} longitude in decimal degrees
-#' @param latitude column with of \code{occ} latitude in decimal degrees
-#' @param basis.of.rec column of \code{occ} with the recording types, as in GBIF.
+#' @param occ Data frame with occurrence records information.
+#' @param spec Data frame with specialists' names. See details.
+#' @param na.rm.coords Logical. If TRUE, remove occurrences with NA in latitude
+#'   or longitude
+#' @param crit.levels Character. Vector with levels of confidence in decreasing
+#'   order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
+#'   \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
+#'    See datails.
+#' @param institution.source Column name of \code{occ} with the name of the
+#' institution that provided the data.
+#' @param collection.code Column name of \code{occ} with the codes for institution
+#'  names.
+#' @param catalog.number Column name of \code{occ} with catalog number.
+#' @param year.event Column name of \code{occ} the year of the collection event.
+#' @param date.identified Column name of \code{occ} with the date of species
+#' determination.
+#' @param scientific.name Column name of \code{occ} with the species names.
+#' @param determined.by Column name of \code{occ} with the name of who determined the
+#'  species.
+#' @param longitude Column name of \code{occ} longitude in decimal degrees.
+#' @param latitude Column name of \code{occ} latitude in decimal degrees.
+#' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
 #'  See details.
-#' @param media.type column of \code{occ} with the media type of recording.
+#' @param media.type Column name of \code{occ} with the media type of recording.
 #' See details.
-#' @param occ.id column of \code{occ} with link or code for the occurence record.
+#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
 #'
-#' @return the \code{occ} data frame plus the classification of each record
+#' @return The \code{occ} data frame plus the classification of each record
 #' in a new column, named \code{naturaList_levels}.
 #'
-#' @details Specialist dataframe must have one column for each name and
-#' abreviation.
-#' First collumn must have the lastname. Subsequente colummns should have names
-#' and abbreviation
-#' for each name. See an exemple with \code{data(speciaList)}
+#' @details \code{spec} data frame must have columns separating \code{LastName},
+#' \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
+#' following columns should have names (\code{Name}) and abbreviation
+#' (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaList}} data.
 #' @details \code{basis.of.rec} is a character vector with one of the following
 #' types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
 #' GBIF data 'basisOfRecord'.
-#'
-#' @details media.type uses the same pattern as GBIF mediaType column,
+#' @details \code{media.type} uses the same pattern as GBIF mediaType column,
 #' indicating the existence of an associated image with \code{STILLIMAGE}.
 #'
+#' @examples
+#' classify_occ(A.setosa, speciaLists)
+#' y
+#' y
+#' y
+#' y
+#'
+#' @seealso \code{\link[naturaList]{speciaList}}
 #'
 #' @author Arthur V. Rodrigues
 #'
