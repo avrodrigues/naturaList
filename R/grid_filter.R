@@ -1,3 +1,43 @@
+#' Filter the occurence with most confidence in species identification inside grid cells
+#'
+#' Filter one occurence record per grid cell selected by the higher level of confidence
+#' in species identification made by \code{\link{classify_occ}}
+#'
+#' @param occ.cl Data frame with occurrence records information already
+#'   classified by \code{\link{classify_occ}}.
+#' @param grid.resolution Numeric vector with widht and height of grid cell in
+#'   decimal degrees.
+#' @param r raster from which the grid cell resolution is derived.
+#' @param institution.source Column name of \code{occ} with the name of the
+#'   institution that provided the data.
+#' @param collection.code Column name of \code{occ} with the codes for institution
+#'   names.
+#' @param catalog.number Column name of \code{occ} with catalog number.
+#' @param year.event Column name of \code{occ} the year of the collection event.
+#' @param date.identified Column name of \code{occ} with the date of species
+#'   determination.
+#' @param scientific.name Column name of \code{occ} with the species names.
+#' @param determined.by Column name of \code{occ} with the name of who determined the
+#'   species.
+#' @param longitude Column name of \code{occ} longitude in decimal degrees.
+#' @param latitude Column name of \code{occ} latitude in decimal degrees.
+#' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
+#' @param media.type Column name of \code{occ} with the media type of recording.
+#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
+#'
+#' @return Data frame with the same columns of \code{occ.cl}.
+#'
+#' @seealso \code{\link{classify_occ}}
+#'
+#' @examples
+#' occ.class <- classify_occ(A.setosa, speciaLists)
+#' occ.grid <- grid.filter(occ.class)
+#' occ.grid
+#'
+#' @author Arthur V. Rodrigues
+#'
+#' @export
+
 
 grid_filter <- function(occ.cl,
                         grid.resolution = c(0.5,0.5),
