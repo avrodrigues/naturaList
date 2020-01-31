@@ -16,50 +16,50 @@ classify_occ(occ, spec = NULL, na.rm.coords = TRUE,
   occ.id = "occurrenceID")
 }
 \arguments{
-\item{occ}{dataframe with occurrence records information.}
+\item{occ}{Data frame with occurrence records information.}
 
-\item{spec}{dataframe with specialists' names. See details.}
+\item{spec}{Data frame with specialists' names. See details.}
 
-\item{na.rm.coords}{logical. If TRUE, remove occurrences with NA in latitude
+\item{na.rm.coords}{Logical. If TRUE, remove occurrences with NA in latitude
 or longitude}
 
-\item{crit.levels}{character. Vector with levels of confidence in decreasing
+\item{crit.levels}{Character. Vector with levels of confidence in decreasing
 order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
 \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
  See datails.}
 
-\item{institution.source}{column of \code{occ} with the name of the
-institution that provided the data}
+\item{institution.source}{Column name of \code{occ} with the name of the
+institution that provided the data.}
 
-\item{collection.code}{column of \code{occ} with the codes for institution
-names}
+\item{collection.code}{Column name of \code{occ} with the codes for institution
+names.}
 
-\item{catalog.number}{column of \code{occ} with catalog number}
+\item{catalog.number}{Column name of \code{occ} with catalog number.}
 
-\item{year.event}{column with of \code{occ} the year of the collection event}
+\item{year.event}{Column name of \code{occ} the year of the collection event.}
 
-\item{date.identified}{column of \code{occ} with the date of species
-determination}
+\item{date.identified}{Column name of \code{occ} with the date of species
+determination.}
 
-\item{scientific.name}{column of \code{occ} with the species names}
+\item{scientific.name}{Column name of \code{occ} with the species names.}
 
-\item{determined.by}{column of \code{occ} with the name of who determined the
-species}
+\item{determined.by}{Column name of \code{occ} with the name of who determined the
+species.}
 
-\item{longitude}{column with of \code{occ} longitude in decimal degrees}
+\item{longitude}{Column name of \code{occ} longitude in decimal degrees.}
 
-\item{latitude}{column with of \code{occ} latitude in decimal degrees}
+\item{latitude}{Column name of \code{occ} latitude in decimal degrees.}
 
-\item{basis.of.rec}{column of \code{occ} with the recording types, as in GBIF.
+\item{basis.of.rec}{Column name of \code{occ} with the recording types, as in GBIF.
 See details.}
 
-\item{media.type}{column of \code{occ} with the media type of recording.
+\item{media.type}{Column name of \code{occ} with the media type of recording.
 See details.}
 
-\item{occ.id}{column of \code{occ} with link or code for the occurence record.}
+\item{occ.id}{Column name of \code{occ} with link or code for the occurence record.}
 }
 \value{
-the \code{occ} data frame plus the classification of each record
+The \code{occ} data frame plus the classification of each record
 in a new column, named \code{naturaList_levels}.
 }
 \description{
@@ -67,18 +67,28 @@ Classify occurrence records in levels of confidence in species
 determination
 }
 \details{
-Specialist dataframe must have one column for each name and
-abreviation.
-First collumn must have the lastname. Subsequente colummns should have names
-and abbreviation
-for each name. See an exemple with \code{data(speciaList)}
+\code{spec} data frame must have columns separating \code{LastName},
+\code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
+following columns should have names (\code{Name}) and abbreviation
+(\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaList}} data.
 
 \code{basis.of.rec} is a character vector with one of the following
 types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
 GBIF data 'basisOfRecord'.
 
-media.type uses the same pattern as GBIF mediaType column,
+\code{media.type} uses the same pattern as GBIF mediaType column,
 indicating the existence of an associated image with \code{STILLIMAGE}.
+}
+\examples{
+classify_occ(A.setosa, speciaLists)
+y
+y
+y
+y
+
+}
+\seealso{
+\code{\link[naturaList]{speciaList}}
 }
 \author{
 Arthur V. Rodrigues
