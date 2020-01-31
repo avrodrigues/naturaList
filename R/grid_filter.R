@@ -1,10 +1,10 @@
 #' Filter the occurence with most confidence in species identification inside grid cells
 #'
 #' Filter one occurence record per grid cell selected by the higher level of confidence
-#' in species identification made by \code{\link{classify_occ}}
+#' in species identification made by \code{\link{classify_occ}} function.
 #'
 #' @param occ.cl Data frame with occurrence records information already
-#'   classified by \code{\link{classify_occ}}.
+#'   classified by \code{\link{classify_occ}} function.
 #' @param grid.resolution Numeric vector with widht and height of grid cell in
 #'   decimal degrees.
 #' @param r raster from which the grid cell resolution is derived.
@@ -37,7 +37,6 @@
 #' @author Arthur V. Rodrigues
 #'
 #' @export
-
 
 grid_filter <- function(occ.cl,
                         grid.resolution = c(0.5,0.5),
