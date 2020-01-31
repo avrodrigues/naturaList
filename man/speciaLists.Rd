@@ -12,19 +12,20 @@
   \item{Abbrev}{Columns with the abbreviation (one character) of the names of
    specialists. Could be repeated as long as needed. In this data \code{Abbrev}
     was repeated three times.}
-  }
-
-  @source The specialists names was derived from the authors of paper:
-  \url{http://dx.doi.org/10.1590/2175-7860201566410}}
+  }}
+\source{
+The specialists names was derived from the authors of paper:
+  \url{http://dx.doi.org/10.1590/2175-7860201566410}
+}
 \usage{
 speciaLists
 }
 \description{
 A dataset containing the specialists of ferns and lycophytes of Brazil formated
-to be used by \code{naturaList} package.
+to be used by \code{naturaList} package. This data serves as a format example for \code{spec} argument in
+\code{\link{classify_occ}}.
 }
 \details{
-This data serves as a format example for \code{spec} argument in
-\code{\link{classify_occ}}
+
 }
 \keyword{datasets}
