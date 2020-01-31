@@ -13,7 +13,7 @@ GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/d
 A.setosa
 }
 \description{
-A dataset contaning 508 occurrence records worldwide. This is the a raw dataset
-fom GBIF.
+A GBIF raw dataset contaning 508 occurrence records for the tree fern
+Alsophila setosa.
 }
 \keyword{datasets}
