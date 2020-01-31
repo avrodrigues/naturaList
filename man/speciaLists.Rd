@@ -4,7 +4,18 @@
 \name{speciaLists}
 \alias{speciaLists}
 \title{Specialists of ferns and lycophytes of Brazil}
-\format{A data frame with 27 rows and 8 columns}
+\format{A data frame with 27 rows and 8 columns:
+\describe{
+  \item{LastName}{Last name of the specialist.}
+  \item{Name}{Columns with the names of specialist. Could be repeated as long
+  as needed. In this data \code{Name} was repeated four times.}
+  \item{Abbrev}{Columns with the abbreviation (one character) of the names of
+   specialists. Could be repeated as long as needed. In this data \code{Abbrev}
+    was repeated three times.}
+  }
+
+  @source The specialists names was derived from the authors of paper:
+  \url{http://dx.doi.org/10.1590/2175-7860201566410}}
 \usage{
 speciaLists
 }
