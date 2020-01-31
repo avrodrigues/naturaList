@@ -15,7 +15,7 @@ grid_filter(occ.cl, grid.resolution = c(0.5, 0.5), r = NULL,
 }
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
-classified by \code{\link{classify_occ}}.}
+classified by \code{\link{classify_occ}} function.}
 
 \item{grid.resolution}{Numeric vector with widht and height of grid cell in
 decimal degrees.}
@@ -55,7 +55,7 @@ Data frame with the same columns of \code{occ.cl}.
 }
 \description{
 Filter one occurence record per grid cell selected by the higher level of confidence
-in species identification made by \code{\link{classify_occ}}
+in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
 occ.class <- classify_occ(A.setosa, speciaLists)
