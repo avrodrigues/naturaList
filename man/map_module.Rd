@@ -53,6 +53,10 @@ classifcation levels or spatial polygons.
 }
 \examples{
 occ.class <- classify_occ(A.setosa, speciaLists)
+y
+y
+y
+y
 occ.selected <- map_module(occ.class)
 occ.selected
 
