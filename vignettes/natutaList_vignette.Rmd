@@ -1,0 +1,68 @@
+---
+title: "Introduction to naturaList R Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{natutaList_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+The `naturaList` Package offers tools that allow to classify occurrence records up 
+to six confidence levels in species identification. This classification aid the user
+to selected reliable occurrence information and to find for inconsistencies in 
+occurrence data. 
+
+The main function of `naturaList` is `classify_occ()`. This function needs a occurrence
+records data and a list of known specialist in the taxa. Both data shold be provided by the user. 
+`naturaList` have a dataset for occurence records of the tree fern *Alsophila setosa*, 
+and a list of specialists in brazilian ferns and lichophytes. These datasets will be used
+as example in the `naturaList` Package. 
+
+Occurence records for *Alsophila setosa* were obtained from 
+[GBIF](https://doi.org/10.15468/dl.6jesg0) in 8th July 2019. The `A.setosa` 
+dataset in the package is the raw dataset downloaded from GBIF, i.e. this dataset 
+contains errors in coordinates and occurrence records without coordinates. The 
+functions in `naturaList` assumes that coordinates are correct, but exclude occurrences
+without coordinates. The dataset of specialists contains the last name, names and abbreviations for the names, separated in collumns (see `?speciaLists`). 
+
+With these two datasets in hands we can start the classification. 
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#"
+)
+```
+
+```{r setup}
+library(naturaList)
+dim(A.setosa) # see ?A.setosa
+dim(speciaLists) # see ?speciaLists
+```
+
+First, we will classify the occurrence records in six confidence levels of species identification. 
+The defalt order of confidence levels is:
+
+ * Level 1 - species was identified by a specialist;
+ * Level 2 - species was identified by a non-specialist;
+ * Level 3 - occurrence record has an image associated;
+ * Level 4 - the specimen is preserved in a scientific colection;
+ * Level 5 - the identification was done in filed observation;
+ * Level 6 - no criteria was met.
+ 
+ Nevertheless, the user can specify the order of levels, depending on the 
+ objetives, except fot the Level 1 that always is the specialist identification. 
+ 
+ Let's conduct the classification with `classify_occ()`:
+ 
+```{r classify, eval=T}
+occ.class <- classify_occ(A.setosa, speciaLists)
+y
+y
+y
+y
+
+dim(occ.class)
+```
+ 
