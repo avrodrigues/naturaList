@@ -44,12 +44,12 @@
 #' indicating the existence of an associated image with \code{STILLIMAGE}.
 #'
 #' @examples
-#' classify_occ(A.setosa, speciaLists)
+#' occ.class <- classify_occ(A.setosa, speciaLists)
 #' y
 #' y
 #' y
 #' y
-#'
+#' occ.class
 #' @seealso \code{\link[naturaList]{speciaList}}
 #'
 #' @author Arthur V. Rodrigues
