@@ -25,3 +25,7 @@ Imports:
     rgdal,
     leaflet.extras,
     shinyLP
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
