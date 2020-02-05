@@ -31,6 +31,10 @@
 #'
 #' @examples
 #' occ.class <- classify_occ(A.setosa, speciaLists)
+#' y
+#' y
+#' y
+#' y
 #' occ.grid <- grid.filter(occ.class)
 #' occ.grid
 #'
