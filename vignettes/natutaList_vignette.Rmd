@@ -51,12 +51,12 @@ The defalt order of confidence levels is:
  * Level 5 - the identification was done in filed observation;
  * Level 6 - no criteria was met.
  
- Nevertheless, the user can specify the order of levels, depending on the 
- objetives, except fot the Level 1 that always is the specialist identification. 
+ Nevertheless, the user can specify the levels order, depending on his/her 
+ objetives, except for the Level 1 that always is the specialist identification. 
  
- Let's conduct the classification with `classify_occ()`:
+ Let's classify the occurence records with `classify_occ()`:
  
-```{r classify, eval=T}
+```{r classify, eval=F, echo = T}
 occ.class <- classify_occ(A.setosa, speciaLists)
 y
 y
@@ -64,5 +64,25 @@ y
 y
 
 dim(occ.class)
+# [1] 323 46
 ```
  
+When the name of who identified the species do not perfect match with specialists
+names, the function asks if the name represents a specialist. Then the user must
+type `y` or `n` to answer yes or no for each umbiguos name. In our example, 
+this checking procedure is needed in 4 occurrences. All of them were identified 
+by at least one specialist. Because this the code have 4 lines with `y`. 
+
+The classified (`occ.class`) dataset was reduced to 323 occurrences from 508 
+from the original dataset (`A.setosa`), because occurences without geographic 
+coodinates were excluded. 
+
+Check how many occurrences was classified in each level:
+```{r levels, eval=F, echo = T}
+table(occ.class$naturaList_levels)
+
+#   1_det_by_spec    2_taxonomist         3_image 4_sci_colection 
+#              69             218              12              24 
+```
+
+You may 
