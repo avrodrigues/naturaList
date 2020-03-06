@@ -151,15 +151,15 @@ has.det.ID <- function(sp.df){
 check.spec <- function(class.occ, crit.levels, determined.by){
 
   sub <- class.occ$naturaList_levels == "1_det_by_spec_verify"
+  spec.unique <- unique(class.occ[sub,determined.by])
+
   if(any(sub)){
-    cat(paste("There is", sum(sub), "specialists' names to be checked"))
+    cat(paste("There is", length(spec.unique), "specialists' names to be checked"))
 
-    sub.occ <- class.occ[sub,]
-    rowid.sub <- rownames(class.occ[sub,])
-    answer <- vector("character", length(rowid.sub))
+    answer <- vector("character", length(spec.unique))
 
-    for(i in 1:nrow(sub.occ)){
-      ask <- paste(sub.occ[, determined.by], "\n", "Is this a specialist? (y/n)")
+    for(i in 1:length(spec.unique)){
+      ask <- paste(spec.unique[i], "\n", "Is this a specialist? (y/n)")
       answer[i] <- readline(ask)
       if(!any(answer[i] %in% c("y", "n"))) stop("Answer only 'y' or 'n'")
     }
@@ -167,7 +167,12 @@ check.spec <- function(class.occ, crit.levels, determined.by){
     c.spec <- ifelse(answer == 'y', 1, 2)
     levels_checked <- paste0(c.spec, "_", crit.levels[c.spec])
 
-    class.occ[rowid.sub, "naturaList_levels"] <- levels_checked
+    for(i in 1:length(spec.unique)){
+      g.spec <- grep(spec.unique[i], class.occ[,determined.by])
+      for(j in 1:length(g.spec)){
+        class.occ[g.spec[j],"naturaList_levels"] <- levels_checked[i]
+      }
+    }
   }
   class.occ
 }
