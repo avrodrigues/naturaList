@@ -36,7 +36,12 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+# Load package and data
 library(naturaList)
+data("A.setosa")
+data("speciaLists")
+
+# see the size of datasets
 dim(A.setosa) # see ?A.setosa
 dim(speciaLists) # see ?speciaLists
 ```
@@ -80,9 +85,35 @@ coodinates were excluded.
 Check how many occurrences was classified in each level:
 ```{r levels, eval=F, echo = T}
 table(occ.class$naturaList_levels)
-
 #   1_det_by_spec    2_taxonomist         3_image 4_sci_colection 
 #              69             218              12              24 
 ```
 
-You may 
+With `grid_filter()` you may filter occurrence records inside grid cells in 
+order to keep only the highest confidence level in each grid cell. 
+
+As example, we will filter the `occ.class` in square grid cells of 0.5 decimal
+degree of side, which is the defalt grid cell size of `grid_filter()`. You can 
+provide the height and width of the grid cell in `grid.resolution` argument, or 
+provide a raster layer in argument `r` from which the cell is used to filter 
+occurrences. 
+
+```{r grid_filter, eval=F}
+occ.grid <- grid_filter(occ.class)
+dim(occ.grid)
+# [1] 102  46
+table(occ.grid$naturaList_levels)
+#  1_det_by_spec    2_taxonomist         3_image 4_sci_colection 
+#             38              58               3               3 
+```
+
+Using the `grid_filter()` with cell size of 0.5 decimal degrees, the number of occurrences
+was reduced to 102. Althogh, the proportion of occurrences identified by specialists
+increased from 21.4 to 37.2%. 
+
+Finally, the `map_module()` function allow the user to visualize the occurrence
+records in a interactive map. In this interactive map, the user can click over an
+occurence point to see basic information about the record, such as the instituition
+who holds the record, who identified the species and when it was identified. 
+Also, if a some error is identified, the user could allow that clicking acts to 
+delete points. 
