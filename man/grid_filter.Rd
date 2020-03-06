@@ -63,7 +63,7 @@ y
 y
 y
 y
-occ.grid <- grid.filter(occ.class)
+occ.grid <- grid_filter(occ.class)
 occ.grid
 
 }
