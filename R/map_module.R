@@ -68,7 +68,7 @@ map_module <- function(occ.cl,
       column(3,
              box(width = NULL,
                  checkboxGroupButtons(
-                   inputId = "grbox", label = "What levels should be keeped in the output data set?",
+                   inputId = "grbox", label = "What levels should be maintained in the output data set?",
                    choices = c("Level 1" = "1",
                                "Level 2" = "2",
                                "Level 3" = "3",
