@@ -50,7 +50,7 @@
 #' y
 #' y
 #' occ.class
-#' @seealso \code{\link[naturaList]{speciaList}}
+#' @seealso \code{\link[naturaList]{speciaLists}}
 #'
 #' @author Arthur V. Rodrigues
 #'
