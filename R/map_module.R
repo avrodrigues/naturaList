@@ -165,53 +165,17 @@ map_module <- function(occ.cl,
 
 
       # Add marker groups
-      addCircleMarkers(data= values$pt.ctr1,
-                       lng= values$pt.ctr1[,longitude] ,
-                       lat= values$pt.ctr1[,latitude],
+      addCircleMarkers(data= values$pt.ctr6,
+                       lng= values$pt.ctr6[,longitude] ,
+                       lat= values$pt.ctr6[,latitude],
                        radius=6 ,
-                       layerId = row.names(values$pt.ctr1),
-                       popup = paste(strong("ID:"), values$pt.ctr1[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr1[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr1[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr1[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr1[, date.identified]), "<br>"),
-                       fillColor="red", stroke = F, fillOpacity = 0.8, group="Level 1") %>%
-
-      addCircleMarkers(data= values$pt.ctr2,
-                       lng= values$pt.ctr2[,longitude] ,
-                       lat= values$pt.ctr2[,latitude],
-                       radius=6 ,
-                       layerId = row.names(values$pt.ctr2),
-                       popup = paste(strong("ID:"), values$pt.ctr2[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr2[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr2[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr2[, year.event], "<br>",
-                                     strong("Date Identified:"), as.Date(as.character(values$pt.ctr2[, date.identified])), "<br>"),
-                       fillColor="orange", stroke = F, fillOpacity = 0.8, group="Level 2") %>%
-
-      addCircleMarkers(data= values$pt.ctr3,
-                       lng= values$pt.ctr3[,longitude] ,
-                       lat= values$pt.ctr3[,latitude],
-                       radius=6 ,
-                       layerId = row.names(values$pt.ctr3),
-                       popup = paste(strong("ID:"), values$pt.ctr3[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr3[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr3[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr3[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr3[, date.identified]), "<br>"),
-                       fillColor="yellow", stroke = F, fillOpacity = 0.8, group="Level 3") %>%
-
-      addCircleMarkers(data= values$pt.ctr4,
-                       lng= values$pt.ctr4[,longitude] ,
-                       lat= values$pt.ctr4[,latitude],
-                       radius=6 ,
-                       layerId = row.names(values$pt.ctr4),
-                       popup = paste(strong("ID:"), values$pt.ctr4[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr4[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr4[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr4[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr4[, date.identified]), "<br>"),
-                       fillColor="darkgreen", stroke = F, fillOpacity = 0.8, group="Level 4") %>%
+                       layerId = row.names(values$pt.ctr6),
+                       popup = paste(strong("ID:"), values$pt.ctr6[, occ.id],"<br>",
+                                     strong("Institution Source:"), values$pt.ctr6[, institution.source], "<br>",
+                                     strong("Determined by:"), values$pt.ctr6[, determined.by], "<br>",
+                                     strong("Year of data colection:"), values$pt.ctr6[, year.event], "<br>",
+                                     strong("Date Identified:"), (values$pt.ctr6[, date.identified]), "<br>"),
+                       fillColor="purple", stroke = F, fillOpacity = 0.8, group="Level 6") %>%
 
       addCircleMarkers(data= values$pt.ctr5,
                        lng= values$pt.ctr5[,longitude] ,
@@ -225,19 +189,54 @@ map_module <- function(occ.cl,
                                      strong("Date Identified:"), (values$pt.ctr5[, date.identified]), "<br>"),
                        fillColor="blue", stroke = F, fillOpacity = 0.8, group="Level 5") %>%
 
-
-
-      addCircleMarkers(data= values$pt.ctr6,
-                       lng= values$pt.ctr6[,longitude] ,
-                       lat= values$pt.ctr6[,latitude],
+      addCircleMarkers(data= values$pt.ctr4,
+                       lng= values$pt.ctr4[,longitude] ,
+                       lat= values$pt.ctr4[,latitude],
                        radius=6 ,
-                       layerId = row.names(values$pt.ctr6),
-                       popup = paste(strong("ID:"), values$pt.ctr6[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr6[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr6[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr6[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr6[, date.identified]), "<br>"),
-                       fillColor="purple", stroke = F, fillOpacity = 0.8, group="Level 6") %>%
+                       layerId = row.names(values$pt.ctr4),
+                       popup = paste(strong("ID:"), values$pt.ctr4[, occ.id],"<br>",
+                                     strong("Institution Source:"), values$pt.ctr4[, institution.source], "<br>",
+                                     strong("Determined by:"), values$pt.ctr4[, determined.by], "<br>",
+                                     strong("Year of data colection:"), values$pt.ctr4[, year.event], "<br>",
+                                     strong("Date Identified:"), (values$pt.ctr4[, date.identified]), "<br>"),
+                       fillColor="darkgreen", stroke = F, fillOpacity = 0.8, group="Level 4") %>%
+
+      addCircleMarkers(data= values$pt.ctr3,
+                       lng= values$pt.ctr3[,longitude] ,
+                       lat= values$pt.ctr3[,latitude],
+                       radius=6 ,
+                       layerId = row.names(values$pt.ctr3),
+                       popup = paste(strong("ID:"), values$pt.ctr3[, occ.id],"<br>",
+                                     strong("Institution Source:"), values$pt.ctr3[, institution.source], "<br>",
+                                     strong("Determined by:"), values$pt.ctr3[, determined.by], "<br>",
+                                     strong("Year of data colection:"), values$pt.ctr3[, year.event], "<br>",
+                                     strong("Date Identified:"), (values$pt.ctr3[, date.identified]), "<br>"),
+                       fillColor="yellow", stroke = F, fillOpacity = 0.8, group="Level 3") %>%
+
+
+      addCircleMarkers(data= values$pt.ctr2,
+                       lng= values$pt.ctr2[,longitude] ,
+                       lat= values$pt.ctr2[,latitude],
+                       radius=6 ,
+                       layerId = row.names(values$pt.ctr2),
+                       popup = paste(strong("ID:"), values$pt.ctr2[, occ.id],"<br>",
+                                     strong("Institution Source:"), values$pt.ctr2[, institution.source], "<br>",
+                                     strong("Determined by:"), values$pt.ctr2[, determined.by], "<br>",
+                                     strong("Year of data colection:"), values$pt.ctr2[, year.event], "<br>",
+                                     strong("Date Identified:"), as.Date(as.character(values$pt.ctr2[, date.identified])), "<br>"),
+                       fillColor="orange", stroke = F, fillOpacity = 0.8, group="Level 2") %>%
+
+      addCircleMarkers(data= values$pt.ctr1,
+                       lng= values$pt.ctr1[,longitude] ,
+                       lat= values$pt.ctr1[,latitude],
+                       radius=6 ,
+                       layerId = row.names(values$pt.ctr1),
+                       popup = paste(strong("ID:"), values$pt.ctr1[, occ.id],"<br>",
+                                     strong("Institution Source:"), values$pt.ctr1[, institution.source], "<br>",
+                                     strong("Determined by:"), values$pt.ctr1[, determined.by], "<br>",
+                                     strong("Year of data colection:"), values$pt.ctr1[, year.event], "<br>",
+                                     strong("Date Identified:"), (values$pt.ctr1[, date.identified]), "<br>"),
+                       fillColor="red", stroke = F, fillOpacity = 0.8, group="Level 1") %>%
 
 
 
