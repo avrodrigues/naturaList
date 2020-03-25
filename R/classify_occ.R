@@ -36,7 +36,7 @@
 #' @details \code{spec} data frame must have columns separating \code{LastName},
 #' \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
 #' following columns should have names (\code{Name}) and abbreviation
-#' (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaList}} data.
+#' (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
 #' @details \code{basis.of.rec} is a character vector with one of the following
 #' types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
 #' GBIF data 'basisOfRecord'.
@@ -85,7 +85,20 @@ classify_occ <- function(occ,
     warning("'occ' already had classification. The classification was remake")
   }
 
-  r.occ <- reduce.df(occ, na.rm.coords = na.rm.coords)
+  r.occ <- reduce.df(occ,
+                     institution.source = institution.source,
+                     collection.code = collection.code,
+                     catalog.number = catalog.number,
+                     year.event = year.event,
+                     date.identified = date.identified,
+                     scientific.name = scientific.name,
+                     determined.by = determined.by,
+                     longitude = longitude,
+                     latitude = latitude,
+                     basis.of.rec = basis.of.rec,
+                     media.type = media.type,
+                     occ.id = occ.id,
+                     na.rm.coords = na.rm.coords)
 
   if(!is.null(spec)){
     spec.list <- as.data.frame(sapply(spec, as.character), stringsAsFactors = F)
