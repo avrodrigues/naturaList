@@ -40,7 +40,7 @@ reduce.df <- function(df,
   }
 
 
- data
+  data
 }
 
 
