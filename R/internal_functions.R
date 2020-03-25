@@ -138,8 +138,7 @@ specialist.conference <- function(pt.df, especialistas){
 # função 6
 has.det.ID <- function(sp.df, ignore.det.names = NULL){
   if(is.null(ignore.det.names)){
-    sem.det <- paste(c("Sem determinador",
-                       "^NA$",
+    sem.det <- paste(c("^NA$",
                        "RRC ID Flag",
                        "^NA $",
                        "^ $",
@@ -149,8 +148,7 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL){
   }
 
   if(!is.null(ignore.det.names)){
-    sem.det <- paste(c("Sem determinador",
-                       "^NA$",
+    sem.det <- paste(c("^NA$",
                        "RRC ID Flag",
                        "^NA $",
                        "^ $",
