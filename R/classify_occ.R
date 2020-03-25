@@ -10,7 +10,9 @@
 #' @param crit.levels Character. Vector with levels of confidence in decreasing
 #'   order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
 #'   \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
-#'    See datails.
+#'    See details.
+#' @param ignore.det.names character vector indicatiing strings in the determined.by columns
+#    that should be ignored as a taxonomist. See details.
 #' @param institution.source Column name of \code{occ} with the name of the
 #' institution that provided the data.
 #' @param collection.code Column name of \code{occ} with the codes for institution
@@ -37,6 +39,9 @@
 #' \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
 #' following columns should have names (\code{Name}) and abbreviation
 #' (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
+#' @details When \code{ignore.det.name = NULL} (default), the function ignores strings with only
+#' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
+#' the default strings and ignore all these strings as being a name of a taxonomist.
 #' @details \code{basis.of.rec} is a character vector with one of the following
 #' types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
 #' GBIF data 'basisOfRecord'.
@@ -65,6 +70,7 @@ classify_occ <- function(occ,
                                          "sci_colection",
                                          "field_obs",
                                          "no_criteria_met"),
+                         ignore.det.names = NULL,
                          institution.source = "institutionCode",
                          collection.code = "collectionCode",
                          catalog.number = "catalogNumber",
@@ -127,7 +133,7 @@ classify_occ <- function(occ,
     }
     if(crit.levels[i] == "taxonomist"){
       tax_level <- paste0(i, "_", "taxonomist")
-      Tax <- has.det.ID(r.occ)
+      Tax <- has.det.ID(r.occ, ignore.det.names)
       naturaList_levels[Tax] <- tax_level
     }
     if(crit.levels[i] == "det_by_spec"){
