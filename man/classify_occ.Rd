@@ -4,16 +4,25 @@
 \alias{classify_occ}
 \title{Classify occurrence records in levels of confidence in species determination}
 \usage{
-classify_occ(occ, spec = NULL, na.rm.coords = TRUE,
-  crit.levels = c("det_by_spec", "taxonomist", "image", "sci_colection",
-  "field_obs", "no_criteria_met"),
+classify_occ(
+  occ,
+  spec = NULL,
+  na.rm.coords = TRUE,
+  crit.levels = c("det_by_spec", "taxonomist", "image", "sci_colection", "field_obs",
+    "no_criteria_met"),
   institution.source = "institutionCode",
-  collection.code = "collectionCode", catalog.number = "catalogNumber",
-  year.event = "year", date.identified = "dateIdentified",
-  scientific.name = "species", determined.by = "identifiedBy",
-  longitude = "decimalLongitude", latitude = "decimalLatitude",
-  basis.of.rec = "basisOfRecord", media.type = "mediaType",
-  occ.id = "occurrenceID")
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType",
+  occ.id = "occurrenceID"
+)
 }
 \arguments{
 \item{occ}{Data frame with occurrence records information.}
@@ -70,7 +79,7 @@ determination
 \code{spec} data frame must have columns separating \code{LastName},
 \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
 following columns should have names (\code{Name}) and abbreviation
-(\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaList}} data.
+(\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
 
 \code{basis.of.rec} is a character vector with one of the following
 types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
