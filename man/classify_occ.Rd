@@ -10,6 +10,7 @@ classify_occ(
   na.rm.coords = TRUE,
   crit.levels = c("det_by_spec", "taxonomist", "image", "sci_colection", "field_obs",
     "no_criteria_met"),
+  ignore.det.names = NULL,
   institution.source = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
@@ -35,7 +36,9 @@ or longitude}
 \item{crit.levels}{Character. Vector with levels of confidence in decreasing
 order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
 \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
- See datails.}
+ See details.}
+
+\item{ignore.det.names}{character vector indicatiing strings in the determined.by columns}
 
 \item{institution.source}{Column name of \code{occ} with the name of the
 institution that provided the data.}
@@ -80,6 +83,10 @@ determination
 \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
 following columns should have names (\code{Name}) and abbreviation
 (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
+
+When \code{ignore.det.name = NULL} (default), the function ignores strings with only
+"RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
+the default strings and ignore all these strings as being a name of a taxonomist.
 
 \code{basis.of.rec} is a character vector with one of the following
 types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
