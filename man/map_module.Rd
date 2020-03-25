@@ -4,13 +4,21 @@
 \alias{map_module}
 \title{Check the occurrence records in a interactive map module}
 \usage{
-map_module(occ.cl, institution.source = "institutionCode",
-  collection.code = "collectionCode", catalog.number = "catalogNumber",
-  year.event = "year", date.identified = "dateIdentified",
-  scientific.name = "species", determined.by = "identifiedBy",
-  longitude = "decimalLongitude", latitude = "decimalLatitude",
-  basis.of.rec = "basisOfRecord", media.type = "mediaType",
-  occ.id = "occurrenceID")
+map_module(
+  occ.cl,
+  institution.source = "institutionCode",
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType",
+  occ.id = "occurrenceID"
+)
 }
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
