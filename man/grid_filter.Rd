@@ -4,14 +4,23 @@
 \alias{grid_filter}
 \title{Filter the occurence with most confidence in species identification inside grid cells}
 \usage{
-grid_filter(occ.cl, grid.resolution = c(0.5, 0.5), r = NULL,
+grid_filter(
+  occ.cl,
+  grid.resolution = c(0.5, 0.5),
+  r = NULL,
   institution.source = "institutionCode",
-  collection.code = "collectionCode", catalog.number = "catalogNumber",
-  year.event = "year", date.identified = "dateIdentified",
-  scientific.name = "species", determined.by = "identifiedBy",
-  longitude = "decimalLongitude", latitude = "decimalLatitude",
-  basis.of.rec = "basisOfRecord", media.type = "mediaType",
-  occ.id = "occurrenceID")
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType",
+  occ.id = "occurrenceID"
+)
 }
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
