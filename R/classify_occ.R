@@ -118,7 +118,7 @@ classify_occ <- function(occ,
 
     if(crit.levels[i] == "field_obs"){
       field_obs_level <- paste0(i, "_", "field_obs")
-      FObs <- which(r.occ$basis.of.rec %in% "HUMAN_OBSERVATION")
+      FObs <- which(toupper(r.occ$basis.of.rec) %in% "HUMAN_OBSERVATION")
       naturaList_levels[FObs] <- field_obs_level
     }
     if(crit.levels[i] == "sci_colection"){
