@@ -1,4 +1,4 @@
-#' get the names in the 'determined.by' column
+#' Get the names in the 'determined.by' column
 #'
 #' This function facilitates the search for non-taxonomist strings in the
 #' 'determined.by' column of occurrence records dataset
@@ -7,8 +7,8 @@
 #' @param determined.by Column name of \code{occ} with the name of who determined the
 #'  species.
 #'
-#'
+#' @export
 
 get_det_names <- function(occ, determined.by = "identifiedBy"){
-  names(table(occ.df[, determined.by]))
+  names(table(occ[, determined.by]))
 }
