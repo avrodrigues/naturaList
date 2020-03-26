@@ -23,16 +23,16 @@ create_spec_df <- function(spec.char){
   })
 
   l.spec.split <- lapply(l.spec.split, "[[", 1)
-  l.spec.split <- lapply(l.spec.split, function(x){
-    gsub("[[:punct:]]","", x)
-  })
+
 
   # Last name list
   last.name <- lapply(l.spec.split, function(x) x[length(x)])
 
   # create names list (without last name)
   names <- lapply(l.spec.split, function(x) x[-length(x)])
-
+  names <- lapply(names, function(x){
+    gsub("[[:punct:]]","", x)
+  })
 
   #function for abbreviation of names only for upper cases
   abbrev.names <- function(char){
