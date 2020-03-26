@@ -2,15 +2,18 @@
 % Please edit documentation in R/get_det_names.R
 \name{get_det_names}
 \alias{get_det_names}
-\title{get the names in the 'determined.by' column}
+\title{Get the names in the 'determined.by' column}
 \usage{
-get_det_names(occ, determined.by = "identifiedBy")
+get_det_names(occ, determined.by = "identifiedBy", freq = FALSE)
 }
 \arguments{
 \item{occ}{Data frame with occurrence records information.}
 
 \item{determined.by}{Column name of \code{occ} with the name of who determined the
 species.}
+
+\item{freq}{Logical. If TRUE output contain the number of times each string is
+repeated in the 'determined.by' column. Default FALSE.}
 }
 \description{
 This function facilitates the search for non-taxonomist strings in the
