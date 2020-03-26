@@ -123,12 +123,12 @@ classify_occ <- function(occ,
     }
     if(crit.levels[i] == "sci_colection"){
       sci_col_level <- paste0(i, "_", "sci_colection")
-      SCol <- which(r.occ$basis.of.rec %in% "PRESERVED_SPECIMEN")
+      SCol <- which(toupper(r.occ$basis.of.rec) %in% "PRESERVED_SPECIMEN")
       naturaList_levels[SCol] <- sci_col_level
     }
     if(crit.levels[i] == "image"){
       image_level <- paste0(i, "_", "image")
-      Img <- which(r.occ$media.type %in% "STILLIMAGE")
+      Img <- which(toupper(r.occ$media.type) %in% "STILLIMAGE")
       naturaList_levels[Img] <- image_level
     }
     if(crit.levels[i] == "taxonomist"){
