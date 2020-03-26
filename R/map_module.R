@@ -149,8 +149,6 @@ map_module <- function(occ.cl,
 
     output$map <- renderLeaflet({
 
-      values$occur[,date.identified]<- as.Date(values$occur[,date.identified])
-
       values$pt.ctr1 <- values$occur[values$Level_1,]
       values$pt.ctr2 <- values$occur[values$Level_2,]
       values$pt.ctr3 <- values$occur[values$Level_3,]
@@ -223,7 +221,7 @@ map_module <- function(occ.cl,
                                      strong("Institution Source:"), values$pt.ctr2[, institution.source], "<br>",
                                      strong("Determined by:"), values$pt.ctr2[, determined.by], "<br>",
                                      strong("Year of data colection:"), values$pt.ctr2[, year.event], "<br>",
-                                     strong("Date Identified:"), as.Date(as.character(values$pt.ctr2[, date.identified])), "<br>"),
+                                     strong("Date Identified:"), values$pt.ctr2[, date.identified], "<br>"),
                        fillColor="orange", stroke = F, fillOpacity = 0.8, group="Level 2") %>%
 
       addCircleMarkers(data= values$pt.ctr1,
