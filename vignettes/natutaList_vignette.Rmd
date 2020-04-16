@@ -78,6 +78,7 @@ You can easily create a specialist dataset using `create_spec_df()`. You just ne
 In this example, we use the names of four famous brazilians musicians. Note that the Latin accent mark is provided, and even a nickname (e.g. Tom Jobim). 
 
 ```{r create_spec_df, eval=F, echo = T}
+# create a specialist table example
 br.musicians <- c("Caetano Veloso", "Antônio Carlos Tom Jobim", 
                   "Gilberto Gil", "Vinícius de Morais")
 
@@ -92,10 +93,13 @@ It might occur that some strings in the 'determined.by' column of the occurrence
 To cope with this issue, `get_det_names()` can be used to verify which strings are not taxonomists names. This function returns all different strings in the 'determined.by' column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. See also the help of the function for more details(`?classify_occ`). 
 
 ```{r get_det_names, eval=F, echo = T}
+# check out if there is string that are not taxonomists
 get_det_names(A.setosa)
 
+# include these strings in a object
 ig.names <- c("Sem Informação" , "Anonymous")
 
+# use 'ignore.det.names' to ignore those strings in classify_occ()
 occ.class <- classify_occ(A.setosa, speciaLists, ignore.det.names = ig.names)
 y
 y
@@ -119,18 +123,35 @@ provide a raster layer in argument `r` from which the cell is used to filter
 occurrences. 
 
 ```{r grid_filter, eval=F}
+# grid filtering
 occ.grid <- grid_filter(occ.class)
 dim(occ.grid)
 table(occ.grid$naturaList_levels)
 ```
 
-Using the `grid_filter()` with cell size of 0.5 decimal degrees, the number of occurrences was reduced to 102. Althogh, the proportion of occurrences identified by specialists increased from 21.4 to 37.2%. 
+## Check out for records in a interactive map module
 
-
-
-Finally, the `map_module()` function allow the user to visualize the occurrence
+The `map_module()` function allow the user to visualize the occurrence
 records in a interactive map. In this interactive map, the user can click over an
 occurence point to see basic information about the record, such as the instituition
-who holds the record, who identified the species and when it was identified. 
-Also, if a some error is identified, the user could allow that clicking acts to 
+that holds the record, who identified the species and when it was identified. 
+Also, if a some error is identified, the user could allow that clicking works to 
 delete points. 
+
+
+```{r map_module, eval=F}
+# map module
+occ.selected <- map_module(occ.grid)
+
+```
+
+
+![Fig. 2 - Features of map_module function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satelite; V – options to draw and edit polygons to select occurrence records that fall within polygon; X – highlights the deleted occurrence points](../vignettes/map_module.png)
+
+In the figure 2, you see two screen shots from `map_module`. In figure 2A, it is showed the initial display of occurence records. In figure 2B it is highlighted the features inside `map_module()`. 
+
+In this example, we selected the levels 1 and 2 (Fig 2B - I). Then we deleted three records, by setting on the button *delete points with click* (Fig 2B - II) and clicking on them. At the end of selection we click on 'Done !' button. 
+
+Other features are avalible and can be seen on the figure 2. Try out with this example dataset. 
+
+
