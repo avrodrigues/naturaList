@@ -146,7 +146,7 @@ occ.selected <- map_module(occ.grid)
 ```
 
 
-![Fig. 2 - Features of map_module function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satelite; V – options to draw and edit polygons to select occurrence records that fall within polygon; X – highlights the deleted occurrence points](../vignettes/map_module.png)
+![Fig. 2 - Features of map_module function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satelite; V – options to draw and edit polygons to select occurrence records that fall within polygon; X – highlights the deleted occurrence points](../vignettes/fig_map_module.png)
 
 In the figure 2, you see two screen shots from `map_module`. In figure 2A, it is showed the initial display of occurence records. In figure 2B it is highlighted the features inside `map_module()`. 
 
