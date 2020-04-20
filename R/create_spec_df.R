@@ -56,7 +56,7 @@ create_spec_df <- function(spec.char){
     for(i in 1:length(x)){
       case[i] <- abbrev.names(x[i])
     }
-    case
+    case[nchar(case)!=0]
   })
 
   # remove abreviation from names
