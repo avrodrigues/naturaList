@@ -1,9 +1,9 @@
 #' Create specialist data frame from character vector
 #'
-#' Create a specialist data frame for ready for use in naturaList::classify_occ()
+#' Creates a specialist data frame ready for use in \code{\link[naturaList]{classify_occ}}
 #' from a character vector containg the specialists names
 #'
-#' @param spec.char A character vector of specialist names
+#' @param spec.char A character vector with specialist names
 #'
 #' @examples spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
 #' "Gilberto Gil", "Vinícius de Morais")

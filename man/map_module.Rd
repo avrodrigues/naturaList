@@ -56,8 +56,8 @@ species.}
 Data frame with the same columns of \code{occ.cl}.
 }
 \description{
-Allow to delete occurrence records and to select occurence points by
-classifcation levels or spatial polygons.
+Allows to delete occurrence records and to select occurence points by
+classifcation levels or by drawing spatial polygons.
 }
 \examples{
 occ.class <- classify_occ(A.setosa, speciaLists)

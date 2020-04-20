@@ -1,6 +1,6 @@
 #' Classify occurrence records in levels of confidence in species determination
 #'
-#' @description Classify occurrence records in levels of confidence in species
+#' @description Classifies occurrence records in levels of confidence in species
 #' determination
 #'
 #' @param occ Data frame with occurrence records information.
@@ -13,32 +13,28 @@
 #'    See details.
 #' @param ignore.det.names character vector indicatiing strings in the determined.by columns
 #    that should be ignored as a taxonomist. See details.
-#' @param institution.source Column name of \code{occ} with the name of the
-#' institution that provided the data.
-#' @param collection.code Column name of \code{occ} with the codes for institution
-#'  names.
-#' @param catalog.number Column name of \code{occ} with catalog number.
-#' @param year.event Column name of \code{occ} the year of the collection event.
-#' @param date.identified Column name of \code{occ} with the date of species
-#' determination.
+#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
 #' @param scientific.name Column name of \code{occ} with the species names.
 #' @param determined.by Column name of \code{occ} with the name of who determined the
-#'  species.
+#'   species.
 #' @param longitude Column name of \code{occ} longitude in decimal degrees.
 #' @param latitude Column name of \code{occ} latitude in decimal degrees.
 #' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
-#'  See details.
 #' @param media.type Column name of \code{occ} with the media type of recording.
-#' See details.
-#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
+#' @param institution.source Column name of \code{occ} with the name of the
+#'   institution that provided the data.
+#' @param collection.code Column name of \code{occ} with the codes for institution
+#'   names.
+#' @param catalog.number Column name of \code{occ} with catalog number.
+#' @param year.event Column name of \code{occ} the year of the collection event.
+#' @param date.identified Column name of \code{occ} with the date of species
+#'   determination.
 #'
 #' @return The \code{occ} data frame plus the classification of each record
 #' in a new column, named \code{naturaList_levels}.
 #'
 #' @details \code{spec} data frame must have columns separating \code{LastName},
-#' \code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
-#' following columns should have names (\code{Name}) and abbreviation
-#' (\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
+#' \code{Name} and \code{Abbrev}. See {\link[naturaList]{create_spec_df}} function for a easy way to produce this data frame.
 #' @details When \code{ignore.det.name = NULL} (default), the function ignores strings with only
 #' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
 #' the default strings and ignore all these strings as being a name of a taxonomist.

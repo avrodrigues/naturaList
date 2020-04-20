@@ -88,12 +88,12 @@ spec_df
 
 ## Verify if the strings in the 'determined.by' column of occurrence dataset is a name 
 
-It might occur that some strings in the 'determined.by' column of the occurrence dataset do not correspond to a taxonomist name. Strings as such `"Unknown"` often is included in the 'determined.by' data field. It is important then that such strings be ignored by the `classify_occ()`, if not this functions could flag an occurrence record as determined by a taxonomist when it was not. 
+It might occur that some strings in the 'determined.by' column of the occurrence dataset do not correspond to a taxonomist name. Strings as such `"Unknown"` often is included in the 'determined.by' data field. It is important then that such strings be ignored by the `classify_occ()`, if not this function could flag an occurrence record as determined by a taxonomist when it was not. 
 
-To cope with this issue, `get_det_names()` can be used to verify which strings are not taxonomists names. This function returns all different strings in the 'determined.by' column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. See also the help of the function for more details(`?classify_occ`). 
+To cope with this issue, `get_det_names()` can be used to verify which strings are not taxonomists names. This function returns all unique strings in the 'determined.by' column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. See also the `?classify_occ` for more details. 
 
 ```{r get_det_names, eval=F, echo = T}
-# check out if there is string that are not taxonomists
+# check out if there are strings which are not taxonomists
 get_det_names(A.setosa)
 
 # include these strings in a object
@@ -135,7 +135,7 @@ The `map_module()` function allow the user to visualize the occurrence
 records in a interactive map. In this interactive map, the user can click over an
 occurence point to see basic information about the record, such as the instituition
 that holds the record, who identified the species and when it was identified. 
-Also, if a some error is identified, the user could allow that clicking works to 
+Also, if some error is identified, the user could allow that clicking works to 
 delete points. 
 
 
@@ -146,9 +146,9 @@ occ.selected <- map_module(occ.grid)
 ```
 
 
-![Fig. 2 - Features of map_module function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satelite; V – options to draw and edit polygons to select occurrence records that fall within polygon; X – highlights the deleted occurrence points](../vignettes/fig_map_module.png)
+![Fig. 2 - Features of `map_module()` function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satelite; V – options to draw and edit polygons to select occurrence records that fall within polygon; X – highlights the deleted occurrence points](../vignettes/fig_map_module.png)
 
-In the figure 2, you see two screen shots from `map_module`. In figure 2A, it is showed the initial display of occurence records. In figure 2B it is highlighted the features inside `map_module()`. 
+In the figure 2, you see two screen shots from `map_module()`. In figure 2A, it is showed the initial display of occurence records. In figure 2B it is highlighted the features inside `map_module()`. 
 
 In this example, we selected the levels 1 and 2 (Fig 2B - I). Then we deleted three records, by setting on the button *delete points with click* (Fig 2B - II) and clicking on them. At the end of selection we click on 'Done !' button. 
 

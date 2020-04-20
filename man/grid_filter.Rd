@@ -63,7 +63,7 @@ species.}
 Data frame with the same columns of \code{occ.cl}.
 }
 \description{
-Filter one occurence record per grid cell selected by the higher level of confidence
+In each grid cell it selects the occurrence with the highest confidence level
 in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
@@ -77,7 +77,7 @@ occ.grid
 
 }
 \seealso{
-\code{\link{classify_occ}}
+\code{\link[naturaList]{classify_occ}}
 }
 \author{
 Arthur V. Rodrigues

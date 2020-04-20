@@ -62,11 +62,9 @@ species.}
 
 \item{latitude}{Column name of \code{occ} latitude in decimal degrees.}
 
-\item{basis.of.rec}{Column name of \code{occ} with the recording types, as in GBIF.
-See details.}
+\item{basis.of.rec}{Column name of \code{occ} with the recording types, as in GBIF.}
 
-\item{media.type}{Column name of \code{occ} with the media type of recording.
-See details.}
+\item{media.type}{Column name of \code{occ} with the media type of recording.}
 
 \item{occ.id}{Column name of \code{occ} with link or code for the occurence record.}
 }
@@ -75,14 +73,12 @@ The \code{occ} data frame plus the classification of each record
 in a new column, named \code{naturaList_levels}.
 }
 \description{
-Classify occurrence records in levels of confidence in species
+Classifies occurrence records in levels of confidence in species
 determination
 }
 \details{
 \code{spec} data frame must have columns separating \code{LastName},
-\code{Name} and \code{Abbrev}. The first column contain the \code{LastName} of the specialists. The
-following columns should have names (\code{Name}) and abbreviation
-(\code{Abbrev}) for each specialist. See an exemple in \code{\link[naturaList]{speciaLists}} data.
+\code{Name} and \code{Abbrev}. See {\link[naturaList]{create_spec_df}} function for a easy way to produce this data frame.
 
 When \code{ignore.det.name = NULL} (default), the function ignores strings with only
 "RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to

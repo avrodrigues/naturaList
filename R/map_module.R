@@ -1,10 +1,18 @@
 #' Check the occurrence records in a interactive map module
 #'
-#' Allow to delete occurrence records and to select occurence points by
-#' classifcation levels or spatial polygons.
+#' Allows to delete occurrence records and to select occurence points by
+#' classifcation levels or by drawing spatial polygons.
 #'
 #' @param occ.cl Data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
+#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
+#' @param scientific.name Column name of \code{occ} with the species names.
+#' @param determined.by Column name of \code{occ} with the name of who determined the
+#'   species.
+#' @param longitude Column name of \code{occ} longitude in decimal degrees.
+#' @param latitude Column name of \code{occ} latitude in decimal degrees.
+#' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
+#' @param media.type Column name of \code{occ} with the media type of recording.
 #' @param institution.source Column name of \code{occ} with the name of the
 #'   institution that provided the data.
 #' @param collection.code Column name of \code{occ} with the codes for institution
@@ -13,14 +21,6 @@
 #' @param year.event Column name of \code{occ} the year of the collection event.
 #' @param date.identified Column name of \code{occ} with the date of species
 #'   determination.
-#' @param scientific.name Column name of \code{occ} with the species names.
-#' @param determined.by Column name of \code{occ} with the name of who determined the
-#'   species.
-#' @param longitude Column name of \code{occ} longitude in decimal degrees.
-#' @param latitude Column name of \code{occ} latitude in decimal degrees.
-#' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
-#' @param media.type Column name of \code{occ} with the media type of recording.
-#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
 #'
 #' @return Data frame with the same columns of \code{occ.cl}.
 #'

@@ -7,15 +7,15 @@
 create_spec_df(spec.char)
 }
 \arguments{
-\item{spec.char}{A character vector of specialist names}
+\item{spec.char}{A character vector with specialist names}
 }
 \description{
-Create a specialist data frame for ready for use in naturaList::classify_occ()
+Creates a specialist data frame ready for use in \code{\link[naturaList]{classify_occ}}
 from a character vector containg the specialists names
 }
 \examples{
-spec_list <- c("Caetano Veloso", "AntÃ´nio Carlos Tom Jobim",
-"Gilberto Gil", "VinÃ­cius de Morais")
+spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
+"Gilberto Gil", "Vinícius de Morais")
 
 create_spec_df(spec_list)
 
