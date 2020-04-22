@@ -8,7 +8,10 @@
 #'  species.
 #' @param freq Logical. If TRUE output contain the number of times each string is
 #'  repeated in the 'determined.by' column. Default FALSE.
-#'
+#' 
+#' @return Character vector containing characters in \code{determined.by} 
+#'     column of \code{occ}.
+#' 
 #' @export
 
 get_det_names <- function(occ,
