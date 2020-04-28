@@ -305,7 +305,9 @@ map_module <- function(occ.cl,
       observeEvent(input$map_draw_all_features, {
 
 
-        if(length(input$map_draw_all_features$features) == 0){return()}
+        if(length(input$map_draw_all_features$features) == 0){
+          values$list.pol.df <- list()
+        }
         if(length(input$map_draw_all_features$features) >0){
           for(i in 1:length(input$map_draw_all_features$features)){
             values$list.pol.df[[i]] <- pol.coords(input$map_draw_all_features$features[[i]])
