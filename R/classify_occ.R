@@ -134,15 +134,15 @@ classify_occ <- function(occ,
     }
     if(crit.levels[i] == "det_by_spec"){
 
-      DSpec <- which(r.occ$vec.crit %in% "f")
-
 
       if(!is.null(spec)){
         DSpec <- unlist(lapply(1:nrow(spec.list),
                                function(x) func.det.by.esp(r.occ, x, spec.list)))
 
-        naturaList_levels[DSpec] <- apply(r.occ[DSpec,], 1,
-                                          function(x) specialist.conference(x, spec.list))
+        if(length(DSpec) > 0){
+          naturaList_levels[DSpec] <- apply(r.occ[DSpec,], 1,
+                                            function(x) specialist.conference(x, spec.list))
+        }
       }
     }
   } # end of classification
