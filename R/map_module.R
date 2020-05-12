@@ -93,14 +93,10 @@ map_module <- function(occ.cl,
              ),
              box(width = NULL, title = "Download",
                  solidHeader = T, status = "success",
-
-
                  textOutput("sel_display"),
-                 #verbatimTextOutput("issue"),
-                 #downloadButton("download_grid_filter.csv","Download from grid filter"),br(),br(),
                  textOutput("down.class.text"),
                  actionBttn("done", "Done!", style = "bordered", color = "success", size = "lg")
-                 #downloadButton("download_classified.csv","Download from classifier")
+
              )
       ),
       column(9,
@@ -130,21 +126,20 @@ map_module <- function(occ.cl,
 
 
     ####
-    ## Pontos a serem deletados
+    ## POints to be deleted
     values$MK <- data.frame(id = character(),
                             x = numeric(),
                             y = numeric())
 
-    ## Linha a ser inserida em values$MK
+    ## Lines to be inserted in values$MK
     values$add_row <- data.frame(id = character(),
                                  x = numeric(),
                                  y = numeric())
 
     values$pol <- list()
 
-    ## linhas das ocorrencias (grep) selecionadas de acordo com os critérios
-    #values$g.cri <- numeric()
-    ## lista de poligonos
+
+    ## List of polygons
     values$list.pol.df <- list()
 
     output$map <- renderLeaflet({
@@ -159,7 +154,7 @@ map_module <- function(occ.cl,
     leaflet("map") %>%
       # Add two tiles
       addTiles(options = providerTileOptions(noWrap = TRUE),group="StreetMap")%>%
-      addProviderTiles("Esri.WorldImagery", group="Satelite")  %>%
+      addProviderTiles("Esri.WorldImagery", group="Satellite")  %>%
 
 
       # Add marker groups
@@ -246,7 +241,7 @@ map_module <- function(occ.cl,
                                          "Level 4",
                                          "Level 5",
                                          "Level 6") ,
-                       baseGroups = c("StreetMap","Satelite"),
+                       baseGroups = c("StreetMap","Satellite"),
                        options = layersControlOptions(collapsed = TRUE)) %>%
 
       ## Add tool to design poligons shapes to selection
@@ -264,7 +259,7 @@ map_module <- function(occ.cl,
                 opacity = 0.8)
   })
 
-    ## Limpa lista de pontos selecionados
+    ## Clear selected poitns
     observeEvent(input$del_mkr_button,{
       if(input$del_mkr_button == FALSE){
         values$add_row <- data.frame(id = character(),
@@ -272,7 +267,7 @@ map_module <- function(occ.cl,
                                      y = numeric())
       }
 
-      ## Deleta pontos de ocorrencia que forem clicados
+      ## Delete points with click
       observeEvent(input$map_marker_click, {
         proxy <- leafletProxy("map")
 
@@ -301,7 +296,7 @@ map_module <- function(occ.cl,
 
       })
 
-      ## Cria uma data.frame com os as coordenadas geográficas para criar um poligo
+      ## Data.frame to create polygon
       observeEvent(input$map_draw_all_features, {
 
 
@@ -316,9 +311,9 @@ map_module <- function(occ.cl,
 
       })
 
-      ## Pontos de ocorrencia selecionados de acordo com a classificação (criterios)
+      ## Select points acordingly to classification levels
       observeEvent(input$grbox, {
-        # dados de ocorrencia da espécie
+        # occurrence data
         occ.df <- values$occur
 
         pttn <- paste(input$grbox, collapse="|")
@@ -335,8 +330,8 @@ map_module <- function(occ.cl,
         }
       })
 
-      ## Cria o data.frame a ser salvo
-      # seleciona pelos critérios e pelos poligonos criados
+      ## Final dataframe
+      # Selectd by levels chosed and poligons created
       observeEvent(input$grbox, {
         output$sel_display <-  renderText({
 
@@ -387,10 +382,6 @@ map_module <- function(occ.cl,
         stopApp(returnValue = result)
       })
 
-      ### resolvendo problemas
-      output$issue <- renderPrint({
-
-      })
 
 
     })
