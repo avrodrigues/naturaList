@@ -12,7 +12,12 @@
 #'   \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
 #'    See details.
 #' @param ignore.det.names character vector indicatiing strings in the determined.by columns
-#    that should be ignored as a taxonomist. See details.
+#'    that should be ignored as a taxonomist. See details.
+#' @param spec.ambiguity character. Indicates how to deal with ambiguity in
+#'    specialists names. \code{not.spec} solve ambiguity by classifing the
+#'    determinating as done by a non-specialist;\code{is.spec} assumes the
+#'    determination was done by a specialist; \code{manual.check} enables the user to
+#'    manually check all ambiguos names. Defaut is \code{not.spec}.
 #' @param occ.id Column name of \code{occ} with link or code for the occurence record.
 #' @param scientific.name Column name of \code{occ} with the species names.
 #' @param determined.by Column name of \code{occ} with the name of who determined the
@@ -67,6 +72,7 @@ classify_occ <- function(occ,
                                          "field_obs",
                                          "no_criteria_met"),
                          ignore.det.names = NULL,
+                         spec.ambiguity = "not.spec",
                          institution.source = "institutionCode",
                          collection.code = "collectionCode",
                          catalog.number = "catalogNumber",
@@ -84,7 +90,7 @@ classify_occ <- function(occ,
     col.number <- grep("naturaList_levels",colnames(occ))
     occ <- occ[, -col.number]
 
-    warning("'occ' already had classification. The classification was remake")
+    warning("'occ' already had classification. The classification was remade")
   }
 
   r.occ <- reduce.df(occ,
@@ -150,8 +156,22 @@ classify_occ <- function(occ,
   rowID <- r.occ$rowID
 
   classified.occ <- cbind(occ[rowID, ], naturaList_levels)
-  classified.occ <- check.spec(classified.occ, crit.levels, determined.by)
-  classified.occ$naturaList_levels <- as.character(classified.occ$naturaList_levels)
+
+  if(spec.ambiguity == "is.spec"){
+    sub <- classified.occ$naturaList_levels == "1_det_by_spec_verify"
+    classified.occ$naturaList_levels[sub] <- "1_det_by_spec"
+  }
+
+  if(spec.ambiguity == "not.spec"){
+    sub <- classified.occ$naturaList_levels == "1_det_by_spec_verify"
+    classified.occ$naturaList_levels[sub] <- "2_taxonomist"
+  }
+
+  if(spec.ambiguity == "manual.check"){
+    classified.occ <- check.spec(classified.occ, crit.levels, determined.by)
+    classified.occ$naturaList_levels <- as.character(classified.occ$naturaList_levels)
+  }
+
   return(classified.occ)
 }
 
