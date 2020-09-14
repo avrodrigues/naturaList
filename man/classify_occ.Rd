@@ -11,6 +11,7 @@ classify_occ(
   crit.levels = c("det_by_spec", "taxonomist", "image", "sci_colection", "field_obs",
     "no_criteria_met"),
   ignore.det.names = NULL,
+  spec.ambiguity = "not.spec",
   institution.source = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
@@ -38,7 +39,14 @@ order. The criteria allowed are \code{det_by_spec}, \code{taxonomist},
 \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
  See details.}
 
-\item{ignore.det.names}{character vector indicatiing strings in the determined.by columns}
+\item{ignore.det.names}{character vector indicatiing strings in the determined.by columns
+that should be ignored as a taxonomist. See details.}
+
+\item{spec.ambiguity}{character. Indicates how to deal with ambiguity in
+specialists names. \code{not.spec} solve ambiguity by classifing the
+determinating as done by a non-specialist;\code{is.spec} assumes the
+determination was done by a specialist; \code{manual.check} enables the user to
+manually check all ambiguos names. Defaut is \code{not.spec}.}
 
 \item{institution.source}{Column name of \code{occ} with the name of the
 institution that provided the data.}

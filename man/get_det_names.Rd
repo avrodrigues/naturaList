@@ -15,6 +15,10 @@ species.}
 \item{freq}{Logical. If TRUE output contain the number of times each string is
 repeated in the 'determined.by' column. Default FALSE.}
 }
+\value{
+Character vector containing characters in \code{determined.by} 
+    column of \code{occ}.
+}
 \description{
 This function facilitates the search for non-taxonomist strings in the
 'determined.by' column of occurrence records dataset
