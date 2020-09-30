@@ -43,13 +43,6 @@ reduce.df <- function(df,
   data
 }
 
-
-
-
-require(dplyr)
-require(shiny)
-require(shinyWidgets)
-
 abrev.pttn <- function(df, linha){
 
   abv.num <- grep("Abbrev",colnames(df))
@@ -70,7 +63,7 @@ abrev.pttn <- function(df, linha){
 }
 # função 2
 
-func.det.by.esp <- function(sp.df,i, specialist){
+func.det.by.esp <- function(sp.df, i, specialist){
 
   padr.det <- abrev.pttn(specialist, i)
 
@@ -86,8 +79,6 @@ func.det.by.esp <- function(sp.df,i, specialist){
   g.det[g.det.1[g.det.ok]]
 
 }
-
-
 
 
 # função 3
@@ -115,7 +106,8 @@ verify.specialist <- function(pattern, string){
   require(stringr)
   collection.new <- gsub(pattern, "", string, ignore.case = T)
 
-  g_zero <- str_replace_all(collection.new, pattern = "[[:punct:]]", "")
+  g_zero <- str_remove_all(collection.new,
+                           pattern = "[[:punct:]]|\\(.+\\)|[0-9]")
 
   zero <- nchar(str_replace_all(g_zero, pattern = "\\s+", "")) == 0
 
