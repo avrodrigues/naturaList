@@ -106,8 +106,9 @@ verify.specialist <- function(pattern, string){
   require(stringr)
   collection.new <- gsub(pattern, "", string, ignore.case = T)
 
-  g_zero <- str_remove_all(collection.new,
-                           pattern = "[[:punct:]]|\\(.+\\)|[0-9]")
+  g_zero <- str_replace_all(collection.new,
+                           pattern = "\\(.+\\)|[0-9]|[[:punct:]]",
+                           "")
 
   zero <- nchar(str_replace_all(g_zero, pattern = "\\s+", "")) == 0
 
