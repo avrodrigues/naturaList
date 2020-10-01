@@ -1,9 +1,5 @@
-.Rproj.user/
-.Rhistory
-.Rproj
-.RData
-.Rhistory
-.RData
-doc
-Meta
+*.Rproj.user/*
+*.Rproj
+*.Rhistory
+*.Rproj.user
 .Rproj.user

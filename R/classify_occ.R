@@ -149,6 +149,57 @@ classify_occ <- function(occ,
           naturaList_levels[DSpec] <- apply(r.occ[DSpec,], 1,
                                             function(x) specialist.conference(x, spec.list))
         }
+
+        if(any(naturaList_levels == "1_det_by_spec_verify")){
+
+          # filtra apenas as linha com ambiguidade
+          cl.verify <- naturaList_levels == "1_det_by_spec_verify"
+
+          # Cria uma tabela tidy para conferir especialistas
+          cl.tidy <- tibble(row = r.occ$rowID[cl.verify],
+                            id = as.character(naturaList_levels)[cl.verify],
+                            det = as.character(r.occ$determined.by)[cl.verify])
+
+          # remove pontos, barras e traços
+          cl.tidy$det <-  gsub("\\/|-|\\.", " ", cl.tidy$det)
+
+          # document term matrix (dtm)
+          word_counts_dtm <- cl.tidy %>%
+            unnest_tokens(word, det) %>% # cria token
+            count(row, word, sort = TRUE) %>% # contagem
+            ungroup() %>%
+            cast_dtm(row, word, n) # document term matrix (dtm)
+
+          # dtm para matrix
+          mtx.word <- as.matrix(word_counts_dtm)
+          mtx.word <- mtx.word[order(as.numeric(row.names(mtx.word))),]
+
+          confer.spec <- sapply(1:nrow(mtx.word), function(i){
+            # words para a linha
+            row.words <- colnames(mtx.word)[mtx.word[i,] != 0]
+            # especialistas relacionados à linha
+            row.num.spec <- which(tolower(spec$LastName) %in% row.words)
+
+            if(length(row.num.spec) != 0){
+              max.match <- max(sapply(row.num.spec, function(x){
+                spec.vec <- as.character(spec[x,])
+                names(spec.vec) <- names(spec)
+
+                spec.vec <- spec.vec[spec.vec != ""]
+                sum(tolower(spec.vec) %in% row.words)
+              }))
+
+              match.spec <- max.match
+            } else {
+              match.spec <- 0
+            }
+
+            match.spec
+
+          })
+
+          naturaList_levels[cl.verify][confer.spec > 2] <- "1_det_by_spec"
+        }
       }
     }
   } # end of classification
@@ -174,5 +225,3 @@ classify_occ <- function(occ,
 
   return(classified.occ)
 }
-
-
