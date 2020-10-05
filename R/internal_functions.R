@@ -139,7 +139,7 @@ pttn.all.specialist <- function(specialist){
   for(i in 1:nrow(specialist)){
 
     nonblank <- specialist[i,]!=""
-    pttn[i] <- paste(df[i ,nonblank], collapse = '|')
+    pttn[i] <- paste(specialist[i ,nonblank], collapse = '|')
 
   }
 
