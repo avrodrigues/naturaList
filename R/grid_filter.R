@@ -75,7 +75,7 @@ grid_filter <- function(occ.cl,
 
 
 
-  spt.spp_DF <- SpatialPointsDataFrame(x[,c(longitude, latitude)], x)
+  spt.spp_DF <- sp::SpatialPointsDataFrame(x[,c(longitude, latitude)], x)
 
   if(!is.null(r)){
     if(!class(r) == "RasterLayer"){stop("'r' must be of class RasterLayer")}
@@ -84,17 +84,17 @@ grid_filter <- function(occ.cl,
   if(is.null(r)){
     resolution <- grid.resolution
 
-    ext <- extent(spt.spp_DF)[1:4]
+    ext <- raster::extent(spt.spp_DF)[1:4]
 
     new.ext <- c(ext[1] - resolution[1],
                  ext[2] + resolution[2],
                  ext[3] - resolution[1],
                  ext[4] + resolution[2])
 
-    r <- raster(resolution = resolution, ext = extent(new.ext))
+    r <- raster::raster(resolution = resolution, ext = extent(new.ext))
   }
 
-  cell.with.pts <- as.numeric(names(table(cellFromXY(r, spt.spp_DF))))
+  cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
 
   total <- length(cell.with.pts)
 
@@ -105,9 +105,8 @@ grid_filter <- function(occ.cl,
 
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   for (i in 1:total){
-    e <- extentFromCells(r,cell.with.pts[i])
+    e <- raster::extentFromCells(r,cell.with.pts[i])
     crop.df <- crop(spt.spp_DF, extent(e))
-
 
     df.crit[[idx]] <- as.data.frame(crop.df)[1,-final.cols]
 
@@ -117,7 +116,7 @@ grid_filter <- function(occ.cl,
 
 
   df.occ.crit <- do.call(rbind,df.crit)
-  df.occ.crit <- rm.coord.dup(df.occ.crit, latitude, longitude)
+  df.occ.crit <- naturaList::rm.coord.dup(df.occ.crit, latitude, longitude)
   return(df.occ.crit)
 
 }

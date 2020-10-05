@@ -93,7 +93,7 @@ classify_occ <- function(occ,
     warning("'occ' already had classification. The classification was remade")
   }
 
-  r.occ <- reduce.df(occ,
+  r.occ <- naturaList::reduce.df(occ,
                      institution.source = institution.source,
                      collection.code = collection.code,
                      catalog.number = catalog.number,
@@ -156,7 +156,7 @@ classify_occ <- function(occ,
           cl.verify <- naturaList_levels == "1_det_by_spec_verify"
 
           # Cria uma tabela tidy para conferir especialistas
-          cl.tidy <- tibble(row = r.occ$rowID[cl.verify],
+          cl.tidy <- dplyr::tibble(row = r.occ$rowID[cl.verify],
                             id = as.character(naturaList_levels)[cl.verify],
                             det = as.character(r.occ$determined.by)[cl.verify])
 
@@ -165,10 +165,10 @@ classify_occ <- function(occ,
 
           # document term matrix (dtm)
           word_counts_dtm <- cl.tidy %>%
-            unnest_tokens(word, det) %>% # cria token
-            count(row, word, sort = TRUE) %>% # contagem
-            ungroup() %>%
-            cast_dtm(row, word, n) # document term matrix (dtm)
+            tidytext::unnest_tokens(word, det) %>% # cria token
+            dplyr::count(row, word, sort = TRUE) %>% # contagem
+            dplyr::ungroup() %>%
+            tidytext::cast_dtm(row, word, n) # document term matrix (dtm)
 
           # dtm para matrix
           mtx.word <- as.matrix(word_counts_dtm)

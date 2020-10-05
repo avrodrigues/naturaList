@@ -52,62 +52,70 @@ map_module <- function(occ.cl,
                        basis.of.rec = "basisOfRecord",
                        media.type = "mediaType",
                        occ.id = "occurrenceID"){
-  library(shiny)
-  library(shinyWidgets)
-  library(shinydashboard)
-  library(leaflet)
-  library(raster)
-  library(rgdal)
+  require(shiny)
+  require(shinyWidgets)
+  require(shinydashboard)
+  require(leaflet)
+  require(raster)
+  require(rgdal)
   require(leaflet.extras)
-  library(shinyLP)
+  require(shinyLP)
 
-  final.df <- runApp(list(
-  ui = fluidPage(
-    titlePanel("Map Module - naturaList"),
-    fluidRow(
-      column(3,
-             box(width = NULL,
-                 checkboxGroupButtons(
-                   inputId = "grbox", label = "What levels should be maintained in the output data set?",
-                   choices = c("Level 1" = "1",
-                               "Level 2" = "2",
-                               "Level 3" = "3",
-                               "Level 4" = "4",
-                               "Level 5" = "5",
-                               "Level 6" = "6"),
-                   justified = T, status = 'info', size = "xs", direction = "vertical",
-                   checkIcon = list(yes = icon("ok", lib = "glyphicon"), no = icon("remove", lib = "glyphicon")),
-                   selected = c("1",
-                                "2",
-                                "3",
-                                "4",
-                                "5",
-                                "6"),
-                   width = "100%"
-                 ),
-                 materialSwitch("del_mkr_button",
-                                label = "Delete points with click",
-                                status = "danger")
+  final.df <- shiny::runApp(list(
+  ui = shiny::fluidPage(
+    shiny::titlePanel("Map Module - naturaList"),
+    shiny::fluidRow(
+      shiny::column(3,
+                    shinydashboard::box(width = NULL,
+                                        shinyWidgets::checkboxGroupButtons(
+                                        inputId = "grbox",
+                                        label = "What levels should be
+                                        maintained in the output data set?",
+                                        choices = c("Level 1" = "1",
+                                                    "Level 2" = "2",
+                                                    "Level 3" = "3",
+                                                    "Level 4" = "4",
+                                                    "Level 5" = "5",
+                                                    "Level 6" = "6"),
+                                        justified = T,
+                                        status = 'info',
+                                        size = "xs",
+                                        direction = "vertical",
+                                        checkIcon = list(yes = icon("ok", lib = "glyphicon"),
+                                                         no = icon("remove", lib = "glyphicon")),
+                                        selected = c("1",
+                                                     "2",
+                                                     "3",
+                                                     "4",
+                                                     "5",
+                                                     "6"),
+                                        width = "100%"),
+                                        shinyWidgets::materialSwitch("del_mkr_button",
+                                                      label = "Delete points with click",
+                                                      status = "danger")
 
 
              ),
-             box(width = NULL, title = "Download",
-                 solidHeader = T, status = "success",
-                 textOutput("sel_display"),
-                 textOutput("down.class.text"),
-                 actionBttn("done", "Done!", style = "bordered", color = "success", size = "lg")
+             shinydashboard::box(width = NULL, title = "Download",
+                                 solidHeader = T, status = "success",
+                                 textOutput("sel_display"),
+                                 textOutput("down.class.text"),
+                                 actionBttn("done", "Done!",
+                                            style = "bordered",
+                                            color = "success",
+                                            size = "lg")
 
              )
       ),
-      column(9,
-             leafletOutput("map", height = 500)
+      shiny::column(9,
+                    leaflet::leafletOutput("map", height = 500)
 
       )
     )
 
   ),
   server = function(input, output, session){
-    values = reactiveValues()
+    values = shiny::reactiveValues()
 
     ## occurrences categories
 
@@ -142,7 +150,7 @@ map_module <- function(occ.cl,
     ## List of polygons
     values$list.pol.df <- list()
 
-    output$map <- renderLeaflet({
+    output$map <- leaflet::renderLeaflet({
 
       values$pt.ctr1 <- values$occur[values$Level_1,]
       values$pt.ctr2 <- values$occur[values$Level_2,]
@@ -151,14 +159,14 @@ map_module <- function(occ.cl,
       values$pt.ctr5 <- values$occur[values$Level_5,]
       values$pt.ctr6 <- values$occur[values$Level_6,]
 
-    leaflet("map") %>%
+      leaflet::leaflet("map") %>%
       # Add two tiles
-      addTiles(options = providerTileOptions(noWrap = TRUE),group="StreetMap")%>%
-      addProviderTiles("Esri.WorldImagery", group="Satellite")  %>%
+        leaflet::addTiles(options = providerTileOptions(noWrap = TRUE),group="StreetMap")%>%
+        leaflet::addProviderTiles("Esri.WorldImagery", group="Satellite")  %>%
 
 
       # Add marker groups
-      addCircleMarkers(data= values$pt.ctr6,
+        leaflet::addCircleMarkers(data= values$pt.ctr6,
                        lng= values$pt.ctr6[,longitude] ,
                        lat= values$pt.ctr6[,latitude],
                        radius=6 ,
@@ -170,7 +178,7 @@ map_module <- function(occ.cl,
                                      strong("Date Identified:"), (values$pt.ctr6[, date.identified]), "<br>"),
                        fillColor="purple", stroke = F, fillOpacity = 0.8, group="Level 6") %>%
 
-      addCircleMarkers(data= values$pt.ctr5,
+        leaflet::addCircleMarkers(data= values$pt.ctr5,
                        lng= values$pt.ctr5[,longitude] ,
                        lat= values$pt.ctr5[,latitude],
                        radius=6 ,
@@ -182,7 +190,7 @@ map_module <- function(occ.cl,
                                      strong("Date Identified:"), (values$pt.ctr5[, date.identified]), "<br>"),
                        fillColor="blue", stroke = F, fillOpacity = 0.8, group="Level 5") %>%
 
-      addCircleMarkers(data= values$pt.ctr4,
+        leaflet::addCircleMarkers(data= values$pt.ctr4,
                        lng= values$pt.ctr4[,longitude] ,
                        lat= values$pt.ctr4[,latitude],
                        radius=6 ,
@@ -194,7 +202,7 @@ map_module <- function(occ.cl,
                                      strong("Date Identified:"), (values$pt.ctr4[, date.identified]), "<br>"),
                        fillColor="darkgreen", stroke = F, fillOpacity = 0.8, group="Level 4") %>%
 
-      addCircleMarkers(data= values$pt.ctr3,
+        leaflet::addCircleMarkers(data= values$pt.ctr3,
                        lng= values$pt.ctr3[,longitude] ,
                        lat= values$pt.ctr3[,latitude],
                        radius=6 ,
@@ -207,7 +215,7 @@ map_module <- function(occ.cl,
                        fillColor="yellow", stroke = F, fillOpacity = 0.8, group="Level 3") %>%
 
 
-      addCircleMarkers(data= values$pt.ctr2,
+        leaflet::addCircleMarkers(data= values$pt.ctr2,
                        lng= values$pt.ctr2[,longitude] ,
                        lat= values$pt.ctr2[,latitude],
                        radius=6 ,
@@ -219,7 +227,7 @@ map_module <- function(occ.cl,
                                      strong("Date Identified:"), values$pt.ctr2[, date.identified], "<br>"),
                        fillColor="orange", stroke = F, fillOpacity = 0.8, group="Level 2") %>%
 
-      addCircleMarkers(data= values$pt.ctr1,
+        leaflet::addCircleMarkers(data= values$pt.ctr1,
                        lng= values$pt.ctr1[,longitude] ,
                        lat= values$pt.ctr1[,latitude],
                        radius=6 ,
@@ -235,7 +243,7 @@ map_module <- function(occ.cl,
 
 
       # Add the control widget
-      addLayersControl(overlayGroups = c("Level 1",
+        leaflet::addLayersControl(overlayGroups = c("Level 1",
                                          "Level 2",
                                          "Level 3",
                                          "Level 4",
@@ -245,22 +253,23 @@ map_module <- function(occ.cl,
                        options = layersControlOptions(collapsed = TRUE)) %>%
 
       ## Add tool to design poligons shapes to selection
-      addDrawToolbar(
-        targetGroup='Markers',
-        polylineOptions = F,
-        polygonOptions = T,
-        circleOptions = F,
-        rectangleOptions = F,
-        markerOptions = F,
-        circleMarkerOptions = F,
-        editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))%>%
-      addLegend("bottomright", colors = c("red", "orange", "yellow", "darkgreen", "blue", "purple"),
-                labels = c("Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"),
-                opacity = 0.8)
+        leaflet.extras::addDrawToolbar(
+                                       targetGroup='Markers',
+                                       polylineOptions = F,
+                                       polygonOptions = T,
+                                       circleOptions = F,
+                                       rectangleOptions = F,
+                                       markerOptions = F,
+                                       circleMarkerOptions = F,
+                                       editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))%>%
+        leaflet::addLegend("bottomright",
+                           colors = c("red", "orange", "yellow", "darkgreen", "blue", "purple"),
+                           labels = c("Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"),
+                           opacity = 0.8)
   })
 
     ## Clear selected poitns
-    observeEvent(input$del_mkr_button,{
+    shiny::observeEvent(input$del_mkr_button,{
       if(input$del_mkr_button == FALSE){
         values$add_row <- data.frame(id = character(),
                                      x = numeric(),
@@ -268,10 +277,8 @@ map_module <- function(occ.cl,
       }
 
       ## Delete points with click
-      observeEvent(input$map_marker_click, {
-        proxy <- leafletProxy("map")
-
-
+      shiny::observeEvent(input$map_marker_click, {
+        proxy <- leaflet::leafletProxy("map")
 
         if(input$del_mkr_button == TRUE){
           values$add_row <- data.frame(id = input$map_marker_click$id,
@@ -291,14 +298,13 @@ map_module <- function(occ.cl,
 
           id <- values$add_row$id
           proxy %>%
-            removeMarker(id)
+            leaflet::removeMarker(id)
         }
 
       })
 
       ## Data.frame to create polygon
       observeEvent(input$map_draw_all_features, {
-
 
         if(length(input$map_draw_all_features$features) == 0){
           values$list.pol.df <- list()
@@ -312,7 +318,7 @@ map_module <- function(occ.cl,
       })
 
       ## Select points acordingly to classification levels
-      observeEvent(input$grbox, {
+      shiny::observeEvent(input$grbox, {
         # occurrence data
         occ.df <- values$occur
 
@@ -322,7 +328,7 @@ map_module <- function(occ.cl,
 
       })
 
-      observeEvent(is.null(input$grbox), {
+      shiny::observeEvent(is.null(input$grbox), {
         if(is.null(input$grbox)){
           g.cri <- NULL
           values$g.cri <- g.cri
@@ -332,8 +338,8 @@ map_module <- function(occ.cl,
 
       ## Final dataframe
       # Selectd by levels chosed and poligons created
-      observeEvent(input$grbox, {
-        output$sel_display <-  renderText({
+      shiny::observeEvent(input$grbox, {
+        output$sel_display <-   shiny::renderText({
 
           if (is.null(values$g.cri)|length(values$g.cri) == 0){
             values$sel.points <- data.frame()
