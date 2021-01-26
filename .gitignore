@@ -3,7 +3,4 @@
 *.Rhistory
 *.Rproj.user
 .Rproj.user
-wc/**
-doc
-Meta
-docs
+wc10
