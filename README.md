@@ -29,7 +29,7 @@ You can install the released version of naturaList from github:
 
 ``` r
 install.packages("devtools")
-install_github("avrodrigues/naturaList", build_vignettes = T)
+devtools::install_github("avrodrigues/naturaList")
 ```
 
 ## Example
