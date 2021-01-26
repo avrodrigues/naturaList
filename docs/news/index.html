@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specialists of ferns and lycophytes of Brazil — speciaLists • naturaList</title>
+<title>Changelog • naturaList</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,7 @@
 
 
 
-<meta property="og:title" content="Specialists of ferns and lycophytes of Brazil — speciaLists" />
-<meta property="og:description" content="A dataset containing the specialists of ferns and lycophytes of Brazil formatted
-to be used by naturaList package. This data serves as a format example for spec argument in
-classify_occ." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -61,7 +58,7 @@ classify_occ." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,50 +117,25 @@ classify_occ." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Specialists of ferns and lycophytes of Brazil</h1>
-    
-    <div class="hidden name"><code>speciaLists.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      
     </div>
 
-    <div class="ref-description">
-    <p>A dataset containing the specialists of ferns and lycophytes of Brazil formatted
-to be used by <code>naturaList</code> package. This data serves as a format example for <code>spec</code> argument in
-<code><a href='classify_occ.html'>classify_occ</a></code>.</p>
-    </div>
-
-    <pre class="usage"><span class='va'>speciaLists</span></pre>
-
-
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data frame with 27 rows and 8 columns:</p><dl>
-  <dt>LastName</dt><dd><p>Last name of the specialist.</p></dd>
-  <dt>Name1</dt><dd><p>Columns with the names of specialist. Could be repeated as
-   long as needed. In this data Name* was repeated three times.</p></dd>
-  <dt>Name2</dt><dd><p>Columns with the names of specialist.</p></dd>
-  <dt>Name3</dt><dd><p>Columns with the names of specialist.</p></dd>
-  <dt>Name4</dt><dd><p>Columns with the names of specialist.</p></dd>
-  <dt>Abbrev1</dt><dd><p>Columns with the abbreviation (one character) of the names of
-   specialists. Could be repeated as long as needed. In this data Abbrev*
-    was repeated three times.</p></dd>
-  <dt>Abbrev2</dt><dd><p>Columns with the abbreviation (one character) of the names of
-   specialists.</p></dd>
-  <dt>Abbrev3</dt><dd><p>Columns with the abbreviation (one character) of the names of
-   specialists.</p></dd>
-  
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>The specialists names was derived from the authors of paper:
-  <a href='http://dx.doi.org/10.1590/2175-7860201566410'>http://dx.doi.org/10.1590/2175-7860201566410</a></p>
-
+    <div id="naturalist-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#naturalist-030" class="anchor"></a>naturaList 0.3.0</h1>
+<ul>
+<li>Added functions <code><a href="../reference/clean_eval.html">clean_eval()</a></code> and <code>define_env_space</code>. This functions implements evaluation of cleaning procedures based in classification made by <code><a href="../reference/classify_occ.html">classify_occ()</a></code>. The evaluation is based on the change of convex hull area of species occurrences between cleaned and raw occurrences dataset.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
