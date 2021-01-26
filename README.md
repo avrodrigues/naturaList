@@ -48,6 +48,6 @@ occ.cl <- classify_occ(A.setosa, speciaLists)
 
 ## Other resources
 
-See the vignette `vignette("naturaList_vignette")`
+See [vignette](https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html).
 
 
