@@ -31,15 +31,11 @@
 #'
 #' @examples
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' y
-#' y
-#' y
-#' y
 #' occ.grid <- grid_filter(occ.class)
 #' occ.grid
 #'
 #' @author Arthur V. Rodrigues
-#'
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 
 grid_filter <- function(occ.cl,
@@ -57,8 +53,7 @@ grid_filter <- function(occ.cl,
                         basis.of.rec = "basisOfRecord",
                         media.type = "mediaType",
                         occ.id = "occurrenceID"){
-  require(sp)
-  require(raster)
+
 
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
   if(!natList_column){
@@ -91,7 +86,7 @@ grid_filter <- function(occ.cl,
                  ext[3] - resolution[1],
                  ext[4] + resolution[2])
 
-    r <- raster::raster(resolution = resolution, ext = extent(new.ext))
+    r <- raster::raster(resolution = resolution, ext = raster::extent(new.ext))
   }
 
   cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
@@ -106,7 +101,7 @@ grid_filter <- function(occ.cl,
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   for (i in 1:total){
     e <- raster::extentFromCells(r,cell.with.pts[i])
-    crop.df <- crop(spt.spp_DF, extent(e))
+    crop.df <- raster::crop(spt.spp_DF, raster::extent(e))
 
     df.crit[[idx]] <- as.data.frame(crop.df)[1,-final.cols]
 
@@ -116,7 +111,7 @@ grid_filter <- function(occ.cl,
 
 
   df.occ.crit <- do.call(rbind,df.crit)
-  df.occ.crit <- naturaList::rm.coord.dup(df.occ.crit, latitude, longitude)
+  df.occ.crit <- rm.coord.dup(df.occ.crit, latitude, longitude)
   return(df.occ.crit)
 
 }

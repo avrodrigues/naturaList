@@ -16,5 +16,5 @@ a data frame with the coordinates
 }
 \description{
 Get coordinates from poligons created in leaflet map. It is used in
- {\link[naturaList]{map_module}}
+ {\link{map_module}}
 }

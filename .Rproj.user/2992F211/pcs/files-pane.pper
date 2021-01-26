@@ -1,9 +1,9 @@
 {
-    "path" : "C:/Users/avrodrigues/OneDrive/R/naturaList/naturaList",
-    "sortOrder" : [
+    "path": "C:/Users/avrodrigues/OneDrive - Universidade Federal do Rio Grande do Sul/R/naturaList/vignettes",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }

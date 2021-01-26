@@ -41,7 +41,7 @@
 #' @details \code{spec} data frame must have columns separating \code{LastName},
 #' \code{Name} and \code{Abbrev}. See {\link[naturaList]{create_spec_df}} function for a easy way to produce this data frame.
 #' @details When \code{ignore.det.name = NULL} (default), the function ignores strings with only
-#' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
+#' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is provided, the function adds the strings in character vector to
 #' the default strings and ignore all these strings as being a name of a taxonomist.
 #' @details \code{basis.of.rec} is a character vector with one of the following
 #' types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
@@ -51,40 +51,41 @@
 #'
 #' @examples
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' y
-#' y
-#' y
-#' y
 #' occ.class
-#' @seealso \code{\link[naturaList]{speciaLists}}
+#'
+#' @seealso \code{\link{speciaLists}}
 #'
 #' @author Arthur V. Rodrigues
 #'
+#' @importFrom rlang .data
 #' @export
 
-classify_occ <- function(occ,
-                         spec = NULL,
-                         na.rm.coords = TRUE,
-                         crit.levels = c("det_by_spec",
-                                         "taxonomist",
-                                         "image",
-                                         "sci_colection",
-                                         "field_obs",
-                                         "no_criteria_met"),
-                         ignore.det.names = NULL,
-                         spec.ambiguity = "not.spec",
-                         institution.source = "institutionCode",
-                         collection.code = "collectionCode",
-                         catalog.number = "catalogNumber",
-                         year.event = "year",
-                         date.identified = "dateIdentified",
-                         scientific.name = "species",
-                         determined.by = "identifiedBy",
-                         longitude = "decimalLongitude",
-                         latitude = "decimalLatitude",
-                         basis.of.rec = "basisOfRecord",
-                         media.type = "mediaType",
-                         occ.id = "occurrenceID"){
+classify_occ <- function(
+  occ,
+  spec = NULL,
+  na.rm.coords = TRUE,
+  crit.levels = c("det_by_spec",
+                  "taxonomist",
+                  "image",
+                  "sci_colection",
+                  "field_obs",
+                  "no_criteria_met"),
+  ignore.det.names = NULL,
+  spec.ambiguity = "not.spec",
+  institution.source = "institutionCode",
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType",
+  occ.id = "occurrenceID"
+  ){
+
   natList_column <- "naturaList_levels" %in% colnames(occ)
   if(natList_column){
     col.number <- grep("naturaList_levels",colnames(occ))
@@ -93,7 +94,7 @@ classify_occ <- function(occ,
     warning("'occ' already had classification. The classification was remade")
   }
 
-  r.occ <- naturaList::reduce.df(occ,
+  r.occ <- reduce.df(occ,
                      institution.source = institution.source,
                      collection.code = collection.code,
                      catalog.number = catalog.number,
@@ -165,14 +166,16 @@ classify_occ <- function(occ,
 
           # document term matrix (dtm)
           word_counts_dtm <- cl.tidy %>%
-            tidytext::unnest_tokens(word, det) %>% # cria token
-            dplyr::count(row, word, sort = TRUE) %>% # contagem
+            tidytext::unnest_tokens(.data$word, det) %>% # cria token
+            dplyr::count(row, .data$word, sort = TRUE) %>% # contagem
             dplyr::ungroup() %>%
-            tidytext::cast_dtm(row, word, n) # document term matrix (dtm)
+            tidytext::cast_dtm(row, .data$word, .data$n) # document term matrix (dtm)
 
           # dtm para matrix
           mtx.word <- as.matrix(word_counts_dtm)
-          mtx.word <- mtx.word[order(as.numeric(row.names(mtx.word))),]
+          if(nrow(mtx.word) > 1){
+            mtx.word <- mtx.word[order(as.numeric(row.names(mtx.word))),]
+          }
 
           confer.spec <- sapply(1:nrow(mtx.word), function(i){
             # words para a linha

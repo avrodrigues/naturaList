@@ -7,8 +7,8 @@
 make.polygon(df)
 }
 \arguments{
-\item{df}{a data frame provided by {\link[naturaList]{pol.coords}}}
+\item{df}{a data frame provided by {\link{pol.coords}}}
 }
 \description{
-Create SpatialPoligons from a list of coordinates. It is used in {\link[naturaList]{map_module}}
+Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
 }

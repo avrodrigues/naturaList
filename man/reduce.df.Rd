@@ -23,7 +23,7 @@ reduce.df(
 )
 }
 \arguments{
-\item{df}{occurence data frame provided in {\link[naturaList]{classify_occ}}}
+\item{df}{occurrence data frame provided in {\link[naturaList]{classify_occ}}}
 
 \item{institution.source}{institution.source = "institutionCode"}
 

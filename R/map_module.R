@@ -1,11 +1,11 @@
 #' Check the occurrence records in a interactive map module
 #'
 #' Allows to delete occurrence records and to select occurence points by
-#' classifcation levels or by drawing spatial polygons.
+#' classification levels or by drawing spatial polygons.
 #'
 #' @param occ.cl Data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
-#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
+#' @param occ.id Column name of \code{occ} with link or code for the occurrence record.
 #' @param scientific.name Column name of \code{occ} with the species names.
 #' @param determined.by Column name of \code{occ} with the name of who determined the
 #'   species.
@@ -27,39 +27,43 @@
 #' @seealso \code{\link{classify_occ}}
 #'
 #' @examples
+#' \dontrun{
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' y
-#' y
-#' y
-#' y
 #' occ.selected <- map_module(occ.class)
 #' occ.selected
+#' }
 #'
 #' @author Arthur V. Rodrigues
 #'
 #' @export
 
-map_module <- function(occ.cl,
-                       institution.source = "institutionCode",
-                       collection.code = "collectionCode",
-                       catalog.number = "catalogNumber",
-                       year.event = "year",
-                       date.identified = "dateIdentified",
-                       scientific.name = "species",
-                       determined.by = "identifiedBy",
-                       longitude = "decimalLongitude",
-                       latitude = "decimalLatitude",
-                       basis.of.rec = "basisOfRecord",
-                       media.type = "mediaType",
-                       occ.id = "occurrenceID"){
-  require(shiny)
-  require(shinyWidgets)
-  require(shinydashboard)
-  require(leaflet)
-  require(raster)
-  require(rgdal)
-  require(leaflet.extras)
-  require(shinyLP)
+map_module <- function(
+  occ.cl,
+  occ.id = "occurrenceID",
+  institution.source = "institutionCode",
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType"
+
+  ){
+
+  requireNamespace("shiny")
+  requireNamespace("shinyWidgets")
+  requireNamespace("shinydashboard")
+  requireNamespace("leaflet")
+  requireNamespace("sp")
+  requireNamespace("raster")
+  requireNamespace("rgdal")
+  requireNamespace("leaflet.extras")
+  requireNamespace("shinyLP")
+
 
   final.df <- shiny::runApp(list(
   ui = shiny::fluidPage(
@@ -81,8 +85,8 @@ map_module <- function(occ.cl,
                                         status = 'info',
                                         size = "xs",
                                         direction = "vertical",
-                                        checkIcon = list(yes = icon("ok", lib = "glyphicon"),
-                                                         no = icon("remove", lib = "glyphicon")),
+                                        checkIcon = list(yes = shiny::icon("ok", lib = "glyphicon"),
+                                                         no = shiny::icon("remove", lib = "glyphicon")),
                                         selected = c("1",
                                                      "2",
                                                      "3",
@@ -98,9 +102,9 @@ map_module <- function(occ.cl,
              ),
              shinydashboard::box(width = NULL, title = "Download",
                                  solidHeader = T, status = "success",
-                                 textOutput("sel_display"),
-                                 textOutput("down.class.text"),
-                                 actionBttn("done", "Done!",
+                                 shiny::textOutput("sel_display"),
+                                 shiny::textOutput("down.class.text"),
+                                 shinyWidgets::actionBttn("done", "Done!",
                                             style = "bordered",
                                             color = "success",
                                             size = "lg")
@@ -161,7 +165,7 @@ map_module <- function(occ.cl,
 
       leaflet::leaflet("map") %>%
       # Add two tiles
-        leaflet::addTiles(options = providerTileOptions(noWrap = TRUE),group="StreetMap")%>%
+        leaflet::addTiles(options = leaflet::providerTileOptions(noWrap = TRUE),group="StreetMap")%>%
         leaflet::addProviderTiles("Esri.WorldImagery", group="Satellite")  %>%
 
 
@@ -171,11 +175,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr6[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr6),
-                       popup = paste(strong("ID:"), values$pt.ctr6[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr6[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr6[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr6[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr6[, date.identified]), "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr6[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr6[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr6[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr6[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), (values$pt.ctr6[, date.identified]), "<br>"),
                        fillColor="purple", stroke = F, fillOpacity = 0.8, group="Level 6") %>%
 
         leaflet::addCircleMarkers(data= values$pt.ctr5,
@@ -183,11 +187,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr5[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr5),
-                       popup = paste(strong("ID:"), values$pt.ctr5[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr5[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr5[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr5[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr5[, date.identified]), "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr5[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr5[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr5[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr5[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), (values$pt.ctr5[, date.identified]), "<br>"),
                        fillColor="blue", stroke = F, fillOpacity = 0.8, group="Level 5") %>%
 
         leaflet::addCircleMarkers(data= values$pt.ctr4,
@@ -195,11 +199,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr4[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr4),
-                       popup = paste(strong("ID:"), values$pt.ctr4[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr4[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr4[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr4[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr4[, date.identified]), "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr4[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr4[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr4[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr4[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), (values$pt.ctr4[, date.identified]), "<br>"),
                        fillColor="darkgreen", stroke = F, fillOpacity = 0.8, group="Level 4") %>%
 
         leaflet::addCircleMarkers(data= values$pt.ctr3,
@@ -207,11 +211,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr3[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr3),
-                       popup = paste(strong("ID:"), values$pt.ctr3[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr3[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr3[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr3[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr3[, date.identified]), "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr3[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr3[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr3[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr3[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), (values$pt.ctr3[, date.identified]), "<br>"),
                        fillColor="yellow", stroke = F, fillOpacity = 0.8, group="Level 3") %>%
 
 
@@ -220,11 +224,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr2[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr2),
-                       popup = paste(strong("ID:"), values$pt.ctr2[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr2[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr2[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr2[, year.event], "<br>",
-                                     strong("Date Identified:"), values$pt.ctr2[, date.identified], "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr2[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr2[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr2[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr2[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), values$pt.ctr2[, date.identified], "<br>"),
                        fillColor="orange", stroke = F, fillOpacity = 0.8, group="Level 2") %>%
 
         leaflet::addCircleMarkers(data= values$pt.ctr1,
@@ -232,11 +236,11 @@ map_module <- function(occ.cl,
                        lat= values$pt.ctr1[,latitude],
                        radius=6 ,
                        layerId = row.names(values$pt.ctr1),
-                       popup = paste(strong("ID:"), values$pt.ctr1[, occ.id],"<br>",
-                                     strong("Institution Source:"), values$pt.ctr1[, institution.source], "<br>",
-                                     strong("Determined by:"), values$pt.ctr1[, determined.by], "<br>",
-                                     strong("Year of data colection:"), values$pt.ctr1[, year.event], "<br>",
-                                     strong("Date Identified:"), (values$pt.ctr1[, date.identified]), "<br>"),
+                       popup = paste(htmltools::strong("ID:"), values$pt.ctr1[, occ.id],"<br>",
+                                     htmltools::strong("Institution Source:"), values$pt.ctr1[, institution.source], "<br>",
+                                     htmltools::strong("Determined by:"), values$pt.ctr1[, determined.by], "<br>",
+                                     htmltools::strong("Year of data colection:"), values$pt.ctr1[, year.event], "<br>",
+                                     htmltools::strong("Date Identified:"), (values$pt.ctr1[, date.identified]), "<br>"),
                        fillColor="red", stroke = F, fillOpacity = 0.8, group="Level 1") %>%
 
 
@@ -250,7 +254,7 @@ map_module <- function(occ.cl,
                                          "Level 5",
                                          "Level 6") ,
                        baseGroups = c("StreetMap","Satellite"),
-                       options = layersControlOptions(collapsed = TRUE)) %>%
+                       options = leaflet::layersControlOptions(collapsed = TRUE)) %>%
 
       ## Add tool to design poligons shapes to selection
         leaflet.extras::addDrawToolbar(
@@ -261,7 +265,8 @@ map_module <- function(occ.cl,
                                        rectangleOptions = F,
                                        markerOptions = F,
                                        circleMarkerOptions = F,
-                                       editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))%>%
+                                       editOptions = leaflet.extras::editToolbarOptions(
+                                         selectedPathOptions = leaflet.extras::selectedPathOptions()))%>%
         leaflet::addLegend("bottomright",
                            colors = c("red", "orange", "yellow", "darkgreen", "blue", "purple"),
                            labels = c("Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"),
@@ -304,7 +309,7 @@ map_module <- function(occ.cl,
       })
 
       ## Data.frame to create polygon
-      observeEvent(input$map_draw_all_features, {
+      shiny::observeEvent(input$map_draw_all_features, {
 
         if(length(input$map_draw_all_features$features) == 0){
           values$list.pol.df <- list()
@@ -358,12 +363,12 @@ map_module <- function(occ.cl,
 
             if(length(values$list.pol.df) > 1){
 
-              values$pol <- bind(lapply(values$list.pol.df, make.polygon))
+              values$pol <- raster::bind(lapply(values$list.pol.df, make.polygon))
             }
 
             df.crit <- values$occur[values$g.cri[c.d],]
 
-            spt.df <- SpatialPointsDataFrame(df.crit[,c(longitude, latitude)], df.crit)
+            spt.df <- sp::SpatialPointsDataFrame(df.crit[,c(longitude, latitude)], df.crit)
 
 
             if(length(values$pol) == 0){
@@ -382,10 +387,10 @@ map_module <- function(occ.cl,
         })
       })
 
-      observeEvent(input$done, {
+      shiny::observeEvent(input$done, {
         result <- values$sel.points
 
-        stopApp(returnValue = result)
+        shiny::stopApp(returnValue = result)
       })
 
 

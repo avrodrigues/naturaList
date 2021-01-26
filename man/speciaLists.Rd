@@ -4,15 +4,24 @@
 \name{speciaLists}
 \alias{speciaLists}
 \title{Specialists of ferns and lycophytes of Brazil}
-\format{A data frame with 27 rows and 8 columns:
+\format{
+A data frame with 27 rows and 8 columns:
 \describe{
   \item{LastName}{Last name of the specialist.}
-  \item{Name}{Columns with the names of specialist. Could be repeated as long
-  as needed. In this data \code{Name} was repeated four times.}
-  \item{Abbrev}{Columns with the abbreviation (one character) of the names of
-   specialists. Could be repeated as long as needed. In this data \code{Abbrev}
+  \item{Name1}{Columns with the names of specialist. Could be repeated as
+   long as needed. In this data Name* was repeated three times.}
+  \item{Name2}{Columns with the names of specialist.}
+  \item{Name3}{Columns with the names of specialist.}
+  \item{Name4}{Columns with the names of specialist.}
+  \item{Abbrev1}{Columns with the abbreviation (one character) of the names of
+   specialists. Could be repeated as long as needed. In this data Abbrev*
     was repeated three times.}
-  }}
+  \item{Abbrev2}{Columns with the abbreviation (one character) of the names of
+   specialists.}
+  \item{Abbrev3}{Columns with the abbreviation (one character) of the names of
+   specialists.}
+  }
+}
 \source{
 The specialists names was derived from the authors of paper:
   \url{http://dx.doi.org/10.1590/2175-7860201566410}
@@ -21,11 +30,8 @@ The specialists names was derived from the authors of paper:
 speciaLists
 }
 \description{
-A dataset containing the specialists of ferns and lycophytes of Brazil formated
+A dataset containing the specialists of ferns and lycophytes of Brazil formatted
 to be used by \code{naturaList} package. This data serves as a format example for \code{spec} argument in
 \code{\link{classify_occ}}.
-}
-\details{
-
 }
 \keyword{datasets}

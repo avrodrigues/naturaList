@@ -5,7 +5,7 @@
 #' Reduce columns of occurrence data.frame required by
 #' {\link[naturaList]{classify_occ}} to facilitate internal operation
 #'
-#' @param df occurence data frame provided in {\link[naturaList]{classify_occ}}
+#' @param df occurrence data frame provided in {\link[naturaList]{classify_occ}}
 #' @param institution.source institution.source = "institutionCode"
 #' @param collection.code collection.code = "collectionCode"
 #' @param catalog.number catalog.number = "catalogNumber"
@@ -160,14 +160,14 @@ pttn.all.specialist <- function(specialist){
 #'
 
 verify.specialist <- function(pattern, string){
-  require(stringr)
+
   collection.new <- gsub(pattern, "", string, ignore.case = T)
 
-  g_zero <- str_replace_all(collection.new,
+  g_zero <- stringr::str_replace_all(collection.new,
                            pattern = "\\(.+\\)|[0-9]|[[:punct:]]",
                            "")
 
-  zero <- nchar(str_replace_all(g_zero, pattern = "\\s+", "")) == 0
+  zero <- nchar(stringr::str_replace_all(g_zero, pattern = "\\s+", "")) == 0
 
   if(zero == T) return("")
   if(zero == F) return("_verify")
@@ -307,7 +307,7 @@ rm.coord.dup <- function(x, latitude, longitude){
 #' map
 #'
 #' Get coordinates from poligons created in leaflet map. It is used in
-#'  {\link[naturaList]{map_module}}
+#'  {\link{map_module}}
 #'
 #' @param input.polig an interactive poligon from leaflet map.
 #' \code{input$map_draw_all_features$features[[i]]}
@@ -338,15 +338,15 @@ pol.coords <- function(input.polig){
 
 #' Internal function of naturaList - Create SpatialPoligons from a list of coordinates
 #'
-#' Create SpatialPoligons from a list of coordinates. It is used in {\link[naturaList]{map_module}}
+#' Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
 #'
-#' @param df a data frame provided by {\link[naturaList]{pol.coords}}
+#' @param df a data frame provided by {\link{pol.coords}}
 
 # função 10
 make.polygon <- function(df){
 
   # and then something like this
-  sp <- SpatialPolygons(list(Polygons(list(Polygon(df)), 1)))
+  sp <- sp::SpatialPolygons(list(sp::Polygons(list(sp::Polygon(df)), 1)))
   sp
 
 }

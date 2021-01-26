@@ -15,8 +15,7 @@ from a character vector containg the specialists names
 }
 \examples{
 spec_list <- c("Caetano Veloso", "AntÃ´nio Carlos Tom Jobim",
-"Gilberto Gil", "VinÃ­cius de Morais")
-
+  "Gilberto Gil", "VinÃ­cius de Morais")
 create_spec_df(spec_list)
 
 }

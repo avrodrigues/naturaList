@@ -22,11 +22,6 @@ knitr::opts_chunk$set(
 ## ----classify, eval=F, echo = T-----------------------------------------------
 #  # classification
 #  occ.class <- classify_occ(A.setosa, speciaLists)
-#  y
-#  y
-#  y
-#  y
-#  
 #  dim(occ.class)
 
 ## ----levels, eval=F, echo = T-------------------------------------------------
@@ -40,7 +35,8 @@ knitr::opts_chunk$set(
 #  spec_df <- create_spec_df(br.musicians)
 #  spec_df
 
-## ----get_det_names, eval=F, echo = T------------------------------------------
+## ----get_det_names, eval=F, echo = F------------------------------------------
+#  
 #  # check out if there are strings which are not taxonomists
 #  get_det_names(A.setosa)
 #  
@@ -49,10 +45,7 @@ knitr::opts_chunk$set(
 #  
 #  # use 'ignore.det.names' to ignore those strings in classify_occ()
 #  occ.class <- classify_occ(A.setosa, speciaLists, ignore.det.names = ig.names)
-#  y
-#  y
-#  y
-#  y
+#  
 #  
 #  table(occ.class$naturaList_levels)
 #  
@@ -62,9 +55,4 @@ knitr::opts_chunk$set(
 #  occ.grid <- grid_filter(occ.class)
 #  dim(occ.grid)
 #  table(occ.grid$naturaList_levels)
-
-## ----map_module, eval=F-------------------------------------------------------
-#  # map module
-#  occ.selected <- map_module(occ.grid)
-#  
 

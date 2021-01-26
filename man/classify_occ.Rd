@@ -89,7 +89,7 @@ determination
 \code{Name} and \code{Abbrev}. See {\link[naturaList]{create_spec_df}} function for a easy way to produce this data frame.
 
 When \code{ignore.det.name = NULL} (default), the function ignores strings with only
-"RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
+"RRC ID Flag", "NA", "", "-" and "_". When a character vector is provided, the function adds the strings in character vector to
 the default strings and ignore all these strings as being a name of a taxonomist.
 
 \code{basis.of.rec} is a character vector with one of the following
@@ -101,14 +101,11 @@ indicating the existence of an associated image with \code{STILLIMAGE}.
 }
 \examples{
 occ.class <- classify_occ(A.setosa, speciaLists)
-y
-y
-y
-y
 occ.class
+
 }
 \seealso{
-\code{\link[naturaList]{speciaLists}}
+\code{\link{speciaLists}}
 }
 \author{
 Arthur V. Rodrigues
