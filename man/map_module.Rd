@@ -6,6 +6,7 @@
 \usage{
 map_module(
   occ.cl,
+  occ.id = "occurrenceID",
   institution.source = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
@@ -16,13 +17,14 @@ map_module(
   longitude = "decimalLongitude",
   latitude = "decimalLatitude",
   basis.of.rec = "basisOfRecord",
-  media.type = "mediaType",
-  occ.id = "occurrenceID"
+  media.type = "mediaType"
 )
 }
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
 classified by \code{\link{classify_occ}} function.}
+
+\item{occ.id}{Column name of \code{occ} with link or code for the occurrence record.}
 
 \item{institution.source}{Column name of \code{occ} with the name of the
 institution that provided the data.}
@@ -49,24 +51,20 @@ species.}
 \item{basis.of.rec}{Column name of \code{occ} with the recording types, as in GBIF.}
 
 \item{media.type}{Column name of \code{occ} with the media type of recording.}
-
-\item{occ.id}{Column name of \code{occ} with link or code for the occurence record.}
 }
 \value{
 Data frame with the same columns of \code{occ.cl}.
 }
 \description{
 Allows to delete occurrence records and to select occurence points by
-classifcation levels or by drawing spatial polygons.
+classification levels or by drawing spatial polygons.
 }
 \examples{
+\dontrun{
 occ.class <- classify_occ(A.setosa, speciaLists)
-y
-y
-y
-y
 occ.selected <- map_module(occ.class)
 occ.selected
+}
 
 }
 \seealso{

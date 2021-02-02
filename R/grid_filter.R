@@ -31,15 +31,11 @@
 #'
 #' @examples
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' y
-#' y
-#' y
-#' y
 #' occ.grid <- grid_filter(occ.class)
 #' occ.grid
 #'
 #' @author Arthur V. Rodrigues
-#'
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 
 grid_filter <- function(occ.cl,
@@ -57,8 +53,7 @@ grid_filter <- function(occ.cl,
                         basis.of.rec = "basisOfRecord",
                         media.type = "mediaType",
                         occ.id = "occurrenceID"){
-  require(sp)
-  require(raster)
+
 
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
   if(!natList_column){
@@ -75,7 +70,7 @@ grid_filter <- function(occ.cl,
 
 
 
-  spt.spp_DF <- SpatialPointsDataFrame(x[,c(longitude, latitude)], x)
+  spt.spp_DF <- sp::SpatialPointsDataFrame(x[,c(longitude, latitude)], x)
 
   if(!is.null(r)){
     if(!class(r) == "RasterLayer"){stop("'r' must be of class RasterLayer")}
@@ -84,17 +79,17 @@ grid_filter <- function(occ.cl,
   if(is.null(r)){
     resolution <- grid.resolution
 
-    ext <- extent(spt.spp_DF)[1:4]
+    ext <- raster::extent(spt.spp_DF)[1:4]
 
     new.ext <- c(ext[1] - resolution[1],
                  ext[2] + resolution[2],
                  ext[3] - resolution[1],
                  ext[4] + resolution[2])
 
-    r <- raster(resolution = resolution, ext = extent(new.ext))
+    r <- raster::raster(resolution = resolution, ext = raster::extent(new.ext))
   }
 
-  cell.with.pts <- as.numeric(names(table(cellFromXY(r, spt.spp_DF))))
+  cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
 
   total <- length(cell.with.pts)
 
@@ -105,9 +100,8 @@ grid_filter <- function(occ.cl,
 
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   for (i in 1:total){
-    e <- extentFromCells(r,cell.with.pts[i])
-    crop.df <- crop(spt.spp_DF, extent(e))
-
+    e <- raster::extentFromCells(r,cell.with.pts[i])
+    crop.df <- raster::crop(spt.spp_DF, raster::extent(e))
 
     df.crit[[idx]] <- as.data.frame(crop.df)[1,-final.cols]
 

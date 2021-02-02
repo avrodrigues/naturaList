@@ -55,15 +55,10 @@ Classification using the default order of confidence levels
 ```{r classify, eval=F, echo = T}
 # classification
 occ.class <- classify_occ(A.setosa, speciaLists)
-y
-y
-y
-y
-
 dim(occ.class)
 ```
  
-When the name of the taxonomist that identified the species do not perfect match with specialists names, the function asks whether the taxonomist name represents a specialist. Then the user must type `y` or `n` to answer yes or no for each umbiguos name. In our example, this checking procedure is needed in 4 occurrences. All of them were identified by specialists. Because this the code have 4 lines with `y`. 
+
 
 
 You can check how many occurrences was classified in each level:
@@ -92,7 +87,8 @@ It might occur that some strings in the 'determined.by' column of the occurrence
 
 To cope with this issue, `get_det_names()` can be used to verify which strings are not taxonomists names. This function returns all unique strings in the 'determined.by' column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. See also the `?classify_occ` for more details. 
 
-```{r get_det_names, eval=F, echo = T}
+```{r get_det_names, eval=F, echo = F}
+
 # check out if there are strings which are not taxonomists
 get_det_names(A.setosa)
 
@@ -101,10 +97,7 @@ ig.names <- c("Sem Informação" , "Anonymous")
 
 # use 'ignore.det.names' to ignore those strings in classify_occ()
 occ.class <- classify_occ(A.setosa, speciaLists, ignore.det.names = ig.names)
-y
-y
-y
-y
+
 
 table(occ.class$naturaList_levels)
 
@@ -139,7 +132,7 @@ Also, if some error is identified, the user could allow that clicking works to
 delete points. 
 
 
-```{r map_module, eval=F}
+```{}
 # map module
 occ.selected <- map_module(occ.grid)
 

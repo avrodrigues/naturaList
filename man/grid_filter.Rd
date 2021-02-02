@@ -68,10 +68,6 @@ in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
 occ.class <- classify_occ(A.setosa, speciaLists)
-y
-y
-y
-y
 occ.grid <- grid_filter(occ.class)
 occ.grid
 

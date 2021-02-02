@@ -5,9 +5,9 @@
 #'
 #' @param spec.char A character vector with specialist names
 #'
-#' @examples spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
-#' "Gilberto Gil", "Vinícius de Morais")
-#'
+#' @examples
+#' spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
+#'   "Gilberto Gil", "Vinícius de Morais")
 #' create_spec_df(spec_list)
 #'
 #' @export
@@ -59,11 +59,29 @@ create_spec_df <- function(spec.char){
     case[nchar(case)!=0]
   })
 
+  #function only for lower cases names
+  lower.names <- function(char){
+    char1 <- substr(char, 1, 1)
+
+    upper <- toupper(char1) == char1
+    lower <- tolower(char1) == char1
+
+    if(upper){
+      return("")
+    }
+    if(lower){
+      return(char1)
+    }
+
+  }
   # remove abreviation from names
   only.names <- lapply(names, function(x){
     onechar <- nchar(x) == 1
     if(any(onechar)){
-      str <- gsub(x[onechar], "", x)
+      multi.char <- x[!onechar]
+      one.low.char <- sapply(x[onechar],lower.names)
+      str <- c(multi.char, one.low.char)
+      names(str) <- NULL
     }
     if(!any(onechar)){ str <- x}
     str

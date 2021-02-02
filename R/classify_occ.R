@@ -12,7 +12,12 @@
 #'   \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
 #'    See details.
 #' @param ignore.det.names character vector indicatiing strings in the determined.by columns
-#    that should be ignored as a taxonomist. See details.
+#'    that should be ignored as a taxonomist. See details.
+#' @param spec.ambiguity character. Indicates how to deal with ambiguity in
+#'    specialists names. \code{not.spec} solve ambiguity by classifing the
+#'    determinating as done by a non-specialist;\code{is.spec} assumes the
+#'    determination was done by a specialist; \code{manual.check} enables the user to
+#'    manually check all ambiguos names. Defaut is \code{not.spec}.
 #' @param occ.id Column name of \code{occ} with link or code for the occurence record.
 #' @param scientific.name Column name of \code{occ} with the species names.
 #' @param determined.by Column name of \code{occ} with the name of who determined the
@@ -36,7 +41,7 @@
 #' @details \code{spec} data frame must have columns separating \code{LastName},
 #' \code{Name} and \code{Abbrev}. See {\link[naturaList]{create_spec_df}} function for a easy way to produce this data frame.
 #' @details When \code{ignore.det.name = NULL} (default), the function ignores strings with only
-#' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is privided, the function adds the strings in character vector to
+#' "RRC ID Flag", "NA", "", "-" and "_". When a character vector is provided, the function adds the strings in character vector to
 #' the default strings and ignore all these strings as being a name of a taxonomist.
 #' @details \code{basis.of.rec} is a character vector with one of the following
 #' types of record:\code{PRESERVED_SPECIMEN} or \code{HUMAN_OBSERVATION}, as in
@@ -46,45 +51,47 @@
 #'
 #' @examples
 #' occ.class <- classify_occ(A.setosa, speciaLists)
-#' y
-#' y
-#' y
-#' y
 #' occ.class
-#' @seealso \code{\link[naturaList]{speciaLists}}
+#'
+#' @seealso \code{\link{speciaLists}}
 #'
 #' @author Arthur V. Rodrigues
 #'
+#' @importFrom rlang .data
 #' @export
 
-classify_occ <- function(occ,
-                         spec = NULL,
-                         na.rm.coords = TRUE,
-                         crit.levels = c("det_by_spec",
-                                         "taxonomist",
-                                         "image",
-                                         "sci_colection",
-                                         "field_obs",
-                                         "no_criteria_met"),
-                         ignore.det.names = NULL,
-                         institution.source = "institutionCode",
-                         collection.code = "collectionCode",
-                         catalog.number = "catalogNumber",
-                         year.event = "year",
-                         date.identified = "dateIdentified",
-                         scientific.name = "species",
-                         determined.by = "identifiedBy",
-                         longitude = "decimalLongitude",
-                         latitude = "decimalLatitude",
-                         basis.of.rec = "basisOfRecord",
-                         media.type = "mediaType",
-                         occ.id = "occurrenceID"){
+classify_occ <- function(
+  occ,
+  spec = NULL,
+  na.rm.coords = TRUE,
+  crit.levels = c("det_by_spec",
+                  "taxonomist",
+                  "image",
+                  "sci_colection",
+                  "field_obs",
+                  "no_criteria_met"),
+  ignore.det.names = NULL,
+  spec.ambiguity = "not.spec",
+  institution.source = "institutionCode",
+  collection.code = "collectionCode",
+  catalog.number = "catalogNumber",
+  year.event = "year",
+  date.identified = "dateIdentified",
+  scientific.name = "species",
+  determined.by = "identifiedBy",
+  longitude = "decimalLongitude",
+  latitude = "decimalLatitude",
+  basis.of.rec = "basisOfRecord",
+  media.type = "mediaType",
+  occ.id = "occurrenceID"
+  ){
+
   natList_column <- "naturaList_levels" %in% colnames(occ)
   if(natList_column){
     col.number <- grep("naturaList_levels",colnames(occ))
     occ <- occ[, -col.number]
 
-    warning("'occ' already had classification. The classification was remake")
+    warning("'occ' already had classification. The classification was remade")
   }
 
   r.occ <- reduce.df(occ,
@@ -143,6 +150,59 @@ classify_occ <- function(occ,
           naturaList_levels[DSpec] <- apply(r.occ[DSpec,], 1,
                                             function(x) specialist.conference(x, spec.list))
         }
+
+        if(any(naturaList_levels == "1_det_by_spec_verify")){
+
+          # filtra apenas as linha com ambiguidade
+          cl.verify <- naturaList_levels == "1_det_by_spec_verify"
+
+          # Cria uma tabela tidy para conferir especialistas
+          cl.tidy <- dplyr::tibble(row = r.occ$rowID[cl.verify],
+                            id = as.character(naturaList_levels)[cl.verify],
+                            det = as.character(r.occ$determined.by)[cl.verify])
+
+          # remove pontos, barras e traços
+          cl.tidy$det <-  gsub("\\/|-|\\.", " ", cl.tidy$det)
+
+          # document term matrix (dtm)
+          word_counts_dtm <- cl.tidy %>%
+            tidytext::unnest_tokens(.data$word, det) %>% # cria token
+            dplyr::count(row, .data$word, sort = TRUE) %>% # contagem
+            dplyr::ungroup() %>%
+            tidytext::cast_dtm(row, .data$word, .data$n) # document term matrix (dtm)
+
+          # dtm para matrix
+          mtx.word <- as.matrix(word_counts_dtm)
+          if(nrow(mtx.word) > 1){
+            mtx.word <- mtx.word[order(as.numeric(row.names(mtx.word))),]
+          }
+
+          confer.spec <- sapply(1:nrow(mtx.word), function(i){
+            # words para a linha
+            row.words <- colnames(mtx.word)[mtx.word[i,] != 0]
+            # especialistas relacionados à linha
+            row.num.spec <- which(tolower(spec$LastName) %in% row.words)
+
+            if(length(row.num.spec) != 0){
+              max.match <- max(sapply(row.num.spec, function(x){
+                spec.vec <- as.character(spec[x,])
+                names(spec.vec) <- names(spec)
+
+                spec.vec <- spec.vec[spec.vec != ""]
+                sum(tolower(spec.vec) %in% row.words)
+              }))
+
+              match.spec <- max.match
+            } else {
+              match.spec <- 0
+            }
+
+            match.spec
+
+          })
+
+          naturaList_levels[cl.verify][confer.spec > 2] <- "1_det_by_spec"
+        }
       }
     }
   } # end of classification
@@ -150,9 +210,21 @@ classify_occ <- function(occ,
   rowID <- r.occ$rowID
 
   classified.occ <- cbind(occ[rowID, ], naturaList_levels)
-  classified.occ <- check.spec(classified.occ, crit.levels, determined.by)
-  classified.occ$naturaList_levels <- as.character(classified.occ$naturaList_levels)
+
+  if(spec.ambiguity == "is.spec"){
+    sub <- classified.occ$naturaList_levels == "1_det_by_spec_verify"
+    classified.occ$naturaList_levels[sub] <- "1_det_by_spec"
+  }
+
+  if(spec.ambiguity == "not.spec"){
+    sub <- classified.occ$naturaList_levels == "1_det_by_spec_verify"
+    classified.occ$naturaList_levels[sub] <- "2_taxonomist"
+  }
+
+  if(spec.ambiguity == "manual.check"){
+    classified.occ <- check.spec(classified.occ, crit.levels, determined.by)
+    classified.occ$naturaList_levels <- as.character(classified.occ$naturaList_levels)
+  }
+
   return(classified.occ)
 }
-
-

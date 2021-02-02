@@ -5,7 +5,9 @@
 \alias{A.setosa}
 \title{Occurrence records of Alsophila setosa downloaded from Global Biodiversity
 Information Facility (GBIF).}
-\format{A data frame with 508 rows and 45 variables}
+\format{
+A data frame with 508 rows and 45 variables
+}
 \source{
 GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/dl.6jesg0}
 }
@@ -13,7 +15,7 @@ GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/d
 A.setosa
 }
 \description{
-A GBIF raw dataset contaning 508 occurrence records for the tree fern
+A GBIF raw dataset containing 508 occurrence records for the tree fern
 Alsophila setosa.
 }
 \keyword{datasets}
