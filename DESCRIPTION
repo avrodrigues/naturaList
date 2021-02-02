@@ -25,6 +25,7 @@ Imports:
     shinydashboard,
     leaflet,
     leaflet.extras,
+    lwgeom,
     shinyLP,
     tidytext,
     magrittr,
