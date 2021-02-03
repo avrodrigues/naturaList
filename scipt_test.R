@@ -12,13 +12,27 @@ lapply(pkgs, require, character.only = TRUE)
 library(fasterize) ### needed in the package
 ## install.packages("lwgeom")
 
-data("A.setosa")
-data("speciaLists")
+A.setosa <- data("A.setosa")
+speciaLists <- data("speciaLists")
+
+# creating specialist data frame from frequencies in determined by
+all_det_names <- get_det_names(occ = A.setosa, determined.by = "identifiedBy", freq = TRUE)
+det_names <- sort(all_det_names,
+     decreasing = TRUE)[-c(which(names(sort(all_det_names, decreasing = TRUE)) == "" ),
+                                         which(names(sort(all_det_names, decreasing = TRUE)) == "-" ))
+                        ] # removing non person characters in determination names
+det_1_percent <- names(which((det_names/sum(det_names) * 100) >= 1))
+det_5_percent <- names(which((det_names/sum(det_names) * 100) >= 5))
+det_7_percent <- names(which((det_names/sum(det_names) * 100) >= 7))
+
+
 
 # classify
 occ.cl <- classify_occ(A.setosa, speciaLists, spec.ambiguity = "not.spec")
+dim(occ.cl) # checking the dimension of data
 ## check points
 occ.cl <-map_module(occ.cl) #delete points in the ocean
+dim(occ.cl) # checking the dimensio after remove some points in the map
 
 # download climate data
 bioclim <- getData('worldclim', var='bio', res=10)
@@ -51,10 +65,14 @@ i.geo.space <- intersect(un.land, buffer(spdf.occ.cl, 200000))
 cl.eval <- clean_eval(occ.cl,
            env.space = env.space,
            geo.space = c.geo.space,
-           r = raster.temp.prec)
+           r = raster.temp.prec) # add lwgeom in dependencies
 
 cl.eval$area
-cl.eval$comp
+dim(cl.eval$comp$comp.BC)
+dim(cl.eval$comp$comp.AC)
+sum(is.na(cl.eval$comp$comp.BC))
+sum(is.na(cl.eval$comp$comp.AC))
+
 cl.eval$rich
 cl.eval$site.coords
 
@@ -78,5 +96,7 @@ c.setosa.bc <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
 c.setosa.ac <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
                                          comp.ac$`Cyathea setosa`)))
 
+quartz()
 plot(c.setosa.bc)
+quartz()
 plot(c.setosa.ac)
