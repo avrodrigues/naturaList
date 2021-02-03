@@ -1,22 +1,22 @@
 <img src="man/figures/naturaList_logo_size2.png" alt="naturaList logo" width="120px" align="right"/>
-  
-  # naturaList
-  
-  <!-- badges: start -->
-  
-  [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/naturaList)](https://cran.r-project.org/package=naturaList)
+
+# naturaList
+
+<!-- badges: start -->
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/naturaList)](https://cran.r-project.org/package=naturaList)
 
 [![R-CMD-check](https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg)](https://github.com/avrodrigues/naturaList/actions)
 
 <!-- badges: end -->
-  
-  The goal of naturaList package is to provide tools for check identification reliability in species occurrence records data sets. The main functionality of naturaList package is provide an automated way to identify for the taxon of interest, which records has the most reliable level of classification, i.e, those records identified by specialists. In addition other characteristics of the records could be used to derive up to six levels of confidence.
+
+The goal of naturaList package is to provide tools for check identification reliability in species occurrence records data sets. The main functionality of naturaList package is provide an automated way to identify for the taxon of interest, which records has the most reliable level of classification, i.e, those records identified by specialists. In addition other characteristics of the records could be used to derive up to six levels of confidence.
 
 ## Levels of confidence
 
 The package allows to classify the occurence records in confidence levels through the function `classify_occ()`, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:
-  
-  -   Level 1 - species is identified by a specialist, if not;
+
+-   Level 1 - species is identified by a specialist, if not;
 -   Level 2 - species is identified by a taxonomist, if not;
 -   Level 3 - occurrence record has an image associated, if not;
 -   Level 4 - the specimen is preserved in a scientific collection, if not;
@@ -28,13 +28,13 @@ The user can alter this order, depending on his/her objectives, except for the L
 ## Installation
 
 You can install the last released version of naturaList from github using:
-  
-  ``` {.r}
+
+``` {.r}
 install.packages("devtools")
 devtools::install_github("avrodrigues/naturaList")
 ```
 
-## Basics of naturaList package 
+## Basics of naturaList package
 
 An extensive explanation of all the features of naturaList package is provided through [vignette articles](https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html). To conduct a basic classification process through `classify_occ` function the user must provide only two data frames. The first containing the occurrence records and the second with a list of specialists. The `classify_occ()` function add a new column in the occurrences dataset named `naturaList_levels`, which contains the classification.
 
