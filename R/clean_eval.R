@@ -1,8 +1,9 @@
 #' Evaluate the cleaning of occurrences records
 #'
-#' By defining the level of filtering, the function compare the area occupied for
-#' each species between before and after cleaning the data set. The area is computed
-#' in the geographical and environmental space
+#' This function compare the area occupied by
+#' a species before and after pass through the cleaning procedure according to the chosen
+#' level of filter.
+#' The comparison can be made by measuring area in the geographical and in the environmental space
 #'
 #' @param occ.cl Data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
@@ -37,6 +38,8 @@
 #' @importFrom methods is
 #' @importFrom stats na.omit
 #' @importFrom rlang .data
+#'
+#' @seealso [define_env_space()]
 #'
 #' @export
 #'
