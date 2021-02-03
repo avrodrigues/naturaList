@@ -40,7 +40,6 @@
 #' @importFrom rlang .data
 #'
 #' @seealso [define_env_space()]
-#'
 #' @export
 #'
 #' @examples

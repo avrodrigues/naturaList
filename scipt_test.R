@@ -34,6 +34,7 @@ dim(occ.cl) # checking the dimension of data
 occ.cl <-map_module(occ.cl) #delete points in the ocean
 dim(occ.cl) # checking the dimensio after remove some points in the map
 
+
 # download climate data
 bioclim <- getData('worldclim', var='bio', res=10)
 
@@ -65,13 +66,14 @@ i.geo.space <- intersect(un.land, buffer(spdf.occ.cl, 200000))
 cl.eval <- clean_eval(occ.cl,
            env.space = env.space,
            geo.space = c.geo.space,
-           r = raster.temp.prec) # add lwgeom in dependencies
+           r = raster.temp.prec) 
 
 cl.eval$area
 dim(cl.eval$comp$comp.BC)
 dim(cl.eval$comp$comp.AC)
 sum(is.na(cl.eval$comp$comp.BC))
 sum(is.na(cl.eval$comp$comp.AC))
+
 
 cl.eval$rich
 cl.eval$site.coords
@@ -96,7 +98,10 @@ c.setosa.bc <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
 c.setosa.ac <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
                                          comp.ac$`Cyathea setosa`)))
 
+
 quartz()
+#windows()
 plot(c.setosa.bc)
 quartz()
+#windows()
 plot(c.setosa.ac)

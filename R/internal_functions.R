@@ -79,7 +79,6 @@ reduce.df <- function(df,
 #' @seealso {\link[naturaList]{classify_occ}}
 #' @keywords internal
 
-
 abrev.pttn <- function(df, line){
 
   abv.num <- grep("Abbrev",colnames(df))
@@ -190,7 +189,6 @@ verify.specialist <- function(pattern, string){
 #'
 #' @keywords internal
 
-
 specialist.conference <- function(pt.df, specialist){
   spe.obs <- which(lapply(specialist[,1],
                           function(x) grep(x, pt.df["determined.by"], ignore.case = T)) == 1)
@@ -257,9 +255,8 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL){
 #' {\link[naturaList]{classify_occ}} criteria
 #' @param crit.levels crit.levels choosed by user in {\link[naturaList]{classify_occ}}
 #' @param determined.by same as determined.by argumetn in {\link[naturaList]{classify_occ}}
-#'
 #' @keywords internal
-#'
+
 check.spec <- function(class.occ, crit.levels, determined.by){
 
   sub <- class.occ$naturaList_levels == "1_det_by_spec_verify"
@@ -320,8 +317,6 @@ rm.coord.dup <- function(x, latitude, longitude){
 #' \code{input$map_draw_all_features$features[[i]]}
 #'
 #' @return a data frame with the coordinates
-
-
 pol.coords <- function(input.polig){
 
   pol.coords <- data.frame(x=numeric(),y=numeric())
@@ -351,8 +346,6 @@ pol.coords <- function(input.polig){
 #'
 #' @keywords internal
 #'
-
-# função 10
 make.polygon <- function(df){
 
   # and then something like this
