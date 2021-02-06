@@ -6,7 +6,7 @@
 #' @param env matrix or data frame with two columns containing two environmental variables.
 #'  The variables must be numeric, even for data frames.
 #' @param buffer.size numeric value indicating a buffer size around each point
-#'  which will delimit the environmental geographical border for the occurence point. See details.
+#'  which will delimit the environmental geographical border for the occurrence point. See details.
 #' @param plot logical. whether to plot the polygon. Default is TRUE.
 #'
 #' @details The environmental variables are standardized by range, which turns the
