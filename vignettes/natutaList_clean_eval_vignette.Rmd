@@ -1,5 +1,5 @@
 ---
-title: "Cleaning data and evaluating the cleaning proccess with naturaList"
+title: "Filtering data and evaluating the filtering proccess with naturaList"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{natutaList_clean_eval_vignette}
@@ -14,13 +14,16 @@ comment = "#"
 )
 ```
 
-In this article we show how naturaList package can be used to process big data related to occurrence points of species occurrences. Specifically we will show how we can filter occurrence data accordingly to a list of specialists and [compare the effect](#comp_eval) of the filtering process regarding the differences in area of distribution of species or [niche space](#env_data) [before and after the filtering process](#comp_eval). This procedure is done mainly through the use of `clean_eval` function.
-So, in summary, in this article you will learn how to:
+In this article we will show how naturaList package can be used to process big data related to occurrence points of species occurrences. Specifically we will show how we can filter occurrence data accordingly to a list of specialists and [compare the effect](#comp_eval) of the filtering process regarding the differences in area of distribution of species, richness and the [niche space](#env_data) [before and after the filtering process](#comp_eval).
 
-   * Get occurrence data from [online data base](#read_data); 
-   * [Process](#data_proc) this data to in order to adequate its format to naturaList functions, specifically `clean_eval`; 
-   * [Obtain and verify](*get_spec) check for possible specialists names; 
-   * [Compare](*comp_eval) the spatial occurrence and environmental niche of species before and after the cleaning process.
+Before read this article, it is important to see the [Introduction to naturaList](https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html).
+
+This procedure is done mainly through the use of `clean_eval` function. So, in summary, in this article you will learn how to:
+
+-   Get occurrence data from [online data base](#read_data);
+-   [Process](#data_proc) this data to in order to adequate its format to naturaList functions, specifically `clean_eval` function;
+-   [check for](*get_spec) possible specialists names;
+-   [Compare](*comp_eval) the spatial occurrence, richness and environmental niche of species before and after the cleaning process.
 
 ## Installation and required packages {#install}
 
@@ -37,18 +40,15 @@ library(devtools)
 library(rgbif)
 ```
 
-Before read this article, it is important to see the [Introduction to naturaList](https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html).
-
 ## Reading data {#read_data}
 
-We will use occurrence data of three fern species obtained from [Gasper et al (2020)](https://avrodrigues.shinyapps.io/tferns/). We used only three species in order to simplify the cleaning process, however this procedure can be made with data bases containing a much more  species, as showed in [Rodrigues et al (2021)]().
-The species chosen was: *Alsophila* *setosa*, *Cyathea* *corcovadensis* and *Gymnosphaera* *capensis*.
+We will use occurrence data of the genus Alsophila, that comprises a group of fern species. We used only a genus in order to simplify the cleaning process, however this procedure can be made with data bases containing a much more species, as showed in [Rodrigues et al (2021)]().
 
-To read data from this three species we will download the occurrence records directly from GBIF via `rgbif` package, selecting only occurrence points that present coordinates and them binding all occurrences in a single data frame.
+To read data from these species we will download the occurrence records directly from GBIF via `rgbif` package, selecting only occurrence points that present coordinates and them binding all occurrences in a single data frame. This data frame will be used in the classification process with `classify_occ` function.
 
 ```{r get_data, eval=F, echo = T}
 
-occ_allspp <- occ_search(scientificName = c("Alsophila setosa", "Cyathea corcovadensis", "Cyathea phalerata"), 
+occ_allspp <- occ_search(scientificName = "Alsophila", 
                          limit = 5000, return = "data",
                          hasCoordinate = TRUE) # downloading occurrence data
 
@@ -70,13 +70,11 @@ data_all_occ_sub <- as.data.frame(data_all_occ_sub)
 
 ```
 
-
 ## Obtain and veryfying specialist´s list {#get_spec}
 
-It might occur that some strings in the 'determined.by' column of the occurrence datasets do not correspond to a taxonomist name. Strings as such `"Unknown"` is often included in the 'determined.by' data field. It is important that such strings be ignored by the `classify_occ()`, if not this function could flag an occurrence record as determined by a taxonomist when it was not.
+It might occur that some strings in the 'determined.by' column of the occurrence datasets do not correspond to a taxonomist name. Strings as such `"Unknown"` is often included in the 'determined.by' data field obtained from GBIF. It is important (but not necessary for naturaList functions work properly) that such strings be ignored by the `classify_occ()`.
 
-To cope with this issue, `get_det_names()` can be used to verify which strings are not taxonomists names. This function returns all unique strings in the 'determined.by' column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. For example, lets classify the occurrences of *A. setosa*, *C. corcovadensis* e *C. phalerata* ignoring some strings in `determined.by` column.
-
+To cope with this issue, `get_det_names()` function can be used to verify which strings are not taxonomists names. This function returns all unique strings in the 'determined.by' column of the dataset. Based on this list of names, the user can create a character vector with the strings to be ignored by `classify_occ()`, providing it to the `ignore.det.names` argument. For example, lets classify the occurrences of our dataset ignoring some strings in `determined.by` column.
 
 ```{r get_det_names, eval=F, echo =TRUE}
 
@@ -88,9 +86,9 @@ ig.names <- c("-", "Anonymous", "Unknown") # some possible characters that do no
 
 ## Classification process
 
-After identifying possible names that do not correspond to a potential specialist in the group we have some alternatives to assembly our specialist´s list. Some of them are discussed in [Rodrigues et al](https://www.biorxiv.org/content/10.1101/2020.05.26.115220v1). Here we will adopt the strategy in which the list of specialist was obtained consulting some specialist in the group. The list of specialist presented here present names of specialists in ferns from south of Brazil, and can be accessed directly from the naturaList package using `data(speciaLists)`.  
+After identifying possible names that do not correspond to a potential specialist in the group we have some alternatives to assembly our specialist´s list. Some of them are discussed in [Rodrigues et al](https://www.biorxiv.org/content/10.1101/2020.05.26.115220v1). Here we will adopt the strategy in which the list of specialist was obtained consulting specialists in the group. The list of specialist presented here contain names of specialists in ferns from south of Brazil, and can be accessed directly from the naturaList package using `data(speciaLists)`.
 
-Now, `data_all_occ_sub`can be used in `classify_occ` function to perform the classification process for the three species at the same time.
+Now, `data_all_occ_sub`can be used in `classify_occ` function to perform the classification process for all species at the same time.
 
 ```{r classification, eval=F, echo=F}
 
@@ -101,42 +99,18 @@ occ.class_all <- classify_occ(occ = data_all_occ_sub, spec = speciaLists, ignore
 ```
 
 We can see how many occurrences were classified in each one of the six confidence levels
+
 ```{r table_res, eval=FALSE, echo=TRUE}
 
 table(occ.class_all$naturaList_levels)
 
 ```
 
-It is worth highlight that if the names in the occurrence data frame differ from names used as default in the arguments of `classify_occ` the user must change the names of columns. For example, if the name containing the name of species was `speciesName` the argument `scientific.name` must be `scientific.name = speciesName`. Therefore, the user must change the argument in order to function work properly.
-
-```{r change_argument, eval=FALSE, echo=FALSE}
-
-occ_Cythea_phale <- occ_search(scientificName = "Cyathea phalerata", limit = 5000, return = 'data', hasCoordinate = TRUE)
-institutionCode <- occ_Cythea_phale$data$institutionCode
-collectionCode <- occ_Cythea_phale$data$collectionCode
-catalogNumber <- occ_Cythea_phale$data$catalogNumber
-year <- occ_Cythea_phale$data$year
-dateIdentified <- occ_Cythea_phale$data$dateIdentified
-speciesNames <- occ_Cythea_phale$data$scientificName
-identifiedBy <- occ_Cythea_phale$data$identifiedBy
-recordedBy <- occ_Cythea_phale$data$recordedBy
-decimalLatitude <- occ_Cythea_phale$data$decimalLatitude
-decimalLongitude <- occ_Cythea_phale$data$decimalLongitude
-basisOfRecord <- occ_Cythea_phale$data$basisOfRecord
-mediaType <- occ_Cythea_phale$data$type
-occurrenceID <- occ_Cythea_phale$data$occurrenceID
-data_cytheaphal_modif <- data.frame(institutionCode, collectionCode, catalogNumber, year, dateIdentified, speciesNames, identifiedBy, decimalLatitude, decimalLongitude, basisOfRecord, mediaType, occurrenceID)
-
-classify_occ(occ = data_cytheaphal_modif, scientific.name = "speciesNames")
-
-```
-
-
 ## Defining geographical and environmental space
 
 ### Downloding additional data {#env_data}
 
-In order to evaluate the effects of the filtering occurrence the data by a specialists in the distribution area of species before and after the filtering process, we will need some additional data of environmental variables, since the comparison can be done using both the geographical space (occurrence points only) or environmental space (niche space). So, we will download data from worldclim platform, select two layers, bio1 and bio2, that represents, respectivelly, temperature and precipitation. These variables will be used to calculate the environmental space using the function `define_env_space` from naturaList package.
+In order to evaluate the effects of the filtering occurrence the data by a specialists in the distribution area of species before and after the filtering process, we will need some additional data of environmental variables, since the comparison can be done using both the geographical space (occurrence points only) or environmental space (niche space). So, we will download data from worldclim platform, select two layers, bio1 and bio2, that represents, respectively, temperature and precipitation. These variables will be used to calculate the environmental space using the function `define_env_space` from naturaList package.
 
 ```{r clim_data, eval=FALSE, echo=FALSE}
 
@@ -154,7 +128,7 @@ df.temp.prec <- as.data.frame(raster.temp.prec)
 
 ```
 
-### Defining environmental space 
+### Defining environmental space
 
 Now that we have data of temperature and precipitation we can obtain the environmental space necessary to compare the effects of filtering in the spatial niche based on this two variables for all three species using the function `define_env_space` in the naturaList package
 
@@ -165,7 +139,7 @@ env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
 
 ```
 
-And also, we can define the geographical space for comparison before the filtering and after the filtering process.
+And also, we can define the geographical space for comparison before and after the filtering process.
 
 ```{r geo_space, eval=T, echo=T}
 
@@ -184,11 +158,10 @@ i.geo.space <- intersect(un.land, buffer(spdf.occ.cl, 200000))
 
 ```
 
-
 ## Comparing before and after cleaning process {#comp_eval}
 
-Here we will use the function `clean_eval` to evaluate the effect of filtering process in two characteristics of occurrence of species: the species distribution, calculated as being the convex hull polygon occupied by a species; and the environmental niche, calculated as being the convex hull polygon obtained from the (at least) two environmental variables presented in the grid in which a species occur.  
-Both spatial distribution and niche space are compared between before and after the cleaning process, and the difference in area for both measure are given as one of the results of `clean_eval` function.
+Here we will use the function `clean_eval` to evaluate the effect of filtering process in two characteristics of occurrence of species: the species distribution, calculated as being the convex hull polygon occupied by a species; and the environmental niche, calculated as being the convex hull polygon obtained from the (at least) two environmental variables presented in the grid in which a species occur.\
+Both spatial distribution and niche space are compared between the data before and after the cleaning process, and the difference in area for both measure are given for each species as one of the results of `clean_eval` function.
 
 ```{r compare, eval=F, echo = F}
 
@@ -203,7 +176,7 @@ area_remained <- cl.eval_all$area # the amount of area remained after cleaning p
 
 ```
 
-The area is a value that range from 0 to 1, in which 0 indicate that the none of the area of distribution of the species left after the cleaning process. On the other hand, values of 1 indicate that all the area occupied by a species remains the same after the cleaning process. In this example we cleaned our data to maintain only the occurrence points of species that was identified by a specialist.  
+The area is a value that range from 0 to 1, in which 0 indicate that none of the area of distribution of the species left after the cleaning process. On the other hand, values of 1 indicate that all the area occupied by a species remains the same after the cleaning process. In this example we cleaned our data to maintain only the occurrence points of species that was identified by a specialist.
 
 If you are working with more than one species, one example of the usage of `clean_eval` results is to plot in a map the richness containing in each grid before and after the cleaning process. This can be done with the following code:
 
@@ -213,5 +186,11 @@ rich.before.clean <- rasterFromXYZ(cbind(cl.eval_all$site.coords,
 rich.after.clean <- rasterFromXYZ(cbind(cl.eval_all$site.coords,
                                          cl.eval_all$rich$rich.AC))
 
+
+```
+
+This can be ploted in two maps and compare the effects of filtering process in the richness of community
+
+```{r plotRich, eval=T, echo=T}
 
 ```
