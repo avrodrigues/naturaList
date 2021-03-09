@@ -66,7 +66,7 @@ i.geo.space <- intersect(un.land, buffer(spdf.occ.cl, 200000))
 cl.eval <- clean_eval(occ.cl,
            env.space = env.space,
            geo.space = c.geo.space,
-           r = raster.temp.prec) 
+           r = raster.temp.prec)
 
 cl.eval$area
 dim(cl.eval$comp$comp.BC)
@@ -105,3 +105,11 @@ plot(c.setosa.bc)
 quartz()
 #windows()
 plot(c.setosa.ac)
+
+
+cyathea_occ <- read.csv(file = "0209002-200613084148143 3.csv", header = TRUE, sep = '\t')
+load("cyathea.RData")
+cyathea_occ <- cyathea_occ
+usethis::use_data(cyathea_occ, naturaList)
+data("cyathea_occ")
+length(table(cyathea_occ$species))
