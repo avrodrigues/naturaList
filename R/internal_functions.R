@@ -21,6 +21,8 @@
 #' @param na.rm.coords = TRUE
 #'
 #' @seealso {\link[naturaList]{classify_occ}}
+#'
+#' @keywords internal
 
 reduce.df <- function(df,
                       institution.source = "institutionCode",
@@ -75,7 +77,7 @@ reduce.df <- function(df,
 #' @param df spec data frame provided in {\link[naturaList]{classify_occ}}
 #' @param line specifies the line of the data frame to be collapsed
 #' @seealso {\link[naturaList]{classify_occ}}
-
+#' @keywords internal
 
 abrev.pttn <- function(df, line){
 
@@ -105,6 +107,7 @@ abrev.pttn <- function(df, line){
 #' in {\link[naturaList]{classify_occ}}
 #' @param i line number of specialist data frame
 #' @param specialist specialist data
+#' @keywords internal
 
 func.det.by.esp <- function(sp.df, i, specialist){
 
@@ -131,7 +134,7 @@ func.det.by.esp <- function(sp.df, i, specialist){
 #'
 #' @param specialist specialist data frame
 #'
-#'
+#' @keywords internal
 
 pttn.all.specialist <- function(specialist){
 
@@ -157,7 +160,7 @@ pttn.all.specialist <- function(specialist){
 #'
 #' @param pattern a pattern from {\link[naturaList]{pttn.all.specialist}} function
 #' @param string string with the name of who identified the specimen
-#'
+#' @keywords internal
 
 verify.specialist <- function(pattern, string){
 
@@ -184,8 +187,7 @@ verify.specialist <- function(pattern, string){
 #' @param pt.df a line of the reduced version of the occurrence data frame
 #' @param specialist specialist data frame
 #'
-#'
-
+#' @keywords internal
 
 specialist.conference <- function(pt.df, specialist){
   spe.obs <- which(lapply(specialist[,1],
@@ -209,7 +211,7 @@ specialist.conference <- function(pt.df, specialist){
 #' @param ignore.det.names ignore.det.names character vector indicatiing strings in the determined.by columns
 #'    that should be ignored as a taxonomist. See {\link[naturaList]{classify_occ}}.
 #'
-#'
+#' @keywords internal
 
 has.det.ID <- function(sp.df, ignore.det.names = NULL){
   if(is.null(ignore.det.names)){
@@ -253,7 +255,8 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL){
 #' {\link[naturaList]{classify_occ}} criteria
 #' @param crit.levels crit.levels choosed by user in {\link[naturaList]{classify_occ}}
 #' @param determined.by same as determined.by argumetn in {\link[naturaList]{classify_occ}}
-#'
+#' @keywords internal
+
 check.spec <- function(class.occ, crit.levels, determined.by){
 
   sub <- class.occ$naturaList_levels == "1_det_by_spec_verify"
@@ -292,6 +295,7 @@ check.spec <- function(class.occ, crit.levels, determined.by){
 #' @param latitude name of column with latitude
 #' @param longitude name of column with longitude
 #'
+#' @keywords internal
 #'
 rm.coord.dup <- function(x, latitude, longitude){
 
@@ -313,8 +317,6 @@ rm.coord.dup <- function(x, latitude, longitude){
 #' \code{input$map_draw_all_features$features[[i]]}
 #'
 #' @return a data frame with the coordinates
-
-
 pol.coords <- function(input.polig){
 
   pol.coords <- data.frame(x=numeric(),y=numeric())
@@ -341,8 +343,9 @@ pol.coords <- function(input.polig){
 #' Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
 #'
 #' @param df a data frame provided by {\link{pol.coords}}
-
-# função 10
+#'
+#' @keywords internal
+#'
 make.polygon <- function(df){
 
   # and then something like this

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The aim of `naturaList` package is to implement a classification of occurrence records based on the confiability in the species identification. The classification could be done up to six levels of confidence. Additionally, `naturaList` provides tools to filter the occurrence data based on these classification levels.
+The aim of `naturaList` package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, `naturaList` package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxons and evaluate the effects that the filtering procedure based on records identified by specialists have on different descriptors of species spatial distribution of occurence records (area of distribution and fundamental niche space). With naturaList package the users can filter large occurence data based on well stablished and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurence data through an interactive interface.
 
 ## Installation
 Install the package from github:
@@ -25,8 +25,8 @@ install_github("avrodrigues/naturaList")
 ```
 
 ## Classify occurrence records based on confidence in the species identification
-
-The rationale of the classification is that the most reliable identification of a specimen is made by a specialist in the taxa. To classify an occurence at this level of confidence, the `classify_occ()` function needs of an occurrence and a specialist dataset. The other levels are derived from information contained in the occurence dataset. Thus, the default order of confidence levels is:
+naturaList has as the core function `classify_occ()`. The rationale of the classification is that the most reliable identification of a specimen is made by a specialist in the taxa. To classify an occurrence at this level of confidence, the `classify_occ()` function needs of an occurrence and a specialist dataset.
+The other levels in which data can be classified are derived from information contained in the occurence dataset. The default order for classification in confidence levels is:
 
  * Level 1 - species is identified by a specialist, if not;
  * Level 2 - species is identified by a taxonomist, if not;
@@ -35,9 +35,9 @@ The rationale of the classification is that the most reliable identification of 
  * Level 5 - the identification was done in filed observation, if not;
  * Level 6 - no criteria was met.
  
-The user can alter this order, depending on his/her objetives, except for the Level 1 that is always a species determined by a specialist. 
+The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist. 
 
-As exemple, we will use the datasets in `naturaList`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facilility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this [paper](http://dx.doi.org/10.1590/2175-7860201566410). 
+As example, we will use the datasets in `naturaList`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facilility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this [paper](http://dx.doi.org/10.1590/2175-7860201566410). 
 
 ```{r setup, eval=FALSE}
 # Load package and data
