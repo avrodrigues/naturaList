@@ -59,7 +59,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/natutaList_vignette.html">Introduction to naturaList R Package</a>
+      <a href="articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+    </li>
+    <li>
+      <a href="articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
+    </li>
+    <li>
+      <a href="articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+    </li>
+    <li>
+      <a href="articles/natutaList_vignette.html">Get Started</a>
     </li>
   </ul>
 </li>
@@ -79,17 +88,20 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
+<p><img src="reference/figures/naturaList_logo_size2.png" alt="naturaList logo" width="120px" align="right"></p>
 <div id="naturalist" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#naturalist" class="anchor"></a>naturaList</h1></div>
 <!-- badges: start -->
 
-<p><a href="https://github.com/avrodrigues/naturaList/actions"><img src="https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
-<p>The goal of naturaList is to provide tools for check identification reliability in species occurrence records data sets. The rationale is that by providing a list specialists in the taxon of interest, the user is able to classify which records were identified by specialists. In addition other characteristics of the records could be used to derive six levels of confidence.</p>
+
+<!-- badges: end -->
+<p>The goal of naturaList package is to provide tools for check identification reliability in species occurrence records data sets. The main functionality of naturaList package is provide an automated way to identify for the taxon of interest, which records has the most reliable level of classification, i.e, those records identified by specialists. In addition other characteristics of the records could be used to derive up to six levels of confidence.</p>
 <div id="levels-of-confidence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#levels-of-confidence" class="anchor"></a>Levels of confidence</h2>
-<p>The package allows to classify the confidence in the identification of the specimen using the <code><a href="reference/classify_occ.html">classify_occ()</a></code> function. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. Thus, the default order of confidence levels is:</p>
+<p>The package allows to classify the occurence records in confidence levels through the function <code><a href="reference/classify_occ.html">classify_occ()</a></code>, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:</p>
 <ul>
 <li>Level 1 - species is identified by a specialist, if not;</li>
 <li>Level 2 - species is identified by a taxonomist, if not;</li>
@@ -103,28 +115,29 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of naturaList from github:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"avrodrigues/naturaList"</span>, build_vignettes <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<p>You can install the last released version of naturaList from github using:</p>
+<pre class="{.r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")
+devtools::install_github("avrodrigues/naturaList")</a></code></pre>
 </div>
-<div id="example" class="section level2">
+<div id="basics-of-naturalist-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>To conduct a classification you have to provide two data frames to <code><a href="reference/classify_occ.html">classify_occ()</a></code> function. The first containing the occurrences records and the second with a list of specialists. The <code><a href="reference/classify_occ.html">classify_occ()</a></code> function add a new column in the occurrences dataset named <code>naturaList_levels</code>, which contains the classification.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">naturaList</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"A.setosa"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"speciaLists"</span><span class="op">)</span>
+<a href="#basics-of-naturalist-package" class="anchor"></a>Basics of naturaList package</h2>
+<p>An extensive explanation of all the features of naturaList package is provided through <a href="https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html">vignette articles</a>. To conduct a basic classification process through <code>classify_occ</code> function the user must provide only two data frames. The first containing the occurrence records and the second with a list of specialists. The <code><a href="reference/classify_occ.html">classify_occ()</a></code> function add a new column in the occurrences dataset named <code>naturaList_levels</code>, which contains the classification.</p>
+<pre class="{.r}"><code><a href="https://rdrr.io/r/base/library.html">library(naturaList)
+data("A.setosa")
+data("speciaLists")
 
-<span class="va">occ.cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
+occ.cl &lt;- classify_occ(A.setosa, speciaLists)</a></code></pre>
+<p>Naturalist also offer an interactive module that allows to visualize occurence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function <code>map_module</code>. An article explaining all features of <code>map_module</code> function can be accessed in this <a href="https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html">article</a></p>
 </div>
 <div id="other-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-resources" class="anchor"></a>Other resources</h2>
-<p>See the vignette <code>vignette("naturaList_vignette")</code></p>
+<p>Auxiliary functions that allows the user to access the effects of filtering procedures based on classification levels are <code>clean_eval</code> and <code>grid_filter</code> functions. A complete example of the usage of these functions can be found in this <a href="https://avrodrigues.github.io/naturaList/articles/clean_eval_vignette.html">article</a>.</p>
+<p>See <a href="https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html">vignette</a> for all articles describing the functionalities of naturaList package.</p>
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -148,6 +161,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=naturaList"><img src="https://www.r-pkg.org/badges/version/naturaList" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://github.com/avrodrigues/naturaList/actions"><img src="https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 </div>
