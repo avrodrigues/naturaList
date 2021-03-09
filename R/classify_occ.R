@@ -94,6 +94,10 @@ classify_occ <- function(
     warning("'occ' already had classification. The classification was remade")
   }
 
+  if(is(occ, "tbl")){
+    occ <- as.data.frame(occ)
+  }
+
   r.occ <- reduce.df(occ,
                      institution.source = institution.source,
                      collection.code = collection.code,
