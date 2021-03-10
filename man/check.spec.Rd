@@ -21,3 +21,4 @@ identifier of a specimen has a specialist name. It solves ambiguity in classify
 an occurence as identified by a specialist. It is used inside
 {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

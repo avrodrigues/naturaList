@@ -2,7 +2,7 @@ Package: naturaList
 Type: Package
 Title: Classify occurrence records by confidence levels in the species 
    identification
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
     person("Gabriel", "Nakamura", role = "aut"),

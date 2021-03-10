@@ -58,3 +58,4 @@ Reduce columns of occurrence data.frame required by
 \seealso{
 {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ in {\link[naturaList]{classify_occ}}}
 Detect if a string with identifier's name has a specialist name. It is used inside
  {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

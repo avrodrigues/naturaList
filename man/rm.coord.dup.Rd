@@ -17,3 +17,4 @@ rm.coord.dup(x, latitude, longitude)
 Remove duplicated occurrence based on coordinates. It is used in
 {\link[naturaList]{grid_filter}}
 }
+\keyword{internal}
