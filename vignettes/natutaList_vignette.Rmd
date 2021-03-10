@@ -1,5 +1,5 @@
 ---
-title: "Introdction to naturaList"
+title: "Introduction to naturaList"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{natutaList_vignette}

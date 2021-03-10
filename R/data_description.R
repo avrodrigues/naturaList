@@ -9,6 +9,18 @@
 #' @source GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/dl.6jesg0}
 "A.setosa"
 
+#' Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
+#' Information Facility (GBIF).
+#'
+#' A filtered GBIF dataset containing 4408 occurrence records for the fern species
+#' from the genus Cyathea in Brazil. We filtered the data after download from GBIF
+#' to ensure all occurrences records are from Brazil.
+#'
+#' @format A data frame with 508 rows and 50 variables
+#'
+#' @source GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qrhynv
+"cyathea.br"
+
 #' Specialists of ferns and lycophytes of Brazil
 #'
 #' A dataset containing the specialists of ferns and lycophytes of Brazil formatted

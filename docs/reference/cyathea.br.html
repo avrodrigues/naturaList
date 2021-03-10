@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define environmental space for species occurrence — define_env_space • naturaList</title>
+<title>Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
+Information Facility (GBIF). — cyathea.br • naturaList</title>
 
 
 <!-- jquery -->
@@ -39,9 +40,11 @@
 
 
 
-<meta property="og:title" content="Define environmental space for species occurrence — define_env_space" />
-<meta property="og:description" content="Based on two continuous environmental variables, it defines a bi-dimensional environmental
-space." />
+<meta property="og:title" content="Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
+Information Facility (GBIF). — cyathea.br" />
+<meta property="og:description" content="A filtered GBIF dataset containing 4408 occurrence records for the fern species
+from the genus Cyathea in Brazil. We filtered the data after download from GBIF
+to ensure all occurrences records are from Brazil." />
 
 
 
@@ -128,47 +131,27 @@ space." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define environmental space for species occurrence</h1>
+    <h1>Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
+Information Facility (GBIF).</h1>
     
-    <div class="hidden name"><code>define_env_space.Rd</code></div>
+    <div class="hidden name"><code>cyathea.br.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Based on two continuous environmental variables, it defines a bi-dimensional environmental
-space.</p>
+    <p>A filtered GBIF dataset containing 4408 occurrence records for the fern species
+from the genus Cyathea in Brazil. We filtered the data after download from GBIF
+to ensure all occurrences records are from Brazil.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>define_env_space</span><span class='op'>(</span><span class='va'>env</span>, <span class='va'>buffer.size</span>, plot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>cyathea.br</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>env</th>
-      <td><p>matrix or data frame with two columns containing two environmental variables.
-The variables must be numeric, even for data frames.</p></td>
-    </tr>
-    <tr>
-      <th>buffer.size</th>
-      <td><p>numeric value indicating a buffer size around each point
-which will delimit the environmental geographical border for the occurrence point. See details.</p></td>
-    </tr>
-    <tr>
-      <th>plot</th>
-      <td><p>logical. whether to plot the polygon. Default is TRUE.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of sfc_POLYGON class</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>A data frame with 508 rows and 50 variables</p>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>The environmental variables are standardized by range, which turns the
- range of each environmental variable from 0 to 1. Then, it is delimited a buffer of size equal
- to <code>buffer.size</code> around each point in this space and a polygon is draw to link these buffers.
- The function returns the polygon needed to link all points, and the area of the polygon indicates
- the environmental space based in the variables used.</p>
+    <p>GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qrhynv</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

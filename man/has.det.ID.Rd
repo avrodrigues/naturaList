@@ -18,3 +18,4 @@ that should be ignored as a taxonomist. See {\link[naturaList]{classify_occ}}.}
 Identifies if a occurence has a name for the identifier of the specimen.
  It is used inside {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

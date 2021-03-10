@@ -18,3 +18,4 @@ used as pattern in grep function inside {\link[naturaList]{classify_occ}}
 \seealso{
 {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

@@ -14,3 +14,4 @@ pttn.all.specialist(specialist)
 Retturn specialists names in a collapesed string to be used in the internal
 function {\link[naturaList]{specialist.conference}}
 }
+\keyword{internal}

@@ -17,3 +17,4 @@ Confirm if an occurrence record was identified by
 a specialist witout ambiguity. It is used inside
  {\link[naturaList]{classify_occ}}
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ make.polygon(df)
 \description{
 Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
 }
+\keyword{internal}

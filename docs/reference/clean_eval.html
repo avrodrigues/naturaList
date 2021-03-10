@@ -40,9 +40,10 @@
 
 
 <meta property="og:title" content="Evaluate the cleaning of occurrences records — clean_eval" />
-<meta property="og:description" content="By defining the level of filtering, the function compare the area occupied for
-each species between before and after cleaning the data set. The area is computed
-in the geographical and environmental space" />
+<meta property="og:description" content="This function compare the area occupied by
+a species before and after pass through the cleaning procedure according to the chosen
+level of filter.
+The comparison can be made by measuring area in the geographical and in the environmental space" />
 
 
 
@@ -74,7 +75,7 @@ in the geographical and environmental space" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -106,7 +107,7 @@ in the geographical and environmental space" />
       <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
-      <a href="../articles/natutaList_vignette.html">Get Started</a>
+      <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
     </li>
   </ul>
 </li>
@@ -135,9 +136,10 @@ in the geographical and environmental space" />
     </div>
 
     <div class="ref-description">
-    <p>By defining the level of filtering, the function compare the area occupied for
-each species between before and after cleaning the data set. The area is computed
-in the geographical and environmental space</p>
+    <p>This function compare the area occupied by
+a species before and after pass through the cleaning procedure according to the chosen
+level of filter.
+The comparison can be made by measuring area in the geographical and in the environmental space</p>
     </div>
 
     <pre class="usage"><span class='fu'>clean_eval</span><span class='op'>(</span>
@@ -206,6 +208,9 @@ collumn which filter the occurrence data set.</p></td>
 <p><code>rich</code> data frame with a single column with the richness of each site</p>
 <p><code>site.coords</code> data frame with site's coordinates. It facilitates to built
   raster layers from results using <code><a href='https://rdrr.io/pkg/raster/man/rasterFromXYZ.html'>rasterFromXYZ</a></code></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[define_env_space()]</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
