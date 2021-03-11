@@ -1,4 +1,4 @@
-<img src="man/figures/naturaList_logo_size2.png" alt="naturaList logo" width="120px" align="right"/>
+<img src="man/figures/logo_naturaList_2.png" alt="naturaList logo" width="120px" align="right"/>
 
 # naturaList
 
