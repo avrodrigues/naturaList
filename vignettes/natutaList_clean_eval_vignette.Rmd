@@ -35,11 +35,6 @@ library(naturaList)
 library(raster)
 library(rnaturalearth)
 library(dplyr)
-if(require(rnaturalearthhires) == FALSE){
-  install.packages("rnaturalearthhires", 
-                   repos = "http://packages.ropensci.org", type = "source")
-}
-
 ```
 
 
