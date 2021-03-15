@@ -4,7 +4,12 @@
 \alias{get_det_names}
 \title{Get the names in the 'determined.by' column}
 \usage{
-get_det_names(occ, determined.by = "identifiedBy", freq = FALSE)
+get_det_names(
+  occ,
+  determined.by = "identifiedBy",
+  freq = FALSE,
+  decreasing = TRUE
+)
 }
 \arguments{
 \item{occ}{Data frame with occurrence records information.}
@@ -14,9 +19,12 @@ species.}
 
 \item{freq}{Logical. If TRUE output contain the number of times each string is
 repeated in the 'determined.by' column. Default FALSE.}
+
+\item{decreasing}{logical. sort strings in decreasing order of frequency. Default =
+TRUE}
 }
 \value{
-Character vector containing characters in \code{determined.by} 
+Character vector containing characters in \code{determined.by}
     column of \code{occ}.
 }
 \description{
