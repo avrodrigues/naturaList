@@ -43,7 +43,9 @@ Suggests:
     rgeos,
     rgdal,
     rnaturalearth,
-    rnaturalearthhires 
+    rnaturalearthhires
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
+URL: https://avrodrigues.github.io/naturaList/
+BugReports: https://github.com/avrodrigues/naturaList/issues
