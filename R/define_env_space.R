@@ -1,18 +1,20 @@
 #' Define environmental space for species occurrence
 #'
-#' Based on two continuous environmental variables, it defines a bi-dimensional environmental
-#' space.
+#' Based on two continuous environmental variables, it defines a
+#' bi-dimensional environmental space.
 #'
-#' @param env matrix or data frame with two columns containing two environmental variables.
-#'  The variables must be numeric, even for data frames.
+#' @param env matrix or data frame with two columns containing two
+#'  environmental variables. The variables must be numeric, even for data frames.
 #' @param buffer.size numeric value indicating a buffer size around each point
-#'  which will delimit the environmental geographical border for the occurrence point. See details.
+#'  which will delimit the environmental geographical border for the occurrence
+#'  point. See details.
 #' @param plot logical. whether to plot the polygon. Default is TRUE.
 #'
-#' @details The environmental variables are standardized by range, which turns the
-#'  range of each environmental variable from 0 to 1. Then, it is delimited a buffer of size equal
-#'  to \code{buffer.size} around each point in this space and a polygon is draw to link these buffers.
-#'  The function returns the polygon needed to link all points, and the area of the polygon indicates
+#' @details The environmental variables are standardized by range, which turns
+#'  the range of each environmental variable from 0 to 1. Then, it is delimited
+#'  a buffer of size equal to \code{buffer.size} around each point in this
+#'  space and a polygon is draw to link these buffers. The function returns the
+#'  polygon needed to link all points, and the area of the polygon indicates
 #'  the environmental space based in the variables used.
 #'
 #' @return An object of sfc_POLYGON class

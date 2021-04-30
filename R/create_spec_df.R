@@ -1,9 +1,10 @@
 #' Create specialist data frame from character vector
 #'
-#' Creates a specialist data frame ready for use in \code{\link[naturaList]{classify_occ}}
-#' from a character vector containg the specialists names
+#' Creates a specialist data frame ready for use in
+#' \code{\link[naturaList]{classify_occ}}
+#' from a character vector containing the specialists names
 #'
-#' @param spec.char A character vector with specialist names
+#' @param spec.char a character vector with specialist names
 #'
 #' @examples
 #' spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
@@ -14,6 +15,7 @@
 
 create_spec_df <- function(spec.char){
   spec.char <- as.character(spec.char)
+
   #transform in list
   l.spec <- lapply(spec.char, function(x) x)
 
@@ -74,6 +76,7 @@ create_spec_df <- function(spec.char){
     }
 
   }
+
   # remove abreviation from names
   only.names <- lapply(names, function(x){
     onechar <- nchar(x) == 1
@@ -90,7 +93,14 @@ create_spec_df <- function(spec.char){
 
 
   # number of cols for names and abbrev data frames
-  ncol.abrev <- max(sapply(l.abrrev, function(x) sum(nchar(x))))
+  ncol.abrev <- sapply(l.abrrev, function(x) sum(nchar(x)))
+  ### incluir stop se for zero (deve fornecer pelo menos um nome com inicial maiúscula)
+  if(any(ncol.abrev == 0)) {
+    warning("There are specialists without abbreviation letters. Be sure that all capital letters were informed correctly")
+    ncol.abrev <- ifelse(ncol.abrev == 0, 1, ncol.abrev)
+  }
+  ncol.abrev <- max(ncol.abrev)
+
 
   ncol.names <- max(sapply(only.names, function(x) length(x)))
 

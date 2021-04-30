@@ -2,19 +2,19 @@
 % Please edit documentation in R/internal_functions.R
 \name{pol.coords}
 \alias{pol.coords}
-\title{Internal function of naturaList - Get coordinates from poligons created in leaflet
+\title{Internal function of naturaList - Get coordinates from polygons created in leaflet
 map}
 \usage{
 pol.coords(input.polig)
 }
 \arguments{
-\item{input.polig}{an interactive poligon from leaflet map.
+\item{input.polig}{an interactive polygon from leaflet map.
 \code{input$map_draw_all_features$features[[i]]}}
 }
 \value{
 a data frame with the coordinates
 }
 \description{
-Get coordinates from poligons created in leaflet map. It is used in
+Get coordinates from polygons created in leaflet map. It is used in
  {\link{map_module}}
 }

@@ -2,32 +2,35 @@
 % Please edit documentation in R/get_det_names.R
 \name{get_det_names}
 \alias{get_det_names}
-\title{Get the names in the 'determined.by' column}
+\title{Get the names in the 'identified.by' column}
 \usage{
 get_det_names(
   occ,
-  determined.by = "identifiedBy",
+  identified.by = "identifiedBy",
   freq = FALSE,
-  decreasing = TRUE
+  decreasing = TRUE,
+  determined.by
 )
 }
 \arguments{
-\item{occ}{Data frame with occurrence records information.}
+\item{occ}{data frame with occurrence records information.}
 
-\item{determined.by}{Column name of \code{occ} with the name of who determined the
-species.}
+\item{identified.by}{column name of \code{occ} with the name of who
+determined the species.}
 
-\item{freq}{Logical. If TRUE output contain the number of times each string is
-repeated in the 'determined.by' column. Default FALSE.}
+\item{freq}{logical. If \code{TRUE} output contain the number of times each
+string is repeated in the \code{identified.by} column. Default = \code{FALSE}}
 
-\item{decreasing}{logical. sort strings in decreasing order of frequency. Default =
-TRUE}
+\item{decreasing}{logical. sort strings in decreasing order of frequency.
+Default = \code{TRUE}.}
+
+\item{determined.by}{deprecated, use \code{identified.by} instead.}
 }
 \value{
-Character vector containing characters in \code{determined.by}
+character vector containing characters in \code{identified.by}
     column of \code{occ}.
 }
 \description{
 This function facilitates the search for non-taxonomist strings in the
-'determined.by' column of occurrence records dataset
+'identified.by' column of occurrence records data set
 }

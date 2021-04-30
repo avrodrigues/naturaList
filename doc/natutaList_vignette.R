@@ -50,9 +50,3 @@ knitr::opts_chunk$set(
 #  table(occ.class$naturaList_levels)
 #  
 
-## ----grid_filter, eval=F------------------------------------------------------
-#  # grid filtering
-#  occ.grid <- grid_filter(occ.class)
-#  dim(occ.grid)
-#  table(occ.grid$naturaList_levels)
-
