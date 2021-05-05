@@ -1,12 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^wc10$
 ^doc$
+^wc10$
 ^scipt_test\.R$
 ^Meta$
 ^\.github$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^vignettes\wc10
+^vignettes\wc10$
+^vignettes\draw_polygon.png$
+^vignettes\fig_map_module.png$

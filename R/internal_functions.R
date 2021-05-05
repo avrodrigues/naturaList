@@ -331,6 +331,9 @@ rm.coord.dup <- function(x, decimal.latitude, decimal.longitude) {
 #' \code{input$map_draw_all_features$features[[i]]}
 #'
 #' @return a data frame with the coordinates
+#'
+#' @keywords internal
+#'
 pol.coords <- function(input.polig) {
   pol.coords <- data.frame(x = numeric(), y = numeric())
   total <- length(input.polig$geometry$coordinates[[1]])

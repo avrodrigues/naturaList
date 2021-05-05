@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the names in the 'determined.by' column — get_det_names • naturaList</title>
+<title>Get the names in the 'identified.by' column — get_det_names • naturaList</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Get the names in the 'determined.by' column — get_det_names" />
+<meta property="og:title" content="Get the names in the 'identified.by' column — get_det_names" />
 <meta property="og:description" content="This function facilitates the search for non-taxonomist strings in the
-'determined.by' column of occurrence records dataset" />
+'identified.by' column of occurrence records data set" />
 
 
 
@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -96,13 +96,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -114,7 +114,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,42 +133,216 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the names in the 'determined.by' column</h1>
-    
+    <h1>Get the names in the 'identified.by' column</h1>
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/get_det_names.R'><code>R/get_det_names.R</code></a></small>
     <div class="hidden name"><code>get_det_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function facilitates the search for non-taxonomist strings in the
-'determined.by' column of occurrence records dataset</p>
+'identified.by' column of occurrence records data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_det_names</span><span class='op'>(</span><span class='va'>occ</span>, determined.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>, freq <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_det_names</span><span class='op'>(</span>
+  <span class='va'>occ</span>,
+  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
+  freq <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  decreasing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>determined.by</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>occ</th>
-      <td><p>Data frame with occurrence records information.</p></td>
+      <td><p>data frame with occurrence records information.</p></td>
     </tr>
     <tr>
-      <th>determined.by</th>
-      <td><p>Column name of <code>occ</code> with the name of who determined the
-species.</p></td>
+      <th>identified.by</th>
+      <td><p>column name of <code>occ</code> with the name of who
+determined the species.</p></td>
     </tr>
     <tr>
       <th>freq</th>
-      <td><p>Logical. If TRUE output contain the number of times each string is
-repeated in the 'determined.by' column. Default FALSE.</p></td>
+      <td><p>logical. If <code>TRUE</code> output contain the number of times each
+string is repeated in the <code>identified.by</code> column. Default = <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>decreasing</th>
+      <td><p>logical. sort strings in decreasing order of frequency.
+Default = <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>determined.by</th>
+      <td><p>deprecated, use <code>identified.by</code> instead.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector containing characters in <code>determined.by</code> 
+    <p>character vector containing characters in <code>identified.by</code>
     column of <code>occ</code>.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"A.setosa"</span><span class='op'>)</span>
+<span class='fu'>get_det_names</span><span class='op'>(</span><span class='va'>A.setosa</span>, freq <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                           string frequency
+#&gt; 1                                                       79
+#&gt; 2                                   I. Fernandes        40
+#&gt; 3                                  Gasper, AL de        38
+#&gt; 4                                      Salino, A        26
+#&gt; 5                                  Schmitt, J.L.        17
+#&gt; 6                                    I.Fernandes        14
+#&gt; 7                                   Gonzatti, F.        13
+#&gt; 8                                  Fernandes, I.        11
+#&gt; 9                                   Ponce, M. M.        11
+#&gt; 10                                    R. Finotti         8
+#&gt; 11                                             -         7
+#&gt; 12                                   Gonzatti, F         7
+#&gt; 13                                    Salino, A.         7
+#&gt; 14                                     A. Salino         6
+#&gt; 15                                    Gasper, AL         6
+#&gt; 16                             Kieling-Rubio, MA         6
+#&gt; 17                             Rolf A. Engelmann         6
+#&gt; 18                                   Senna, R.M.         6
+#&gt; 19                                    C. R. Lehn         5
+#&gt; 20                                   Matos, F.B.         5
+#&gt; 21                                 A. Smith (UC)         4
+#&gt; 22                                    C. Mynssen         4
+#&gt; 23                                Canestraro, BK         4
+#&gt; 24                                  Labiak, P.H.         4
+#&gt; 25                            Schwartsburd, P.B.         4
+#&gt; 26                               Schwirkowski, P         4
+#&gt; 27                                      Verdi, M         4
+#&gt; 28                               Fernandes, I.M.         3
+#&gt; 29                                   J. Cordeiro         3
+#&gt; 30                             M. Lehnert (BONN)         3
+#&gt; 31                                     Matos, FB         3
+#&gt; 32                              Rolf A.Engelmann         3
+#&gt; 33                                Rolf Engelmann         3
+#&gt; 34                                     Senna, RM         3
+#&gt; 35                                 A.L.de Gasper         2
+#&gt; 36                                   C.E.Jascone         2
+#&gt; 37                                    Dreveck, S         2
+#&gt; 38                                   F. Gonzatti         2
+#&gt; 39                                      F. Matos         2
+#&gt; 40                                     Fleck, R.         2
+#&gt; 41                               Gasper, A.L. de         2
+#&gt; 42                      J. Cordeiro &amp; E. Barboza         2
+#&gt; 43                                  J.L. Schmitt         2
+#&gt; 44                               Lehn &amp; Steffens         2
+#&gt; 45                                         Lopes         2
+#&gt; 46                                  M.G. Caxambu         2
+#&gt; 47                              Mazziero, F.F.F.         2
+#&gt; 48                                   Michelon, C         2
+#&gt; 49                                 Nóbrega, G.A.         2
+#&gt; 50                                  P. H. Labiak         2
+#&gt; 51                                 P.G. Windisch         2
+#&gt; 52                               Pereira, J.B.S.         2
+#&gt; 53                                   RRC ID Flag         2
+#&gt; 54                                Sem Informação         2
+#&gt; 55                                    Záchia, R.         2
+#&gt; 56                                   A. Santiago         1
+#&gt; 57                                     A. Sehnem         1
+#&gt; 58                                      A. Smith         1
+#&gt; 59                             A. Smith, 1987-88         1
+#&gt; 60                                    A.C. Brade         1
+#&gt; 61                                A.L. de Gasper         1
+#&gt; 62                                    A.L.Gasper         1
+#&gt; 63                                   Almeida, TE         1
+#&gt; 64  Almeida, TE; Mota, NFO; Lau, BL; Ramalho, AJ         1
+#&gt; 65                                     Anonymous         1
+#&gt; 66                                 Arantes, A.A.         1
+#&gt; 67                                    Areias, G.         1
+#&gt; 68                      B. Zimmer (B) 2018-04-04         1
+#&gt; 69                                Barros, I.C.L.         1
+#&gt; 70                               Belgrano, M. J.         1
+#&gt; 71                                     Bueno, RM         1
+#&gt; 72                              Burmeister, E.L.         1
+#&gt; 73                      C. Mynssen et E. Moreira         1
+#&gt; 74                   C. R. Lehn &amp; J. L. Schmitt.         1
+#&gt; 75                                   C. Steffens         1
+#&gt; 76                                  C.E. Jascone         1
+#&gt; 77                                    C.E.Jacone         1
+#&gt; 78                                   C.G.V.Ramos         1
+#&gt; 79                                     C.MYNSSEN         1
+#&gt; 80                              Canestraro, B.K.         1
+#&gt; 81                                  Carmes, A.A.         1
+#&gt; 82                                   Condack, J.         1
+#&gt; 83                              Dittrich, V.A.O.         1
+#&gt; 84                                 Dittrich, VAO         1
+#&gt; 85                             E. I. Meza Torres         1
+#&gt; 86                               E. R. Damasceno         1
+#&gt; 87                                   Estevan, DA         1
+#&gt; 88                                    F. Azevedo         1
+#&gt; 89                            F.S.Souza/Fev.2011         1
+#&gt; 90                                  Fernande, I.         1
+#&gt; 91                                   Funez, L.A.         1
+#&gt; 92                               G.A.D.C. Franco         1
+#&gt; 93                                    G.S. McKee         1
+#&gt; 94                                 Gasper, A. L.         1
+#&gt; 95                                  Gasper, A.L.         1
+#&gt; 96                      Goetz, MNB &amp; Becker, DFP         1
+#&gt; 97                                Hiendlmayer, R         1
+#&gt; 98                                   I. Fernades         1
+#&gt; 99                                I. K. Flausino         1
+#&gt; 100                   I. K. Flausino/07-XII-2005         1
+#&gt; 101                                J. P. Condack         1
+#&gt; 102                                     J. Prado         1
+#&gt; 103                                   J. Schmitt         1
+#&gt; 104                                 Jarenkow, JA         1
+#&gt; 105                        Kieling- Rubio, M. A.         1
+#&gt; 106                         L.C. Bernacci et al.         1
+#&gt; 107                                  L.Sylvestre         1
+#&gt; 108                                Labiak, P. H.         1
+#&gt; 109                      Lana da Silva Sylvestre         1
+#&gt; 110                                 Lehnert (UC)         1
+#&gt; 111                                   Lermer, J.         1
+#&gt; 112                                   Lerner, J.         1
+#&gt; 113                               M.Lehnert (UC)         1
+#&gt; 114                                   M.M. Ponce         1
+#&gt; 115                               Marcus Lehnert         1
+#&gt; 116                                  Marquez, G.         1
+#&gt; 117                                    Matos, F.         1
+#&gt; 118                                Mckee, G. .S.         1
+#&gt; 119                         Melo, LCN; Salino, A         1
+#&gt; 120                                 Michelon, C.         1
+#&gt; 121                                Morero, R. E.         1
+#&gt; 122                                 Nervo, M. H.         1
+#&gt; 123                                    Nervo, MH         1
+#&gt; 124                              Oliveira, AA de         1
+#&gt; 125                                    P. Labiak         1
+#&gt; 126                           P.J.S. Silva Filho         1
+#&gt; 127                                        Ponce         1
+#&gt; 128                             Ponce, M. M., //         1
+#&gt; 129                                     Prado, J         1
+#&gt; 130                                 R. Engelmann         1
+#&gt; 131                                  R. M. Bueno         1
+#&gt; 132                                  R. M. Senna         1
+#&gt; 133                                    R.M.Senna         1
+#&gt; 134                            Rev. I. Fernandes         1
+#&gt; 135                                   Ristow, R.         1
+#&gt; 136                                Rogério Bueno         1
+#&gt; 137                                  Rubio, A.K.         1
+#&gt; 138                               S. Vasconcelos         1
+#&gt; 139                               Sakagami, C.R.         1
+#&gt; 140                                 Sakagami, CR         1
+#&gt; 141                        Salino, A; Nóbrega, T         1
+#&gt; 142                               Schmitt, J. L.         1
+#&gt; 143                                Schmitt. J.L.         1
+#&gt; 144                                    Silva, FD         1
+#&gt; 145                                 Silva, V. L.         1
+#&gt; 146                                 Steffens, C.         1
+#&gt; 147                                    Uller, HF         1
+#&gt; 148                V. Graeff, T. Padoin, V. Leão         1
+#&gt; 149                                  V. L. Silva         1
+#&gt; 150                              V.A.O. Dittrich         1
+#&gt; 151                    Vanilde Citadini- Zanette         1
+#&gt; 152                                    Verdi, M.         1
+#&gt; 153                                  Völtz, R.R.         1
+#&gt; 154                                 Windisch, PG         1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

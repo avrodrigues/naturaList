@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -94,13 +94,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -112,7 +112,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -127,9 +132,36 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      
+      <small>Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="naturalist-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#naturalist-040" class="anchor"></a>naturaList 0.4.0</h1>
+<ul>
+<li><p>some arguments for column names of the occurrence dataset was changed. They are still working, with warning message informing they are deprecated and what is the current argument accepted.</p></li>
+<li>
+<p>bugs solved in <code><a href="../reference/create_spec_df.html">create_spec_df()</a></code>:</p>
+<ul>
+<li>warning message included for specialists names without abbreviation letters</li>
+</ul>
+</li>
+<li>
+<p>bug solved in <code><a href="../reference/classify_occ.html">classify_occ()</a></code>:</p>
+<ul>
+<li>it is possible to use a list of specialists with only 1 row</li>
+</ul>
+</li>
+<li><p>Classification level <code>taxonomy</code> was renamed to <code>not_spec_name</code></p></li>
+<li>
+<p>bug solved in <code><a href="../reference/map_module.html">map_module()</a></code>:</p>
+<ul>
+<li>Before if a point was selected, when <code>Delete points with click</code> was activated, the selected points was deleted. Now <code>Delete points with click</code> always wait a click to delete a point.</li>
+</ul>
+</li>
+<li><p>new argument <code>action</code> in <code><a href="../reference/map_module.html">map_module()</a></code>, which allows to choose if the output dataset will contain only the selected occurrences, or if the occurrences output dataset will be flagged about the chices of the user in the application.</p></li>
+</ul>
+</div>
     <div id="naturalist-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
 <a href="#naturalist-031" class="anchor"></a>naturaList 0.3.1</h1>
@@ -141,7 +173,7 @@
 <h1 class="page-header" data-toc-text="0.3.0">
 <a href="#naturalist-030" class="anchor"></a>naturaList 0.3.0</h1>
 <ul>
-<li>Added functions <code><a href="../reference/clean_eval.html">clean_eval()</a></code> and <code>define_env_space</code>. This functions implements evaluation of cleaning procedures based in classification made by <code><a href="../reference/classify_occ.html">classify_occ()</a></code>. The evaluation is based on the change of convex hull area of species occurrences between cleaned and raw occurrences dataset.</li>
+<li>Added functions <code><a href="../reference/clean_eval.html">clean_eval()</a></code> and <code>define_env_space</code>. These functions implements evaluation of cleaning procedures based in classification made by <code><a href="../reference/classify_occ.html">classify_occ()</a></code>. The evaluation is based on the change of convex hull area of species occurrences between cleaned and raw occurrences dataset.</li>
 </ul>
 </div>
   </div>

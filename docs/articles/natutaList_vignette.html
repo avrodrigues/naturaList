@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -54,13 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -71,7 +71,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -81,20 +88,20 @@
 
       
 
-      </header><script src="natutaList_vignette_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="natutaList_vignette_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to naturaList</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/avrodrigues/naturaList/blob/master/vignettes/natutaList_vignette.Rmd"><code>vignettes/natutaList_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>natutaList_vignette.Rmd</code></div>
 
     </div>
 
     
     
-<p>The aim of <code>{naturaList}</code> package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, <code>naturaList</code> package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxa and evaluate the effects that the filtering procedure on different descriptors of species spatial distribution of occurrence records (area of distribution and niche breadth). With <code>{naturaList}</code> package the users can filter large occurrence data based on well established and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurrence data through an interactive interface.</p>
+<p>The aim of <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxa and evaluate the effects of the filtering procedure on different descriptors of species spatial distribution of occurrence records (area of distribution and niche breadth). With <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package the users can filter large occurrence data based on well established and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurrence data through an interactive interface.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -106,20 +113,20 @@
 <div id="classify-occurrence-records-based-on-confidence-in-the-species-identification" class="section level2">
 <h2 class="hasAnchor">
 <a href="#classify-occurrence-records-based-on-confidence-in-the-species-identification" class="anchor"></a>Classify occurrence records based on confidence in the species identification</h2>
-<p><code>{naturaList}</code> has as the core function <code><a href="../reference/classify_occ.html">classify_occ()</a></code>. The rationale of the classification is that the most reliable identification of a specimen is made by a specialist in the taxa. To classify an occurrence at this level of confidence, the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function needs of an occurrence and a specialist dataset. The other levels in which data can be classified are derived from information contained in the occurrence dataset. The default order for classification in confidence levels is:</p>
+<p><a href="https://github.com/avrodrigues/naturaList">naturaList</a> has as the core function <code><a href="../reference/classify_occ.html">classify_occ()</a></code>. The rationale of the classification is that the most reliable identification of a specimen is made by a specialist in the taxa. To classify an occurrence at this level of confidence, the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function needs of an occurrence and a specialist dataset. The other levels in which data can be classified are derived from information contained in the occurrence dataset. The default order for classification in confidence levels is:</p>
 <ul>
-<li>Level 1 - species is identified by a specialist, if not;</li>
-<li>Level 2 - species is identified by a taxonomist, if not;</li>
+<li>Level 1 - species was identified by a specialist, if not;</li>
+<li>Level 2 - who identified the the species was not specialist name, if not;</li>
 <li>Level 3 - occurrence record has an image associated, if not;</li>
 <li>Level 4 - the specimen is preserved in a scientific collection, if not;</li>
 <li>Level 5 - the identification was done in filed observation, if not;</li>
 <li>Level 6 - no criteria was met.</li>
 </ul>
 <p>The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.</p>
-<p>As example, we will use the datasets in <code>{naturaList}</code>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facilility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
+<p>As example, we will use the datasets in <a href="https://github.com/avrodrigues/naturaList">naturaList</a>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facilility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load package and data</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">naturaList</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/avrodrigues/naturaList">naturaList</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"A.setosa"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"speciaLists"</span><span class="op">)</span>
@@ -152,8 +159,21 @@
 <div id="verify-if-the-strings-in-the-identifiedby-column-of-occurrence-dataset-is-a-name" class="section level2">
 <h2 class="hasAnchor">
 <a href="#verify-if-the-strings-in-the-identifiedby-column-of-occurrence-dataset-is-a-name" class="anchor"></a>Verify if the strings in the ‘identifiedBy’ column of occurrence dataset is a name</h2>
-<p>It might occur that some strings in the ‘determined.by’ column of the occurrence dataset do not correspond to a taxonomist name. Strings as such <code>"Unknown"</code> often is included in the ‘identifiedBy’ data field. It is important then that such strings be ignored by the <code><a href="../reference/classify_occ.html">classify_occ()</a></code>, if not this function could flag an occurrence record as determined by a taxonomist when it was not.</p>
+<p>It might occur that some strings in the ‘identifiedBy’ column of the occurrence dataset do not correspond to a taxonomist name. Strings as such <code>"Unknown"</code> often is included in the ‘identifiedBy’ data field. It is important then that such strings be ignored by the <code><a href="../reference/classify_occ.html">classify_occ()</a></code>, if not this function could flag an occurrence record as determined by a taxonomist when it was not.</p>
 <p>To cope with this issue, <code><a href="../reference/get_det_names.html">get_det_names()</a></code> can be used to verify which strings are not taxonomists names. This function returns all unique strings in the ‘identifiedBy’ column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by <code><a href="../reference/classify_occ.html">classify_occ()</a></code>, providing it to the <code>ignore.det.names</code> argument. See also the <code><a href="../reference/classify_occ.html">?classify_occ</a></code> for more details.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># check out if there are strings which are not taxonomists</span>
+<span class="fu"><a href="../reference/get_det_names.html">get_det_names</a></span><span class="op">(</span><span class="va">A.setosa</span><span class="op">)</span>
+
+<span class="co"># include these strings in a object</span>
+<span class="va">ig.names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sem Informação"</span> , <span class="st">"Anonymous"</span><span class="op">)</span>
+
+<span class="co"># use 'ignore.det.names' to ignore those strings in classify_occ()</span>
+<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span>, ignore.det.names <span class="op">=</span> <span class="va">ig.names</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">$</span><span class="va">naturaList_levels</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 

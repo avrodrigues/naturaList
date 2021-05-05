@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -59,13 +59,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -76,7 +76,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -123,7 +130,7 @@ devtools::install_github("avrodrigues/naturaList")</a></code></pre>
 <h2 class="hasAnchor">
 <a href="#basics-of-naturalist-package" class="anchor"></a>Basics of naturaList package</h2>
 <p>An extensive explanation of all the features of naturaList package is provided through <a href="https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html">vignette articles</a>. To conduct a basic classification process through <code>classify_occ</code> function the user must provide only two data frames. The first containing the occurrence records and the second with a list of specialists. The <code><a href="reference/classify_occ.html">classify_occ()</a></code> function add a new column in the occurrences dataset named <code>naturaList_levels</code>, which contains the classification.</p>
-<pre class="{.r}"><code><a href="https://rdrr.io/r/base/library.html">library(naturaList)
+<pre class="{.r}"><code><a href="https://github.com/avrodrigues/naturaList">library(naturaList)
 data("A.setosa")
 data("speciaLists")
 
@@ -141,7 +148,16 @@ occ.cl &lt;- classify_occ(A.setosa, speciaLists)</a></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/avrodrigues/naturaList/">https://​github.com/​avrodrigues/​naturaList/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/avrodrigues/naturaList/issues">https://​github.com/​avrodrigues/​naturaList/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

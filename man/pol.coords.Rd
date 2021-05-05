@@ -18,3 +18,4 @@ a data frame with the coordinates
 Get coordinates from polygons created in leaflet map. It is used in
  {\link{map_module}}
 }
+\keyword{internal}
