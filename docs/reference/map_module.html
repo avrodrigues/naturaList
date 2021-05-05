@@ -73,7 +73,7 @@ classification levels or by drawing spatial polygons." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -96,13 +96,13 @@ classification levels or by drawing spatial polygons." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -114,7 +114,12 @@ classification levels or by drawing spatial polygons." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -129,7 +134,7 @@ classification levels or by drawing spatial polygons." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Check the occurrence records in a interactive map module</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/map_module.R'><code>R/map_module.R</code></a></small>
     <div class="hidden name"><code>map_module.Rd</code></div>
     </div>
 
@@ -140,18 +145,27 @@ classification levels or by drawing spatial polygons.</p>
 
     <pre class="usage"><span class='fu'>map_module</span><span class='op'>(</span>
   <span class='va'>occ.cl</span>,
-  occ.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
-  institution.source <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
+  action <span class='op'>=</span> <span class='st'>"clean"</span>,
+  institution.code <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
   collection.code <span class='op'>=</span> <span class='st'>"collectionCode"</span>,
   catalog.number <span class='op'>=</span> <span class='st'>"catalogNumber"</span>,
-  year.event <span class='op'>=</span> <span class='st'>"year"</span>,
+  year <span class='op'>=</span> <span class='st'>"year"</span>,
   date.identified <span class='op'>=</span> <span class='st'>"dateIdentified"</span>,
-  scientific.name <span class='op'>=</span> <span class='st'>"species"</span>,
-  determined.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
-  longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
-  basis.of.rec <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
-  media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>
+  species <span class='op'>=</span> <span class='st'>"species"</span>,
+  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
+  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
+  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
+  basis.of.record <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
+  media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>,
+  occurrence.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
+  <span class='va'>institution.source</span>,
+  <span class='va'>year.event</span>,
+  <span class='va'>scientific.name</span>,
+  <span class='va'>determined.by</span>,
+  <span class='va'>latitude</span>,
+  <span class='va'>longitude</span>,
+  <span class='va'>basis.of.rec</span>,
+  <span class='va'>occ.id</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -163,56 +177,107 @@ classification levels or by drawing spatial polygons.</p>
 classified by <code><a href='classify_occ.html'>classify_occ</a></code> function.</p></td>
     </tr>
     <tr>
-      <th>occ.id</th>
-      <td><p>Column name of <code>occ</code> with link or code for the occurrence record.</p></td>
+      <th>action</th>
+      <td><p>a string with `"clean"` or `"flag"` which defines the action
+of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+If the string is `"clean"` the dataset returned only the occurrences records
+selected by the user. If the string is `"flag"`, a column named
+`map_molule_flag` is added in the output dataset, with tags `selected` and
+`deleted`, following the choices of the user in the application.</p></td>
     </tr>
     <tr>
-      <th>institution.source</th>
-      <td><p>Column name of <code>occ</code> with the name of the
-institution that provided the data.</p></td>
+      <th>institution.code</th>
+      <td><p>column name of <code>occ</code> with the name (or acronym)
+in use by the institution having custody of the object(s) or information
+referred to in the record.</p></td>
     </tr>
     <tr>
       <th>collection.code</th>
-      <td><p>Column name of <code>occ</code> with the codes for institution
-names.</p></td>
+      <td><p>column name of <code>occ</code> with The name, acronym,
+coden, or initials identifying the collection or data set from which the
+record was derived.</p></td>
     </tr>
     <tr>
       <th>catalog.number</th>
-      <td><p>Column name of <code>occ</code> with catalog number.</p></td>
+      <td><p>column name of <code>occ</code> with an identifier
+(preferably unique) for the record within the data set or collection.</p></td>
     </tr>
     <tr>
-      <th>year.event</th>
-      <td><p>Column name of <code>occ</code> the year of the collection event.</p></td>
+      <th>year</th>
+      <td><p>Column name of <code>occ</code> the four-digit year in which the
+Event occurred, according to the Common Era Calendar.</p></td>
     </tr>
     <tr>
       <th>date.identified</th>
-      <td><p>Column name of <code>occ</code> with the date of species
-determination.</p></td>
+      <td><p>Column name of <code>occ</code> with the date on which the
+subject was determined as representing the Taxon.</p></td>
     </tr>
     <tr>
-      <th>scientific.name</th>
-      <td><p>Column name of <code>occ</code> with the species names.</p></td>
+      <th>species</th>
+      <td><p>column name of <code>occ</code> with the species names.</p></td>
     </tr>
     <tr>
-      <th>determined.by</th>
-      <td><p>Column name of <code>occ</code> with the name of who determined the
-species.</p></td>
+      <th>identified.by</th>
+      <td><p>column name of <code>occ</code> with the name of who
+determined the species.</p></td>
     </tr>
     <tr>
-      <th>longitude</th>
-      <td><p>Column name of <code>occ</code> longitude in decimal degrees.</p></td>
+      <th>decimal.latitude</th>
+      <td><p>column name of <code>occ</code> latitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>latitude</th>
-      <td><p>Column name of <code>occ</code> latitude in decimal degrees.</p></td>
+      <th>decimal.longitude</th>
+      <td><p>column name of <code>occ</code> longitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>basis.of.rec</th>
-      <td><p>Column name of <code>occ</code> with the recording types, as in GBIF.</p></td>
+      <th>basis.of.record</th>
+      <td><p>column name with the specific nature of the data
+record. See details.</p></td>
     </tr>
     <tr>
       <th>media.type</th>
-      <td><p>Column name of <code>occ</code> with the media type of recording.</p></td>
+      <td><p>column name of <code>occ</code> with the media type of recording.
+See details.</p></td>
+    </tr>
+    <tr>
+      <th>occurrence.id</th>
+      <td><p>column name of <code>occ</code> with link or code for the
+occurrence record. See in
+<a href='https://dwc.tdwg.org/terms/#dwc:occurrenceID'>Darwin Core Format</a></p></td>
+    </tr>
+    <tr>
+      <th>institution.source</th>
+      <td><p>deprecated, use <code>institution.code</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>year.event</th>
+      <td><p>deprecated, use <code>year</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>scientific.name</th>
+      <td><p>deprecated, use <code>species</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>determined.by</th>
+      <td><p>deprecated, use <code>identified.by</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <td><p>deprecated, use <code>decimal.latitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td><p>deprecated, use <code>decimal.longitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>basis.of.rec</th>
+      <td><p>deprecated, use <code>basis.of.record</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>occ.id</th>
+      <td><p>deprecated, use <code>occurrence.id</code> instead</p></td>
     </tr>
     </table>
 

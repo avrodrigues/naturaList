@@ -2,20 +2,21 @@
 % Please edit documentation in R/internal_functions.R
 \name{has.det.ID}
 \alias{has.det.ID}
-\title{Internal function of naturaList - Identifies if a occurence has a name for
+\title{Internal function of naturaList - Identifies if a occurrence has a name for
 the identifier of the specimen}
 \usage{
 has.det.ID(sp.df, ignore.det.names = NULL)
 }
 \arguments{
-\item{sp.df}{reduced version of occurence data frame provided in
+\item{sp.df}{reduced version of occurrence data frame provided in
 {\link[naturaList]{classify_occ}}}
 
-\item{ignore.det.names}{ignore.det.names character vector indicatiing strings in the determined.by columns
-that should be ignored as a taxonomist. See {\link[naturaList]{classify_occ}}.}
+\item{ignore.det.names}{ignore.det.names character vector indicating
+strings in the identified.by column that should be ignored as a
+taxonomist. See {\link[naturaList]{classify_occ}}.}
 }
 \description{
-Identifies if a occurence has a name for the identifier of the specimen.
+Identifies if a occurrence has a name for the identifier of the specimen.
  It is used inside {\link[naturaList]{classify_occ}}
 }
 \keyword{internal}

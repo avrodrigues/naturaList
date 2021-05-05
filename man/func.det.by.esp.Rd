@@ -7,7 +7,7 @@
 func.det.by.esp(sp.df, i, specialist)
 }
 \arguments{
-\item{sp.df}{reduced version of occurence data frame provided
+\item{sp.df}{reduced version of occurrence data frame provided
 in {\link[naturaList]{classify_occ}}}
 
 \item{i}{line number of specialist data frame}
@@ -15,7 +15,7 @@ in {\link[naturaList]{classify_occ}}}
 \item{specialist}{specialist data}
 }
 \description{
-Detect if a string with identifier's name has a specialist name. It is used inside
+Detect if a string with identifiers name has a specialist name. It is used inside
  {\link[naturaList]{classify_occ}}
 }
 \keyword{internal}

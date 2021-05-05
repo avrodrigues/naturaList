@@ -5,15 +5,15 @@
 \title{Internal function of naturaList - Manual check of ambiguity in specialist
 name}
 \usage{
-check.spec(class.occ, crit.levels, determined.by)
+check.spec(class.occ, crit.levels, identified.by)
 }
 \arguments{
 \item{class.occ}{internal data frame with observation classified according
 {\link[naturaList]{classify_occ}} criteria}
 
-\item{crit.levels}{crit.levels choosed by user in {\link[naturaList]{classify_occ}}}
+\item{crit.levels}{crit.levels choose by user in {\link[naturaList]{classify_occ}}}
 
-\item{determined.by}{same as determined.by argumetn in {\link[naturaList]{classify_occ}}}
+\item{identified.by}{same as identified.by argument in {\link[naturaList]{classify_occ}}}
 }
 \description{
 Creates interaction with user in which the user check if a string with the

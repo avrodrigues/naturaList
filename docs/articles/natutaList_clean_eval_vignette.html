@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Filtering data and evaluating the filtering proccess with naturaList • naturaList</title>
+<title>Evaluating the filtering proccess with naturaList • naturaList</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Filtering data and evaluating the filtering proccess with naturaList">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Evaluating the filtering proccess with naturaList">
 <meta property="og:description" content="naturaList">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -54,13 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -71,7 +71,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -81,49 +88,50 @@
 
       
 
-      </header><script src="natutaList_clean_eval_vignette_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="natutaList_clean_eval_vignette_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Filtering data and evaluating the filtering proccess with naturaList</h1>
+      <h1 data-toc-skip>Evaluating the filtering proccess with naturaList</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/avrodrigues/naturaList/blob/master/vignettes/natutaList_clean_eval_vignette.Rmd"><code>vignettes/natutaList_clean_eval_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>natutaList_clean_eval_vignette.Rmd</code></div>
 
     </div>
 
     
     
-<p>In this article we will show how naturaList package can be used to process big data related to occurrence points of species occurrences. Specifically we will show how we can filter occurrence data accordingly to a list of specialists and <a href="#comp_eval">compare the effect</a> of the filtering process regarding the differences in area of distribution of species, richness and the <a href="#env_data">niche space</a> <a href="#comp_eval">before and after the filtering process</a>.</p>
+<p>In this article we will show how <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package can be used to process large dataset of species occurrence records. Specifically we will show how we can filter occurrence data accordingly to a list of specialists and <a href="#comp_eval">compare the effect</a> of the filtering process regarding the differences in area of distribution of species, richness and the niche space before and after the filtering process.</p>
 <p>Before read this article, it is important to see the <a href="https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html">Introduction to naturaList</a>.</p>
-<p>This evaluation of cleaning procedure is done mainly through the use of <code>clean_eval</code> function. So, in summary, in this article you will learn how to:</p>
+<p>This evaluation of cleaning procedure is done mainly through the use of <code><a href="../reference/clean_eval.html">clean_eval()</a></code> function. So, in summary, in this article you will learn how to:</p>
 <ul>
 <li>
-<a href="#data_proc">Process</a> this data to in order to adequate its format to <code>{naturaList}</code> functions, specifically <code>clean_eval</code> function;</li>
+<a href="#env_data">Process</a> geographical and environmental data in order to adequate its format to <a href="https://github.com/avrodrigues/naturaList">naturaList</a> functions, specifically <code><a href="../reference/clean_eval.html">clean_eval()</a></code> function;</li>
 <li>
 <a href="#comp_eval">Compare</a> the spatial occurrence, richness and environmental niche of species before and after the cleaning process.</li>
 </ul>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Installation and required packages</h2>
-<p>For this article the user must read or install the following packages:</p>
+<p>For this article the user must load or install the following packages:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">naturaList</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/avrodrigues/naturaList">naturaList</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth">rnaturalearth</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co"># Warning: package 'dplyr' was built under R version 4.0.5</span></code></pre></div>
 </div>
 <div id="classification-process" class="section level2">
 <h2 class="hasAnchor">
 <a href="#classification-process" class="anchor"></a>Classification process</h2>
-<p>We will use occurrence data of the fern genus <em>Cyathea</em> in Brazil, that comprises a group of fern species. This dataset is available in the <code>{naturalist}</code>. We used these dataset in order to exemplify how to use a dataset with several species in <code>{naturaList}</code>.</p>
+<p>We will use occurrence data of the fern genus <em>Cyathea</em> in Brazil, that comprises a group of fern species. This dataset is available in the <code>{naturalist}</code>. We used this dataset to exemplify how to use a dataset with several species in <a href="https://github.com/avrodrigues/naturaList">naturaList</a>.</p>
 <p>The list of specialists we will use was derived from the authors of a paper describing the diversity of ferns and lycophytes in Brazil (see <code><a href="../reference/speciaLists.html">?speciaLists</a></code>).</p>
-<p>The both datasets of occurrence of <em>Cyathea</em> species in Brazil ans the specialists of ferns and lycophytes are available in the <code>{naturaList}</code>. They can be loaded using the following code:</p>
+<p>Both datasets of occurrence of <em>Cyathea</em> species in Brazil and the specialists of ferns and lycophytes are available in the <a href="https://github.com/avrodrigues/naturaList">naturaList</a>. They can be loaded using the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"cyathea.br"</span><span class="op">)</span> <span class="co"># occurrence dataset</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"speciaLists"</span><span class="op">)</span> <span class="co"># specialists dataset</span></code></pre></div>
-<p>Now, we can use the <code>classify_occ</code> function to perform the classification process for all species at the same time.</p>
+<p>Now, we can use the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function to perform the classification process for all species at the same time.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span>occ <span class="op">=</span> <span class="va">cyathea.br</span>, spec <span class="op">=</span> <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
@@ -132,15 +140,15 @@
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">$</span><span class="va">naturaList_levels</span><span class="op">)</span>
 <span class="co"># </span>
-<span class="co">#     1_det_by_spec      2_taxonomist           3_image   4_sci_colection </span>
-<span class="co">#               867              2322               675               457 </span>
+<span class="co">#     1_det_by_spec   2_not_spec_name           3_image   4_sci_colection </span>
+<span class="co">#               831              2199               561               242 </span>
 <span class="co">#       5_field_obs 6_no_criteria_met </span>
-<span class="co">#                17                70</span></code></pre></div>
+<span class="co">#                17                 1</span></code></pre></div>
 </div>
 <div id="env_data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#env_data" class="anchor"></a>Downloding environmental data</h2>
-<p>We will evaluate the effects of cleaning occurrence data based in the classification made with <code><a href="../reference/classify_occ.html">classify_occ()</a></code> in both geographical and environmental space. To this purpose we need data on environmental variables. So, we will download bioclim variables from worldclim (using the <a href="https://rspatial.org/raster">raster</a> package) and select two layers (bio1 and bio12) that represents temperature and precipitation. These variables will be used to calculate the environmental space using the function <code>define_env_space</code> from <code>{naturaList}</code> package.</p>
+<p>We will evaluate the effects of cleaning occurrence data based in the classification made with <code><a href="../reference/classify_occ.html">classify_occ()</a></code> in both geographical and environmental space. To this purpose we need data on environmental variables. So, we will download bioclim variables from worldclim (using the <a href="https://rspatial.org/raster">raster</a> package) and select two layers (bio1 and bio12) that represents temperature and precipitation. These variables will be used to calculate the environmental space using the function <code><a href="../reference/define_env_space.html">define_env_space()</a></code> from <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># download and load the bioclim raster layers</span>
@@ -160,11 +168,12 @@
 <div id="defining-environmental-space" class="section level2">
 <h2 class="hasAnchor">
 <a href="#defining-environmental-space" class="anchor"></a>Defining environmental space</h2>
-<p>Now that we have data of temperature and precipitation, we can define the environmental space using the function <code>define_env_space</code> in the <code>{naturaList}</code> package.</p>
+<p>Now that we have data of temperature and precipitation, we can define the environmental space using the function <code><a href="../reference/define_env_space.html">define_env_space()</a></code> in the <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">### Define the environmental space for analysis</span>
 <span class="va">env.space</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_env_space.html">define_env_space</a></span><span class="op">(</span><span class="va">df.temp.prec</span>, buffer.size <span class="op">=</span> <span class="fl">0.05</span>, plot <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
+<p>In this function, the environmental variables are standardized by range, which turns the range of each environmental variable from 0 to 1. Then, it is delimited a <code>buffer.size</code> around each point in this space and a polygon is draw to link these buffers. You can play with the value in the <code>buffer.size</code> argument and set the <code>plot = TRUE</code> to visualize the output polygon. The objective with this function is to create a boundary in the environmental space available for the species.</p>
 </div>
 <div id="defining-geographical-space" class="section level2">
 <h2 class="hasAnchor">
@@ -179,8 +188,8 @@
 <div id="comp_eval" class="section level2">
 <h2 class="hasAnchor">
 <a href="#comp_eval" class="anchor"></a>Comparing before and after cleaning process</h2>
-<p>Here we will use the function <code>clean_eval</code> to evaluate the effect of filtering process in two characteristics of occurrence of species: the species distribution, calculated as being the convex hull polygon occupied by a species; and the environmental niche breadth, calculated as being the convex hull polygon obtained from two environmental variables.</p>
-<p>Both spatial distribution and niche space are compared between the data before and after the cleaning process. The ratio of area after cleaning and before cleaning both spatial distribution and niche space are given for each species as one of the results of <code>clean_eval</code> function.</p>
+<p>Here we will use the function <code><a href="../reference/clean_eval.html">clean_eval()</a></code> to evaluate the effect of filtering process in two characteristics of occurrence of species: the species distribution, calculated as being the convex hull polygon occupied by a species; and the environmental niche breadth, calculated as being the convex hull polygon obtained from two environmental variables.</p>
+<p>Both spatial distribution and niche space are compared between the data before and after the cleaning process. The ratio of area after cleaning and before cleaning in both spatial distribution and niche space are given for each species as one of the results of <code><a href="../reference/clean_eval.html">clean_eval()</a></code> function.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># filter by year to be consistent with the environmental data</span>
 <span class="va">occ.class.1970</span> <span class="op">&lt;-</span> 
@@ -192,11 +201,12 @@
                               env.space <span class="op">=</span> <span class="va">env.space</span>,
                               geo.space <span class="op">=</span> <span class="va">BR</span>,
                               r <span class="op">=</span> <span class="va">raster.temp.prec</span><span class="op">)</span> 
+<span class="co"># Warning: package 'sf' was built under R version 4.0.5</span>
 
 <span class="co"># the amount of area remained after cleaning process </span>
 <span class="va">area_remained</span> <span class="op">&lt;-</span> <span class="va">cl.eval_all</span><span class="op">$</span><span class="va">area</span> </code></pre></div>
 <p>The area is a value that range from 0 to 1, in which 0 indicate that none of the area of distribution of the species left after the cleaning process. On the other hand, values of 1 indicate that all the area occupied by a species remains the same after the cleaning process. In this example we cleaned our data to maintain only the occurrence points of species that was identified by a specialist. But it can be altered in the <code>level.filter</code> argument (see <code><a href="../reference/clean_eval.html">?clean_eval</a></code>).</p>
-<p>If you are working with more than one species, one example of the usage of <code>clean_eval</code> results is to plot in a map the richness containing in each grid before and after the cleaning process. This can be done with the following code:</p>
+<p>If you are working with more than one species, one example of the usage of <code><a href="../reference/clean_eval.html">clean_eval()</a></code> results is to plot in a map the richness containing in each grid before and after the cleaning process. This can be done with the following code:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rich.before.clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/rasterFromXYZ.html">rasterFromXYZ</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">cl.eval_all</span><span class="op">$</span><span class="va">site.coords</span>,
                                          <span class="va">cl.eval_all</span><span class="op">$</span><span class="va">rich</span><span class="op">$</span><span class="va">rich.BC</span><span class="op">)</span><span class="op">)</span>

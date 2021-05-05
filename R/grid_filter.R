@@ -1,29 +1,48 @@
-#' Filter the occurence with most confidence in species identification inside grid cells
+#' Filter the occurrence with most confidence in species identification inside
+#' grid cells
 #'
 #' In each grid cell it selects the occurrence with the highest confidence level
 #' in species identification made by \code{\link{classify_occ}} function.
 #'
-#' @param occ.cl Data frame with occurrence records information already
+#' @param occ.cl data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
-#' @param grid.resolution Numeric vector with widht and height of grid cell in
+#' @param grid.resolution numeric vector with width and height of grid cell in
 #'   decimal degrees.
 #' @param r raster from which the grid cell resolution is derived.
-#' @param occ.id Column name of \code{occ} with link or code for the occurence record.
-#' @param scientific.name Column name of \code{occ} with the species names.
-#' @param determined.by Column name of \code{occ} with the name of who determined the
-#'   species.
-#' @param longitude Column name of \code{occ} longitude in decimal degrees.
-#' @param latitude Column name of \code{occ} latitude in decimal degrees.
-#' @param basis.of.rec Column name of \code{occ} with the recording types, as in GBIF.
-#' @param media.type Column name of \code{occ} with the media type of recording.
-#' @param institution.source Column name of \code{occ} with the name of the
-#'   institution that provided the data.
-#' @param collection.code Column name of \code{occ} with the codes for institution
-#'   names.
-#' @param catalog.number Column name of \code{occ} with catalog number.
-#' @param year.event Column name of \code{occ} the year of the collection event.
-#' @param date.identified Column name of \code{occ} with the date of species
-#'   determination.
+#' @param occurrence.id column name of \code{occ} with link or code for the
+#'  occurrence record. See in
+#'  \href{https://dwc.tdwg.org/terms/#dwc:occurrenceID}{Darwin Core Format}
+#' @param occ.id deprecated, use \code{occurrence.id} instead
+#' @param species column name of \code{occ} with the species names.
+#' @param scientific.name deprecated, use \code{species} instead.
+#' @param identified.by column name of \code{occ.cl} with the name of who
+#'  determined the species.
+#' @param determined.by deprecated, use \code{identified.by} instead
+#' @param decimal.longitude column name of \code{occ.cl} longitude in decimal
+#'  degrees.
+#' @param longitude deprecated, use \code{decimal.longitude} instead
+#' @param decimal.latitude column name of \code{occ.cl} latitude in decimal
+#'  degrees.
+#' @param latitude deprecated, use \code{decimal.latitude} instead
+#' @param basis.of.record column name with the specific nature of the data
+#'  record. See details.
+#' @param basis.of.rec deprecated, use \code{basis.of.record} instead.
+#' @param media.type column name of \code{occ.cl} with the media type of recording.
+#'  See details.
+#' @param institution.code column name of \code{occ.cl} with the name (or acronym)
+#'  in use by the institution having custody of the object(s) or information
+#'  referred to in the record.
+#' @param institution.source deprecated, use \code{institution.code} instead.
+#' @param collection.code column name of \code{occ.cl} with The name, acronym,
+#'  coden, or initials identifying the collection or data set from which the
+#'  record was derived.
+#' @param catalog.number column name of \code{occ.cl} with an identifier
+#'  (preferably unique) for the record within the data set or collection.
+#' @param year Column name of \code{occ.cl} the four-digit year in which the
+#'  Event occurred, according to the Common Era Calendar.
+#' @param year.event deprecated, use \code{year} instead.
+#' @param date.identified Column name of \code{occ.cl} with the date on which the
+#'  subject was determined as representing the Taxon.
 #'
 #' @return Data frame with the same columns of \code{occ.cl}.
 #'
@@ -41,52 +60,104 @@
 grid_filter <- function(occ.cl,
                         grid.resolution = c(0.5,0.5),
                         r = NULL,
-                        institution.source = "institutionCode",
+                        institution.code ="institutionCode",
                         collection.code = "collectionCode",
                         catalog.number = "catalogNumber",
-                        year.event = "year",
+                        year = "year",
                         date.identified = "dateIdentified",
-                        scientific.name = "species",
-                        determined.by = "identifiedBy",
-                        longitude = "decimalLongitude",
-                        latitude = "decimalLatitude",
-                        basis.of.rec = "basisOfRecord",
+                        species = "species",
+                        identified.by = "identifiedBy",
+                        decimal.latitude = "decimalLatitude",
+                        decimal.longitude = "decimalLongitude",
+                        basis.of.record = "basisOfRecord",
                         media.type = "mediaType",
-                        occ.id = "occurrenceID"){
+                        occurrence.id = "occurrenceID",
+                        institution.source , #deprecated
+                        year.event, #deprecated
+                        scientific.name, #deprecated
+                        determined.by, #deprecated
+                        latitude, #deprecated
+                        longitude, #deprecated
+                        basis.of.rec, #deprecated
+                        occ.id){ #deprecated
 
+  # new arguments  ----------------------------------------------------------
+
+  if (!missing(institution.source)) {
+    warning("argument 'institution.source' is deprecated; please use 'institution.code' instead.",
+            call. = FALSE)
+    institution.code <- institution.source
+  }
+
+  if (!missing(year.event)) {
+    warning("argument 'year.event' is deprecated; please use 'year' instead.",
+            call. = FALSE)
+    year <- year.event
+  }
+
+  if (!missing(scientific.name)) {
+    warning("argument 'scientific.name' is deprecated; please use 'species' instead.",
+            call. = FALSE)
+    species <- scientific.name
+  }
+
+  if (!missing(determined.by)) {
+    warning("argument 'determined.by' is deprecated; please use 'identified.by' instead.",
+            call. = FALSE)
+    identified.by <- determined.by
+  }
+
+  if (!missing(latitude)) {
+    warning("argument 'latitude' is deprecated; please use 'decimal.latitude' instead.",
+            call. = FALSE)
+    decimal.latitude <- latitude
+  }
+
+  if (!missing(longitude)) {
+    warning("argument 'longitude' is deprecated; please use 'decimal.longitude' instead.",
+            call. = FALSE)
+    decimal.longitude <- longitude
+  }
+
+  if (!missing(basis.of.rec)) {
+    warning("argument 'basis.of.rec' is deprecated; please use 'basis.of.record' instead.",
+            call. = FALSE)
+    basis.of.record <- basis.of.rec
+  }
+
+  if (!missing(occ.id)) {
+    warning("argument 'occ.id' is deprecated; please use 'occurrence.id' instead.",
+            call. = FALSE)
+    occurrence.id <- occ.id
+  }
 
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
   if(!natList_column){
     stop("occurrences must has 'naturaList_levels' classification.")
   }
 
-  od1 <- occ.cl[order(occ.cl[,year.event], decreasing = T),]
+  od1 <- occ.cl[order(occ.cl[,year], decreasing = T),]
   od2 <- od1[order(od1[,date.identified], decreasing = T),]
-  od3 <- od2[order(od2[,"naturaList_levels"]),]
-  row.names(od3) <- 1:nrow(od3)
-  x <- od3
+  x <- od2[order(od2[,"naturaList_levels"]),]
+  row.names(x) <- 1:nrow(x)
 
-
-
-
-
-  spt.spp_DF <- sp::SpatialPointsDataFrame(x[,c(longitude, latitude)], x)
+  spt.spp_DF <- sp::SpatialPointsDataFrame(
+    x[,c(decimal.longitude, decimal.latitude)], x)
 
   if(!is.null(r)){
-    if(!class(r) == "RasterLayer"){stop("'r' must be of class RasterLayer")}
+    if(!inherits(r, what =  "RasterLayer")){stop("'r' must be of class RasterLayer")}
   }
 
   if(is.null(r)){
-    resolution <- grid.resolution
 
     ext <- raster::extent(spt.spp_DF)[1:4]
 
-    new.ext <- c(ext[1] - resolution[1],
-                 ext[2] + resolution[2],
-                 ext[3] - resolution[1],
-                 ext[4] + resolution[2])
+    new.ext <- c(ext[1] - grid.resolution[1],
+                 ext[2] + grid.resolution[2],
+                 ext[3] - grid.resolution[1],
+                 ext[4] + grid.resolution[2])
 
-    r <- raster::raster(resolution = resolution, ext = raster::extent(new.ext))
+    r <- raster::raster(resolution = grid.resolution, ext = raster::extent(new.ext))
   }
 
   cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
@@ -96,22 +167,20 @@ grid_filter <- function(occ.cl,
   final.cols <- c(ncol(spt.spp_DF)+1,ncol(spt.spp_DF)+2)
 
   df.crit <- vector("list", total)
-  idx <- 1
 
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   for (i in 1:total){
     e <- raster::extentFromCells(r,cell.with.pts[i])
     crop.df <- raster::crop(spt.spp_DF, raster::extent(e))
 
-    df.crit[[idx]] <- as.data.frame(crop.df)[1,-final.cols]
+    df.crit[[i]] <- as.data.frame(crop.df)[1,-final.cols]
 
-    idx <- idx+1
     setTxtProgressBar(pb, i)
   }
 
 
-  df.occ.crit <- do.call(rbind,df.crit)
-  df.occ.crit <- rm.coord.dup(df.occ.crit, latitude, longitude)
+  df.occ.crit <- do.call(rbind, df.crit)
+  df.occ.crit <- rm.coord.dup(df.occ.crit, decimal.latitude, decimal.longitude)
   return(df.occ.crit)
 
 }

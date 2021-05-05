@@ -1,30 +1,46 @@
-#' Get the names in the 'determined.by' column
+#' Get the names in the 'identified.by' column
 #'
 #' This function facilitates the search for non-taxonomist strings in the
-#' 'determined.by' column of occurrence records dataset
+#' 'identified.by' column of occurrence records data set
 #'
-#' @param occ Data frame with occurrence records information.
-#' @param determined.by Column name of \code{occ} with the name of who determined the
-#'  species.
-#' @param freq Logical. If TRUE output contain the number of times each string is
-#'  repeated in the 'determined.by' column. Default FALSE.
-#' @param decreasing logical. sort strings in decreasing order of frequency. Default =
-#'  TRUE
+#' @param occ data frame with occurrence records information.
+#' @param identified.by column name of \code{occ} with the name of who
+#'  determined the species.
+#' @param determined.by deprecated, use \code{identified.by} instead.
+#' @param freq logical. If \code{TRUE} output contain the number of times each
+#'  string is repeated in the \code{identified.by} column. Default = \code{FALSE}
+#' @param decreasing logical. sort strings in decreasing order of frequency.
+#'  Default = \code{TRUE}.
 #'
-#' @return Character vector containing characters in \code{determined.by}
+#' @return character vector containing characters in \code{identified.by}
 #'     column of \code{occ}.
+#'
+#' @examples
+#' data("A.setosa")
+#' get_det_names(A.setosa, freq = TRUE)
 #'
 #' @export
 
 get_det_names <- function(occ,
-                          determined.by = "identifiedBy",
+                          identified.by = "identifiedBy",
                           freq = FALSE,
-                          decreasing = TRUE){
-    det.string <- names(table(occ[, determined.by]))
+                          decreasing = TRUE,
+                          determined.by) { # deprecated
 
+  if (!missing(determined.by)) {
+    warning("argument 'determined.by' is deprecated; please use 'identified.by' instead.",
+      call. = FALSE
+    )
+    identified.by <- determined.by
+  }
+
+  det.table <- table(occ[, identified.by])
+  det.string <- names(det.table)
   if(freq){
-    det.string <-   table(occ[, determined.by])[order(table(occ[, determined.by]),
-                                                      decreasing = decreasing)]
+    ord <- order(det.table, decreasing = decreasing)
+    det.string <- as.data.frame(det.table[ord])
+    names(det.string) <- c("string", "frequency")
+
   }
 
   return(det.string)

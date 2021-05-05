@@ -1,21 +1,32 @@
 #' Evaluate the cleaning of occurrences records
 #'
 #' This function compare the area occupied by
-#' a species before and after pass through the cleaning procedure according to the chosen
-#' level of filter.
-#' The comparison can be made by measuring area in the geographical and in the environmental space
+#' a species before and after pass through the cleaning procedure according to
+#' the chosen level of filter.
+#' The comparison can be made by measuring area in the geographical and in the
+#' environmental space
 #'
-#' @param occ.cl Data frame with occurrence records information already
+#' @param occ.cl data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
-#' @param geo.space a SpatialPolygons* or sf object defining the geographical space
-#' @param env.space a SpatialPolygons* or sf object defining the environmental space.
-#'   Use the \code{\link{define_env_space}} for create this object.
-#' @param level.filter a character vector including the levels in 'naturaList_levels'
-#'   collumn which filter the occurrence data set.
-#' @param r a raster with 2 layers representing the environmental variables
-#' @param scientific.name Column name of \code{occ.cl} with the species names.
-#' @param longitude Column name of \code{occ.cl} longitude in decimal degrees.
-#' @param latitude Column name of \code{occ.cl} latitude in decimal degrees.
+#' @param geo.space a SpatialPolygons* or sf object defining the geographical
+#'  space
+#' @param env.space a SpatialPolygons* or sf object defining the environmental
+#'  space. Use the \code{\link{define_env_space}} for create this object.
+#'  By default \code{env.space = NULL}, hence do not evaluate the cleaning
+#'  in the environmental space.
+#' @param level.filter a character vector including the levels in
+#' 'naturaList_levels' column which filter the occurrence data set.
+#' @param r a raster with 2 layers representing the environmental variables. If
+#'   \code{env.space = NULL}, it could be a single layer raster, from which
+#'   the cell size and extent are extracted to produce the composition matrix.
+#' @param species column name of \code{occ.cl} with the species names.
+#' @param scientific.name deprecated, use \code{species} instead.
+#' @param decimal.longitude column name of \code{occ.cl} longitude in decimal
+#'  degrees.
+#' @param longitude deprecated, use \code{decimal.longitude} instead
+#' @param decimal.latitude column name of \code{occ.cl} latitude in decimal
+#'  degrees.
+#' @param latitude deprecated, use \code{decimal.latitude} instead
 #'
 #' @return a list in which:
 #'
@@ -44,22 +55,30 @@
 #'
 #' @examples
 #' \dontrun{
-#' pkgs <- c("devtools", "raster", "maptools", "rnaturalearth", "sf")
+#' pkgs <- c("raster", "maptools", "rnaturalearth", "sf")
 #' lapply(pkgs, require, character.only = TRUE)
 #'
-#' data("A.setosa")
 #' data("speciaLists")
-#'
+#' data("cyathea.br")
 #' # classify
-#' occ.cl <- classify_occ(A.setosa, speciaLists, spec.ambiguity = "not.spec")
-#' ## check points
-#' occ.cl <-map_module(occ.cl) #delete points in the ocean
+#' occ.cl <- classify_occ(cyathea.br, speciaLists)
+#' nrow(occ.cl)
 #'
-#' # download climate data
-#' bioclim <- getData('worldclim', var='bio', res=10)
+#' # delimit the geographic space
+#' # land area
+#' land <- ne_countries(continent = 'south america')
+#' un.land <- unionSpatialPolygons(land, land$scalerank)
 #'
 #' # Transform occurrence data in SpatialPointsDataFrame
 #' spdf.occ.cl <- SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
+#'
+#' # Crop by geographic space
+#' spdf.occ.cl <- crop(spdf.occ.cl, un.land)
+#'
+#' # download climate data
+#' # this function will download the bioclim raster layer
+#' # to your work directory
+#' bioclim <- getData('worldclim', var='bio', res=10)
 #'
 #' # redefine the extent of bioclim layers based on buffer around the occurrences
 #' c.bioclim <- crop(bioclim, buffer(spdf.occ.cl, 100000)) # 100km buffer
@@ -69,27 +88,26 @@
 #' df.temp.prec <- as.data.frame(raster.temp.prec)
 #'
 #' ### Define the environmental space for analysis
+#' # this function will create a boundary of available environmental space,
+#' # analogous to the continent boundary in the geographical space
 #' env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
-#'
-#' # delimit the geographic space
-#' # land area
-#' land <- ne_countries(continent = 'south america')
-#' un.land <- unionSpatialPolygons(land, land$scalerank)
 #'
 #' # geo space based on crop
 #' c.geo.space <- crop(un.land, c.bioclim)
 #'
-#' #geo space based on intersect
-#' i.geo.space <- intersect(un.land, buffer(spdf.occ.cl2, 200000))
+#' # filter by year to be consistent with the environmental data
+#' occ.class.1970 <-  occ.cl %>%
+#'   dplyr::filter(year >= 1970)
 #'
 #' ### run the evaluation
-#' cl.eval <- clean_eval(occ.cl,
+#' cl.eval <- clean_eval(occ.class.1970,
 #'                       env.space = env.space,
 #'                       geo.space = c.geo.space,
 #'                       r = raster.temp.prec)
 #'
 #' #area results
 #' cl.eval$area
+#'
 #'
 #' ### richness maps
 #' ## it makes sense if there are more than one species
@@ -101,38 +119,62 @@
 #' plot(rich.before.clean)
 #' plot(rich.after.clean)
 #'
-#'
 #' ### species area map
 #' comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
 #' comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
 #'
-#' c.setosa.bc <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
-#'                                          comp.bc$`Cyathea setosa`)))
-#' c.setosa.ac <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
-#'                                          comp.ac$`Cyathea setosa`)))
+#' c.villosa.bc <- rasterFromXYZ(cbind(cl.eval$site.coords,
+#'                                     comp.bc$`Cyathea villosa`))
+#' c.villosa.ac <- rasterFromXYZ(cbind(cl.eval$site.coords,
+#'                                     comp.ac$`Cyathea villosa`))
 #'
-#' plot(c.setosa.bc)
-#' plot(c.setosa.ac)
+#' plot(c.villosa.bc)
+#' plot(c.villosa.bc)
+#'
 #'
 #' }
 #'
 clean_eval <- function(
   occ.cl,
   geo.space,
-  env.space,
+  env.space = NULL,
   level.filter = c("1_det_by_spec"),
   r,
-  scientific.name = "species",
-  longitude = "decimalLongitude",
-  latitude = "decimalLatitude"
+  species = "species",
+  decimal.longitude = "decimalLongitude",
+  decimal.latitude = "decimalLatitude",
+  scientific.name,
+  longitude,
+  latitude
   ){
 
+  if (!missing(scientific.name)) {
+    warning("argument 'scientific.name' is deprecated; please use 'species' instead.",
+            call. = FALSE)
+    species <- scientific.name
+  }
+
+  if (!missing(latitude)) {
+    warning("argument 'latitude' is deprecated; please use 'decimal.latitude' instead.",
+            call. = FALSE)
+    decimal.latitude <- latitude
+  }
+
+  if (!missing(longitude)) {
+    warning("argument 'longitude' is deprecated; please use 'decimal.longitude' instead.",
+            call. = FALSE)
+    decimal.longitude <- longitude
+  }
 
 
 # Tests for arguments rules -----------------------------------------------
 
 
-  # Include TEST FOR classified occurence data set
+  # test for a classified occurrence data set
+  natList_column <- "naturaList_levels" %in% colnames(occ.cl)
+  if(!natList_column){
+    stop("'occ.cl' must be classified by 'classify_occ' function")
+  }
 
 
   # test for polygons as sf object
@@ -145,13 +187,19 @@ clean_eval <- function(
 
   geo.space <- sf::st_geometry(geo.space)
   # env.space
-  if(is(env.space, "SpatialPolygons")) {
-    env.space <- sf::st_as_sf(env.space)
-  }
-  if(!is(env.space, "sf"))
-    errorCondition("env.space must be of class: sf or SpatialPolygons*")
 
-  if(raster::nlayers(r) != 2) errorCondition("raster objetct must have two layers")
+
+  if(!is.null(env.space)){
+    if(is(env.space, "SpatialPolygons")) {
+      env.space <- sf::st_as_sf(env.space)
+    }
+
+    if(!is(env.space, "sf"))
+      errorCondition("env.space must be of class: sf or SpatialPolygons*")
+
+    if(raster::nlayers(r) != 2) errorCondition("raster objetct must have two layers")
+
+  }
 
 
 
@@ -159,14 +207,16 @@ clean_eval <- function(
 
 
   occ.full <- occ.cl %>%
-    dplyr::rename("species" = scientific.name ,
-                  "decimalLongitude" = longitude,
-                  "decimalLatitude" = latitude) %>%
-    dplyr::select(.data$decimalLongitude, .data$decimalLatitude, .data$species)
+    dplyr::rename("species" = species ,
+                  "decimalLongitude" = decimal.longitude,
+                  "decimalLatitude" = decimal.latitude) %>%
+    dplyr::select(.data$decimalLongitude, .data$decimalLatitude, .data$species) %>%
+    dplyr::arrange(species)
 
   occ.cleaned <- occ.cl %>%
     dplyr::filter(.data$naturaList_levels %in% level.filter) %>%
-    dplyr::select(.data$decimalLongitude, .data$decimalLatitude, .data$species)
+    dplyr::select(.data$decimalLongitude, .data$decimalLatitude, .data$species) %>%
+    dplyr::arrange(species)
 
   occ.list <- list(occ.full = occ.full,
                    occ.cleaned = occ.cleaned)
@@ -185,8 +235,8 @@ clean_eval <- function(
 # Metrics computaion ------------------------------------------------------
 
 
-  msg <- c("Calculating metrics before cleannig",
-           "Calculating metrics after cleannig")
+  msg <- c("Calculating metrics before cleaning",
+           "Calculating metrics after cleaning")
 
   res.list <- vector("list", 2)
 
@@ -243,44 +293,57 @@ clean_eval <- function(
     sitexsp[,names.sp] <-  raster::values(stk)
 
     # Enviromental space
-    message("..Step 2 - Enviromental space")
-
-    env.std <- vegan::decostand(raster::as.data.frame(r),
-                                "range",  na.rm = T)
 
 
-    env.polygon <- lapply(unique(occ$species), function(i){
-      x <- dplyr::filter(occ, .data$species == i)
+    if(!is.null(env.space)){
+      message("..Step 2 - Enviromental space")
 
-      sp.cell <- unique(raster::cellFromXY(r[[1]], x[, 1:2]))
-      env.row <- row.names(env.std) %in% sp.cell
-      env.xy <- env.std[sp.cell,]
+      env.std <- vegan::decostand(raster::as.data.frame(r),
+                                  "range",  na.rm = T)
 
-      if(any(is.na(env.xy))){
-        warningCondition("There are occurrence points in raster cells without values (NA)")
+
+      env.polygon <- lapply(unique(occ$species), function(i){
+        x <- dplyr::filter(occ, .data$species == i)
+
+        sp.cell <- unique(raster::cellFromXY(r[[1]], x[, 1:2]))
+        env.row <- row.names(env.std) %in% sp.cell
+        env.xy <- env.std[sp.cell,]
+
+        if(any(is.na(env.xy))){
+          warningCondition("There are occurrence points in raster cells without values (NA)")
         }
 
-      pt <- sf::st_multipoint(na.omit(as.matrix(env.xy)))
+        pt <- sf::st_multipoint(na.omit(as.matrix(env.xy)))
 
-      if(nrow(x) <=3){
-        sp.pol <- sf::st_buffer(pt, 0.025)
-      }
+        if(nrow(x) <=3){
+          sp.pol <- sf::st_buffer(pt, 0.025)
+        }
 
-      if(nrow(x) > 3){
-        sp.pol <- sf::st_convex_hull(pt)
-        sp.pol <- sf::st_buffer(sp.pol, 0.025)
-      }
+        if(nrow(x) > 3){
+          sp.pol <- sf::st_convex_hull(pt)
+          sp.pol <- sf::st_buffer(sp.pol, 0.025)
+        }
 
-      suppressMessages(sf::st_intersection(sf::st_geometry(sp.pol), env.space))
-    })
+        suppressMessages(sf::st_intersection(sf::st_geometry(sp.pol), env.space))
+      })
 
-    res.env.area <- sapply(env.polygon, function(x) sum(sf::st_area(x)))
-    env.area[names.sp] <- res.env.area
+      res.env.area <- sapply(env.polygon, function(x) sum(sf::st_area(x)))
+      env.area[names.sp] <- res.env.area
+
+
+      # results list for the loop
+      res.list[[i]] <- list(geo.area = geo.area,
+                            env.area = env.area,
+                            sitexsp = sitexsp)
+    }
 
     # results list for the loop
-    res.list[[i]] <- list(geo.area = geo.area,
-                          env.area = env.area,
-                          sitexsp = sitexsp)
+    if(is.null(env.space)) {
+      res.list[[i]] <- list(geo.area = geo.area,
+                            sitexsp = sitexsp)
+    }
+
+
 
   }
 
@@ -288,10 +351,18 @@ clean_eval <- function(
   site.coords <- raster::coordinates(r)
 
   remmain.geo.area <- round(res.list[[2]]$geo.area/res.list[[1]]$geo.area, 2)
-  remmain.env.area <- round(res.list[[2]]$env.area/res.list[[1]]$env.area, 2)
 
-  area <- data.frame(r.geo.area = remmain.geo.area,
-                     r.env.area = remmain.env.area)
+  if(!is.null(env.space)) {
+    remmain.env.area <- round(res.list[[2]]$env.area/res.list[[1]]$env.area, 2)
+
+    area <- data.frame(r.geo.area = remmain.geo.area,
+                       r.env.area = remmain.env.area)
+  }
+  if(is.null(env.space)) {
+    area <- data.frame(r.geo.area = remmain.geo.area)
+  }
+
+
 
   #composition before cleaning (BC) and after cleaning(AC)
   comp <- list(comp.BC = res.list[[1]]$sitexsp,

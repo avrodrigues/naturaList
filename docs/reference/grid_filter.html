@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter the occurence with most confidence in species identification inside grid cells — grid_filter • naturaList</title>
+<title>Filter the occurrence with most confidence in species identification inside
+grid cells — grid_filter • naturaList</title>
 
 
 <!-- jquery -->
@@ -39,7 +40,8 @@
 
 
 
-<meta property="og:title" content="Filter the occurence with most confidence in species identification inside grid cells — grid_filter" />
+<meta property="og:title" content="Filter the occurrence with most confidence in species identification inside
+grid cells — grid_filter" />
 <meta property="og:description" content="In each grid cell it selects the occurrence with the highest confidence level
 in species identification made by classify_occ function." />
 
@@ -73,7 +75,7 @@ in species identification made by classify_occ function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -96,13 +98,13 @@ in species identification made by classify_occ function." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -114,7 +116,12 @@ in species identification made by classify_occ function." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,8 +135,9 @@ in species identification made by classify_occ function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter the occurence with most confidence in species identification inside grid cells</h1>
-    
+    <h1>Filter the occurrence with most confidence in species identification inside
+grid cells</h1>
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/grid_filter.R'><code>R/grid_filter.R</code></a></small>
     <div class="hidden name"><code>grid_filter.Rd</code></div>
     </div>
 
@@ -142,18 +150,26 @@ in species identification made by <code><a href='classify_occ.html'>classify_occ
   <span class='va'>occ.cl</span>,
   grid.resolution <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span>,
   r <span class='op'>=</span> <span class='cn'>NULL</span>,
-  institution.source <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
+  institution.code <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
   collection.code <span class='op'>=</span> <span class='st'>"collectionCode"</span>,
   catalog.number <span class='op'>=</span> <span class='st'>"catalogNumber"</span>,
-  year.event <span class='op'>=</span> <span class='st'>"year"</span>,
+  year <span class='op'>=</span> <span class='st'>"year"</span>,
   date.identified <span class='op'>=</span> <span class='st'>"dateIdentified"</span>,
-  scientific.name <span class='op'>=</span> <span class='st'>"species"</span>,
-  determined.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
-  longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
-  basis.of.rec <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
+  species <span class='op'>=</span> <span class='st'>"species"</span>,
+  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
+  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
+  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
+  basis.of.record <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
   media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>,
-  occ.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>
+  occurrence.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
+  <span class='va'>institution.source</span>,
+  <span class='va'>year.event</span>,
+  <span class='va'>scientific.name</span>,
+  <span class='va'>determined.by</span>,
+  <span class='va'>latitude</span>,
+  <span class='va'>longitude</span>,
+  <span class='va'>basis.of.rec</span>,
+  <span class='va'>occ.id</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -161,12 +177,12 @@ in species identification made by <code><a href='classify_occ.html'>classify_occ
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>occ.cl</th>
-      <td><p>Data frame with occurrence records information already
+      <td><p>data frame with occurrence records information already
 classified by <code><a href='classify_occ.html'>classify_occ</a></code> function.</p></td>
     </tr>
     <tr>
       <th>grid.resolution</th>
-      <td><p>Numeric vector with widht and height of grid cell in
+      <td><p>numeric vector with width and height of grid cell in
 decimal degrees.</p></td>
     </tr>
     <tr>
@@ -174,56 +190,98 @@ decimal degrees.</p></td>
       <td><p>raster from which the grid cell resolution is derived.</p></td>
     </tr>
     <tr>
-      <th>institution.source</th>
-      <td><p>Column name of <code>occ</code> with the name of the
-institution that provided the data.</p></td>
+      <th>institution.code</th>
+      <td><p>column name of <code>occ.cl</code> with the name (or acronym)
+in use by the institution having custody of the object(s) or information
+referred to in the record.</p></td>
     </tr>
     <tr>
       <th>collection.code</th>
-      <td><p>Column name of <code>occ</code> with the codes for institution
-names.</p></td>
+      <td><p>column name of <code>occ.cl</code> with The name, acronym,
+coden, or initials identifying the collection or data set from which the
+record was derived.</p></td>
     </tr>
     <tr>
       <th>catalog.number</th>
-      <td><p>Column name of <code>occ</code> with catalog number.</p></td>
+      <td><p>column name of <code>occ.cl</code> with an identifier
+(preferably unique) for the record within the data set or collection.</p></td>
     </tr>
     <tr>
-      <th>year.event</th>
-      <td><p>Column name of <code>occ</code> the year of the collection event.</p></td>
+      <th>year</th>
+      <td><p>Column name of <code>occ.cl</code> the four-digit year in which the
+Event occurred, according to the Common Era Calendar.</p></td>
     </tr>
     <tr>
       <th>date.identified</th>
-      <td><p>Column name of <code>occ</code> with the date of species
-determination.</p></td>
+      <td><p>Column name of <code>occ.cl</code> with the date on which the
+subject was determined as representing the Taxon.</p></td>
     </tr>
     <tr>
-      <th>scientific.name</th>
-      <td><p>Column name of <code>occ</code> with the species names.</p></td>
+      <th>species</th>
+      <td><p>column name of <code>occ</code> with the species names.</p></td>
     </tr>
     <tr>
-      <th>determined.by</th>
-      <td><p>Column name of <code>occ</code> with the name of who determined the
-species.</p></td>
+      <th>identified.by</th>
+      <td><p>column name of <code>occ.cl</code> with the name of who
+determined the species.</p></td>
     </tr>
     <tr>
-      <th>longitude</th>
-      <td><p>Column name of <code>occ</code> longitude in decimal degrees.</p></td>
+      <th>decimal.latitude</th>
+      <td><p>column name of <code>occ.cl</code> latitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>latitude</th>
-      <td><p>Column name of <code>occ</code> latitude in decimal degrees.</p></td>
+      <th>decimal.longitude</th>
+      <td><p>column name of <code>occ.cl</code> longitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>basis.of.rec</th>
-      <td><p>Column name of <code>occ</code> with the recording types, as in GBIF.</p></td>
+      <th>basis.of.record</th>
+      <td><p>column name with the specific nature of the data
+record. See details.</p></td>
     </tr>
     <tr>
       <th>media.type</th>
-      <td><p>Column name of <code>occ</code> with the media type of recording.</p></td>
+      <td><p>column name of <code>occ.cl</code> with the media type of recording.
+See details.</p></td>
+    </tr>
+    <tr>
+      <th>occurrence.id</th>
+      <td><p>column name of <code>occ</code> with link or code for the
+occurrence record. See in
+<a href='https://dwc.tdwg.org/terms/#dwc:occurrenceID'>Darwin Core Format</a></p></td>
+    </tr>
+    <tr>
+      <th>institution.source</th>
+      <td><p>deprecated, use <code>institution.code</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>year.event</th>
+      <td><p>deprecated, use <code>year</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>scientific.name</th>
+      <td><p>deprecated, use <code>species</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>determined.by</th>
+      <td><p>deprecated, use <code>identified.by</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <td><p>deprecated, use <code>decimal.latitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td><p>deprecated, use <code>decimal.longitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>basis.of.rec</th>
+      <td><p>deprecated, use <code>basis.of.record</code> instead.</p></td>
     </tr>
     <tr>
       <th>occ.id</th>
-      <td><p>Column name of <code>occ</code> with link or code for the occurence record.</p></td>
+      <td><p>deprecated, use <code>occurrence.id</code> instead</p></td>
     </tr>
     </table>
 
@@ -1896,7 +1954,7 @@ species.</p></td>
 #&gt; 4       1_det_by_spec
 #&gt; 5       1_det_by_spec
 #&gt; 6       1_det_by_spec
-#&gt; 7        2_taxonomist
+#&gt; 7     2_not_spec_name
 #&gt; 8       1_det_by_spec
 #&gt; 9       1_det_by_spec
 #&gt; 10      1_det_by_spec
@@ -1904,7 +1962,7 @@ species.</p></td>
 #&gt; 12      1_det_by_spec
 #&gt; 13      1_det_by_spec
 #&gt; 14      1_det_by_spec
-#&gt; 15       2_taxonomist
+#&gt; 15    2_not_spec_name
 #&gt; 16      1_det_by_spec
 #&gt; 17      1_det_by_spec
 #&gt; 18      1_det_by_spec
@@ -1917,81 +1975,81 @@ species.</p></td>
 #&gt; 25      1_det_by_spec
 #&gt; 26      1_det_by_spec
 #&gt; 27            3_image
-#&gt; 28       2_taxonomist
-#&gt; 29       2_taxonomist
+#&gt; 28    2_not_spec_name
+#&gt; 29    2_not_spec_name
 #&gt; 30      1_det_by_spec
-#&gt; 31       2_taxonomist
+#&gt; 31    2_not_spec_name
 #&gt; 32      1_det_by_spec
-#&gt; 33       2_taxonomist
+#&gt; 33    2_not_spec_name
 #&gt; 34      1_det_by_spec
 #&gt; 35    4_sci_colection
 #&gt; 36      1_det_by_spec
-#&gt; 37       2_taxonomist
-#&gt; 38       2_taxonomist
-#&gt; 39       2_taxonomist
+#&gt; 37    2_not_spec_name
+#&gt; 38    2_not_spec_name
+#&gt; 39    2_not_spec_name
 #&gt; 40      1_det_by_spec
 #&gt; 41      1_det_by_spec
-#&gt; 42       2_taxonomist
-#&gt; 43       2_taxonomist
-#&gt; 44       2_taxonomist
-#&gt; 45       2_taxonomist
+#&gt; 42    2_not_spec_name
+#&gt; 43    2_not_spec_name
+#&gt; 44    2_not_spec_name
+#&gt; 45    2_not_spec_name
 #&gt; 46      1_det_by_spec
-#&gt; 47       2_taxonomist
+#&gt; 47    2_not_spec_name
 #&gt; 48      1_det_by_spec
 #&gt; 49      1_det_by_spec
-#&gt; 50       2_taxonomist
+#&gt; 50    2_not_spec_name
 #&gt; 51      1_det_by_spec
 #&gt; 52      1_det_by_spec
-#&gt; 53       2_taxonomist
-#&gt; 54       2_taxonomist
-#&gt; 55       2_taxonomist
-#&gt; 56       2_taxonomist
-#&gt; 57       2_taxonomist
+#&gt; 53    2_not_spec_name
+#&gt; 54    2_not_spec_name
+#&gt; 55    2_not_spec_name
+#&gt; 56    2_not_spec_name
+#&gt; 57    2_not_spec_name
 #&gt; 58    4_sci_colection
-#&gt; 59       2_taxonomist
-#&gt; 60       2_taxonomist
-#&gt; 61       2_taxonomist
-#&gt; 62       2_taxonomist
-#&gt; 63       2_taxonomist
-#&gt; 64       2_taxonomist
-#&gt; 65       2_taxonomist
-#&gt; 66       2_taxonomist
-#&gt; 67       2_taxonomist
-#&gt; 68       2_taxonomist
-#&gt; 69       2_taxonomist
-#&gt; 70       2_taxonomist
-#&gt; 71       2_taxonomist
-#&gt; 72       2_taxonomist
-#&gt; 73       2_taxonomist
+#&gt; 59    2_not_spec_name
+#&gt; 60    2_not_spec_name
+#&gt; 61    2_not_spec_name
+#&gt; 62    2_not_spec_name
+#&gt; 63    2_not_spec_name
+#&gt; 64    2_not_spec_name
+#&gt; 65    2_not_spec_name
+#&gt; 66    2_not_spec_name
+#&gt; 67    2_not_spec_name
+#&gt; 68    2_not_spec_name
+#&gt; 69    2_not_spec_name
+#&gt; 70    2_not_spec_name
+#&gt; 71    2_not_spec_name
+#&gt; 72    2_not_spec_name
+#&gt; 73    2_not_spec_name
 #&gt; 74            3_image
-#&gt; 75       2_taxonomist
-#&gt; 76       2_taxonomist
-#&gt; 77       2_taxonomist
-#&gt; 78       2_taxonomist
-#&gt; 79       2_taxonomist
-#&gt; 80       2_taxonomist
-#&gt; 81       2_taxonomist
+#&gt; 75    2_not_spec_name
+#&gt; 76    2_not_spec_name
+#&gt; 77    2_not_spec_name
+#&gt; 78    2_not_spec_name
+#&gt; 79    2_not_spec_name
+#&gt; 80    2_not_spec_name
+#&gt; 81    2_not_spec_name
 #&gt; 82      1_det_by_spec
-#&gt; 83       2_taxonomist
-#&gt; 84       2_taxonomist
-#&gt; 85       2_taxonomist
-#&gt; 86       2_taxonomist
+#&gt; 83    2_not_spec_name
+#&gt; 84    2_not_spec_name
+#&gt; 85    2_not_spec_name
+#&gt; 86    2_not_spec_name
 #&gt; 87      1_det_by_spec
 #&gt; 88      1_det_by_spec
-#&gt; 89       2_taxonomist
-#&gt; 90       2_taxonomist
-#&gt; 91       2_taxonomist
-#&gt; 92       2_taxonomist
-#&gt; 93       2_taxonomist
-#&gt; 94       2_taxonomist
-#&gt; 95       2_taxonomist
+#&gt; 89    2_not_spec_name
+#&gt; 90    2_not_spec_name
+#&gt; 91    2_not_spec_name
+#&gt; 92    2_not_spec_name
+#&gt; 93    2_not_spec_name
+#&gt; 94    2_not_spec_name
+#&gt; 95    2_not_spec_name
 #&gt; 96      1_det_by_spec
-#&gt; 97       2_taxonomist
-#&gt; 98       2_taxonomist
+#&gt; 97    2_not_spec_name
+#&gt; 98    2_not_spec_name
 #&gt; 99            3_image
-#&gt; 100      2_taxonomist
-#&gt; 101      2_taxonomist
-#&gt; 102      2_taxonomist</div><div class='input'>
+#&gt; 100   2_not_spec_name
+#&gt; 101   2_not_spec_name
+#&gt; 102   2_not_spec_name</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -41,9 +41,10 @@
 
 <meta property="og:title" content="Evaluate the cleaning of occurrences records — clean_eval" />
 <meta property="og:description" content="This function compare the area occupied by
-a species before and after pass through the cleaning procedure according to the chosen
-level of filter.
-The comparison can be made by measuring area in the geographical and in the environmental space" />
+a species before and after pass through the cleaning procedure according to
+the chosen level of filter.
+The comparison can be made by measuring area in the geographical and in the
+environmental space" />
 
 
 
@@ -75,7 +76,7 @@ The comparison can be made by measuring area in the geographical and in the envi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -98,13 +99,13 @@ The comparison can be made by measuring area in the geographical and in the envi
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -116,7 +117,12 @@ The comparison can be made by measuring area in the geographical and in the envi
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -131,26 +137,30 @@ The comparison can be made by measuring area in the geographical and in the envi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Evaluate the cleaning of occurrences records</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/clean_eval.R'><code>R/clean_eval.R</code></a></small>
     <div class="hidden name"><code>clean_eval.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function compare the area occupied by
-a species before and after pass through the cleaning procedure according to the chosen
-level of filter.
-The comparison can be made by measuring area in the geographical and in the environmental space</p>
+a species before and after pass through the cleaning procedure according to
+the chosen level of filter.
+The comparison can be made by measuring area in the geographical and in the
+environmental space</p>
     </div>
 
     <pre class="usage"><span class='fu'>clean_eval</span><span class='op'>(</span>
   <span class='va'>occ.cl</span>,
   <span class='va'>geo.space</span>,
-  <span class='va'>env.space</span>,
+  env.space <span class='op'>=</span> <span class='cn'>NULL</span>,
   level.filter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1_det_by_spec"</span><span class='op'>)</span>,
   <span class='va'>r</span>,
-  scientific.name <span class='op'>=</span> <span class='st'>"species"</span>,
-  longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>
+  species <span class='op'>=</span> <span class='st'>"species"</span>,
+  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
+  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
+  <span class='va'>scientific.name</span>,
+  <span class='va'>longitude</span>,
+  <span class='va'>latitude</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -158,38 +168,57 @@ The comparison can be made by measuring area in the geographical and in the envi
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>occ.cl</th>
-      <td><p>Data frame with occurrence records information already
+      <td><p>data frame with occurrence records information already
 classified by <code><a href='classify_occ.html'>classify_occ</a></code> function.</p></td>
     </tr>
     <tr>
       <th>geo.space</th>
-      <td><p>a SpatialPolygons* or sf object defining the geographical space</p></td>
+      <td><p>a SpatialPolygons* or sf object defining the geographical
+space</p></td>
     </tr>
     <tr>
       <th>env.space</th>
-      <td><p>a SpatialPolygons* or sf object defining the environmental space.
-Use the <code><a href='define_env_space.html'>define_env_space</a></code> for create this object.</p></td>
+      <td><p>a SpatialPolygons* or sf object defining the environmental
+space. Use the <code><a href='define_env_space.html'>define_env_space</a></code> for create this object.
+By default <code>env.space = NULL</code>, hence do not evaluate the cleaning
+in the environmental space.</p></td>
     </tr>
     <tr>
       <th>level.filter</th>
-      <td><p>a character vector including the levels in 'naturaList_levels'
-collumn which filter the occurrence data set.</p></td>
+      <td><p>a character vector including the levels in
+'naturaList_levels' column which filter the occurrence data set.</p></td>
     </tr>
     <tr>
       <th>r</th>
-      <td><p>a raster with 2 layers representing the environmental variables</p></td>
+      <td><p>a raster with 2 layers representing the environmental variables. If
+<code>env.space = NULL</code>, it could be a single layer raster, from which
+the cell size and extent are extracted to produce the composition matrix.</p></td>
+    </tr>
+    <tr>
+      <th>species</th>
+      <td><p>column name of <code>occ.cl</code> with the species names.</p></td>
+    </tr>
+    <tr>
+      <th>decimal.longitude</th>
+      <td><p>column name of <code>occ.cl</code> longitude in decimal
+degrees.</p></td>
+    </tr>
+    <tr>
+      <th>decimal.latitude</th>
+      <td><p>column name of <code>occ.cl</code> latitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
       <th>scientific.name</th>
-      <td><p>Column name of <code>occ.cl</code> with the species names.</p></td>
+      <td><p>deprecated, use <code>species</code> instead.</p></td>
     </tr>
     <tr>
       <th>longitude</th>
-      <td><p>Column name of <code>occ.cl</code> longitude in decimal degrees.</p></td>
+      <td><p>deprecated, use <code>decimal.longitude</code> instead</p></td>
     </tr>
     <tr>
       <th>latitude</th>
-      <td><p>Column name of <code>occ.cl</code> latitude in decimal degrees.</p></td>
+      <td><p>deprecated, use <code>decimal.latitude</code> instead</p></td>
     </tr>
     </table>
 
@@ -214,22 +243,30 @@ collumn which filter the occurrence data set.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>pkgs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"devtools"</span>, <span class='st'>"raster"</span>, <span class='st'>"maptools"</span>, <span class='st'>"rnaturalearth"</span>, <span class='st'>"sf"</span><span class='op'>)</span>
+<span class='va'>pkgs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raster"</span>, <span class='st'>"maptools"</span>, <span class='st'>"rnaturalearth"</span>, <span class='st'>"sf"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>pkgs</span>, <span class='va'>require</span>, character.only <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"A.setosa"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span>
-
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"cyathea.br"</span><span class='op'>)</span>
 <span class='co'># classify</span>
-<span class='va'>occ.cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='classify_occ.html'>classify_occ</a></span><span class='op'>(</span><span class='va'>A.setosa</span>, <span class='va'>speciaLists</span>, spec.ambiguity <span class='op'>=</span> <span class='st'>"not.spec"</span><span class='op'>)</span>
-<span class='co'>## check points</span>
-<span class='va'>occ.cl</span> <span class='op'>&lt;-</span><span class='fu'><a href='map_module.html'>map_module</a></span><span class='op'>(</span><span class='va'>occ.cl</span><span class='op'>)</span> <span class='co'>#delete points in the ocean</span>
+<span class='va'>occ.cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='classify_occ.html'>classify_occ</a></span><span class='op'>(</span><span class='va'>cyathea.br</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>occ.cl</span><span class='op'>)</span>
 
-<span class='co'># download climate data</span>
-<span class='va'>bioclim</span> <span class='op'>&lt;-</span> <span class='fu'>getData</span><span class='op'>(</span><span class='st'>'worldclim'</span>, var<span class='op'>=</span><span class='st'>'bio'</span>, res<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='co'># delimit the geographic space</span>
+<span class='co'># land area</span>
+<span class='va'>land</span> <span class='op'>&lt;-</span> <span class='fu'>ne_countries</span><span class='op'>(</span>continent <span class='op'>=</span> <span class='st'>'south america'</span><span class='op'>)</span>
+<span class='va'>un.land</span> <span class='op'>&lt;-</span> <span class='fu'>unionSpatialPolygons</span><span class='op'>(</span><span class='va'>land</span>, <span class='va'>land</span><span class='op'>$</span><span class='va'>scalerank</span><span class='op'>)</span>
 
 <span class='co'># Transform occurrence data in SpatialPointsDataFrame</span>
 <span class='va'>spdf.occ.cl</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialPoints</span><span class='op'>(</span><span class='va'>occ.cl</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"decimalLongitude"</span>, <span class='st'>"decimalLatitude"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+
+<span class='co'># Crop by geographic space</span>
+<span class='va'>spdf.occ.cl</span> <span class='op'>&lt;-</span> <span class='fu'>crop</span><span class='op'>(</span><span class='va'>spdf.occ.cl</span>, <span class='va'>un.land</span><span class='op'>)</span>
+
+<span class='co'># download climate data</span>
+<span class='co'># this function will download the bioclim raster layer</span>
+<span class='co'># to your work directory</span>
+<span class='va'>bioclim</span> <span class='op'>&lt;-</span> <span class='fu'>getData</span><span class='op'>(</span><span class='st'>'worldclim'</span>, var<span class='op'>=</span><span class='st'>'bio'</span>, res<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'># redefine the extent of bioclim layers based on buffer around the occurrences</span>
 <span class='va'>c.bioclim</span> <span class='op'>&lt;-</span> <span class='fu'>crop</span><span class='op'>(</span><span class='va'>bioclim</span>, <span class='fu'>buffer</span><span class='op'>(</span><span class='va'>spdf.occ.cl</span>, <span class='fl'>100000</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># 100km buffer</span>
@@ -239,27 +276,26 @@ collumn which filter the occurrence data set.</p></td>
 <span class='va'>df.temp.prec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>raster.temp.prec</span><span class='op'>)</span>
 
 <span class='co'>### Define the environmental space for analysis</span>
+<span class='co'># this function will create a boundary of available environmental space,</span>
+<span class='co'># analogous to the continent boundary in the geographical space</span>
 <span class='va'>env.space</span> <span class='op'>&lt;-</span> <span class='fu'><a href='define_env_space.html'>define_env_space</a></span><span class='op'>(</span><span class='va'>df.temp.prec</span>, buffer.size <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span>
-
-<span class='co'># delimit the geographic space</span>
-<span class='co'># land area</span>
-<span class='va'>land</span> <span class='op'>&lt;-</span> <span class='fu'>ne_countries</span><span class='op'>(</span>continent <span class='op'>=</span> <span class='st'>'south america'</span><span class='op'>)</span>
-<span class='va'>un.land</span> <span class='op'>&lt;-</span> <span class='fu'>unionSpatialPolygons</span><span class='op'>(</span><span class='va'>land</span>, <span class='va'>land</span><span class='op'>$</span><span class='va'>scalerank</span><span class='op'>)</span>
 
 <span class='co'># geo space based on crop</span>
 <span class='va'>c.geo.space</span> <span class='op'>&lt;-</span> <span class='fu'>crop</span><span class='op'>(</span><span class='va'>un.land</span>, <span class='va'>c.bioclim</span><span class='op'>)</span>
 
-<span class='co'>#geo space based on intersect</span>
-<span class='va'>i.geo.space</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sets.html'>intersect</a></span><span class='op'>(</span><span class='va'>un.land</span>, <span class='fu'>buffer</span><span class='op'>(</span><span class='va'>spdf.occ.cl2</span>, <span class='fl'>200000</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># filter by year to be consistent with the environmental data</span>
+<span class='va'>occ.class.1970</span> <span class='op'>&lt;-</span>  <span class='va'>occ.cl</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>&gt;=</span> <span class='fl'>1970</span><span class='op'>)</span>
 
 <span class='co'>### run the evaluation</span>
-<span class='va'>cl.eval</span> <span class='op'>&lt;-</span> <span class='fu'>clean_eval</span><span class='op'>(</span><span class='va'>occ.cl</span>,
+<span class='va'>cl.eval</span> <span class='op'>&lt;-</span> <span class='fu'>clean_eval</span><span class='op'>(</span><span class='va'>occ.class.1970</span>,
                       env.space <span class='op'>=</span> <span class='va'>env.space</span>,
                       geo.space <span class='op'>=</span> <span class='va'>c.geo.space</span>,
                       r <span class='op'>=</span> <span class='va'>raster.temp.prec</span><span class='op'>)</span>
 
 <span class='co'>#area results</span>
 <span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>area</span>
+
 
 <span class='co'>### richness maps</span>
 <span class='co'>## it makes sense if there are more than one species</span>
@@ -271,18 +307,18 @@ collumn which filter the occurrence data set.</p></td>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>rich.before.clean</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>rich.after.clean</span><span class='op'>)</span>
 
-
 <span class='co'>### species area map</span>
 <span class='va'>comp.bc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>comp</span><span class='op'>$</span><span class='va'>comp.BC</span><span class='op'>)</span>
 <span class='va'>comp.ac</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>comp</span><span class='op'>$</span><span class='va'>comp.AC</span><span class='op'>)</span>
 
-<span class='va'>c.setosa.bc</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>site.coords</span>,
-                                         <span class='va'>comp.bc</span><span class='op'>$</span><span class='va'>`Cyathea setosa`</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>c.setosa.ac</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>site.coords</span>,
-                                         <span class='va'>comp.ac</span><span class='op'>$</span><span class='va'>`Cyathea setosa`</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>c.villosa.bc</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>site.coords</span>,
+                                    <span class='va'>comp.bc</span><span class='op'>$</span><span class='va'>`Cyathea villosa`</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>c.villosa.ac</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>site.coords</span>,
+                                    <span class='va'>comp.ac</span><span class='op'>$</span><span class='va'>`Cyathea villosa`</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>c.setosa.bc</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>c.setosa.ac</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>c.villosa.bc</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>c.villosa.bc</span><span class='op'>)</span>
+
 
 <span class='op'>}</span>
 
