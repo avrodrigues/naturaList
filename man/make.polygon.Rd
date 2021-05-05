@@ -2,7 +2,7 @@
 % Please edit documentation in R/internal_functions.R
 \name{make.polygon}
 \alias{make.polygon}
-\title{Internal function of naturaList - Create SpatialPoligons from a list of coordinates}
+\title{Internal function of naturaList - Create SpatialPolygons from a list of coordinates}
 \usage{
 make.polygon(df)
 }

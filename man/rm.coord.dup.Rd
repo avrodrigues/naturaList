@@ -2,16 +2,16 @@
 % Please edit documentation in R/internal_functions.R
 \name{rm.coord.dup}
 \alias{rm.coord.dup}
-\title{Internal funciton of naturaList - Remove duplicate occurrence}
+\title{Internal function of naturaList - Remove duplicate occurrence}
 \usage{
-rm.coord.dup(x, latitude, longitude)
+rm.coord.dup(x, decimal.latitude, decimal.longitude)
 }
 \arguments{
 \item{x}{data frame with filtered occurrences}
 
-\item{latitude}{name of column with latitude}
+\item{decimal.latitude}{name of column with decimal.latitude}
 
-\item{longitude}{name of column with longitude}
+\item{decimal.longitude}{name of column with decimal.longitude}
 }
 \description{
 Remove duplicated occurrence based on coordinates. It is used in

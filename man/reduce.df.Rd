@@ -7,47 +7,47 @@ collumn length}
 \usage{
 reduce.df(
   df,
-  institution.source = "institutionCode",
+  institution.code = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
-  year.event = "year",
+  year = "year",
   date.identified = "dateIdentified",
-  scientific.name = "species",
-  determined.by = "identifiedBy",
-  longitude = "decimalLongitude",
-  latitude = "decimalLatitude",
-  basis.of.rec = "basisOfRecord",
+  species = "species",
+  identified.by = "identifiedBy",
+  decimal.latitude = "decimalLatitude",
+  decimal.longitude = "decimalLongitude",
+  basis.of.record = "basisOfRecord",
   media.type = "mediaType",
-  occ.id = "occurrenceID",
+  occurrence.id = "occurrenceID",
   na.rm.coords = TRUE
 )
 }
 \arguments{
 \item{df}{occurrence data frame provided in {\link[naturaList]{classify_occ}}}
 
-\item{institution.source}{institution.source = "institutionCode"}
+\item{institution.code}{institution.code = "institutionCode"}
 
 \item{collection.code}{collection.code = "collectionCode"}
 
 \item{catalog.number}{catalog.number = "catalogNumber"}
 
-\item{year.event}{year.event = "year",}
+\item{year}{year = "year",}
 
 \item{date.identified}{date.identified = "dateIdentified"}
 
-\item{scientific.name}{scientific.name = "species"}
+\item{species}{species = "species"}
 
-\item{determined.by}{determined.by = "identifiedBy"}
+\item{identified.by}{identified.by = "identifiedBy"}
 
-\item{longitude}{longitude = "decimalLongitude"}
+\item{decimal.latitude}{decimal.latitude = "decimalLatitude"}
 
-\item{latitude}{latitude = "decimalLatitude"}
+\item{decimal.longitude}{decimal.longitude = "decimalLongitude"}
 
-\item{basis.of.rec}{basis.of.rec = "basisOfRecord"}
+\item{basis.of.record}{basis.of.record = "basisOfRecord"}
 
 \item{media.type}{media.type = "mediaType"}
 
-\item{occ.id}{occ.id = "occurrenceID"}
+\item{occurrence.id}{occ.id = "occurrenceID"}
 
 \item{na.rm.coords}{= TRUE}
 }

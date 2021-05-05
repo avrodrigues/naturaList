@@ -75,7 +75,7 @@ classify_occ to facilitate internal operation" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@ classify_occ to facilitate internal operation" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -116,7 +116,12 @@ classify_occ to facilitate internal operation" />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -132,7 +137,7 @@ classify_occ to facilitate internal operation" />
     <div class="page-header">
     <h1>Internal function of naturaList - reduce data.frama of occurence for a minimal
 collumn length</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/internal_functions.R'><code>R/internal_functions.R</code></a></small>
     <div class="hidden name"><code>reduce.df.Rd</code></div>
     </div>
 
@@ -143,18 +148,18 @@ collumn length</h1>
 
     <pre class="usage"><span class='fu'>reduce.df</span><span class='op'>(</span>
   <span class='va'>df</span>,
-  institution.source <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
+  institution.code <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
   collection.code <span class='op'>=</span> <span class='st'>"collectionCode"</span>,
   catalog.number <span class='op'>=</span> <span class='st'>"catalogNumber"</span>,
-  year.event <span class='op'>=</span> <span class='st'>"year"</span>,
+  year <span class='op'>=</span> <span class='st'>"year"</span>,
   date.identified <span class='op'>=</span> <span class='st'>"dateIdentified"</span>,
-  scientific.name <span class='op'>=</span> <span class='st'>"species"</span>,
-  determined.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
-  longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
-  basis.of.rec <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
+  species <span class='op'>=</span> <span class='st'>"species"</span>,
+  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
+  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
+  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
+  basis.of.record <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
   media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>,
-  occ.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
+  occurrence.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
   na.rm.coords <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -166,8 +171,8 @@ collumn length</h1>
       <td><p>occurrence data frame provided in <a href='classify_occ.html'>classify_occ</a></p></td>
     </tr>
     <tr>
-      <th>institution.source</th>
-      <td><p>institution.source = "institutionCode"</p></td>
+      <th>institution.code</th>
+      <td><p>institution.code = "institutionCode"</p></td>
     </tr>
     <tr>
       <th>collection.code</th>
@@ -178,39 +183,39 @@ collumn length</h1>
       <td><p>catalog.number = "catalogNumber"</p></td>
     </tr>
     <tr>
-      <th>year.event</th>
-      <td><p>year.event = "year",</p></td>
+      <th>year</th>
+      <td><p>year = "year",</p></td>
     </tr>
     <tr>
       <th>date.identified</th>
       <td><p>date.identified = "dateIdentified"</p></td>
     </tr>
     <tr>
-      <th>scientific.name</th>
-      <td><p>scientific.name = "species"</p></td>
+      <th>species</th>
+      <td><p>species = "species"</p></td>
     </tr>
     <tr>
-      <th>determined.by</th>
-      <td><p>determined.by = "identifiedBy"</p></td>
+      <th>identified.by</th>
+      <td><p>identified.by = "identifiedBy"</p></td>
     </tr>
     <tr>
-      <th>longitude</th>
-      <td><p>longitude = "decimalLongitude"</p></td>
+      <th>decimal.latitude</th>
+      <td><p>decimal.latitude = "decimalLatitude"</p></td>
     </tr>
     <tr>
-      <th>latitude</th>
-      <td><p>latitude = "decimalLatitude"</p></td>
+      <th>decimal.longitude</th>
+      <td><p>decimal.longitude = "decimalLongitude"</p></td>
     </tr>
     <tr>
-      <th>basis.of.rec</th>
-      <td><p>basis.of.rec = "basisOfRecord"</p></td>
+      <th>basis.of.record</th>
+      <td><p>basis.of.record = "basisOfRecord"</p></td>
     </tr>
     <tr>
       <th>media.type</th>
       <td><p>media.type = "mediaType"</p></td>
     </tr>
     <tr>
-      <th>occ.id</th>
+      <th>occurrence.id</th>
       <td><p>occ.id = "occurrenceID"</p></td>
     </tr>
     <tr>

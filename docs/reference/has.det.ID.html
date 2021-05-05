@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function of naturaList - Identifies if a occurence has a name for
+<title>Internal function of naturaList - Identifies if a occurrence has a name for
 the identifier of the specimen — has.det.ID • naturaList</title>
 
 
@@ -40,9 +40,9 @@ the identifier of the specimen — has.det.ID • naturaList</title>
 
 
 
-<meta property="og:title" content="Internal function of naturaList - Identifies if a occurence has a name for
+<meta property="og:title" content="Internal function of naturaList - Identifies if a occurrence has a name for
 the identifier of the specimen — has.det.ID" />
-<meta property="og:description" content="Identifies if a occurence has a name for the identifier of the specimen.
+<meta property="og:description" content="Identifies if a occurrence has a name for the identifier of the specimen.
  It is used inside classify_occ" />
 
 
@@ -75,7 +75,7 @@ the identifier of the specimen — has.det.ID" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@ the identifier of the specimen — has.det.ID" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -116,7 +116,12 @@ the identifier of the specimen — has.det.ID" />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -130,14 +135,14 @@ the identifier of the specimen — has.det.ID" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal function of naturaList - Identifies if a occurence has a name for
+    <h1>Internal function of naturaList - Identifies if a occurrence has a name for
 the identifier of the specimen</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/internal_functions.R'><code>R/internal_functions.R</code></a></small>
     <div class="hidden name"><code>has.det.ID.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Identifies if a occurence has a name for the identifier of the specimen.
+    <p>Identifies if a occurrence has a name for the identifier of the specimen.
  It is used inside <a href='classify_occ.html'>classify_occ</a></p>
     </div>
 
@@ -148,13 +153,14 @@ the identifier of the specimen</h1>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sp.df</th>
-      <td><p>reduced version of occurence data frame provided in
+      <td><p>reduced version of occurrence data frame provided in
 <a href='classify_occ.html'>classify_occ</a></p></td>
     </tr>
     <tr>
       <th>ignore.det.names</th>
-      <td><p>ignore.det.names character vector indicatiing strings in the determined.by columns
-that should be ignored as a taxonomist. See <a href='classify_occ.html'>classify_occ</a>.</p></td>
+      <td><p>ignore.det.names character vector indicating
+strings in the identified.by column that should be ignored as a
+taxonomist. See <a href='classify_occ.html'>classify_occ</a>.</p></td>
     </tr>
     </table>
 

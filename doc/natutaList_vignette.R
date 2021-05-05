@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 #  spec_df <- create_spec_df(br.musicians)
 #  spec_df
 
-## ----get_det_names, eval=F, echo = F------------------------------------------
+## ----get_det_names, eval=F, echo = T------------------------------------------
 #  
 #  # check out if there are strings which are not taxonomists
 #  get_det_names(A.setosa)
@@ -49,10 +49,4 @@ knitr::opts_chunk$set(
 #  
 #  table(occ.class$naturaList_levels)
 #  
-
-## ----grid_filter, eval=F------------------------------------------------------
-#  # grid filtering
-#  occ.grid <- grid_filter(occ.class)
-#  dim(occ.grid)
-#  table(occ.grid$naturaList_levels)
 

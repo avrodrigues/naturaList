@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classify occurrence records in levels of confidence in species determination — classify_occ • naturaList</title>
+<title>Classify occurrence records in levels of confidence in species identification — classify_occ • naturaList</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Classify occurrence records in levels of confidence in species determination — classify_occ" />
+<meta property="og:title" content="Classify occurrence records in levels of confidence in species identification — classify_occ" />
 <meta property="og:description" content="Classifies occurrence records in levels of confidence in species
-determination" />
+identification" />
 
 
 
@@ -73,7 +73,7 @@ determination" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -96,13 +96,13 @@ determination" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -114,7 +114,12 @@ determination" />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,36 +133,44 @@ determination" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classify occurrence records in levels of confidence in species determination</h1>
-    
+    <h1>Classify occurrence records in levels of confidence in species identification</h1>
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/classify_occ.R'><code>R/classify_occ.R</code></a></small>
     <div class="hidden name"><code>classify_occ.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Classifies occurrence records in levels of confidence in species
-determination</p>
+identification</p>
     </div>
 
     <pre class="usage"><span class='fu'>classify_occ</span><span class='op'>(</span>
   <span class='va'>occ</span>,
   spec <span class='op'>=</span> <span class='cn'>NULL</span>,
   na.rm.coords <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  crit.levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"det_by_spec"</span>, <span class='st'>"taxonomist"</span>, <span class='st'>"image"</span>, <span class='st'>"sci_colection"</span>, <span class='st'>"field_obs"</span>,
-    <span class='st'>"no_criteria_met"</span><span class='op'>)</span>,
+  crit.levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"det_by_spec"</span>, <span class='st'>"not_spec_name"</span>, <span class='st'>"image"</span>, <span class='st'>"sci_colection"</span>,
+    <span class='st'>"field_obs"</span>, <span class='st'>"no_criteria_met"</span><span class='op'>)</span>,
   ignore.det.names <span class='op'>=</span> <span class='cn'>NULL</span>,
   spec.ambiguity <span class='op'>=</span> <span class='st'>"not.spec"</span>,
-  institution.source <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
+  institution.code <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
   collection.code <span class='op'>=</span> <span class='st'>"collectionCode"</span>,
   catalog.number <span class='op'>=</span> <span class='st'>"catalogNumber"</span>,
-  year.event <span class='op'>=</span> <span class='st'>"year"</span>,
+  year <span class='op'>=</span> <span class='st'>"year"</span>,
   date.identified <span class='op'>=</span> <span class='st'>"dateIdentified"</span>,
-  scientific.name <span class='op'>=</span> <span class='st'>"species"</span>,
-  determined.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
-  longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
-  basis.of.rec <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
+  species <span class='op'>=</span> <span class='st'>"species"</span>,
+  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
+  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
+  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
+  basis.of.record <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
   media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>,
-  occ.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>
+  occurrence.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
+  <span class='va'>institution.source</span>,
+  <span class='va'>year.event</span>,
+  <span class='va'>scientific.name</span>,
+  <span class='va'>determined.by</span>,
+  <span class='va'>latitude</span>,
+  <span class='va'>longitude</span>,
+  <span class='va'>basis.of.rec</span>,
+  <span class='va'>occ.id</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,88 +178,130 @@ determination</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>occ</th>
-      <td><p>Data frame with occurrence records information.</p></td>
+      <td><p>data frame with occurrence records information.</p></td>
     </tr>
     <tr>
       <th>spec</th>
-      <td><p>Data frame with specialists' names. See details.</p></td>
+      <td><p>data frame with specialists' names. See details.</p></td>
     </tr>
     <tr>
       <th>na.rm.coords</th>
-      <td><p>Logical. If TRUE, remove occurrences with NA in latitude
-or longitude</p></td>
+      <td><p>logical. If <code>TRUE</code>, remove occurrences with <code>NA</code>
+in <code>decimal.latitude</code> or <code>decimal.longitude</code></p></td>
     </tr>
     <tr>
       <th>crit.levels</th>
-      <td><p>Character. Vector with levels of confidence in decreasing
-order. The criteria allowed are <code>det_by_spec</code>, <code>taxonomist</code>,
+      <td><p>character. Vector with levels of confidence in decreasing
+order. The criteria allowed are <code>det_by_spec</code>, <code>not_spec_name</code>,
 <code>image</code>, <code>sci_colection</code>, <code>field_obs</code>, <code>no_criteria_met</code>.
- See details.</p></td>
+See details.</p></td>
     </tr>
     <tr>
       <th>ignore.det.names</th>
-      <td><p>character vector indicatiing strings in the determined.by columns
-that should be ignored as a taxonomist. See details.</p></td>
+      <td><p>character vector indicating strings in
+<code>identified.by</code> that should be ignored as a taxonomist. See details.</p></td>
     </tr>
     <tr>
       <th>spec.ambiguity</th>
       <td><p>character. Indicates how to deal with ambiguity in
-specialists names. <code>not.spec</code> solve ambiguity by classifing the
-determinating as done by a non-specialist;<code>is.spec</code> assumes the
-determination was done by a specialist; <code>manual.check</code> enables the user to
-manually check all ambiguos names. Defaut is <code>not.spec</code>.</p></td>
+specialists names. <code>not.spec</code> solve ambiguity by classifying the
+identification as done by a non-specialist;<code>is.spec</code> assumes the
+identification was done by a specialist; <code>manual.check</code> enables the
+user to manually check all ambiguous names. Default is <code>not.spec</code>.</p></td>
     </tr>
     <tr>
-      <th>institution.source</th>
-      <td><p>Column name of <code>occ</code> with the name of the
-institution that provided the data.</p></td>
+      <th>institution.code</th>
+      <td><p>column name of <code>occ</code> with the name (or acronym)
+in use by the institution having custody of the object(s) or information
+referred to in the record.</p></td>
     </tr>
     <tr>
       <th>collection.code</th>
-      <td><p>Column name of <code>occ</code> with the codes for institution
-names.</p></td>
+      <td><p>column name of <code>occ</code> with The name, acronym,
+coden, or initials identifying the collection or data set from which the
+record was derived.</p></td>
     </tr>
     <tr>
       <th>catalog.number</th>
-      <td><p>Column name of <code>occ</code> with catalog number.</p></td>
+      <td><p>column name of <code>occ</code> with an identifier
+(preferably unique) for the record within the data set or collection.</p></td>
     </tr>
     <tr>
-      <th>year.event</th>
-      <td><p>Column name of <code>occ</code> the year of the collection event.</p></td>
+      <th>year</th>
+      <td><p>Column name of <code>occ</code> the four-digit year in which the
+Event occurred, according to the Common Era Calendar.</p></td>
     </tr>
     <tr>
       <th>date.identified</th>
-      <td><p>Column name of <code>occ</code> with the date of species
-determination.</p></td>
+      <td><p>Column name of <code>occ</code> with the date on which the
+subject was determined as representing the Taxon.</p></td>
     </tr>
     <tr>
-      <th>scientific.name</th>
-      <td><p>Column name of <code>occ</code> with the species names.</p></td>
+      <th>species</th>
+      <td><p>column name of <code>occ</code> with the species names.</p></td>
     </tr>
     <tr>
-      <th>determined.by</th>
-      <td><p>Column name of <code>occ</code> with the name of who determined the
-species.</p></td>
+      <th>identified.by</th>
+      <td><p>column name of <code>occ</code> with the name of who
+determined the species.</p></td>
     </tr>
     <tr>
-      <th>longitude</th>
-      <td><p>Column name of <code>occ</code> longitude in decimal degrees.</p></td>
+      <th>decimal.latitude</th>
+      <td><p>column name of <code>occ</code> latitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>latitude</th>
-      <td><p>Column name of <code>occ</code> latitude in decimal degrees.</p></td>
+      <th>decimal.longitude</th>
+      <td><p>column name of <code>occ</code> longitude in decimal
+degrees.</p></td>
     </tr>
     <tr>
-      <th>basis.of.rec</th>
-      <td><p>Column name of <code>occ</code> with the recording types, as in GBIF.</p></td>
+      <th>basis.of.record</th>
+      <td><p>column name with the specific nature of the data
+record. See details.</p></td>
     </tr>
     <tr>
       <th>media.type</th>
-      <td><p>Column name of <code>occ</code> with the media type of recording.</p></td>
+      <td><p>column name of <code>occ</code> with the media type of recording.
+See details.</p></td>
+    </tr>
+    <tr>
+      <th>occurrence.id</th>
+      <td><p>column name of <code>occ</code> with link or code for the
+occurrence record. See in
+<a href='https://dwc.tdwg.org/terms/#dwc:occurrenceID'>Darwin Core Format</a></p></td>
+    </tr>
+    <tr>
+      <th>institution.source</th>
+      <td><p>deprecated, use <code>institution.code</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>year.event</th>
+      <td><p>deprecated, use <code>year</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>scientific.name</th>
+      <td><p>deprecated, use <code>species</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>determined.by</th>
+      <td><p>deprecated, use <code>identified.by</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>latitude</th>
+      <td><p>deprecated, use <code>decimal.latitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>longitude</th>
+      <td><p>deprecated, use <code>decimal.longitude</code> instead</p></td>
+    </tr>
+    <tr>
+      <th>basis.of.rec</th>
+      <td><p>deprecated, use <code>basis.of.record</code> instead.</p></td>
     </tr>
     <tr>
       <th>occ.id</th>
-      <td><p>Column name of <code>occ</code> with link or code for the occurence record.</p></td>
+      <td><p>deprecated, use <code>occurrence.id</code> instead</p></td>
     </tr>
     </table>
 
@@ -257,15 +312,34 @@ in a new column, named <code>naturaList_levels</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>spec</code> data frame must have columns separating <code>LastName</code>,
-<code>Name</code> and <code>Abbrev</code>. See <a href='create_spec_df.html'>create_spec_df</a> function for a easy way to produce this data frame.</p>
-<p>When <code>ignore.det.name = NULL</code> (default), the function ignores strings with only
-"RRC ID Flag", "NA", "", "-" and "_". When a character vector is provided, the function adds the strings in character vector to
-the default strings and ignore all these strings as being a name of a taxonomist.</p>
-<p><code>basis.of.rec</code> is a character vector with one of the following
-types of record:<code>PRESERVED_SPECIMEN</code> or <code>HUMAN_OBSERVATION</code>, as in
-GBIF data 'basisOfRecord'.</p>
+<code>Name</code> and <code>Abbrev</code>. See <a href='create_spec_df.html'>create_spec_df</a>
+function for a easy way to produce this data frame.</p>
+<p>When <code>ignore.det.name = NULL</code> (default), the function ignores
+strings with <code>"RRC ID Flag", "NA", "", "-" and "_".</code> When a character
+vector is provided, the function adds the default strings to the provided
+character vector and ignore all these strings as being a name of a taxonomist.</p>
+<p>The function classifies the occurrence records in six levels of
+confidence in species identification. The six levels are:</p><ul>
+<li><p><code>det_by_spec</code> - when the identification was made by a specialists
+    which is present in the list of specialists provided in the <code>spec</code>
+    argument;</p></li>
+<li><p><code>not_spec_name</code> - when the identification was made by a name who is
+    not a specialist name provide in <code>spec</code>;</p></li>
+<li><p><code>image</code> - the occurrence have not name of a identifier, but present
+    an image associated;</p></li>
+<li><p><code>sci_colection</code> - the occurrence have not name of a identifier,
+   but preserved in a scientific collection;</p></li>
+<li><p><code>field_obs</code> - the occurrence have not name of a identifier,
+   but it was identified in field observation;</p></li>
+<li><p><code>no_criteria_met</code> - no other criteria was met.</p></li>
+</ul><p>The (decreasing) order of the levels in the chatacter vetor determines the
+ classification level order.</p>
+<p><code>basis.of.record</code> is a character vector with one of the following
+types of record: <code>PRESERVED_SPECIMEN</code>, <code>PreservedSpecimen</code>,
+ <code>HUMAN_OBSERVATION</code> or <code>HumanObservation</code>, as in GBIF data
+ 'basisOfRecord'.</p>
 <p><code>media.type</code> uses the same pattern as GBIF mediaType column,
-indicating the existence of an associated image with <code>STILLIMAGE</code>.</p>
+indicating the existence of an associated image with <code>stillImage</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='speciaLists.html'>speciaLists</a></code></p></div>
@@ -274,7 +348,9 @@ indicating the existence of an associated image with <code>STILLIMAGE</code>.</p
     <p>Arthur V. Rodrigues</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>occ.class</span> <span class='op'>&lt;-</span> <span class='fu'>classify_occ</span><span class='op'>(</span><span class='va'>A.setosa</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"A.setosa"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span>
+<span class='va'>occ.class</span> <span class='op'>&lt;-</span> <span class='fu'>classify_occ</span><span class='op'>(</span><span class='va'>A.setosa</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
 <span class='va'>occ.class</span>
 </div><div class='output co'>#&gt;         gbifID                           datasetKey
 #&gt; 1   2269193205 dd31ac22-63d4-4bb4-a987-5eece5ffadb8
@@ -5785,58 +5861,58 @@ indicating the existence of an associated image with <code>STILLIMAGE</code>.</p
 #&gt; 505                                                GEODETIC_DATUM_ASSUMED_WGS84
 #&gt; 506                                                GEODETIC_DATUM_ASSUMED_WGS84
 #&gt;     naturaList_levels
-#&gt; 1        2_taxonomist
+#&gt; 1     2_not_spec_name
 #&gt; 2     4_sci_colection
 #&gt; 3     4_sci_colection
 #&gt; 4     4_sci_colection
-#&gt; 5        2_taxonomist
-#&gt; 9        2_taxonomist
-#&gt; 10       2_taxonomist
-#&gt; 11       2_taxonomist
-#&gt; 12       2_taxonomist
-#&gt; 16       2_taxonomist
-#&gt; 21       2_taxonomist
-#&gt; 22       2_taxonomist
+#&gt; 5     2_not_spec_name
+#&gt; 9     2_not_spec_name
+#&gt; 10    2_not_spec_name
+#&gt; 11    2_not_spec_name
+#&gt; 12    2_not_spec_name
+#&gt; 16    2_not_spec_name
+#&gt; 21    2_not_spec_name
+#&gt; 22    2_not_spec_name
 #&gt; 26            3_image
-#&gt; 27       2_taxonomist
-#&gt; 28       2_taxonomist
-#&gt; 29       2_taxonomist
+#&gt; 27    2_not_spec_name
+#&gt; 28    2_not_spec_name
+#&gt; 29    2_not_spec_name
 #&gt; 30    4_sci_colection
 #&gt; 31    4_sci_colection
-#&gt; 32       2_taxonomist
-#&gt; 33       2_taxonomist
-#&gt; 34       2_taxonomist
-#&gt; 36       2_taxonomist
+#&gt; 32    2_not_spec_name
+#&gt; 33    2_not_spec_name
+#&gt; 34    2_not_spec_name
+#&gt; 36    2_not_spec_name
 #&gt; 37      1_det_by_spec
-#&gt; 38       2_taxonomist
-#&gt; 40       2_taxonomist
-#&gt; 41       2_taxonomist
-#&gt; 42       2_taxonomist
-#&gt; 46       2_taxonomist
-#&gt; 47       2_taxonomist
-#&gt; 48       2_taxonomist
-#&gt; 50       2_taxonomist
-#&gt; 51       2_taxonomist
-#&gt; 55       2_taxonomist
-#&gt; 62       2_taxonomist
-#&gt; 65       2_taxonomist
-#&gt; 66       2_taxonomist
-#&gt; 67       2_taxonomist
-#&gt; 68       2_taxonomist
-#&gt; 69       2_taxonomist
-#&gt; 71       2_taxonomist
-#&gt; 72       2_taxonomist
-#&gt; 76       2_taxonomist
-#&gt; 77       2_taxonomist
-#&gt; 78       2_taxonomist
-#&gt; 79       2_taxonomist
-#&gt; 80       2_taxonomist
-#&gt; 81       2_taxonomist
-#&gt; 82       2_taxonomist
-#&gt; 89       2_taxonomist
-#&gt; 90       2_taxonomist
+#&gt; 38    2_not_spec_name
+#&gt; 40    2_not_spec_name
+#&gt; 41    2_not_spec_name
+#&gt; 42    2_not_spec_name
+#&gt; 46    2_not_spec_name
+#&gt; 47    2_not_spec_name
+#&gt; 48    2_not_spec_name
+#&gt; 50    2_not_spec_name
+#&gt; 51    2_not_spec_name
+#&gt; 55    2_not_spec_name
+#&gt; 62    2_not_spec_name
+#&gt; 65    2_not_spec_name
+#&gt; 66    2_not_spec_name
+#&gt; 67    2_not_spec_name
+#&gt; 68    2_not_spec_name
+#&gt; 69    2_not_spec_name
+#&gt; 71    2_not_spec_name
+#&gt; 72    2_not_spec_name
+#&gt; 76    2_not_spec_name
+#&gt; 77    2_not_spec_name
+#&gt; 78    2_not_spec_name
+#&gt; 79    2_not_spec_name
+#&gt; 80    2_not_spec_name
+#&gt; 81    2_not_spec_name
+#&gt; 82    2_not_spec_name
+#&gt; 89    2_not_spec_name
+#&gt; 90    2_not_spec_name
 #&gt; 115     1_det_by_spec
-#&gt; 116      2_taxonomist
+#&gt; 116   2_not_spec_name
 #&gt; 117     1_det_by_spec
 #&gt; 118     1_det_by_spec
 #&gt; 119   4_sci_colection
@@ -5861,68 +5937,68 @@ indicating the existence of an associated image with <code>STILLIMAGE</code>.</p
 #&gt; 138     1_det_by_spec
 #&gt; 139     1_det_by_spec
 #&gt; 140     1_det_by_spec
-#&gt; 141      2_taxonomist
+#&gt; 141   2_not_spec_name
 #&gt; 142     1_det_by_spec
 #&gt; 143     1_det_by_spec
 #&gt; 144     1_det_by_spec
 #&gt; 145     1_det_by_spec
 #&gt; 146     1_det_by_spec
-#&gt; 147      2_taxonomist
+#&gt; 147   2_not_spec_name
 #&gt; 148     1_det_by_spec
 #&gt; 149     1_det_by_spec
-#&gt; 150      2_taxonomist
-#&gt; 151      2_taxonomist
-#&gt; 152      2_taxonomist
-#&gt; 153      2_taxonomist
-#&gt; 154      2_taxonomist
+#&gt; 150   2_not_spec_name
+#&gt; 151   2_not_spec_name
+#&gt; 152   2_not_spec_name
+#&gt; 153   2_not_spec_name
+#&gt; 154   2_not_spec_name
 #&gt; 155     1_det_by_spec
-#&gt; 156      2_taxonomist
-#&gt; 157      2_taxonomist
-#&gt; 158      2_taxonomist
-#&gt; 159      2_taxonomist
-#&gt; 160      2_taxonomist
-#&gt; 161      2_taxonomist
-#&gt; 162      2_taxonomist
-#&gt; 163      2_taxonomist
-#&gt; 164      2_taxonomist
-#&gt; 165      2_taxonomist
+#&gt; 156   2_not_spec_name
+#&gt; 157   2_not_spec_name
+#&gt; 158   2_not_spec_name
+#&gt; 159   2_not_spec_name
+#&gt; 160   2_not_spec_name
+#&gt; 161   2_not_spec_name
+#&gt; 162   2_not_spec_name
+#&gt; 163   2_not_spec_name
+#&gt; 164   2_not_spec_name
+#&gt; 165   2_not_spec_name
 #&gt; 167     1_det_by_spec
 #&gt; 171           3_image
 #&gt; 172           3_image
 #&gt; 173           3_image
-#&gt; 174      2_taxonomist
+#&gt; 174   2_not_spec_name
 #&gt; 175     1_det_by_spec
-#&gt; 176      2_taxonomist
-#&gt; 177      2_taxonomist
-#&gt; 178      2_taxonomist
-#&gt; 179      2_taxonomist
-#&gt; 180      2_taxonomist
-#&gt; 181      2_taxonomist
-#&gt; 182      2_taxonomist
-#&gt; 183      2_taxonomist
-#&gt; 184      2_taxonomist
-#&gt; 186      2_taxonomist
-#&gt; 188      2_taxonomist
-#&gt; 189      2_taxonomist
-#&gt; 190      2_taxonomist
-#&gt; 191      2_taxonomist
+#&gt; 176   2_not_spec_name
+#&gt; 177   2_not_spec_name
+#&gt; 178   2_not_spec_name
+#&gt; 179   2_not_spec_name
+#&gt; 180   2_not_spec_name
+#&gt; 181   2_not_spec_name
+#&gt; 182   2_not_spec_name
+#&gt; 183   2_not_spec_name
+#&gt; 184   2_not_spec_name
+#&gt; 186   2_not_spec_name
+#&gt; 188   2_not_spec_name
+#&gt; 189   2_not_spec_name
+#&gt; 190   2_not_spec_name
+#&gt; 191   2_not_spec_name
 #&gt; 192     1_det_by_spec
-#&gt; 194      2_taxonomist
-#&gt; 196      2_taxonomist
-#&gt; 209      2_taxonomist
-#&gt; 211      2_taxonomist
+#&gt; 194   2_not_spec_name
+#&gt; 196   2_not_spec_name
+#&gt; 209   2_not_spec_name
+#&gt; 211   2_not_spec_name
 #&gt; 212           3_image
-#&gt; 213      2_taxonomist
-#&gt; 216      2_taxonomist
-#&gt; 217      2_taxonomist
-#&gt; 218      2_taxonomist
-#&gt; 219      2_taxonomist
-#&gt; 220      2_taxonomist
-#&gt; 221      2_taxonomist
-#&gt; 225      2_taxonomist
-#&gt; 229      2_taxonomist
+#&gt; 213   2_not_spec_name
+#&gt; 216   2_not_spec_name
+#&gt; 217   2_not_spec_name
+#&gt; 218   2_not_spec_name
+#&gt; 219   2_not_spec_name
+#&gt; 220   2_not_spec_name
+#&gt; 221   2_not_spec_name
+#&gt; 225   2_not_spec_name
+#&gt; 229   2_not_spec_name
 #&gt; 232     1_det_by_spec
-#&gt; 233      2_taxonomist
+#&gt; 233   2_not_spec_name
 #&gt; 234           3_image
 #&gt; 235           3_image
 #&gt; 236     1_det_by_spec
@@ -5932,182 +6008,182 @@ indicating the existence of an associated image with <code>STILLIMAGE</code>.</p
 #&gt; 258           3_image
 #&gt; 263           3_image
 #&gt; 264           3_image
-#&gt; 272      2_taxonomist
+#&gt; 272   2_not_spec_name
 #&gt; 274   4_sci_colection
-#&gt; 275      2_taxonomist
-#&gt; 276      2_taxonomist
-#&gt; 277      2_taxonomist
-#&gt; 278      2_taxonomist
-#&gt; 279      2_taxonomist
-#&gt; 280      2_taxonomist
-#&gt; 282      2_taxonomist
+#&gt; 275   2_not_spec_name
+#&gt; 276   2_not_spec_name
+#&gt; 277   2_not_spec_name
+#&gt; 278   2_not_spec_name
+#&gt; 279   2_not_spec_name
+#&gt; 280   2_not_spec_name
+#&gt; 282   2_not_spec_name
 #&gt; 287   4_sci_colection
-#&gt; 290      2_taxonomist
-#&gt; 291      2_taxonomist
+#&gt; 290   2_not_spec_name
+#&gt; 291   2_not_spec_name
 #&gt; 292   4_sci_colection
-#&gt; 293      2_taxonomist
-#&gt; 294      2_taxonomist
-#&gt; 295      2_taxonomist
-#&gt; 296      2_taxonomist
+#&gt; 293   2_not_spec_name
+#&gt; 294   2_not_spec_name
+#&gt; 295   2_not_spec_name
+#&gt; 296   2_not_spec_name
 #&gt; 297     1_det_by_spec
-#&gt; 298      2_taxonomist
-#&gt; 300      2_taxonomist
-#&gt; 301      2_taxonomist
+#&gt; 298   2_not_spec_name
+#&gt; 300   2_not_spec_name
+#&gt; 301   2_not_spec_name
 #&gt; 303   4_sci_colection
-#&gt; 304      2_taxonomist
-#&gt; 305      2_taxonomist
-#&gt; 306      2_taxonomist
-#&gt; 311      2_taxonomist
+#&gt; 304   2_not_spec_name
+#&gt; 305   2_not_spec_name
+#&gt; 306   2_not_spec_name
+#&gt; 311   2_not_spec_name
 #&gt; 312     1_det_by_spec
 #&gt; 313     1_det_by_spec
-#&gt; 314      2_taxonomist
-#&gt; 315      2_taxonomist
+#&gt; 314   2_not_spec_name
+#&gt; 315   2_not_spec_name
 #&gt; 316     1_det_by_spec
 #&gt; 317     1_det_by_spec
 #&gt; 318     1_det_by_spec
 #&gt; 319     1_det_by_spec
 #&gt; 320     1_det_by_spec
-#&gt; 321      2_taxonomist
-#&gt; 322      2_taxonomist
-#&gt; 323      2_taxonomist
-#&gt; 324      2_taxonomist
-#&gt; 325      2_taxonomist
+#&gt; 321   2_not_spec_name
+#&gt; 322   2_not_spec_name
+#&gt; 323   2_not_spec_name
+#&gt; 324   2_not_spec_name
+#&gt; 325   2_not_spec_name
 #&gt; 327   4_sci_colection
-#&gt; 335      2_taxonomist
-#&gt; 336      2_taxonomist
-#&gt; 337      2_taxonomist
+#&gt; 335   2_not_spec_name
+#&gt; 336   2_not_spec_name
+#&gt; 337   2_not_spec_name
 #&gt; 338     1_det_by_spec
-#&gt; 339      2_taxonomist
+#&gt; 339   2_not_spec_name
 #&gt; 340     1_det_by_spec
-#&gt; 341      2_taxonomist
-#&gt; 342      2_taxonomist
-#&gt; 343      2_taxonomist
-#&gt; 345      2_taxonomist
-#&gt; 346      2_taxonomist
-#&gt; 347      2_taxonomist
-#&gt; 348      2_taxonomist
-#&gt; 349      2_taxonomist
+#&gt; 341   2_not_spec_name
+#&gt; 342   2_not_spec_name
+#&gt; 343   2_not_spec_name
+#&gt; 345   2_not_spec_name
+#&gt; 346   2_not_spec_name
+#&gt; 347   2_not_spec_name
+#&gt; 348   2_not_spec_name
+#&gt; 349   2_not_spec_name
 #&gt; 350   4_sci_colection
 #&gt; 351   4_sci_colection
 #&gt; 352   4_sci_colection
 #&gt; 353   4_sci_colection
-#&gt; 354      2_taxonomist
-#&gt; 355      2_taxonomist
-#&gt; 356      2_taxonomist
+#&gt; 354   2_not_spec_name
+#&gt; 355   2_not_spec_name
+#&gt; 356   2_not_spec_name
 #&gt; 357     1_det_by_spec
 #&gt; 358     1_det_by_spec
 #&gt; 359     1_det_by_spec
-#&gt; 360      2_taxonomist
+#&gt; 360   2_not_spec_name
 #&gt; 361     1_det_by_spec
 #&gt; 362     1_det_by_spec
 #&gt; 363     1_det_by_spec
-#&gt; 364      2_taxonomist
-#&gt; 365      2_taxonomist
-#&gt; 366      2_taxonomist
-#&gt; 367      2_taxonomist
-#&gt; 368      2_taxonomist
-#&gt; 369      2_taxonomist
-#&gt; 370      2_taxonomist
+#&gt; 364   2_not_spec_name
+#&gt; 365   2_not_spec_name
+#&gt; 366   2_not_spec_name
+#&gt; 367   2_not_spec_name
+#&gt; 368   2_not_spec_name
+#&gt; 369   2_not_spec_name
+#&gt; 370   2_not_spec_name
 #&gt; 371     1_det_by_spec
-#&gt; 372      2_taxonomist
-#&gt; 373      2_taxonomist
+#&gt; 372   2_not_spec_name
+#&gt; 373   2_not_spec_name
 #&gt; 374     1_det_by_spec
 #&gt; 375     1_det_by_spec
-#&gt; 376      2_taxonomist
-#&gt; 378      2_taxonomist
+#&gt; 376   2_not_spec_name
+#&gt; 378   2_not_spec_name
 #&gt; 381     1_det_by_spec
 #&gt; 382     1_det_by_spec
 #&gt; 383     1_det_by_spec
 #&gt; 385     1_det_by_spec
-#&gt; 386      2_taxonomist
+#&gt; 386   2_not_spec_name
 #&gt; 390     1_det_by_spec
 #&gt; 391     1_det_by_spec
 #&gt; 392     1_det_by_spec
-#&gt; 401      2_taxonomist
-#&gt; 402      2_taxonomist
-#&gt; 403      2_taxonomist
-#&gt; 404      2_taxonomist
-#&gt; 405      2_taxonomist
-#&gt; 406      2_taxonomist
-#&gt; 407      2_taxonomist
-#&gt; 408      2_taxonomist
-#&gt; 421      2_taxonomist
-#&gt; 422      2_taxonomist
-#&gt; 423      2_taxonomist
-#&gt; 424      2_taxonomist
-#&gt; 425      2_taxonomist
-#&gt; 427      2_taxonomist
-#&gt; 428      2_taxonomist
-#&gt; 429      2_taxonomist
-#&gt; 430      2_taxonomist
-#&gt; 431      2_taxonomist
-#&gt; 432      2_taxonomist
-#&gt; 433      2_taxonomist
-#&gt; 434      2_taxonomist
-#&gt; 435      2_taxonomist
-#&gt; 436      2_taxonomist
-#&gt; 437      2_taxonomist
-#&gt; 438      2_taxonomist
-#&gt; 439      2_taxonomist
-#&gt; 440      2_taxonomist
-#&gt; 441      2_taxonomist
-#&gt; 442      2_taxonomist
-#&gt; 443      2_taxonomist
-#&gt; 444      2_taxonomist
-#&gt; 445      2_taxonomist
-#&gt; 446      2_taxonomist
-#&gt; 447      2_taxonomist
-#&gt; 448      2_taxonomist
-#&gt; 449      2_taxonomist
-#&gt; 450      2_taxonomist
-#&gt; 451      2_taxonomist
-#&gt; 452      2_taxonomist
-#&gt; 453      2_taxonomist
-#&gt; 454      2_taxonomist
-#&gt; 455      2_taxonomist
-#&gt; 456      2_taxonomist
-#&gt; 457      2_taxonomist
-#&gt; 458      2_taxonomist
-#&gt; 459      2_taxonomist
-#&gt; 460      2_taxonomist
-#&gt; 461      2_taxonomist
-#&gt; 462      2_taxonomist
-#&gt; 463      2_taxonomist
-#&gt; 464      2_taxonomist
-#&gt; 465      2_taxonomist
-#&gt; 466      2_taxonomist
-#&gt; 467      2_taxonomist
-#&gt; 468      2_taxonomist
-#&gt; 469      2_taxonomist
+#&gt; 401   2_not_spec_name
+#&gt; 402   2_not_spec_name
+#&gt; 403   2_not_spec_name
+#&gt; 404   2_not_spec_name
+#&gt; 405   2_not_spec_name
+#&gt; 406   2_not_spec_name
+#&gt; 407   2_not_spec_name
+#&gt; 408   2_not_spec_name
+#&gt; 421   2_not_spec_name
+#&gt; 422   2_not_spec_name
+#&gt; 423   2_not_spec_name
+#&gt; 424   2_not_spec_name
+#&gt; 425   2_not_spec_name
+#&gt; 427   2_not_spec_name
+#&gt; 428   2_not_spec_name
+#&gt; 429   2_not_spec_name
+#&gt; 430   2_not_spec_name
+#&gt; 431   2_not_spec_name
+#&gt; 432   2_not_spec_name
+#&gt; 433   2_not_spec_name
+#&gt; 434   2_not_spec_name
+#&gt; 435   2_not_spec_name
+#&gt; 436   2_not_spec_name
+#&gt; 437   2_not_spec_name
+#&gt; 438   2_not_spec_name
+#&gt; 439   2_not_spec_name
+#&gt; 440   2_not_spec_name
+#&gt; 441   2_not_spec_name
+#&gt; 442   2_not_spec_name
+#&gt; 443   2_not_spec_name
+#&gt; 444   2_not_spec_name
+#&gt; 445   2_not_spec_name
+#&gt; 446   2_not_spec_name
+#&gt; 447   2_not_spec_name
+#&gt; 448   2_not_spec_name
+#&gt; 449   2_not_spec_name
+#&gt; 450   2_not_spec_name
+#&gt; 451   2_not_spec_name
+#&gt; 452   2_not_spec_name
+#&gt; 453   2_not_spec_name
+#&gt; 454   2_not_spec_name
+#&gt; 455   2_not_spec_name
+#&gt; 456   2_not_spec_name
+#&gt; 457   2_not_spec_name
+#&gt; 458   2_not_spec_name
+#&gt; 459   2_not_spec_name
+#&gt; 460   2_not_spec_name
+#&gt; 461   2_not_spec_name
+#&gt; 462   2_not_spec_name
+#&gt; 463   2_not_spec_name
+#&gt; 464   2_not_spec_name
+#&gt; 465   2_not_spec_name
+#&gt; 466   2_not_spec_name
+#&gt; 467   2_not_spec_name
+#&gt; 468   2_not_spec_name
+#&gt; 469   2_not_spec_name
 #&gt; 475     1_det_by_spec
 #&gt; 476     1_det_by_spec
 #&gt; 477     1_det_by_spec
 #&gt; 478     1_det_by_spec
-#&gt; 479      2_taxonomist
-#&gt; 480      2_taxonomist
-#&gt; 481      2_taxonomist
-#&gt; 482      2_taxonomist
-#&gt; 483      2_taxonomist
-#&gt; 484      2_taxonomist
-#&gt; 485      2_taxonomist
-#&gt; 486      2_taxonomist
-#&gt; 487      2_taxonomist
-#&gt; 488      2_taxonomist
-#&gt; 489      2_taxonomist
-#&gt; 492      2_taxonomist
-#&gt; 493      2_taxonomist
-#&gt; 494      2_taxonomist
-#&gt; 495      2_taxonomist
+#&gt; 479   2_not_spec_name
+#&gt; 480   2_not_spec_name
+#&gt; 481   2_not_spec_name
+#&gt; 482   2_not_spec_name
+#&gt; 483   2_not_spec_name
+#&gt; 484   2_not_spec_name
+#&gt; 485   2_not_spec_name
+#&gt; 486   2_not_spec_name
+#&gt; 487   2_not_spec_name
+#&gt; 488   2_not_spec_name
+#&gt; 489   2_not_spec_name
+#&gt; 492   2_not_spec_name
+#&gt; 493   2_not_spec_name
+#&gt; 494   2_not_spec_name
+#&gt; 495   2_not_spec_name
 #&gt; 496   4_sci_colection
-#&gt; 497      2_taxonomist
+#&gt; 497   2_not_spec_name
 #&gt; 498   4_sci_colection
 #&gt; 499   4_sci_colection
 #&gt; 500   4_sci_colection
 #&gt; 501   4_sci_colection
-#&gt; 503      2_taxonomist
-#&gt; 504      2_taxonomist
-#&gt; 505      2_taxonomist
-#&gt; 506      2_taxonomist</div><div class='input'>
+#&gt; 503   2_not_spec_name
+#&gt; 504   2_not_spec_name
+#&gt; 505   2_not_spec_name
+#&gt; 506   2_not_spec_name</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

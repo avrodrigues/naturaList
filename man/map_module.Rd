@@ -6,51 +6,93 @@
 \usage{
 map_module(
   occ.cl,
-  occ.id = "occurrenceID",
-  institution.source = "institutionCode",
+  action = "clean",
+  institution.code = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
-  year.event = "year",
+  year = "year",
   date.identified = "dateIdentified",
-  scientific.name = "species",
-  determined.by = "identifiedBy",
-  longitude = "decimalLongitude",
-  latitude = "decimalLatitude",
-  basis.of.rec = "basisOfRecord",
-  media.type = "mediaType"
+  species = "species",
+  identified.by = "identifiedBy",
+  decimal.latitude = "decimalLatitude",
+  decimal.longitude = "decimalLongitude",
+  basis.of.record = "basisOfRecord",
+  media.type = "mediaType",
+  occurrence.id = "occurrenceID",
+  institution.source,
+  year.event,
+  scientific.name,
+  determined.by,
+  latitude,
+  longitude,
+  basis.of.rec,
+  occ.id
 )
 }
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
 classified by \code{\link{classify_occ}} function.}
 
-\item{occ.id}{Column name of \code{occ} with link or code for the occurrence record.}
+\item{action}{a string with `"clean"` or `"flag"` which defines the action
+of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+If the string is `"clean"` the dataset returned only the occurrences records
+selected by the user. If the string is `"flag"`, a column named
+`map_molule_flag` is added in the output dataset, with tags `selected` and
+`deleted`, following the choices of the user in the application.}
 
-\item{institution.source}{Column name of \code{occ} with the name of the
-institution that provided the data.}
+\item{institution.code}{column name of \code{occ} with the name (or acronym)
+in use by the institution having custody of the object(s) or information
+referred to in the record.}
 
-\item{collection.code}{Column name of \code{occ} with the codes for institution
-names.}
+\item{collection.code}{column name of \code{occ} with The name, acronym,
+coden, or initials identifying the collection or data set from which the
+record was derived.}
 
-\item{catalog.number}{Column name of \code{occ} with catalog number.}
+\item{catalog.number}{column name of \code{occ} with an identifier
+(preferably unique) for the record within the data set or collection.}
 
-\item{year.event}{Column name of \code{occ} the year of the collection event.}
+\item{year}{Column name of \code{occ} the four-digit year in which the
+Event occurred, according to the Common Era Calendar.}
 
-\item{date.identified}{Column name of \code{occ} with the date of species
-determination.}
+\item{date.identified}{Column name of \code{occ} with the date on which the
+subject was determined as representing the Taxon.}
 
-\item{scientific.name}{Column name of \code{occ} with the species names.}
+\item{species}{column name of \code{occ} with the species names.}
 
-\item{determined.by}{Column name of \code{occ} with the name of who determined the
-species.}
+\item{identified.by}{column name of \code{occ} with the name of who
+determined the species.}
 
-\item{longitude}{Column name of \code{occ} longitude in decimal degrees.}
+\item{decimal.latitude}{column name of \code{occ} latitude in decimal
+degrees.}
 
-\item{latitude}{Column name of \code{occ} latitude in decimal degrees.}
+\item{decimal.longitude}{column name of \code{occ} longitude in decimal
+degrees.}
 
-\item{basis.of.rec}{Column name of \code{occ} with the recording types, as in GBIF.}
+\item{basis.of.record}{column name with the specific nature of the data
+record. See details.}
 
-\item{media.type}{Column name of \code{occ} with the media type of recording.}
+\item{media.type}{column name of \code{occ} with the media type of recording.
+See details.}
+
+\item{occurrence.id}{column name of \code{occ} with link or code for the
+occurrence record. See in
+\href{https://dwc.tdwg.org/terms/#dwc:occurrenceID}{Darwin Core Format}}
+
+\item{institution.source}{deprecated, use \code{institution.code} instead.}
+
+\item{year.event}{deprecated, use \code{year} instead.}
+
+\item{scientific.name}{deprecated, use \code{species} instead.}
+
+\item{determined.by}{deprecated, use \code{identified.by} instead}
+
+\item{latitude}{deprecated, use \code{decimal.latitude} instead}
+
+\item{longitude}{deprecated, use \code{decimal.longitude} instead}
+
+\item{basis.of.rec}{deprecated, use \code{basis.of.record} instead.}
+
+\item{occ.id}{deprecated, use \code{occurrence.id} instead}
 }
 \value{
 Data frame with the same columns of \code{occ.cl}.

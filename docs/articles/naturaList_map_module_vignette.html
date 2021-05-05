@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -54,13 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/naturaList_grid_filter_vignette.html">Filter within grid cells</a>
+      <a href="../articles/naturaList_grid_filter_vignette.html">Filter the best classified occurrences within grid cells</a>
     </li>
     <li>
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Filtering data and evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -71,7 +71,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/avrodrigues/naturaList/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -81,13 +88,13 @@
 
       
 
-      </header><script src="naturaList_map_module_vignette_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="naturaList_map_module_vignette_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Interacting with naturaList: the map_module() function</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/avrodrigues/naturaList/blob/master/vignettes/naturaList_map_module_vignette.Rmd"><code>vignettes/naturaList_map_module_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>naturaList_map_module_vignette.Rmd</code></div>
 
     </div>
@@ -97,21 +104,21 @@
 <div id="interactively-exploring-and-editing-occurrence-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#interactively-exploring-and-editing-occurrence-data" class="anchor"></a>Interactively exploring and editing occurrence data</h1>
-<p>In this article the user can explore the interactive module presented in naturaList package: the <code>map_module</code> function. Through <code>map_module</code> the user will be able to visual explore the occurrence data by seeing how it is distributed in space, as described in Figure 1.</p>
+<p>In this article the user can explore the interactive module presented in naturaList package: the <code><a href="../reference/map_module.html">map_module()</a></code> function. Through <code><a href="../reference/map_module.html">map_module()</a></code> the user will be able to visual explore the occurrence data by seeing how it is distributed in space, as described in Figure 1.</p>
 <div id="check-out-for-records-in-a-interactive-map-module" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-out-for-records-in-a-interactive-map-module" class="anchor"></a>Check out for records in a interactive map module</h2>
-<p>The <code><a href="../reference/map_module.html">map_module()</a></code> function allow the user to visualize the occurrence records in a interactive map. To open the interactive module of naturaList package the user must provide an object containing occurrence records obtained from <code>classify_occ</code> function. To illustrate the usage of map module we will use the dataset containing the occurrences of <em>Alsophila setosa</em> and the list of specialist for this species.</p>
+<p>The <code><a href="../reference/map_module.html">map_module()</a></code> function allow the user to visualize the occurrence records in a interactive map. To open the interactive module of naturaList package the user must provide an object containing occurrence records obtained from <code>classify_occ</code> function. To illustrate the usage of map module we will use the dataset containing the occurrences of <em>Alsophila setosa</em> and the list of specialist of tree ferns.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">naturaList</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/avrodrigues/naturaList">naturaList</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"A.setosa"</span><span class="op">)</span> <span class="co"># occurrence points for A.setosa</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"speciaLists"</span><span class="op">)</span> <span class="co"># list of specialists for A.setosa</span></code></pre></div>
-<p>First we need to classify the occurrences of <em>A. setosa</em> through the <code>classify_occ</code> function</p>
+<p>First we need to classify the occurrences of <em>A. setosa</em> through the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
-<p>Now we can open the map module by providing the classification of <em>A. setosa</em> for <code>map_module</code> function and save it in an object.</p>
+<p>Now we can open the map module by providing the classification of <em>A. setosa</em> for <code><a href="../reference/map_module.html">map_module()</a></code> function and save it in an object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">occ.select</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/map_module.html">map_module</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">)</span></code></pre></div>
@@ -120,11 +127,16 @@
 <img src="../vignettes/fig_map_module.png" alt=""><p class="caption">Fig. 1 - Features of <code><a href="../reference/map_module.html">map_module()</a></code> function used in the example with Alsophila setosa occurrence data. A) the initial display of occurrence records data; B) highlights the features of map_module. I – Select levels to be maintained in the output dataset; II – enable to delete point with click over occurrences; III – show how many points have been selected from the initial dataset; IV – display in the map only occurrences that belong to the selected levels, and turn visualization of the map between OpenStreetMap and Satellite; V – options to draw and edit polygons to select occurrence records that fall within polygon; The “x” – represents a point deleted with click.</p>
 </div>
 <p>In the Figure 1, you see two screen shots from <code><a href="../reference/map_module.html">map_module()</a></code>. In figure 1A, it is showed the initial display of occurrence records. In figure 1B it is highlighted the features inside <code><a href="../reference/map_module.html">map_module()</a></code>.</p>
-<p>In this example, we selected the levels 1 and 2 (Fig 1B - I) to be shown in the module. We also deleted three records by setting on the button <em>delete points with click</em> (Fig 1B - II) and clicking on them. At the end of selection we click on ‘Done !’ button, that will close the map module and the modifications will be stored in occ_select object. The <code>occ.select</code> object corresponds to a data frame containing occurrences of <em>A. setosa</em> after the modification made with the <code>map_module</code> function.</p>
-<p>The map module also has the option to draw polygons to select various occurrences that fall inside the polygons. After the selection and click in the button Done! the points are saved in an object. In this example we selected four points using the draw polygon tool of <code>map_module</code>.</p>
+<p>In this example, we selected the levels 1 and 2 (Fig 1B - I) to be shown in the module. We also deleted three records by setting on the button <em>delete points with click</em> (Fig 1B - II) and clicking on them. At the end of selection we click on ‘Done !’ button, that will close the map module and the modifications will be stored in occ_select object. The <code>occ.select</code> object corresponds to a data frame containing occurrences of <em>A. setosa</em> after the modification made with the <code><a href="../reference/map_module.html">map_module()</a></code> function.</p>
+<p>The <code><a href="../reference/map_module.html">map_module()</a></code> also has the option to draw polygons to select various occurrences that fall inside the polygons. After the selection and click in the button Done! the points are saved in an object. In this example we selected four points using the draw polygon tool of <code><a href="../reference/map_module.html">map_module()</a></code>.</p>
 <div class="figure">
-<img src="../vignettes/draw_polygon.png" alt=""><p class="caption">Fig. 2 - Draw polygon tool from <code><a href="../reference/map_module.html">map_module()</a></code> function used in the example with Alsophila setosa occurrence data. In this example, the points inside the blue polygon were deleted.</p>
+<img src="../vignettes/draw_polygon.png" alt=""><p class="caption">Fig. 2 - Draw polygon tool from <code><a href="../reference/map_module.html">map_module()</a></code> function used in the example with Alsophila setosa occurrence data. In this example, the points inside the blue polygon were selected</p>
 </div>
+<p>The <code><a href="../reference/map_module.html">map_module()</a></code> offers yet two options for the output dataset, which can be chosed in the argument <code>action</code>. If <code>action = "clean"</code> the output dataset contain only the occurrences selected by the user in the application. Otherwise, if <code>action = "flag"</code>, the output dataset indicates which occurrence was selected and which was deleted by the user in the aplication. The flag option add a new column named <code>map_module_flag</code> to the output dataset, with the tags <code>selected</code> or <code>deleted</code>. By default the <code>action = "clean"</code>. Check out the differences of this option:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">occ.select1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/map_module.html">map_module</a></span><span class="op">(</span><span class="va">occ.class</span>, action <span class="op">=</span> <span class="st">"flag"</span><span class="op">)</span>
+<span class="va">occ.select2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/map_module.html">map_module</a></span><span class="op">(</span><span class="va">occ.class</span>, action <span class="op">=</span> <span class="st">"clean"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>

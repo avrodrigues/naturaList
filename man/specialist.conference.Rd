@@ -3,7 +3,7 @@
 \name{specialist.conference}
 \alias{specialist.conference}
 \title{Internal function of naturaList - Confirm if an occurrence record was identified by
-a specialist witout ambiguity}
+a specialist without ambiguity}
 \usage{
 specialist.conference(pt.df, specialist)
 }
@@ -14,7 +14,7 @@ specialist.conference(pt.df, specialist)
 }
 \description{
 Confirm if an occurrence record was identified by
-a specialist witout ambiguity. It is used inside
+a specialist without ambiguity. It is used inside
  {\link[naturaList]{classify_occ}}
 }
 \keyword{internal}

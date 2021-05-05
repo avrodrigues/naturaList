@@ -2,7 +2,7 @@
 % Please edit documentation in R/internal_functions.R
 \name{pttn.all.specialist}
 \alias{pttn.all.specialist}
-\title{Internal function of naturaList - Retturn specialists names in a collapesed
+\title{Internal function of naturaList - Return specialists names in a collapsed
 string}
 \usage{
 pttn.all.specialist(specialist)
@@ -11,7 +11,7 @@ pttn.all.specialist(specialist)
 \item{specialist}{specialist data frame}
 }
 \description{
-Retturn specialists names in a collapesed string to be used in the internal
+Return specialists names in a collapsed string to be used in the internal
 function {\link[naturaList]{specialist.conference}}
 }
 \keyword{internal}

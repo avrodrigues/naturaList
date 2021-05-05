@@ -6,7 +6,7 @@
 \title{Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
 Information Facility (GBIF).}
 \format{
-A data frame with 508 rows and 50 variables
+A data frame with 3851 rows and 50 variables
 }
 \source{
 GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qrhynv
@@ -15,7 +15,7 @@ GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qr
 cyathea.br
 }
 \description{
-A filtered GBIF dataset containing 4408 occurrence records for the fern species
+A filtered GBIF dataset containing 3851 occurrence records for the fern species
 from the genus Cyathea in Brazil. We filtered the data after download from GBIF
 to ensure all occurrences records are from Brazil.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/internal_functions.R
 \name{abrev.pttn}
 \alias{abrev.pttn}
-\title{Internal function of naturaList - Return abbreviation colapsed}
+\title{Internal function of naturaList - Return abbreviation collapsed}
 \usage{
 abrev.pttn(df, line)
 }
@@ -12,8 +12,9 @@ abrev.pttn(df, line)
 \item{line}{specifies the line of the data frame to be collapsed}
 }
 \description{
-Return colapsed abbreviation for a specific line of specialist data frame. It is
-used as pattern in grep function inside {\link[naturaList]{classify_occ}}
+Return collapsed abbreviation for a specific line of specialist data frame.
+It is used as pattern in grep function inside
+{\link[naturaList]{classify_occ}}
 }
 \seealso{
 {\link[naturaList]{classify_occ}}
