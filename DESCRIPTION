@@ -42,8 +42,7 @@ Suggests:
     tm,
     rgeos,
     rgdal,
-    rnaturalearth,
-    rnaturalearthhires
+    rnaturalearth
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

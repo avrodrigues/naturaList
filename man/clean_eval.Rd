@@ -79,22 +79,30 @@ environmental space
 }
 \examples{
 \dontrun{
-pkgs <- c("devtools", "raster", "maptools", "rnaturalearth", "sf")
+pkgs <- c("raster", "maptools", "rnaturalearth", "sf")
 lapply(pkgs, require, character.only = TRUE)
 
-data("A.setosa")
 data("speciaLists")
-
+data("cyathea.br")
 # classify
-occ.cl <- classify_occ(A.setosa, speciaLists, spec.ambiguity = "not.spec")
-## check points
-occ.cl <-map_module(occ.cl) #delete points in the ocean
+occ.cl <- classify_occ(cyathea.br, speciaLists)
+nrow(occ.cl)
 
-# download climate data
-bioclim <- getData('worldclim', var='bio', res=10)
+# delimit the geographic space
+# land area
+land <- ne_countries(continent = 'south america')
+un.land <- unionSpatialPolygons(land, land$scalerank)
 
 # Transform occurrence data in SpatialPointsDataFrame
 spdf.occ.cl <- SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
+
+# Crop by geographic space
+spdf.occ.cl <- crop(spdf.occ.cl, un.land)
+
+# download climate data
+# this function will download the bioclim raster layer
+# to your work directory
+bioclim <- getData('worldclim', var='bio', res=10)
 
 # redefine the extent of bioclim layers based on buffer around the occurrences
 c.bioclim <- crop(bioclim, buffer(spdf.occ.cl, 100000)) # 100km buffer
@@ -104,27 +112,26 @@ raster.temp.prec <- c.bioclim[[c("bio1", "bio12")]]
 df.temp.prec <- as.data.frame(raster.temp.prec)
 
 ### Define the environmental space for analysis
+# this function will create a boundary of available environmental space,
+# analogous to the continent boundary in the geographical space
 env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
-
-# delimit the geographic space
-# land area
-land <- ne_countries(continent = 'south america')
-un.land <- unionSpatialPolygons(land, land$scalerank)
 
 # geo space based on crop
 c.geo.space <- crop(un.land, c.bioclim)
 
-#geo space based on intersect
-i.geo.space <- intersect(un.land, buffer(spdf.occ.cl2, 200000))
+# filter by year to be consistent with the environmental data
+occ.class.1970 <-  occ.cl \%>\%
+  dplyr::filter(year >= 1970)
 
 ### run the evaluation
-cl.eval <- clean_eval(occ.cl,
+cl.eval <- clean_eval(occ.class.1970,
                       env.space = env.space,
                       geo.space = c.geo.space,
                       r = raster.temp.prec)
 
 #area results
 cl.eval$area
+
 
 ### richness maps
 ## it makes sense if there are more than one species
@@ -136,18 +143,18 @@ rich.after.clean <- rasterFromXYZ(cbind(cl.eval$site.coords,
 plot(rich.before.clean)
 plot(rich.after.clean)
 
-
 ### species area map
 comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
 comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
 
-c.setosa.bc <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
-                                         comp.bc$`Cyathea setosa`)))
-c.setosa.ac <- rasterFromXYZ(cbind(cbind(cl.eval$site.coords,
-                                         comp.ac$`Cyathea setosa`)))
+c.villosa.bc <- rasterFromXYZ(cbind(cl.eval$site.coords,
+                                    comp.bc$`Cyathea villosa`))
+c.villosa.ac <- rasterFromXYZ(cbind(cl.eval$site.coords,
+                                    comp.ac$`Cyathea villosa`))
 
-plot(c.setosa.bc)
-plot(c.setosa.ac)
+plot(c.villosa.bc)
+plot(c.villosa.bc)
+
 
 }
 

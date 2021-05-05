@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>The aim of <code>{naturaList}</code> package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, <code>naturaList</code> package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxa and evaluate the effects that the filtering procedure on different descriptors of species spatial distribution of occurrence records (area of distribution and niche breadth). With <code>{naturaList}</code> package the users can filter large occurrence data based on well established and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurrence data through an interactive interface.</p>
+<p>The aim of <code>{naturaList}</code> package is to implement a classification of occurrence records based on the suitability in the species identification record. The quality of classification is ranked up to six levels of confidence. Additionally, <code>{naturaList}</code> package provides tools to filter the occurrence data based on these classification levels, identify the possible specialists in the taxa and evaluate the effects of the filtering procedure on different descriptors of species spatial distribution of occurrence records (area of distribution and niche breadth). With <code>{naturaList}</code> package the users can filter large occurrence data based on well established and clear criterion, evaluate possible effect of data processing on downstream analysis and explore spatial occurrence data through an interactive interface.</p>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
 <p>Install the package from github:</p>
@@ -151,8 +151,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Classify occurrence records based on confidence in the species identification</h2>
 <p><code>{naturaList}</code> has as the core function <code>classify_occ()</code>. The rationale of the classification is that the most reliable identification of a specimen is made by a specialist in the taxa. To classify an occurrence at this level of confidence, the <code>classify_occ()</code> function needs of an occurrence and a specialist dataset. The other levels in which data can be classified are derived from information contained in the occurrence dataset. The default order for classification in confidence levels is:</p>
 <ul>
-<li>Level 1 - species is identified by a specialist, if not;</li>
-<li>Level 2 - species is identified by a taxonomist, if not;</li>
+<li>Level 1 - species was identified by a specialist, if not;</li>
+<li>Level 2 - who identified the the species was not specialist name, if not;</li>
 <li>Level 3 - occurrence record has an image associated, if not;</li>
 <li>Level 4 - the specimen is preserved in a scientific collection, if not;</li>
 <li>Level 5 - the identification was done in filed observation, if not;</li>
@@ -189,8 +189,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="verify-if-the-strings-in-the-identifiedby-column-of-occurrence-dataset-is-a-name" class="section level2">
 <h2>Verify if the strings in the ‘identifiedBy’ column of occurrence dataset is a name</h2>
-<p>It might occur that some strings in the ‘determined.by’ column of the occurrence dataset do not correspond to a taxonomist name. Strings as such <code>&quot;Unknown&quot;</code> often is included in the ‘identifiedBy’ data field. It is important then that such strings be ignored by the <code>classify_occ()</code>, if not this function could flag an occurrence record as determined by a taxonomist when it was not.</p>
+<p>It might occur that some strings in the ‘identifiedBy’ column of the occurrence dataset do not correspond to a taxonomist name. Strings as such <code>&quot;Unknown&quot;</code> often is included in the ‘identifiedBy’ data field. It is important then that such strings be ignored by the <code>classify_occ()</code>, if not this function could flag an occurrence record as determined by a taxonomist when it was not.</p>
 <p>To cope with this issue, <code>get_det_names()</code> can be used to verify which strings are not taxonomists names. This function returns all unique strings in the ‘identifiedBy’ column of the dataset. Based on this list of names, you could create a character vector with the strings to be ignored by <code>classify_occ()</code>, providing it to the <code>ignore.det.names</code> argument. See also the <code>?classify_occ</code> for more details.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check out if there are strings which are not taxonomists</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_det_names</span>(A.setosa)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># include these strings in a object</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ig.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sem Informação&quot;</span> , <span class="st">&quot;Anonymous&quot;</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># use &#39;ignore.det.names&#39; to ignore those strings in classify_occ()</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>occ.class <span class="ot">&lt;-</span> <span class="fu">classify_occ</span>(A.setosa, speciaLists, <span class="at">ignore.det.names =</span> ig.names)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(occ.class<span class="sc">$</span>naturaList_levels)</span></code></pre></div>
 </div>
 
 

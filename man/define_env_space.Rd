@@ -31,3 +31,21 @@ The environmental variables are standardized by range, which turns
  polygon needed to link all points, and the area of the polygon indicates
  the environmental space based in the variables used.
 }
+\examples{
+\dontrun{
+library(raster)
+
+# this function will download the bioclim raster layer
+# to your work directory
+wc <- getData('worldclim', var='bio', res=10)
+
+env.data <- data.frame(
+  temp = values(wc$bio1),
+  prec = values(wc$bio12)
+)
+
+define_env_space(env.data, 0.05)
+}
+
+
+}

@@ -1,5 +1,5 @@
 ---
-title: "Filter within grid cells"
+title: "Filter the best classified occurrences within grid cells"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{naturaList_grid_filter_vignette}
@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-## Filter occurrence records within grid cells
 
 With `grid_filter()` you may filter occurrence records inside grid cells in order to keep only the record with the highest confidence level in each grid cell.
 
@@ -30,7 +29,6 @@ data("speciaLists")
 
 # classification
 occ.class <- classify_occ(A.setosa, speciaLists)
-
 
 # grid filtering
 occ.grid <- grid_filter(occ.class)

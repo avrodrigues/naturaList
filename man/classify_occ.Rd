@@ -156,6 +156,8 @@ types of record: \code{PRESERVED_SPECIMEN}, \code{PreservedSpecimen},
 indicating the existence of an associated image with \code{stillImage}.
 }
 \examples{
+data("A.setosa")
+data("speciaLists")
 occ.class <- classify_occ(A.setosa, speciaLists)
 occ.class
 

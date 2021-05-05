@@ -5,6 +5,12 @@
 #'
 #' @param occ.cl Data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
+#' @param action a string with `"clean"` or `"flag"` which defines the action
+#'   of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+#'   If the string is `"clean"` the dataset returned only the occurrences records
+#'   selected by the user. If the string is `"flag"`, a column named
+#'   `map_molule_flag` is added in the output dataset, with tags `selected` and
+#'   `deleted`, following the choices of the user in the application.
 #' @param occurrence.id column name of \code{occ} with link or code for the
 #'  occurrence record. See in
 #'  \href{https://dwc.tdwg.org/terms/#dwc:occurrenceID}{Darwin Core Format}
@@ -57,6 +63,7 @@
 
 map_module <- function(
   occ.cl,
+  action = "clean", # clean or flag
   institution.code = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
@@ -128,7 +135,9 @@ map_module <- function(
     occurrence.id <- occ.id
   }
 
-
+  if(!any(action == c("clean", "flag"))){
+    stop("argument action must be 'clean' or 'flag'")
+  }
 
   requireNamespace("shiny")
   requireNamespace("shinyWidgets")
@@ -181,8 +190,8 @@ map_module <- function(
               width = "100%"
             ),
             shinyWidgets::materialSwitch("del_mkr_button",
-              label = "Delete points with click",
-              status = "danger"
+                                         label = "Delete points with click",
+                                         status = "danger"
             )
           ),
           shinydashboard::box(
@@ -191,9 +200,9 @@ map_module <- function(
             shiny::textOutput("sel_display"),
             shiny::textOutput("down.class.text"),
             shinyWidgets::actionBttn("done", "Done!",
-              style = "bordered",
-              color = "success",
-              size = "lg"
+                                     style = "bordered",
+                                     color = "success",
+                                     size = "lg"
             )
           )
         ),
@@ -203,6 +212,7 @@ map_module <- function(
         )
       )
     ),
+
     server = function(input, output, session) {
       values <- shiny::reactiveValues()
 
@@ -212,8 +222,8 @@ map_module <- function(
           htmltools::h4(
             htmltools::strong(
               htmltools::em(shiny::textOutput("txt.sp"))
-              )
             )
+          )
         }
       })
 
@@ -221,12 +231,11 @@ map_module <- function(
         as.character(unique(occ.cl[, species]))
       })
 
-
-      ## occurrences categories
-
+      ## occurrences dataset
+      occ.cl$id <- row.names(occ.cl)
       values$occur <- occ.cl
 
-
+      ## Occurrences split by classification
       values$Level_1 <- grep("1", occ.cl$naturaList_levels)
       values$Level_2 <- grep("2", occ.cl$naturaList_levels)
       values$Level_3 <- grep("3", occ.cl$naturaList_levels)
@@ -234,12 +243,7 @@ map_module <- function(
       values$Level_5 <- grep("5", occ.cl$naturaList_levels)
       values$Level_6 <- grep("6", occ.cl$naturaList_levels)
 
-
-
-
-
-      ####
-      ## POints to be deleted
+      ## Data frame with points to be deleted with click
       values$MK <- data.frame(
         id = character(),
         x = numeric(),
@@ -253,13 +257,22 @@ map_module <- function(
         y = numeric()
       )
 
+      # data frame to create polygon
       values$pol <- list()
 
 
-      ## List of polygons
+      ## List of polygons to select points
       values$list.pol.df <- list()
 
-      output$map <- leaflet::renderLeaflet({
+      ## clickedMarker
+      values$clickedMarker <- NULL
+
+
+
+
+# leaflet interactive map -------------------------------------------------
+
+     output$map <- leaflet::renderLeaflet({
         values$pt.ctr1 <- values$occur[values$Level_1, ]
         values$pt.ctr2 <- values$occur[values$Level_2, ]
         values$pt.ctr3 <- values$occur[values$Level_3, ]
@@ -395,13 +408,13 @@ map_module <- function(
             )
           ) %>%
           leaflet::addLegend("bottomright",
-            colors = c("red", "orange", "yellow", "darkgreen", "blue", "purple"),
-            labels = c("Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"),
-            opacity = 0.8
+                             colors = c("red", "orange", "yellow", "darkgreen", "blue", "purple"),
+                             labels = c("Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"),
+                             opacity = 0.8
           )
       })
 
-      ## Clear selected poitns
+      ## Clear points clicked selected
       shiny::observeEvent(input$del_mkr_button, {
         if (input$del_mkr_button == FALSE) {
           values$add_row <- data.frame(
@@ -411,31 +424,42 @@ map_module <- function(
           )
         }
 
+
+        shiny::observeEvent(input$map_marker_click,
+                     {values$clickedMarker <- input$map_marker_click})
+
+        shiny::observeEvent(input$del_mkr_button,
+                     {values$clickedMarker <- NULL})
+
         ## Delete points with click
-        shiny::observeEvent(input$map_marker_click, {
+        shiny::observeEvent(input$del_mkr_button, {
+
           proxy <- leaflet::leafletProxy("map")
 
-          if (input$del_mkr_button == TRUE) {
-            values$add_row <- data.frame(
-              id = input$map_marker_click$id,
-              x = input$map_marker_click$lng,
-              y = input$map_marker_click$lat
-            )
-            values$MK <- rbind(values$MK, values$add_row)
+          shiny::observeEvent(values$clickedMarker, {
+            if (input$del_mkr_button == TRUE &
+                !is.null(values$clickedMarker)) {
+              values$add_row <- data.frame(
+                id = input$map_marker_click$id,
+                x = input$map_marker_click$lng,
+                y = input$map_marker_click$lat
+              )
+              values$MK <- rbind(values$MK, values$add_row)
+              dp <- duplicated(values$MK$id)
 
+              if (sum(dp) >= 1) {
+                del <- values$MK[, 1] %in% values$MK[dp, 1]
+              }
 
-
-            dp <- duplicated(values$MK$id)
-
-            if (sum(dp) >= 1) {
-              del <- values$MK[, 1] %in% values$MK[dp, 1]
+              id <- values$add_row$id
+              proxy %>%
+                leaflet::removeMarker(id)
             }
+          })
 
-            id <- values$add_row$id
-            proxy %>%
-              leaflet::removeMarker(id)
-          }
+
         })
+
 
         ## Data.frame to create polygon
         shiny::observeEvent(input$map_draw_all_features, {
@@ -444,12 +468,13 @@ map_module <- function(
           }
           if (length(input$map_draw_all_features$features) > 0) {
             for (i in 1:length(input$map_draw_all_features$features)) {
-              values$list.pol.df[[i]] <- pol.coords(input$map_draw_all_features$features[[i]])
+              values$list.pol.df[[i]] <-
+                pol.coords(input$map_draw_all_features$features[[i]])
             }
           }
         })
 
-        ## Select points acordingly to classification levels
+        ## Select points accordingly to classification levels
         shiny::observeEvent(input$grbox, {
           # occurrence data
           occ.df <- values$occur
@@ -460,13 +485,12 @@ map_module <- function(
 
         shiny::observeEvent(is.null(input$grbox), {
           if (is.null(input$grbox)) {
-            g.cri <- NULL
-            values$g.cri <- g.cri
+            values$g.cri <- NULL
           }
         })
 
-        ## Final dataframe
-        # Selectd by levels chosed and poligons created
+        ## Final data frame
+        # Selected by levels chose and polygons created
         shiny::observeEvent(input$grbox, {
           output$sel_display <- shiny::renderText({
             if (is.null(values$g.cri) | length(values$g.cri) == 0) {
@@ -474,8 +498,8 @@ map_module <- function(
             } else {
               occ.df <- values$occur
               n.id <- as.character(values$MK$id)
-              del <- row.names(occ.df) %in% n.id
-              c.d <- values$g.cri %in% which(!del)
+              del <- row.names(occ.df) %in% n.id ## deleted with click
+              c.d <- values$g.cri %in% which(!del) ## deleted with click + selected criteria (box)
               values$pol <- list()
 
               if (length(values$list.pol.df) == 1) {
@@ -516,11 +540,26 @@ map_module <- function(
           })
         })
 
-        shiny::observeEvent(input$done, {
-          result <- values$sel.points
+      shiny::observeEvent(input$done, {
+        result.id <- values$sel.points$id
+        sel.id <- occ.cl$id %in% result.id
 
-          shiny::stopApp(returnValue = result)
-        })
+        occ.cl <- occ.cl[, -ncol(occ.cl)]
+
+
+        if(action == "flag"){
+          occ.cl$map_module_flags <- ifelse(sel.id, "selected", "deleted")
+          result <- occ.cl
+        }
+
+        if(action == "clean"){
+
+          result <- occ.cl[sel.id,]
+        }
+
+        shiny::stopApp(returnValue = result)
+      })
+
       })
     }
   ))

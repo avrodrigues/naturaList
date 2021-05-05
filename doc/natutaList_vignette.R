@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 #  spec_df <- create_spec_df(br.musicians)
 #  spec_df
 
-## ----get_det_names, eval=F, echo = F------------------------------------------
+## ----get_det_names, eval=F, echo = T------------------------------------------
 #  
 #  # check out if there are strings which are not taxonomists
 #  get_det_names(A.setosa)

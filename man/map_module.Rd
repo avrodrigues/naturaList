@@ -6,6 +6,7 @@
 \usage{
 map_module(
   occ.cl,
+  action = "clean",
   institution.code = "institutionCode",
   collection.code = "collectionCode",
   catalog.number = "catalogNumber",
@@ -31,6 +32,13 @@ map_module(
 \arguments{
 \item{occ.cl}{Data frame with occurrence records information already
 classified by \code{\link{classify_occ}} function.}
+
+\item{action}{a string with `"clean"` or `"flag"` which defines the action
+of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+If the string is `"clean"` the dataset returned only the occurrences records
+selected by the user. If the string is `"flag"`, a column named
+`map_molule_flag` is added in the output dataset, with tags `selected` and
+`deleted`, following the choices of the user in the application.}
 
 \item{institution.code}{column name of \code{occ} with the name (or acronym)
 in use by the institution having custody of the object(s) or information

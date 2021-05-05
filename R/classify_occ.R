@@ -92,6 +92,8 @@
 #' indicating the existence of an associated image with \code{stillImage}.
 #'
 #' @examples
+#' data("A.setosa")
+#' data("speciaLists")
 #' occ.class <- classify_occ(A.setosa, speciaLists)
 #' occ.class
 #'
@@ -189,10 +191,16 @@ classify_occ <- function(
     occurrence.id <- occ.id
   }
 
+  c.tax <- crit.levels == "taxonomy"
+  if(any(c.tax)){
+    warning("string 'taxonomy' in crit.levels argument is depreceated, please use 'not_spec_name' instead.")
+    crit.levels[c.tax] <- 'not_spec_name'
+  }
+
 
   natList_column <- "naturaList_levels" %in% colnames(occ)
   if(natList_column){
-    col.number <- grep("naturaList_levels",colnames(occ))
+    col.number <- grep("naturaList_levels", colnames(occ))
     occ <- occ[, -col.number]
 
     warning("'occ' already had classification. The classification was remade")

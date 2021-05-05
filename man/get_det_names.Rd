@@ -34,3 +34,8 @@ character vector containing characters in \code{identified.by}
 This function facilitates the search for non-taxonomist strings in the
 'identified.by' column of occurrence records data set
 }
+\examples{
+data("A.setosa")
+get_det_names(A.setosa, freq = TRUE)
+
+}

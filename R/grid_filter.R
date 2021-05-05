@@ -138,29 +138,26 @@ grid_filter <- function(occ.cl,
 
   od1 <- occ.cl[order(occ.cl[,year], decreasing = T),]
   od2 <- od1[order(od1[,date.identified], decreasing = T),]
-  od3 <- od2[order(od2[,"naturaList_levels"]),]
-  row.names(od3) <- 1:nrow(od3)
-  x <- od3
-
+  x <- od2[order(od2[,"naturaList_levels"]),]
+  row.names(x) <- 1:nrow(x)
 
   spt.spp_DF <- sp::SpatialPointsDataFrame(
     x[,c(decimal.longitude, decimal.latitude)], x)
 
   if(!is.null(r)){
-    if(!class(r) == "RasterLayer"){stop("'r' must be of class RasterLayer")}
+    if(!inherits(r, what =  "RasterLayer")){stop("'r' must be of class RasterLayer")}
   }
 
   if(is.null(r)){
-    resolution <- grid.resolution
 
     ext <- raster::extent(spt.spp_DF)[1:4]
 
-    new.ext <- c(ext[1] - resolution[1],
-                 ext[2] + resolution[2],
-                 ext[3] - resolution[1],
-                 ext[4] + resolution[2])
+    new.ext <- c(ext[1] - grid.resolution[1],
+                 ext[2] + grid.resolution[2],
+                 ext[3] - grid.resolution[1],
+                 ext[4] + grid.resolution[2])
 
-    r <- raster::raster(resolution = resolution, ext = raster::extent(new.ext))
+    r <- raster::raster(resolution = grid.resolution, ext = raster::extent(new.ext))
   }
 
   cell.with.pts <- as.numeric(names(table(raster::cellFromXY(r, spt.spp_DF))))
@@ -170,21 +167,19 @@ grid_filter <- function(occ.cl,
   final.cols <- c(ncol(spt.spp_DF)+1,ncol(spt.spp_DF)+2)
 
   df.crit <- vector("list", total)
-  idx <- 1
 
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   for (i in 1:total){
     e <- raster::extentFromCells(r,cell.with.pts[i])
     crop.df <- raster::crop(spt.spp_DF, raster::extent(e))
 
-    df.crit[[idx]] <- as.data.frame(crop.df)[1,-final.cols]
+    df.crit[[i]] <- as.data.frame(crop.df)[1,-final.cols]
 
-    idx <- idx+1
     setTxtProgressBar(pb, i)
   }
 
 
-  df.occ.crit <- do.call(rbind,df.crit)
+  df.occ.crit <- do.call(rbind, df.crit)
   df.occ.crit <- rm.coord.dup(df.occ.crit, decimal.latitude, decimal.longitude)
   return(df.occ.crit)
 

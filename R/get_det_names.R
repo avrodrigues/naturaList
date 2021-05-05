@@ -15,6 +15,10 @@
 #' @return character vector containing characters in \code{identified.by}
 #'     column of \code{occ}.
 #'
+#' @examples
+#' data("A.setosa")
+#' get_det_names(A.setosa, freq = TRUE)
+#'
 #' @export
 
 get_det_names <- function(occ,
@@ -30,14 +34,13 @@ get_det_names <- function(occ,
     identified.by <- determined.by
   }
 
+  det.table <- table(occ[, identified.by])
+  det.string <- names(det.table)
+  if(freq){
+    ord <- order(det.table, decreasing = decreasing)
+    det.string <- as.data.frame(det.table[ord])
+    names(det.string) <- c("string", "frequency")
 
-
-  det.string <- names(table(occ[, identified.by]))
-
-  if (freq) {
-    det.string <- table(occ[, identified.by])[order(table(occ[, identified.by]),
-      decreasing = decreasing
-    )]
   }
 
   return(det.string)
