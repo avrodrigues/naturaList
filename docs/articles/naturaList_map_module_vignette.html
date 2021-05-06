@@ -117,7 +117,10 @@
 <p>First we need to classify the occurrences of <em>A. setosa</em> through the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
+<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span>
+<span class="co">#&gt; Warning in classify_occ(A.setosa, speciaLists): string 'sci_colection'</span>
+<span class="co">#&gt; in crit.levels argument was mispelled and is depreceated, please use</span>
+<span class="co">#&gt; 'sci_collection' instead.</span></code></pre></div>
 <p>Now we can open the map module by providing the classification of <em>A. setosa</em> for <code><a href="../reference/map_module.html">map_module()</a></code> function and save it in an object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">

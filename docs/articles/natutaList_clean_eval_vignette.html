@@ -134,13 +134,16 @@
 <p>Now, we can use the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function to perform the classification process for all species at the same time.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span>occ <span class="op">=</span> <span class="va">cyathea.br</span>, spec <span class="op">=</span> <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
+<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span>occ <span class="op">=</span> <span class="va">cyathea.br</span>, spec <span class="op">=</span> <span class="va">speciaLists</span><span class="op">)</span>
+<span class="co"># Warning in classify_occ(occ = cyathea.br, spec = speciaLists): string</span>
+<span class="co"># 'sci_colection' in crit.levels argument was mispelled and is depreceated, please</span>
+<span class="co"># use 'sci_collection' instead.</span></code></pre></div>
 <p>We can see how many occurrences were classified in each one of the six confidence levels</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">$</span><span class="va">naturaList_levels</span><span class="op">)</span>
 <span class="co"># </span>
-<span class="co">#     1_det_by_spec   2_not_spec_name           3_image   4_sci_colection </span>
+<span class="co">#     1_det_by_spec   2_not_spec_name           3_image  4_sci_collection </span>
 <span class="co">#               831              2199               561               242 </span>
 <span class="co">#       5_field_obs 6_no_criteria_met </span>
 <span class="co">#                17                 1</span></code></pre></div>

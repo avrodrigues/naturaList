@@ -351,7 +351,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"A.setosa"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span>
 <span class='va'>occ.class</span> <span class='op'>&lt;-</span> <span class='fu'>classify_occ</span><span class='op'>(</span><span class='va'>A.setosa</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
-<span class='va'>occ.class</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: string 'sci_colection' in crit.levels argument was mispelled and is depreceated, please use 'sci_collection' instead.</span></div><div class='input'><span class='va'>occ.class</span>
 </div><div class='output co'>#&gt;         gbifID                           datasetKey
 #&gt; 1   2269193205 dd31ac22-63d4-4bb4-a987-5eece5ffadb8
 #&gt; 2   2269039405 68c90cbc-e74b-4fb6-8ee4-6fa3bd247837
@@ -5862,9 +5862,9 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 506                                                GEODETIC_DATUM_ASSUMED_WGS84
 #&gt;     naturaList_levels
 #&gt; 1     2_not_spec_name
-#&gt; 2     4_sci_colection
-#&gt; 3     4_sci_colection
-#&gt; 4     4_sci_colection
+#&gt; 2    4_sci_collection
+#&gt; 3    4_sci_collection
+#&gt; 4    4_sci_collection
 #&gt; 5     2_not_spec_name
 #&gt; 9     2_not_spec_name
 #&gt; 10    2_not_spec_name
@@ -5877,8 +5877,8 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 27    2_not_spec_name
 #&gt; 28    2_not_spec_name
 #&gt; 29    2_not_spec_name
-#&gt; 30    4_sci_colection
-#&gt; 31    4_sci_colection
+#&gt; 30   4_sci_collection
+#&gt; 31   4_sci_collection
 #&gt; 32    2_not_spec_name
 #&gt; 33    2_not_spec_name
 #&gt; 34    2_not_spec_name
@@ -5915,15 +5915,15 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 116   2_not_spec_name
 #&gt; 117     1_det_by_spec
 #&gt; 118     1_det_by_spec
-#&gt; 119   4_sci_colection
-#&gt; 120   4_sci_colection
-#&gt; 121   4_sci_colection
+#&gt; 119  4_sci_collection
+#&gt; 120  4_sci_collection
+#&gt; 121  4_sci_collection
 #&gt; 122     1_det_by_spec
 #&gt; 123     1_det_by_spec
 #&gt; 124     1_det_by_spec
 #&gt; 125     1_det_by_spec
 #&gt; 126     1_det_by_spec
-#&gt; 127   4_sci_colection
+#&gt; 127  4_sci_collection
 #&gt; 128     1_det_by_spec
 #&gt; 129     1_det_by_spec
 #&gt; 130     1_det_by_spec
@@ -6004,12 +6004,12 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 236     1_det_by_spec
 #&gt; 237           3_image
 #&gt; 243           3_image
-#&gt; 244   4_sci_colection
+#&gt; 244  4_sci_collection
 #&gt; 258           3_image
 #&gt; 263           3_image
 #&gt; 264           3_image
 #&gt; 272   2_not_spec_name
-#&gt; 274   4_sci_colection
+#&gt; 274  4_sci_collection
 #&gt; 275   2_not_spec_name
 #&gt; 276   2_not_spec_name
 #&gt; 277   2_not_spec_name
@@ -6017,10 +6017,10 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 279   2_not_spec_name
 #&gt; 280   2_not_spec_name
 #&gt; 282   2_not_spec_name
-#&gt; 287   4_sci_colection
+#&gt; 287  4_sci_collection
 #&gt; 290   2_not_spec_name
 #&gt; 291   2_not_spec_name
-#&gt; 292   4_sci_colection
+#&gt; 292  4_sci_collection
 #&gt; 293   2_not_spec_name
 #&gt; 294   2_not_spec_name
 #&gt; 295   2_not_spec_name
@@ -6029,7 +6029,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 298   2_not_spec_name
 #&gt; 300   2_not_spec_name
 #&gt; 301   2_not_spec_name
-#&gt; 303   4_sci_colection
+#&gt; 303  4_sci_collection
 #&gt; 304   2_not_spec_name
 #&gt; 305   2_not_spec_name
 #&gt; 306   2_not_spec_name
@@ -6048,7 +6048,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 323   2_not_spec_name
 #&gt; 324   2_not_spec_name
 #&gt; 325   2_not_spec_name
-#&gt; 327   4_sci_colection
+#&gt; 327  4_sci_collection
 #&gt; 335   2_not_spec_name
 #&gt; 336   2_not_spec_name
 #&gt; 337   2_not_spec_name
@@ -6063,10 +6063,10 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 347   2_not_spec_name
 #&gt; 348   2_not_spec_name
 #&gt; 349   2_not_spec_name
-#&gt; 350   4_sci_colection
-#&gt; 351   4_sci_colection
-#&gt; 352   4_sci_colection
-#&gt; 353   4_sci_colection
+#&gt; 350  4_sci_collection
+#&gt; 351  4_sci_collection
+#&gt; 352  4_sci_collection
+#&gt; 353  4_sci_collection
 #&gt; 354   2_not_spec_name
 #&gt; 355   2_not_spec_name
 #&gt; 356   2_not_spec_name
@@ -6174,12 +6174,12 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 493   2_not_spec_name
 #&gt; 494   2_not_spec_name
 #&gt; 495   2_not_spec_name
-#&gt; 496   4_sci_colection
+#&gt; 496  4_sci_collection
 #&gt; 497   2_not_spec_name
-#&gt; 498   4_sci_colection
-#&gt; 499   4_sci_colection
-#&gt; 500   4_sci_colection
-#&gt; 501   4_sci_colection
+#&gt; 498  4_sci_collection
+#&gt; 499  4_sci_collection
+#&gt; 500  4_sci_collection
+#&gt; 501  4_sci_collection
 #&gt; 503   2_not_spec_name
 #&gt; 504   2_not_spec_name
 #&gt; 505   2_not_spec_name
