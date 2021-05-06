@@ -9,7 +9,7 @@
 #'  in \code{decimal.latitude} or \code{decimal.longitude}
 #' @param crit.levels character. Vector with levels of confidence in decreasing
 #'  order. The criteria allowed are \code{det_by_spec}, \code{not_spec_name},
-#'  \code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
+#'  \code{image}, \code{sci_collection}, \code{field_obs}, \code{no_criteria_met}.
 #'  See details.
 #' @param ignore.det.names character vector indicating strings in
 #'  \code{identified.by} that should be ignored as a taxonomist. See details.
@@ -75,7 +75,7 @@
 #'     not a specialist name provide in \code{spec};}
 #'  \item{\code{image}}{ - the occurrence have not name of a identifier, but present
 #'     an image associated; }
-#'  \item{\code{sci_colection}}{ - the occurrence have not name of a identifier,
+#'  \item{\code{sci_collection}}{ - the occurrence have not name of a identifier,
 #'    but preserved in a scientific collection;}
 #'  \item{ \code{field_obs}}{ - the occurrence have not name of a identifier,
 #'    but it was identified in field observation;}
@@ -112,7 +112,7 @@ classify_occ <- function(
     "det_by_spec",
     "not_spec_name",
     "image",
-    "sci_colection",
+    "sci_collection",
     "field_obs",
     "no_criteria_met"
     ),
@@ -197,6 +197,12 @@ classify_occ <- function(
     crit.levels[c.tax] <- 'not_spec_name'
   }
 
+  c.sci <- crit.levels == "sci_collection"
+  if(any(c.sci)){
+    warning("string 'sci_colection' in crit.levels argument was mispelled and is depreceated, please use 'sci_collection' instead.")
+    crit.levels[c.sci] <- 'sci_collection'
+  }
+
 
   natList_column <- "naturaList_levels" %in% colnames(occ)
   if(natList_column){
@@ -245,8 +251,8 @@ classify_occ <- function(
                       c("HUMAN_OBSERVATION", "HumanObservation"))
       naturaList_levels[FObs] <- field_obs_level
     }
-    if(crit.levels[i] == "sci_colection"){
-      sci_col_level <- paste0(i, "_", "sci_colection")
+    if(crit.levels[i] == "sci_collection"){
+      sci_col_level <- paste0(i, "_", "sci_collection")
       SCol <- which(toupper(r.occ$basis.of.record) %in%
                       c("PRESERVED_SPECIMEN", "PreservedSpecimen"))
       naturaList_levels[SCol] <- sci_col_level

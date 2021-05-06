@@ -17,7 +17,7 @@ The goal of naturaList package is to provide tools for check identification reli
 The package allows to classify the occurence records in confidence levels through the function `classify_occ()`, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:
 
 -   Level 1 - species was identified by a specialist, if not;
--   Level 2 - who identified the the species was not specialist name, if not;
+-   Level 2 - who identified the species was not a specialist name, if not;
 -   Level 3 - occurrence record has an image associated, if not;
 -   Level 4 - the specimen is preserved in a scientific collection, if not;
 -   Level 5 - the identification was done in filed observation, if not;
