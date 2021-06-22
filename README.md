@@ -8,7 +8,6 @@
 
 [![R-CMD-check](https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg)](https://github.com/avrodrigues/naturaList/actions)
 
-[![Travis build status](https://travis-ci.com/avrodrigues/naturaList.svg?branch=master)](https://travis-ci.com/avrodrigues/naturaList)
 <!-- badges: end -->
 
 The goal of naturaList package is to provide tools for check identification reliability in species occurrence records data sets. The main functionality of naturaList package is provide an automated way to identify for the taxon of interest, which records has the most reliable level of classification, i.e, those records identified by specialists. In addition other characteristics of the records could be used to derive up to six levels of confidence.
