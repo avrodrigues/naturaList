@@ -8,7 +8,7 @@ classify_occ(
   occ,
   spec = NULL,
   na.rm.coords = TRUE,
-  crit.levels = c("det_by_spec", "not_spec_name", "image", "sci_colection",
+  crit.levels = c("det_by_spec", "not_spec_name", "image", "sci_collection",
     "field_obs", "no_criteria_met"),
   ignore.det.names = NULL,
   spec.ambiguity = "not.spec",
@@ -44,7 +44,7 @@ in \code{decimal.latitude} or \code{decimal.longitude}}
 
 \item{crit.levels}{character. Vector with levels of confidence in decreasing
 order. The criteria allowed are \code{det_by_spec}, \code{not_spec_name},
-\code{image}, \code{sci_colection}, \code{field_obs}, \code{no_criteria_met}.
+\code{image}, \code{sci_collection}, \code{field_obs}, \code{no_criteria_met}.
 See details.}
 
 \item{ignore.det.names}{character vector indicating strings in
@@ -138,7 +138,7 @@ confidence in species identification. The six levels are:
     not a specialist name provide in \code{spec};}
  \item{\code{image}}{ - the occurrence have not name of a identifier, but present
     an image associated; }
- \item{\code{sci_colection}}{ - the occurrence have not name of a identifier,
+ \item{\code{sci_collection}}{ - the occurrence have not name of a identifier,
    but preserved in a scientific collection;}
  \item{ \code{field_obs}}{ - the occurrence have not name of a identifier,
    but it was identified in field observation;}

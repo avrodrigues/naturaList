@@ -25,8 +25,6 @@ Imports:
     shinydashboard,
     leaflet,
     leaflet.extras,
-    lwgeom,
-    shinyLP,
     tidytext,
     magrittr,
     vegan,
@@ -42,7 +40,9 @@ Suggests:
     tm,
     rgeos,
     rgdal,
-    rnaturalearth
+    rnaturalearth,
+    lwgeom,
+    shinyLP,
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
