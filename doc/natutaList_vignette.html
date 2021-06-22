@@ -159,7 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Level 6 - no criteria was met.</li>
 </ul>
 <p>The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.</p>
-<p>As example, we will use the datasets in <code>{naturaList}</code>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facilility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
+<p>As example, we will use the datasets in <code>{naturaList}</code>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and lycophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package and data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naturaList)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="create-a-specialist-dataset" class="section level2">
 <h2>Create a specialist dataset</h2>
-<p>You can easily create a specialist dataset using <code>create_spec_df()</code>. You just need to provide a character vector with the names of specialists, and the output is a dataset formated be used in <code>classify_occ()</code>.</p>
+<p>You can easily create a specialist dataset using <code>create_spec_df()</code>. You just need to provide a character vector with the names of specialists, and the output is a dataset formatted be used in <code>classify_occ()</code>.</p>
 <p>In this example, we use the names of four famous Brazilian musicians. Note that the Latin accent mark is provided, and even a nickname (e.g. Tom Jobim).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a specialist table example</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>br.musicians <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Caetano Veloso&quot;</span>, <span class="st">&quot;Antônio Carlos Tom Jobim&quot;</span>, </span>

@@ -65,7 +65,7 @@
       <a href="articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
+      <a href="articles/natutaList_clean_eval_vignette.html">Evaluating the filtering process with naturaList</a>
     </li>
     <li>
       <a href="articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -101,14 +101,14 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#naturalist" class="anchor"></a>naturaList</h1></div>
 <!-- badges: start -->
-
-
-<!-- badges: end -->
+<p><a href="https://cran.r-project.org/package=naturaList"><img src="https://www.r-pkg.org/badges/version/naturaList" alt="CRAN_Status_Badge"></a></p>
+<p><a href="https://github.com/avrodrigues/naturaList/actions"><img src="https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></p>
+<p><a href="https://travis-ci.com/avrodrigues/naturaList"><img src="https://travis-ci.com/avrodrigues/naturaList.svg?branch=master" alt="Travis build status"></a> <!-- badges: end --></p>
 <p>The goal of naturaList package is to provide tools for check identification reliability in species occurrence records data sets. The main functionality of naturaList package is provide an automated way to identify for the taxon of interest, which records has the most reliable level of classification, i.e, those records identified by specialists. In addition other characteristics of the records could be used to derive up to six levels of confidence.</p>
 <div id="levels-of-confidence" class="section level2">
 <h2 class="hasAnchor">
 <a href="#levels-of-confidence" class="anchor"></a>Levels of confidence</h2>
-<p>The package allows to classify the occurence records in confidence levels through the function <code><a href="reference/classify_occ.html">classify_occ()</a></code>, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:</p>
+<p>The package allows to classify the occurrence records in confidence levels through the function <code><a href="reference/classify_occ.html">classify_occ()</a></code>, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:</p>
 <ul>
 <li>Level 1 - species was identified by a specialist, if not;</li>
 <li>Level 2 - who identified the species was not a specialist name, if not;</li>
@@ -135,7 +135,7 @@ data("A.setosa")
 data("speciaLists")
 
 occ.cl &lt;- classify_occ(A.setosa, speciaLists)</a></code></pre>
-<p>Naturalist also offer an interactive module that allows to visualize occurence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function <code>map_module</code>. An article explaining all features of <code>map_module</code> function can be accessed in this <a href="https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html">article</a></p>
+<p>Naturalist also offer an interactive module that allows to visualize occurrence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function <code>map_module</code>. An article explaining all features of <code>map_module</code> function can be accessed in this <a href="https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html">article</a></p>
 </div>
 <div id="other-resources" class="section level2">
 <h2 class="hasAnchor">
@@ -173,14 +173,7 @@ occ.cl &lt;- classify_occ(A.setosa, speciaLists)</a></code></pre>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=naturaList"><img src="https://www.r-pkg.org/badges/version/naturaList" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/avrodrigues/naturaList/actions"><img src="https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 

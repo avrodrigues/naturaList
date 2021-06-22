@@ -43,7 +43,7 @@
 #'  referred to in the record.
 #' @param institution.source deprecated, use \code{institution.code} instead.
 #' @param collection.code column name of \code{occ} with The name, acronym,
-#'  coden, or initials identifying the collection or data set from which the
+#'  code, or initials identifying the collection or data set from which the
 #'  record was derived.
 #' @param catalog.number column name of \code{occ} with an identifier
 #'  (preferably unique) for the record within the data set or collection.
@@ -81,7 +81,7 @@
 #'    but it was identified in field observation;}
 #'  \item{\code{no_criteria_met}}{ - no other criteria was met.}
 #' }
-#'  The (decreasing) order of the levels in the chatacter vetor determines the
+#'  The (decreasing) order of the levels in the character vector determines the
 #'  classification level order.
 #'
 #' @details \code{basis.of.record} is a character vector with one of the following

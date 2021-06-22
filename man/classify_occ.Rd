@@ -61,7 +61,7 @@ in use by the institution having custody of the object(s) or information
 referred to in the record.}
 
 \item{collection.code}{column name of \code{occ} with The name, acronym,
-coden, or initials identifying the collection or data set from which the
+code, or initials identifying the collection or data set from which the
 record was derived.}
 
 \item{catalog.number}{column name of \code{occ} with an identifier
@@ -144,7 +144,7 @@ confidence in species identification. The six levels are:
    but it was identified in field observation;}
  \item{\code{no_criteria_met}}{ - no other criteria was met.}
 }
- The (decreasing) order of the levels in the chatacter vetor determines the
+ The (decreasing) order of the levels in the character vector determines the
  classification level order.
 
 \code{basis.of.record} is a character vector with one of the following

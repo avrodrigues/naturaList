@@ -102,7 +102,7 @@ identification" />
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering process with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -147,7 +147,7 @@ identification</p>
   <span class='va'>occ</span>,
   spec <span class='op'>=</span> <span class='cn'>NULL</span>,
   na.rm.coords <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  crit.levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"det_by_spec"</span>, <span class='st'>"not_spec_name"</span>, <span class='st'>"image"</span>, <span class='st'>"sci_colection"</span>,
+  crit.levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"det_by_spec"</span>, <span class='st'>"not_spec_name"</span>, <span class='st'>"image"</span>, <span class='st'>"sci_collection"</span>,
     <span class='st'>"field_obs"</span>, <span class='st'>"no_criteria_met"</span><span class='op'>)</span>,
   ignore.det.names <span class='op'>=</span> <span class='cn'>NULL</span>,
   spec.ambiguity <span class='op'>=</span> <span class='st'>"not.spec"</span>,
@@ -193,7 +193,7 @@ in <code>decimal.latitude</code> or <code>decimal.longitude</code></p></td>
       <th>crit.levels</th>
       <td><p>character. Vector with levels of confidence in decreasing
 order. The criteria allowed are <code>det_by_spec</code>, <code>not_spec_name</code>,
-<code>image</code>, <code>sci_colection</code>, <code>field_obs</code>, <code>no_criteria_met</code>.
+<code>image</code>, <code>sci_collection</code>, <code>field_obs</code>, <code>no_criteria_met</code>.
 See details.</p></td>
     </tr>
     <tr>
@@ -218,7 +218,7 @@ referred to in the record.</p></td>
     <tr>
       <th>collection.code</th>
       <td><p>column name of <code>occ</code> with The name, acronym,
-coden, or initials identifying the collection or data set from which the
+code, or initials identifying the collection or data set from which the
 record was derived.</p></td>
     </tr>
     <tr>
@@ -327,12 +327,12 @@ confidence in species identification. The six levels are:</p><ul>
     not a specialist name provide in <code>spec</code>;</p></li>
 <li><p><code>image</code> - the occurrence have not name of a identifier, but present
     an image associated;</p></li>
-<li><p><code>sci_colection</code> - the occurrence have not name of a identifier,
+<li><p><code>sci_collection</code> - the occurrence have not name of a identifier,
    but preserved in a scientific collection;</p></li>
 <li><p><code>field_obs</code> - the occurrence have not name of a identifier,
    but it was identified in field observation;</p></li>
 <li><p><code>no_criteria_met</code> - no other criteria was met.</p></li>
-</ul><p>The (decreasing) order of the levels in the chatacter vetor determines the
+</ul><p>The (decreasing) order of the levels in the character vector determines the
  classification level order.</p>
 <p><code>basis.of.record</code> is a character vector with one of the following
 types of record: <code>PRESERVED_SPECIMEN</code>, <code>PreservedSpecimen</code>,
@@ -351,7 +351,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"A.setosa"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span>
 <span class='va'>occ.class</span> <span class='op'>&lt;-</span> <span class='fu'>classify_occ</span><span class='op'>(</span><span class='va'>A.setosa</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: string 'sci_colection' in crit.levels argument was mispelled and is depreceated, please use 'sci_collection' instead.</span></div><div class='input'><span class='va'>occ.class</span>
+<span class='va'>occ.class</span>
 </div><div class='output co'>#&gt;         gbifID                           datasetKey
 #&gt; 1   2269193205 dd31ac22-63d4-4bb4-a987-5eece5ffadb8
 #&gt; 2   2269039405 68c90cbc-e74b-4fb6-8ee4-6fa3bd247837
@@ -5862,9 +5862,9 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 506                                                GEODETIC_DATUM_ASSUMED_WGS84
 #&gt;     naturaList_levels
 #&gt; 1     2_not_spec_name
-#&gt; 2    4_sci_collection
-#&gt; 3    4_sci_collection
-#&gt; 4    4_sci_collection
+#&gt; 2     4_sci_colection
+#&gt; 3     4_sci_colection
+#&gt; 4     4_sci_colection
 #&gt; 5     2_not_spec_name
 #&gt; 9     2_not_spec_name
 #&gt; 10    2_not_spec_name
@@ -5877,8 +5877,8 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 27    2_not_spec_name
 #&gt; 28    2_not_spec_name
 #&gt; 29    2_not_spec_name
-#&gt; 30   4_sci_collection
-#&gt; 31   4_sci_collection
+#&gt; 30    4_sci_colection
+#&gt; 31    4_sci_colection
 #&gt; 32    2_not_spec_name
 #&gt; 33    2_not_spec_name
 #&gt; 34    2_not_spec_name
@@ -5915,15 +5915,15 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 116   2_not_spec_name
 #&gt; 117     1_det_by_spec
 #&gt; 118     1_det_by_spec
-#&gt; 119  4_sci_collection
-#&gt; 120  4_sci_collection
-#&gt; 121  4_sci_collection
+#&gt; 119   4_sci_colection
+#&gt; 120   4_sci_colection
+#&gt; 121   4_sci_colection
 #&gt; 122     1_det_by_spec
 #&gt; 123     1_det_by_spec
 #&gt; 124     1_det_by_spec
 #&gt; 125     1_det_by_spec
 #&gt; 126     1_det_by_spec
-#&gt; 127  4_sci_collection
+#&gt; 127   4_sci_colection
 #&gt; 128     1_det_by_spec
 #&gt; 129     1_det_by_spec
 #&gt; 130     1_det_by_spec
@@ -6004,12 +6004,12 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 236     1_det_by_spec
 #&gt; 237           3_image
 #&gt; 243           3_image
-#&gt; 244  4_sci_collection
+#&gt; 244   4_sci_colection
 #&gt; 258           3_image
 #&gt; 263           3_image
 #&gt; 264           3_image
 #&gt; 272   2_not_spec_name
-#&gt; 274  4_sci_collection
+#&gt; 274   4_sci_colection
 #&gt; 275   2_not_spec_name
 #&gt; 276   2_not_spec_name
 #&gt; 277   2_not_spec_name
@@ -6017,10 +6017,10 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 279   2_not_spec_name
 #&gt; 280   2_not_spec_name
 #&gt; 282   2_not_spec_name
-#&gt; 287  4_sci_collection
+#&gt; 287   4_sci_colection
 #&gt; 290   2_not_spec_name
 #&gt; 291   2_not_spec_name
-#&gt; 292  4_sci_collection
+#&gt; 292   4_sci_colection
 #&gt; 293   2_not_spec_name
 #&gt; 294   2_not_spec_name
 #&gt; 295   2_not_spec_name
@@ -6029,7 +6029,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 298   2_not_spec_name
 #&gt; 300   2_not_spec_name
 #&gt; 301   2_not_spec_name
-#&gt; 303  4_sci_collection
+#&gt; 303   4_sci_colection
 #&gt; 304   2_not_spec_name
 #&gt; 305   2_not_spec_name
 #&gt; 306   2_not_spec_name
@@ -6048,7 +6048,7 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 323   2_not_spec_name
 #&gt; 324   2_not_spec_name
 #&gt; 325   2_not_spec_name
-#&gt; 327  4_sci_collection
+#&gt; 327   4_sci_colection
 #&gt; 335   2_not_spec_name
 #&gt; 336   2_not_spec_name
 #&gt; 337   2_not_spec_name
@@ -6063,10 +6063,10 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 347   2_not_spec_name
 #&gt; 348   2_not_spec_name
 #&gt; 349   2_not_spec_name
-#&gt; 350  4_sci_collection
-#&gt; 351  4_sci_collection
-#&gt; 352  4_sci_collection
-#&gt; 353  4_sci_collection
+#&gt; 350   4_sci_colection
+#&gt; 351   4_sci_colection
+#&gt; 352   4_sci_colection
+#&gt; 353   4_sci_colection
 #&gt; 354   2_not_spec_name
 #&gt; 355   2_not_spec_name
 #&gt; 356   2_not_spec_name
@@ -6174,12 +6174,12 @@ indicating the existence of an associated image with <code>stillImage</code>.</p
 #&gt; 493   2_not_spec_name
 #&gt; 494   2_not_spec_name
 #&gt; 495   2_not_spec_name
-#&gt; 496  4_sci_collection
+#&gt; 496   4_sci_colection
 #&gt; 497   2_not_spec_name
-#&gt; 498  4_sci_collection
-#&gt; 499  4_sci_collection
-#&gt; 500  4_sci_collection
-#&gt; 501  4_sci_collection
+#&gt; 498   4_sci_colection
+#&gt; 499   4_sci_colection
+#&gt; 500   4_sci_colection
+#&gt; 501   4_sci_colection
 #&gt; 503   2_not_spec_name
 #&gt; 504   2_not_spec_name
 #&gt; 505   2_not_spec_name

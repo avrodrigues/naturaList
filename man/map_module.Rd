@@ -34,10 +34,10 @@ map_module(
 classified by \code{\link{classify_occ}} function.}
 
 \item{action}{a string with `"clean"` or `"flag"` which defines the action
-of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+of `map_module` function with the occurrence dataset. Default is `"clean"`.
 If the string is `"clean"` the dataset returned only the occurrences records
 selected by the user. If the string is `"flag"`, a column named
-`map_molule_flag` is added in the output dataset, with tags `selected` and
+`map_module_flag` is added in the output dataset, with tags `selected` and
 `deleted`, following the choices of the user in the application.}
 
 \item{institution.code}{column name of \code{occ} with the name (or acronym)
@@ -45,7 +45,7 @@ in use by the institution having custody of the object(s) or information
 referred to in the record.}
 
 \item{collection.code}{column name of \code{occ} with The name, acronym,
-coden, or initials identifying the collection or data set from which the
+code, or initials identifying the collection or data set from which the
 record was derived.}
 
 \item{catalog.number}{column name of \code{occ} with an identifier
@@ -98,7 +98,7 @@ occurrence record. See in
 Data frame with the same columns of \code{occ.cl}.
 }
 \description{
-Allows to delete occurrence records and to select occurence points by
+Allows to delete occurrence records and to select occurrence points by
 classification levels or by drawing spatial polygons.
 }
 \examples{

@@ -10,6 +10,6 @@ make.polygon(df)
 \item{df}{a data frame provided by {\link{pol.coords}}}
 }
 \description{
-Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
+Create SpatialPolygons from a list of coordinates. It is used in {\link{map_module}}
 }
 \keyword{internal}

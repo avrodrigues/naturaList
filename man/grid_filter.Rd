@@ -45,7 +45,7 @@ in use by the institution having custody of the object(s) or information
 referred to in the record.}
 
 \item{collection.code}{column name of \code{occ.cl} with The name, acronym,
-coden, or initials identifying the collection or data set from which the
+code, or initials identifying the collection or data set from which the
 record was derived.}
 
 \item{catalog.number}{column name of \code{occ.cl} with an identifier

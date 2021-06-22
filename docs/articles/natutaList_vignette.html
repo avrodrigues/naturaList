@@ -60,7 +60,7 @@
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering process with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -123,7 +123,7 @@
 <li>Level 6 - no criteria was met.</li>
 </ul>
 <p>The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.</p>
-<p>As example, we will use the datasets in <a href="https://github.com/avrodrigues/naturaList">naturaList</a>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facilility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
+<p>As example, we will use the datasets in <a href="https://github.com/avrodrigues/naturaList">naturaList</a>: <code>A.setosa</code>, as the occurrence dataset, and <code>speciaLists</code>, as the specialist dataset. In the <code>A.setosa</code> there are occurrence records for <em>Alsophila setosa</em>, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from <a href="https://doi.org/10.15468/dl.6jesg0">Global Biodiversity Information Facility (GBIF)</a>. The <code>speciaLists</code> is a dataset with specialists of ferns and lycophytes of Brazil, which we gathered from the authors of this <a href="http://dx.doi.org/10.1590/2175-7860201566410">paper</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load package and data</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/avrodrigues/naturaList">naturaList</a></span><span class="op">)</span>
@@ -146,7 +146,7 @@
 <div id="create-a-specialist-dataset" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-specialist-dataset" class="anchor"></a>Create a specialist dataset</h2>
-<p>You can easily create a specialist dataset using <code><a href="../reference/create_spec_df.html">create_spec_df()</a></code>. You just need to provide a character vector with the names of specialists, and the output is a dataset formated be used in <code><a href="../reference/classify_occ.html">classify_occ()</a></code>.</p>
+<p>You can easily create a specialist dataset using <code><a href="../reference/create_spec_df.html">create_spec_df()</a></code>. You just need to provide a character vector with the names of specialists, and the output is a dataset formatted be used in <code><a href="../reference/classify_occ.html">classify_occ()</a></code>.</p>
 <p>In this example, we use the names of four famous Brazilian musicians. Note that the Latin accent mark is provided, and even a nickname (e.g. Tom Jobim).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a specialist table example</span>

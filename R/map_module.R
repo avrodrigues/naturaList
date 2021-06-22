@@ -1,15 +1,15 @@
 #' Check the occurrence records in a interactive map module
 #'
-#' Allows to delete occurrence records and to select occurence points by
+#' Allows to delete occurrence records and to select occurrence points by
 #' classification levels or by drawing spatial polygons.
 #'
 #' @param occ.cl Data frame with occurrence records information already
 #'   classified by \code{\link{classify_occ}} function.
 #' @param action a string with `"clean"` or `"flag"` which defines the action
-#'   of `map_module` function with the occurrence dataset. Defalt is `"clean"`.
+#'   of `map_module` function with the occurrence dataset. Default is `"clean"`.
 #'   If the string is `"clean"` the dataset returned only the occurrences records
 #'   selected by the user. If the string is `"flag"`, a column named
-#'   `map_molule_flag` is added in the output dataset, with tags `selected` and
+#'   `map_module_flag` is added in the output dataset, with tags `selected` and
 #'   `deleted`, following the choices of the user in the application.
 #' @param occurrence.id column name of \code{occ} with link or code for the
 #'  occurrence record. See in
@@ -36,7 +36,7 @@
 #'  referred to in the record.
 #' @param institution.source deprecated, use \code{institution.code} instead.
 #' @param collection.code column name of \code{occ} with The name, acronym,
-#'  coden, or initials identifying the collection or data set from which the
+#'  code, or initials identifying the collection or data set from which the
 #'  record was derived.
 #' @param catalog.number column name of \code{occ} with an identifier
 #'  (preferably unique) for the record within the data set or collection.

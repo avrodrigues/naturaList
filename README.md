@@ -15,7 +15,7 @@ The goal of naturaList package is to provide tools for check identification reli
 
 ## Levels of confidence
 
-The package allows to classify the occurence records in confidence levels through the function `classify_occ()`, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:
+The package allows to classify the occurrence records in confidence levels through the function `classify_occ()`, that comprises the main function of naturaList package. The most reliable identification of a specimen is made by a specialist in the taxa. The other levels are derived from information contained in the occurrence dataset. The default order of confidence levels used in classification process are:
 
 -   Level 1 - species was identified by a specialist, if not;
 -   Level 2 - who identified the species was not a specialist name, if not;
@@ -47,7 +47,7 @@ data("speciaLists")
 occ.cl <- classify_occ(A.setosa, speciaLists)
 ```
 
-Naturalist also offer an interactive module that allows to visualize occurence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function `map_module`. An article explaining all features of `map_module` function can be accessed in this [article](https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html)
+Naturalist also offer an interactive module that allows to visualize occurrence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function `map_module`. An article explaining all features of `map_module` function can be accessed in this [article](https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html)
 
 ## Other resources
 

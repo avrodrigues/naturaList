@@ -11,7 +11,7 @@
     
 * bug solved in `map_module()`:
     * Before if a point was selected, when `Delete points with click` was activated, the selected points was deleted. Now `Delete points with click` always wait a click to delete a point. 
-* new argument `action` in `map_module()`, which allows to choose if the output dataset will contain only the selected occurrences, or if the occurrences output dataset will be flagged about the chices of the user in the application.
+* new argument `action` in `map_module()`, which allows to choose if the output dataset will contain only the selected occurrences, or if the occurrences output dataset will be flagged about the choices of the user in the application.
 
 
 # naturaList 0.3.1

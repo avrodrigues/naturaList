@@ -59,8 +59,7 @@ The `map_module()` also has the option to draw polygons to select various occurr
 
 ![Fig. 2 - Draw polygon tool from `map_module()` function used in the example with Alsophila setosa occurrence data. In this example, the points inside the blue polygon were selected](../vignettes/draw_polygon.png)
 
-The `map_module()` offers yet two options for the output dataset, which can be
-chosed in the argument `action`. If `action = "clean"` the output dataset contain only the occurrences selected by the user in the application. Otherwise, if `action = "flag"`, the output dataset indicates which occurrence was selected and which was deleted by the user in the aplication. The flag option add a new column named `map_module_flag` to the output dataset, with the tags `selected` or `deleted`. By default the `action = "clean"`. Check out the differences of this option:
+The `map_module()` offers yet two options for the output dataset, which can be chosen in the argument `action`. If `action = "clean"` the output dataset contain only the occurrences selected by the user in the application. Otherwise, if `action = "flag"`, the output dataset indicates which occurrence was selected and which was deleted by the user in the application. The flag option add a new column named `map_module_flag` to the output dataset, with the tags `selected` or `deleted`. By default the `action = "clean"`. Check out the differences of this option:
 
 ```{r, eval=FALSE, echo=TRUE}
 

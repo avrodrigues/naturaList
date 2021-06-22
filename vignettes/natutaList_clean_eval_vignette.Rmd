@@ -1,5 +1,5 @@
 ---
-title: "Evaluating the filtering proccess with naturaList"
+title: "Evaluating the filtering process with naturaList"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{natutaList_clean_eval_vignette}
@@ -70,7 +70,7 @@ table(occ.class$naturaList_levels)
 
 ```
 
-## Downloding environmental data {#env_data}
+## Downloading environmental data {#env_data}
 
 We will evaluate the effects of cleaning occurrence data based in the classification made with `classify_occ()` in both geographical and environmental space. To this purpose we need data on environmental variables. So, we will download bioclim variables from worldclim (using the `{raster}` package) and select two layers (bio1 and bio12) that represents temperature and precipitation. These variables will be used to calculate the environmental space using the function `define_env_space()` from `{naturaList}` package.
 

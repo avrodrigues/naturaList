@@ -2,8 +2,8 @@
 % Please edit documentation in R/internal_functions.R
 \name{reduce.df}
 \alias{reduce.df}
-\title{Internal function of naturaList - reduce data.frama of occurence for a minimal
-collumn length}
+\title{Internal function of naturaList - reduce data.frame of occurrence for a minimal
+column length}
 \usage{
 reduce.df(
   df,

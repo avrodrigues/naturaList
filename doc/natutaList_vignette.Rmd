@@ -38,7 +38,7 @@ The other levels in which data can be classified are derived from information co
  
 The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.
 
-As example, we will use the datasets in `{naturaList}`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facilility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and licophytes of Brazil, which we gathered from the authors of this [paper](http://dx.doi.org/10.1590/2175-7860201566410). 
+As example, we will use the datasets in `{naturaList}`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and lycophytes of Brazil, which we gathered from the authors of this [paper](http://dx.doi.org/10.1590/2175-7860201566410). 
 
 ```{r setup, eval=FALSE}
 # Load package and data
@@ -67,7 +67,7 @@ table(occ.class$naturaList_levels)
 
 ## Create a specialist dataset
 
-You can easily create a specialist dataset using `create_spec_df()`. You just need to provide a character vector with the names of specialists, and the output is a dataset formated be used in `classify_occ()`. 
+You can easily create a specialist dataset using `create_spec_df()`. You just need to provide a character vector with the names of specialists, and the output is a dataset formatted be used in `classify_occ()`. 
 
 In this example, we use the names of four famous Brazilian musicians. Note that the Latin accent mark is provided, and even a nickname (e.g. Tom Jobim). 
 

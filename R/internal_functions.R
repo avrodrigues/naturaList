@@ -1,5 +1,5 @@
-#' Internal function of naturaList - reduce data.frama of occurence for a minimal
-#' collumn length
+#' Internal function of naturaList - reduce data.frame of occurrence for a minimal
+#' column length
 #'
 #'
 #' Reduce columns of occurrence data.frame required by
@@ -264,7 +264,7 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL) {
 #'
 #' Creates interaction with user in which the user check if a string with the
 #' identifier of a specimen has a specialist name. It solves ambiguity in classify
-#' an occurence as identified by a specialist. It is used inside
+#' an occurrence as identified by a specialist. It is used inside
 #' {\link[naturaList]{classify_occ}}
 #'
 #' @param class.occ internal data frame with observation classified according
@@ -355,7 +355,7 @@ pol.coords <- function(input.polig) {
 
 #' Internal function of naturaList - Create SpatialPolygons from a list of coordinates
 #'
-#' Create SpatialPoligons from a list of coordinates. It is used in {\link{map_module}}
+#' Create SpatialPolygons from a list of coordinates. It is used in {\link{map_module}}
 #'
 #' @param df a data frame provided by {\link{pol.coords}}
 #'

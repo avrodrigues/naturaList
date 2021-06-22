@@ -60,7 +60,7 @@
       <a href="../articles/naturaList_map_module_vignette.html">Interacting with naturaList: the map_module() function </a>
     </li>
     <li>
-      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering proccess with naturaList</a>
+      <a href="../articles/natutaList_clean_eval_vignette.html">Evaluating the filtering process with naturaList</a>
     </li>
     <li>
       <a href="../articles/natutaList_vignette.html">Introduction to naturaList</a>
@@ -117,10 +117,7 @@
 <p>First we need to classify the occurrences of <em>A. setosa</em> through the <code><a href="../reference/classify_occ.html">classify_occ()</a></code> function</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span>
-<span class="co">#&gt; Warning in classify_occ(A.setosa, speciaLists): string 'sci_colection'</span>
-<span class="co">#&gt; in crit.levels argument was mispelled and is depreceated, please use</span>
-<span class="co">#&gt; 'sci_collection' instead.</span></code></pre></div>
+<span class="va">occ.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/classify_occ.html">classify_occ</a></span><span class="op">(</span><span class="va">A.setosa</span>, <span class="va">speciaLists</span><span class="op">)</span></code></pre></div>
 <p>Now we can open the map module by providing the classification of <em>A. setosa</em> for <code><a href="../reference/map_module.html">map_module()</a></code> function and save it in an object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
@@ -135,7 +132,7 @@
 <div class="figure">
 <img src="../vignettes/draw_polygon.png" alt=""><p class="caption">Fig. 2 - Draw polygon tool from <code><a href="../reference/map_module.html">map_module()</a></code> function used in the example with Alsophila setosa occurrence data. In this example, the points inside the blue polygon were selected</p>
 </div>
-<p>The <code><a href="../reference/map_module.html">map_module()</a></code> offers yet two options for the output dataset, which can be chosed in the argument <code>action</code>. If <code>action = "clean"</code> the output dataset contain only the occurrences selected by the user in the application. Otherwise, if <code>action = "flag"</code>, the output dataset indicates which occurrence was selected and which was deleted by the user in the aplication. The flag option add a new column named <code>map_module_flag</code> to the output dataset, with the tags <code>selected</code> or <code>deleted</code>. By default the <code>action = "clean"</code>. Check out the differences of this option:</p>
+<p>The <code><a href="../reference/map_module.html">map_module()</a></code> offers yet two options for the output dataset, which can be chosen in the argument <code>action</code>. If <code>action = "clean"</code> the output dataset contain only the occurrences selected by the user in the application. Otherwise, if <code>action = "flag"</code>, the output dataset indicates which occurrence was selected and which was deleted by the user in the application. The flag option add a new column named <code>map_module_flag</code> to the output dataset, with the tags <code>selected</code> or <code>deleted</code>. By default the <code>action = "clean"</code>. Check out the differences of this option:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">occ.select1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/map_module.html">map_module</a></span><span class="op">(</span><span class="va">occ.class</span>, action <span class="op">=</span> <span class="st">"flag"</span><span class="op">)</span>

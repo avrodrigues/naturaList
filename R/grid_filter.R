@@ -34,7 +34,7 @@
 #'  referred to in the record.
 #' @param institution.source deprecated, use \code{institution.code} instead.
 #' @param collection.code column name of \code{occ.cl} with The name, acronym,
-#'  coden, or initials identifying the collection or data set from which the
+#'  code, or initials identifying the collection or data set from which the
 #'  record was derived.
 #' @param catalog.number column name of \code{occ.cl} with an identifier
 #'  (preferably unique) for the record within the data set or collection.
