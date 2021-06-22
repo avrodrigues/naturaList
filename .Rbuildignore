@@ -12,3 +12,4 @@
 ^vignettes\wc10$
 ^vignettes\draw_polygon.png$
 ^vignettes\fig_map_module.png$
+^\.travis\.yml$
