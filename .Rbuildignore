@@ -13,3 +13,5 @@
 ^vignettes\fig_map_module.png$
 ^\.travis\.yml$
 ^doc$
+^CRAN-RELEASE$
+^cran_comments.md$

@@ -1,13 +1,13 @@
 Package: naturaList
 Type: Package
-Title: Classify occurrence records by confidence levels in the species 
-   identification
+Title: Classify Occurrence Records by Confidence Levels in the Species 
+   Identification
 Version: 0.4.0
 Authors@R: c(
     person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
     person("Gabriel", "Nakamura", role = "aut"),
 	person("Leandro", "Duarte", role = "aut"))
-Description: This package allows to classify occurrence records based on confidence
+Description: Classify occurrence records based on confidence
     levels of species identification. In addition, implement tools to filter
     occurrence inside grid cells and to manually check for possibles errors with 
 	an interactive shiny application.
@@ -42,7 +42,7 @@ Suggests:
     rgdal,
     rnaturalearth,
     lwgeom,
-    shinyLP,
+    shinyLP
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

@@ -46,10 +46,10 @@ data("speciaLists")
 occ.cl <- classify_occ(A.setosa, speciaLists)
 ```
 
-Naturalist also offer an interactive module that allows to visualize occurrence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function `map_module`. An article explaining all features of `map_module` function can be accessed in this [article](https://avrodrigues.github.io/naturaList/articles/map_module_vignette.html)
+Naturalist also offer an interactive module that allows to visualize occurrence in space, get information by pointing the occurrence of interest and manually edit occurrence records by point and click. This interactive module is activate through function `map_module`. An article explaining all features of `map_module` function can be accessed in this [article](https://avrodrigues.github.io/naturaList/articles/naturaList_map_module_vignette.html)
 
 ## Other resources
 
-Auxiliary functions that allows the user to access the effects of filtering procedures based on classification levels are `clean_eval` and `grid_filter` functions. A complete example of the usage of these functions can be found in this [article](https://avrodrigues.github.io/naturaList/articles/clean_eval_vignette.html).
+Auxiliary functions that allows the user to access the effects of filtering procedures based on classification levels are `clean_eval` and `grid_filter` functions. A complete example of the usage of these functions can be found in this [article](https://avrodrigues.github.io/naturaList/articles/natutaList_clean_eval_vignette.html).
 
 See [vignette](https://avrodrigues.github.io/naturaList/articles/natutaList_vignette.html) for all articles describing the functionalities of naturaList package.

@@ -9,7 +9,7 @@ Information Facility (GBIF).}
 A data frame with 3851 rows and 50 variables
 }
 \source{
-GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qrhynv
+GBIF.org (07 March 2021) GBIF Occurrence Download \doi{10.15468/dl.qrhynv}
 }
 \usage{
 cyathea.br

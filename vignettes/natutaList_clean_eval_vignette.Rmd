@@ -114,7 +114,7 @@ We also need to define the geographical space for comparison before and after th
 
 # delimit the geographic space
 # land area
-BR <- rnaturalearth::ne_countries(country = "Brazil", scale = 10)
+data('BR')
 
 ```
 

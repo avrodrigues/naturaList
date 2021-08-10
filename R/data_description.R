@@ -6,7 +6,7 @@
 #'
 #' @format A data frame with 508 rows and 45 variables
 #'
-#' @source GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/dl.6jesg0}
+#' @source GBIF.org (08 July 2019) GBIF Occurrence Download \doi{10.15468/dl.6jesg0}
 "A.setosa"
 
 #' Occurrence records of Cyathea species in Brazil downloaded from Global Biodiversity
@@ -18,7 +18,7 @@
 #'
 #' @format A data frame with 3851 rows and 50 variables
 #'
-#' @source GBIF.org (07 March 2021) GBIF Occurrence Download https://doi.org/10.15468/dl.qrhynv
+#' @source GBIF.org (07 March 2021) GBIF Occurrence Download \doi{10.15468/dl.qrhynv}
 "cyathea.br"
 
 #' Specialists of ferns and lycophytes of Brazil
@@ -47,5 +47,11 @@
 #'   }
 #'
 #' @source The specialists names was derived from the authors of paper:
-#'   \url{http://dx.doi.org/10.1590/2175-7860201566410}
+#'   \doi{10.1590/2175-7860201566410}
 "speciaLists"
+
+#' Brazil boundary
+#'
+#' A spatial polygon with the Brazil boundaries
+#' @format A 'SpatialPolygonsDataFrame' with 1 feature
+"BR"

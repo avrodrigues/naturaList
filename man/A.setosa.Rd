@@ -9,7 +9,7 @@ Information Facility (GBIF).}
 A data frame with 508 rows and 45 variables
 }
 \source{
-GBIF.org (08 July 2019) GBIF Occurrence Download \url{https://doi.org/10.15468/dl.6jesg0}
+GBIF.org (08 July 2019) GBIF Occurrence Download \doi{10.15468/dl.6jesg0}
 }
 \usage{
 A.setosa

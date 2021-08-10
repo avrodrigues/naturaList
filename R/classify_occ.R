@@ -197,7 +197,7 @@ classify_occ <- function(
     crit.levels[c.tax] <- 'not_spec_name'
   }
 
-  c.sci <- crit.levels == "sci_collection"
+  c.sci <- crit.levels == "sci_colection"
   if(any(c.sci)){
     warning("string 'sci_colection' in crit.levels argument was mispelled and is depreceated, please use 'sci_collection' instead.")
     crit.levels[c.sci] <- 'sci_collection'

@@ -24,7 +24,7 @@ A data frame with 27 rows and 8 columns:
 }
 \source{
 The specialists names was derived from the authors of paper:
-  \url{http://dx.doi.org/10.1590/2175-7860201566410}
+  \doi{10.1590/2175-7860201566410}
 }
 \usage{
 speciaLists
