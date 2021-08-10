@@ -1,4 +1,7 @@
 # naturaList 0.4.0
+* bug solved in the classify_occ function
+
+# naturaList 0.4.0
 
 * some arguments for column names of the occurrence dataset was changed. They are still working, with warning message informing they are deprecated and what is the current argument accepted. 
 
