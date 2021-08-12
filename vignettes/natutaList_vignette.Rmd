@@ -38,7 +38,7 @@ The other levels in which data can be classified are derived from information co
  
 The user can alter this order, depending on his/her objectives, except for the Level 1 that is always a species determined by a specialist.
 
-As example, we will use the datasets in `{naturaList}`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and lycophytes of Brazil, which we gathered from the authors of this [paper](http://dx.doi.org/10.1590/2175-7860201566410). 
+As example, we will use the datasets in `{naturaList}`: `A.setosa`, as the occurrence dataset, and `speciaLists`, as the specialist dataset. In the `A.setosa` there are occurrence records for *Alsophila setosa*, a tree fern of the Brazilian Atlantic Forest. This dataset were downloaded from [Global Biodiversity Information Facility (GBIF)]( https://doi.org/10.15468/dl.6jesg0). The `speciaLists` is a dataset with specialists of ferns and lycophytes of Brazil, which we gathered from the authors of this [paper](https://doi.org/10.1590/2175-7860201566410). 
 
 ```{r setup, eval=FALSE}
 # Load package and data
