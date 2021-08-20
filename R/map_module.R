@@ -52,9 +52,13 @@
 #'
 #' @examples
 #' \dontrun{
+#' data("A.setosa")
+#' data("speciaLists")
+#'
 #' occ.class <- classify_occ(A.setosa, speciaLists)
 #' occ.selected <- map_module(occ.class)
 #' occ.selected
+#'
 #' }
 #'
 #' @author Arthur V. Rodrigues

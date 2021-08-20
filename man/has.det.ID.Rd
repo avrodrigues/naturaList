@@ -12,8 +12,10 @@ has.det.ID(sp.df, ignore.det.names = NULL)
 {\link[naturaList]{classify_occ}}}
 
 \item{ignore.det.names}{ignore.det.names character vector indicating
-strings in the identified.by column that should be ignored as a
-taxonomist. See {\link[naturaList]{classify_occ}}.}
+ strings in the identified.by column that should be ignored as a
+ taxonomist. See {\link[naturaList]{classify_occ}}.
+
+ @return an integer vector indicating the rows which have 'identified by' ID}
 }
 \description{
 Identifies if a occurrence has a name for the identifier of the specimen.

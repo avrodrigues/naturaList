@@ -18,8 +18,10 @@
 #' @param basis.of.record basis.of.record = "basisOfRecord"
 #' @param media.type media.type = "mediaType"
 #' @param occurrence.id occ.id = "occurrenceID"
-#' @param na.rm.coords = TRUE
+#' @param na.rm.coords na.rm.coords = TRUE
 #'
+#' @return a data frame with only the columns required for the \code{naturaList}
+#'   package
 #' @seealso {\link[naturaList]{classify_occ}}
 #'
 #' @keywords internal
@@ -81,6 +83,10 @@ reduce.df <- function(df,
 #'
 #' @param df spec data frame provided in {\link[naturaList]{classify_occ}}
 #' @param line specifies the line of the data frame to be collapsed
+#'
+#' @return a list with two elements in regex format:
+#'   \item{[[1]]}{the abbreviation of the first name;}
+#'   \item{[[2]]}{regex pattern with all names and abbreviations.}
 #' @seealso {\link[naturaList]{classify_occ}}
 #' @keywords internal
 
@@ -109,8 +115,12 @@ abrev.pttn <- function(df, line) {
 #'
 #' @param sp.df reduced version of occurrence data frame provided
 #' in {\link[naturaList]{classify_occ}}
-#' @param i line number of specialist data frame
+#' @param i row number of specialist data frame
 #' @param specialist specialist data
+#'
+#' @return integer with the row numbers of the \code{sp.df} data frame which was
+#'  identified by the specialist name in row \code{i}.
+#'
 #' @keywords internal
 
 func.det.by.esp <- function(sp.df, i, specialist) {
@@ -142,6 +152,8 @@ func.det.by.esp <- function(sp.df, i, specialist) {
 #'
 #' @param specialist specialist data frame
 #'
+#' @return character. A regex pattern for the specialist full name
+#'
 #' @keywords internal
 
 pttn.all.specialist <- function(specialist) {
@@ -165,6 +177,9 @@ pttn.all.specialist <- function(specialist) {
 #'
 #' @param pattern a pattern from {\link[naturaList]{pttn.all.specialist}} function
 #' @param string string with the name of who identified the specimen
+#'
+#' @return character. \code{""} or \code{"_verify"}.
+#'
 #' @keywords internal
 
 verify.specialist <- function(pattern, string) {
@@ -195,6 +210,9 @@ verify.specialist <- function(pattern, string) {
 #' @param pt.df a line of the reduced version of the occurrence data frame
 #' @param specialist specialist data frame
 #'
+#' @return character with naturaList level code \code{"1_det_by_spec"} or
+#'   \code{"1_det_by_spec_verify"}
+#'
 #' @keywords internal
 
 specialist.conference <- function(pt.df, specialist) {
@@ -222,6 +240,8 @@ specialist.conference <- function(pt.df, specialist) {
 #' @param ignore.det.names ignore.det.names character vector indicating
 #'  strings in the identified.by column that should be ignored as a
 #'  taxonomist. See {\link[naturaList]{classify_occ}}.
+#'
+#'  @return an integer vector indicating the rows which have 'identified by' ID
 #'
 #' @keywords internal
 
@@ -259,7 +279,7 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL) {
   which(ID)
 }
 
-#' Internal function of naturaList - Manual check of ambiguity in specialist
+#' Internal function of naturaList - Manual check of ambiguity in specialist's
 #' name
 #'
 #' Creates interaction with user in which the user check if a string with the
@@ -271,6 +291,8 @@ has.det.ID <- function(sp.df, ignore.det.names = NULL) {
 #' {\link[naturaList]{classify_occ}} criteria
 #' @param crit.levels crit.levels choose by user in {\link[naturaList]{classify_occ}}
 #' @param identified.by same as identified.by argument in {\link[naturaList]{classify_occ}}
+#'
+#' @return a character vector with 'naturaList_levels" ID.
 #' @keywords internal
 
 check.spec <- function(class.occ, crit.levels, identified.by) {
@@ -309,6 +331,8 @@ check.spec <- function(class.occ, crit.levels, identified.by) {
 #' @param x  data frame with filtered occurrences
 #' @param decimal.latitude name of column with decimal.latitude
 #' @param decimal.longitude name of column with decimal.longitude
+#'
+#' @return data frame with occurrence records
 #'
 #' @keywords internal
 #'
@@ -358,6 +382,8 @@ pol.coords <- function(input.polig) {
 #' Create SpatialPolygons from a list of coordinates. It is used in {\link{map_module}}
 #'
 #' @param df a data frame provided by {\link{pol.coords}}
+#'
+#' @return  a \code{SpatialPolygon} object
 #'
 #' @keywords internal
 #'

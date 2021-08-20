@@ -102,6 +102,10 @@ In each grid cell it selects the occurrence with the highest confidence level
 in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
+
+data("A.setose")
+data(speciaLists)
+
 occ.class <- classify_occ(A.setosa, speciaLists)
 occ.grid <- grid_filter(occ.class)
 occ.grid

@@ -9,6 +9,9 @@ make.polygon(df)
 \arguments{
 \item{df}{a data frame provided by {\link{pol.coords}}}
 }
+\value{
+a \code{SpatialPolygon} object
+}
 \description{
 Create SpatialPolygons from a list of coordinates. It is used in {\link{map_module}}
 }

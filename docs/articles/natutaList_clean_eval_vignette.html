@@ -155,7 +155,7 @@
 <span class="va">bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/getData.html">getData</a></span><span class="op">(</span><span class="st">'worldclim'</span>, var<span class="op">=</span><span class="st">'bio'</span>, res<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># Transform occurrence data in SpatialPointsDataFrame</span>
-<span class="va">spdf.occ.cl</span> <span class="op">&lt;-</span> <span class="fu">SpatialPoints</span><span class="op">(</span><span class="va">occ.class</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">spdf.occ.cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPoints.html">SpatialPoints</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 
 <span class="co"># redefine the extent of bioclim layers </span>
 <span class="va">c.bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/crop.html">crop</a></span><span class="op">(</span><span class="va">bioclim</span>, <span class="va">spdf.occ.cl</span><span class="op">)</span> 

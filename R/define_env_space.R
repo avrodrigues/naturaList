@@ -20,8 +20,8 @@
 #' @return An object of sfc_POLYGON class
 #'
 #' @examples
-#' \dontrun{
-#' library(raster)
+#' \donttest{
+#' library("raster")
 #'
 #' # this function will download the bioclim raster layer
 #' # to your work directory
@@ -33,7 +33,10 @@
 #' )
 #'
 #' define_env_space(env.data, 0.05)
+#'
 #' }
+#'
+#'
 #'
 #'
 #' @importFrom stats na.omit

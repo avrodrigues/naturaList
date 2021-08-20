@@ -11,6 +11,11 @@ abrev.pttn(df, line)
 
 \item{line}{specifies the line of the data frame to be collapsed}
 }
+\value{
+a list with two elements in regex format:
+  \item{[[1]]}{the abbreviation of the first name;}
+  \item{[[2]]}{regex pattern with all names and abbreviations.}
+}
 \description{
 Return collapsed abbreviation for a specific line of specialist data frame.
 It is used as pattern in grep function inside

@@ -10,6 +10,9 @@ pttn.all.specialist(specialist)
 \arguments{
 \item{specialist}{specialist data frame}
 }
+\value{
+character. A regex pattern for the specialist full name
+}
 \description{
 Return specialists names in a collapsed string to be used in the internal
 function {\link[naturaList]{specialist.conference}}

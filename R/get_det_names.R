@@ -12,8 +12,9 @@
 #' @param decreasing logical. sort strings in decreasing order of frequency.
 #'  Default = \code{TRUE}.
 #'
-#' @return character vector containing characters in \code{identified.by}
-#'     column of \code{occ}.
+#' @return character vector containing the strings in \code{identified.by}
+#'     column of \code{occ}. If \code{freq = TRUE} it return a data frame with
+#'     two columns: 'strings' and 'frequency'.
 #'
 #' @examples
 #' data("A.setosa")

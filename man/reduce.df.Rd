@@ -49,7 +49,11 @@ reduce.df(
 
 \item{occurrence.id}{occ.id = "occurrenceID"}
 
-\item{na.rm.coords}{= TRUE}
+\item{na.rm.coords}{na.rm.coords = TRUE}
+}
+\value{
+a data frame with only the columns required for the \code{naturaList}
+  package
 }
 \description{
 Reduce columns of occurrence data.frame required by

@@ -27,8 +27,9 @@ Default = \code{TRUE}.}
 \item{determined.by}{deprecated, use \code{identified.by} instead.}
 }
 \value{
-character vector containing characters in \code{identified.by}
-    column of \code{occ}.
+character vector containing the strings in \code{identified.by}
+    column of \code{occ}. If \code{freq = TRUE} it return a data frame with
+    two columns: 'strings' and 'frequency'.
 }
 \description{
 This function facilitates the search for non-taxonomist strings in the

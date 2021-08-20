@@ -12,6 +12,10 @@ specialist.conference(pt.df, specialist)
 
 \item{specialist}{specialist data frame}
 }
+\value{
+character with naturaList level code \code{"1_det_by_spec"} or
+  \code{"1_det_by_spec_verify"}
+}
 \description{
 Confirm if an occurrence record was identified by
 a specialist without ambiguity. It is used inside

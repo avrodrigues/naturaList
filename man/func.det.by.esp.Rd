@@ -10,9 +10,13 @@ func.det.by.esp(sp.df, i, specialist)
 \item{sp.df}{reduced version of occurrence data frame provided
 in {\link[naturaList]{classify_occ}}}
 
-\item{i}{line number of specialist data frame}
+\item{i}{row number of specialist data frame}
 
 \item{specialist}{specialist data}
+}
+\value{
+integer with the row numbers of the \code{sp.df} data frame which was
+ identified by the specialist name in row \code{i}.
 }
 \description{
 Detect if a string with identifiers name has a specialist name. It is used inside

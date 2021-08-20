@@ -78,84 +78,87 @@ The comparison can be made by measuring area in the geographical and in the
 environmental space
 }
 \examples{
-\dontrun{
-pkgs <- c("raster", "maptools", "rnaturalearth", "sf")
-lapply(pkgs, require, character.only = TRUE)
+\donttest{
 
-data("speciaLists")
-data("cyathea.br")
-# classify
-occ.cl <- classify_occ(cyathea.br, speciaLists)
-nrow(occ.cl)
+  library(raster)
+  library(sp)
 
-# delimit the geographic space
-# land area
-land <- ne_countries(continent = 'south america')
-un.land <- unionSpatialPolygons(land, land$scalerank)
+  data("speciaLists")
+  data("cyathea.br")
 
-# Transform occurrence data in SpatialPointsDataFrame
-spdf.occ.cl <- SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
+  # classify
+  occ.cl <- classify_occ(cyathea.br, speciaLists)
+  nrow(occ.cl)
 
-# Crop by geographic space
-spdf.occ.cl <- crop(spdf.occ.cl, un.land)
+  # delimit the geographic space
+  # land area
+  data("BR")
+  un.land <- BR
 
-# download climate data
-# this function will download the bioclim raster layer
-# to your work directory
-bioclim <- getData('worldclim', var='bio', res=10)
+  # Transform occurrence data in SpatialPointsDataFrame
+  spdf.occ.cl <- sp::SpatialPoints(occ.cl[, c("decimalLongitude", "decimalLatitude")])
 
-# redefine the extent of bioclim layers based on buffer around the occurrences
-c.bioclim <- crop(bioclim, buffer(spdf.occ.cl, 100000)) # 100km buffer
+  # Crop by geographic space
+  spdf.occ.cl <- raster::crop(spdf.occ.cl, un.land)
 
-# select two layers
-raster.temp.prec <- c.bioclim[[c("bio1", "bio12")]]
-df.temp.prec <- as.data.frame(raster.temp.prec)
+  # download climate data
+  # this function will download the bioclim raster layer
+  # to your work directory
+  bioclim <- raster::getData('worldclim', var='bio', res=10)
 
-### Define the environmental space for analysis
-# this function will create a boundary of available environmental space,
-# analogous to the continent boundary in the geographical space
-env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
+  # redefine the extent of bioclim layers based on buffer around the occurrences
+  c.bioclim <- raster::crop(
+    bioclim,
+    raster::buffer(spdf.occ.cl, 100000)
+  ) # 100km buffer
 
-# geo space based on crop
-c.geo.space <- crop(un.land, c.bioclim)
+  # select two layers
+  raster.temp.prec <- c.bioclim[[c("bio1", "bio12")]]
+  df.temp.prec <- raster::as.data.frame(raster.temp.prec)
 
-# filter by year to be consistent with the environmental data
-occ.class.1970 <-  occ.cl \%>\%
-  dplyr::filter(year >= 1970)
+  ### Define the environmental space for analysis
+  # this function will create a boundary of available environmental space,
+  # analogous to the continent boundary in the geographical space
+  env.space <- define_env_space(df.temp.prec, buffer.size = 0.05)
 
-### run the evaluation
-cl.eval <- clean_eval(occ.class.1970,
-                      env.space = env.space,
-                      geo.space = c.geo.space,
-                      r = raster.temp.prec)
+  # geo space based on crop
+  c.geo.space <- raster::crop(un.land, c.bioclim)
 
-#area results
-cl.eval$area
+  # filter by year to be consistent with the environmental data
+  occ.class.1970 <-  occ.cl \%>\%
+    dplyr::filter(year >= 1970)
 
+  ### run the evaluation
+  cl.eval <- clean_eval(occ.class.1970,
+                        env.space = env.space,
+                        geo.space = c.geo.space,
+                        r = raster.temp.prec)
 
-### richness maps
-## it makes sense if there are more than one species
-rich.before.clean <- rasterFromXYZ(cbind(cl.eval$site.coords,
-                                         cl.eval$rich$rich.BC))
-rich.after.clean <- rasterFromXYZ(cbind(cl.eval$site.coords,
-                                        cl.eval$rich$rich.AC))
-
-plot(rich.before.clean)
-plot(rich.after.clean)
-
-### species area map
-comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
-comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
-
-c.villosa.bc <- rasterFromXYZ(cbind(cl.eval$site.coords,
-                                    comp.bc$`Cyathea villosa`))
-c.villosa.ac <- rasterFromXYZ(cbind(cl.eval$site.coords,
-                                    comp.ac$`Cyathea villosa`))
-
-plot(c.villosa.bc)
-plot(c.villosa.bc)
+  #area results
+  cl.eval$area
 
 
+  ### richness maps
+  ## it makes sense if there are more than one species
+  rich.before.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                           cl.eval$rich$rich.BC))
+  rich.after.clean <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                          cl.eval$rich$rich.AC))
+
+  raster::plot(rich.before.clean)
+  raster::plot(rich.after.clean)
+
+  ### species area map
+  comp.bc <- as.data.frame(cl.eval$comp$comp.BC)
+  comp.ac <- as.data.frame(cl.eval$comp$comp.AC)
+
+  c.villosa.bc <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                              comp.bc$`Cyathea villosa`))
+  c.villosa.ac <- raster::rasterFromXYZ(cbind(cl.eval$site.coords,
+                                              comp.ac$`Cyathea villosa`))
+
+  raster::plot(c.villosa.bc)
+  raster::plot(c.villosa.ac)
 }
 
 }

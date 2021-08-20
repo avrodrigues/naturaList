@@ -1,7 +1,6 @@
 Package: naturaList
 Type: Package
-Title: Classify Occurrence Records by Confidence Levels in the Species 
-   Identification
+Title: Classify Occurrences by Confidence Levels in the Species ID
 Version: 0.4.1
 Authors@R: c(
     person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
@@ -42,7 +41,8 @@ Suggests:
     rgdal,
     rnaturalearth,
     lwgeom,
-    shinyLP
+    shinyLP,
+    maptools
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

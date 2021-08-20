@@ -49,11 +49,16 @@
 #' @seealso \code{\link[naturaList]{classify_occ}}
 #'
 #' @examples
+#'
+#' data("A.setose")
+#' data(speciaLists)
+#'
 #' occ.class <- classify_occ(A.setosa, speciaLists)
 #' occ.grid <- grid_filter(occ.class)
 #' occ.grid
 #'
 #' @author Arthur V. Rodrigues
+#'
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 

@@ -32,8 +32,8 @@ The environmental variables are standardized by range, which turns
  the environmental space based in the variables used.
 }
 \examples{
-\dontrun{
-library(raster)
+\donttest{
+library("raster")
 
 # this function will download the bioclim raster layer
 # to your work directory
@@ -45,7 +45,10 @@ env.data <- data.frame(
 )
 
 define_env_space(env.data, 0.05)
+
 }
+
+
 
 
 }

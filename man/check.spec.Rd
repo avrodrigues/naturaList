@@ -2,7 +2,7 @@
 % Please edit documentation in R/internal_functions.R
 \name{check.spec}
 \alias{check.spec}
-\title{Internal function of naturaList - Manual check of ambiguity in specialist
+\title{Internal function of naturaList - Manual check of ambiguity in specialist's
 name}
 \usage{
 check.spec(class.occ, crit.levels, identified.by)
@@ -14,6 +14,9 @@ check.spec(class.occ, crit.levels, identified.by)
 \item{crit.levels}{crit.levels choose by user in {\link[naturaList]{classify_occ}}}
 
 \item{identified.by}{same as identified.by argument in {\link[naturaList]{classify_occ}}}
+}
+\value{
+a character vector with 'naturaList_levels" ID.
 }
 \description{
 Creates interaction with user in which the user check if a string with the

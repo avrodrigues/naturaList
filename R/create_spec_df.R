@@ -6,9 +6,21 @@
 #'
 #' @param spec.char a character vector with specialist names
 #'
+#' @return a data frame. Columns split the names, surname and abbreviation for
+#'  the names. If the full name contain any special character, such as accent marks,
+#'  two lines for that name will be provided, with and without the special characters.
+#'  See examples.
+#' @encoding UTF-8
 #' @examples
-#' spec_list <- c("Caetano Veloso", "Antônio Carlos Tom Jobim",
-#'   "Gilberto Gil", "Vinícius de Morais")
+#' # Example using Latin accent marks
+#'
+#' spec_list <- iconv(
+#'   c("Caetano Veloso", "Antônio Carlos Tom Jobim",
+#'     "Gilberto Gil", "Vinícius de Morais"),
+#'   from = "UTF-8", to='latin1')
+#'
+#' spec_list
+#'
 #' create_spec_df(spec_list)
 #'
 #' @export

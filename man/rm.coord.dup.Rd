@@ -13,6 +13,9 @@ rm.coord.dup(x, decimal.latitude, decimal.longitude)
 
 \item{decimal.longitude}{name of column with decimal.longitude}
 }
+\value{
+data frame with occurrence records
+}
 \description{
 Remove duplicated occurrence based on coordinates. It is used in
 {\link[naturaList]{grid_filter}}
