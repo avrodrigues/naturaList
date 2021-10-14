@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1-1</span>
       </span>
     </div>
 
@@ -148,22 +148,16 @@
 <div id="env_data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#env_data" class="anchor"></a>Downloading environmental data</h2>
-<p>We will evaluate the effects of cleaning occurrence data based in the classification made with <code><a href="../reference/classify_occ.html">classify_occ()</a></code> in both geographical and environmental space. To this purpose we need data on environmental variables. So, we will download bioclim variables from worldclim (using the <a href="https://rspatial.org/raster">raster</a> package) and select two layers (bio1 and bio12) that represents temperature and precipitation. These variables will be used to calculate the environmental space using the function <code><a href="../reference/define_env_space.html">define_env_space()</a></code> from <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package.</p>
+<p>We will evaluate the effects of cleaning occurrence data based in the classification made with <code><a href="../reference/classify_occ.html">classify_occ()</a></code> in both geographical and environmental space. To this purpose we need data on environmental variables. So, we downloaded bioclim variables from worldclim (using the <a href="https://rspatial.org/raster">raster</a> package) and select two layers (bio1 and bio12) that represents temperature and precipitation. This raster are available as the <code>r.temp.prec</code> data in the package. It will be used to calculate the environmental space using the function <code><a href="../reference/define_env_space.html">define_env_space()</a></code> from <a href="https://github.com/avrodrigues/naturaList">naturaList</a> package.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="co"># download and load the bioclim raster layers</span>
-<span class="va">bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/getData.html">getData</a></span><span class="op">(</span><span class="st">'worldclim'</span>, var<span class="op">=</span><span class="st">'bio'</span>, res<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
+<span class="co"># load climate data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"r.temp.prec"</span><span class="op">)</span>
+<span class="va">df.temp.prec</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">r.temp.prec</span><span class="op">)</span>
+    
 
 <span class="co"># Transform occurrence data in SpatialPointsDataFrame</span>
-<span class="va">spdf.occ.cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPoints.html">SpatialPoints</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
-
-<span class="co"># redefine the extent of bioclim layers </span>
-<span class="va">c.bioclim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/crop.html">crop</a></span><span class="op">(</span><span class="va">bioclim</span>, <span class="va">spdf.occ.cl</span><span class="op">)</span> 
-
-
-<span class="co"># select two layers</span>
-<span class="va">raster.temp.prec</span> <span class="op">&lt;-</span> <span class="va">c.bioclim</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>
-<span class="va">df.temp.prec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">raster.temp.prec</span><span class="op">)</span></code></pre></div>
+<span class="va">spdf.occ.cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPoints.html">SpatialPoints</a></span><span class="op">(</span><span class="va">occ.class</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="defining-environmental-space" class="section level2">
 <h2 class="hasAnchor">
@@ -200,7 +194,7 @@
 <span class="va">cl.eval_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_eval.html">clean_eval</a></span><span class="op">(</span>occ.cl <span class="op">=</span> <span class="va">occ.class.1970</span>,
                               env.space <span class="op">=</span> <span class="va">env.space</span>,
                               geo.space <span class="op">=</span> <span class="va">BR</span>,
-                              r <span class="op">=</span> <span class="va">raster.temp.prec</span><span class="op">)</span> 
+                              r <span class="op">=</span> <span class="va">r.temp.prec</span><span class="op">)</span> 
 <span class="co"># Warning: package 'sf' was built under R version 4.0.5</span>
 
 <span class="co"># the amount of area remained after cleaning process </span>

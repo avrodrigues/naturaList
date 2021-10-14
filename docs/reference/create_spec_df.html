@@ -74,7 +74,7 @@ from a character vector containing the specialists names" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1-1</span>
       </span>
     </div>
 
@@ -165,16 +165,11 @@ from a character vector containing the specialists names</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Example using Latin accent marks</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>spec_names_ex</span><span class='op'>)</span>
 
-<span class='va'>spec_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/iconv.html'>iconv</a></span><span class='op'>(</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Caetano Veloso"</span>, <span class='st'>"AntÃ´nio Carlos Tom Jobim"</span>,
-    <span class='st'>"Gilberto Gil"</span>, <span class='st'>"VinÃ­cius de Morais"</span><span class='op'>)</span>,
-  from <span class='op'>=</span> <span class='st'>"UTF-8"</span>, to<span class='op'>=</span><span class='st'>'latin1'</span><span class='op'>)</span>
-
-<span class='va'>spec_list</span>
+<span class='va'>spec_names_ex</span>
 </div><div class='output co'>#&gt; [1] "Caetano Veloso"           "Antônio Carlos Tom Jobim"
-#&gt; [3] "Gilberto Gil"             "Vinícius de Morais"      </div><div class='input'>
-<span class='fu'>create_spec_df</span><span class='op'>(</span><span class='va'>spec_list</span><span class='op'>)</span>
+#&gt; [3] "Gilberto Gil"             "Vinícius de Morais"      </div><div class='input'><span class='fu'>create_spec_df</span><span class='op'>(</span><span class='va'>spec_names_ex</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   LastName    Name1  Name2 Name3 Abbrev1 Abbrev2 Abbrev3
 #&gt; 1      Gil Gilberto                    G                
 #&gt; 2    Jobim  Antônio Carlos   Tom       A       C       T

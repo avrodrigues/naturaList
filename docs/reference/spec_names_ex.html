@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function of naturaList - reduce data.frame of occurrence for a minimal
-column length — reduce.df • naturaList</title>
+<title>Example of specialist names with accent marks — spec_names_ex • naturaList</title>
 
 
 <!-- jquery -->
@@ -40,10 +39,8 @@ column length — reduce.df • naturaList</title>
 
 
 
-<meta property="og:title" content="Internal function of naturaList - reduce data.frame of occurrence for a minimal
-column length — reduce.df" />
-<meta property="og:description" content="Reduce columns of occurrence data.frame required by
-classify_occ to facilitate internal operation" />
+<meta property="og:title" content="Example of specialist names with accent marks — spec_names_ex" />
+<meta property="og:description" content="Example of specialist names with accent marks" />
 
 
 
@@ -135,102 +132,21 @@ classify_occ to facilitate internal operation" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal function of naturaList - reduce data.frame of occurrence for a minimal
-column length</h1>
-    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/internal_functions.R'><code>R/internal_functions.R</code></a></small>
-    <div class="hidden name"><code>reduce.df.Rd</code></div>
+    <h1>Example of specialist names with accent marks</h1>
+    <small class="dont-index">Source: <a href='https://github.com/avrodrigues/naturaList/blob/master/R/data_description.R'><code>R/data_description.R</code></a></small>
+    <div class="hidden name"><code>spec_names_ex.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reduce columns of occurrence data.frame required by
-<a href='classify_occ.html'>classify_occ</a> to facilitate internal operation</p>
+    <p>Example of specialist names with accent marks</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reduce.df</span><span class='op'>(</span>
-  <span class='va'>df</span>,
-  institution.code <span class='op'>=</span> <span class='st'>"institutionCode"</span>,
-  collection.code <span class='op'>=</span> <span class='st'>"collectionCode"</span>,
-  catalog.number <span class='op'>=</span> <span class='st'>"catalogNumber"</span>,
-  year <span class='op'>=</span> <span class='st'>"year"</span>,
-  date.identified <span class='op'>=</span> <span class='st'>"dateIdentified"</span>,
-  species <span class='op'>=</span> <span class='st'>"species"</span>,
-  identified.by <span class='op'>=</span> <span class='st'>"identifiedBy"</span>,
-  decimal.latitude <span class='op'>=</span> <span class='st'>"decimalLatitude"</span>,
-  decimal.longitude <span class='op'>=</span> <span class='st'>"decimalLongitude"</span>,
-  basis.of.record <span class='op'>=</span> <span class='st'>"basisOfRecord"</span>,
-  media.type <span class='op'>=</span> <span class='st'>"mediaType"</span>,
-  occurrence.id <span class='op'>=</span> <span class='st'>"occurrenceID"</span>,
-  na.rm.coords <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>spec_names_ex</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>df</th>
-      <td><p>occurrence data frame provided in <a href='classify_occ.html'>classify_occ</a></p></td>
-    </tr>
-    <tr>
-      <th>institution.code</th>
-      <td><p>institution.code = "institutionCode"</p></td>
-    </tr>
-    <tr>
-      <th>collection.code</th>
-      <td><p>collection.code = "collectionCode"</p></td>
-    </tr>
-    <tr>
-      <th>catalog.number</th>
-      <td><p>catalog.number = "catalogNumber"</p></td>
-    </tr>
-    <tr>
-      <th>year</th>
-      <td><p>year = "year",</p></td>
-    </tr>
-    <tr>
-      <th>date.identified</th>
-      <td><p>date.identified = "dateIdentified"</p></td>
-    </tr>
-    <tr>
-      <th>species</th>
-      <td><p>species = "species"</p></td>
-    </tr>
-    <tr>
-      <th>identified.by</th>
-      <td><p>identified.by = "identifiedBy"</p></td>
-    </tr>
-    <tr>
-      <th>decimal.latitude</th>
-      <td><p>decimal.latitude = "decimalLatitude"</p></td>
-    </tr>
-    <tr>
-      <th>decimal.longitude</th>
-      <td><p>decimal.longitude = "decimalLongitude"</p></td>
-    </tr>
-    <tr>
-      <th>basis.of.record</th>
-      <td><p>basis.of.record = "basisOfRecord"</p></td>
-    </tr>
-    <tr>
-      <th>media.type</th>
-      <td><p>media.type = "mediaType"</p></td>
-    </tr>
-    <tr>
-      <th>occurrence.id</th>
-      <td><p>occ.id = "occurrenceID"</p></td>
-    </tr>
-    <tr>
-      <th>na.rm.coords</th>
-      <td><p>na.rm.coords = TRUE</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>a data frame with only the columns required for the <code>naturaList</code>
-  package</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='classify_occ.html'>classify_occ</a></p></div>
+    <p>character</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

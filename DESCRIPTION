@@ -1,7 +1,7 @@
 Package: naturaList
 Type: Package
 Title: Classify Occurrences by Confidence Levels in the Species ID
-Version: 0.4.1
+Version: 0.4.1-1
 Authors@R: c(
     person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
     person("Gabriel", "Nakamura", role = "aut"),
