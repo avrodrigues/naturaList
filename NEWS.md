@@ -1,4 +1,4 @@
-# naturaList 0.4.1-1
+# naturaList 0.4.2
 * documentation update
 
 # naturaList 0.4.1

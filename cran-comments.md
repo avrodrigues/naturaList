@@ -1,11 +1,16 @@
 ## Test environments
 * local Windows 10, R 4.0.3
-* macOS-latest (on github-actions 10-08-2021), R 4.1.0 
+* macOS-latest (on github-actions 14-10-2021), R 4.1.0 
 * Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-rub)
 * Fedora Linux, R-devel, clang, gfortran (r-hub)
 
 ## R CMD check results
-## local Windows 10, R 4.0.3 and macOS-latest (on github-actions 10-08-2021), R 4.1.0 
+## local Windows 10, R 4.0.3 
+
+there was 1 Warning:
+'qpdf' is needed for checks on size reduction of PDFs
+
+## macOS-latest (on github-actions 14-10-2021), R 4.1.0 
 
 there were 2 Warnings:
 
@@ -16,13 +21,8 @@ there were 2 Warnings:
 
 ## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-rub)
 
-There were 1 note:
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: ‘Arthur  Vinicius Rodrigues <rodrigues.arthur.v@gmail.com>’
+OK
 
 ## Fedora Linux, R-devel, clang, gfortran (r-hub)
 
-Didn't pass:
-
-Error in install package dependencies
+OK
