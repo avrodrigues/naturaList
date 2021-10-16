@@ -20,6 +20,7 @@
 #' @return An object of sfc_POLYGON class
 #'
 #' @examples
+#' /donttest{
 #' library("raster")
 #'
 #' # load climate data
@@ -27,6 +28,7 @@
 #' env.data <- raster::as.data.frame(r.temp.prec)
 #'
 #' define_env_space(env.data, 0.05)
+#' }
 #'
 #'
 #'
