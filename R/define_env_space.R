@@ -20,7 +20,7 @@
 #' @return An object of sfc_POLYGON class
 #'
 #' @examples
-#' /donttest{
+#' \donttest{
 #' library("raster")
 #'
 #' # load climate data
