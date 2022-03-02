@@ -1,14 +1,21 @@
 Package: naturaList
 Type: Package
 Title: Classify Occurrences by Confidence Levels in the Species ID
-Version: 0.4.2
+Version: 0.4.3
 Authors@R: c(
-    person("Arthur  Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", role = "cre"),
-    person("Gabriel", "Nakamura", role = "aut"),
-	person("Leandro", "Duarte", role = "aut"))
+    person("Arthur Vinicius", "Rodrigues", email = "rodrigues.arthur.v@gmail.com", 
+      role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2656-558X")
+    ),
+    person("Gabriel", "Nakamura", role = "aut", 
+      comment = c(ORCID = "0000-0002-5144-5312")
+    ),
+	person("Leandro", "Duarte", role = "aut", 
+	  comment = c(ORCID = "0000-0003-1771-0407")
+	)
+  )  
 Description: Classify occurrence records based on confidence
     levels of species identification. In addition, implement tools to filter
-    occurrence inside grid cells and to manually check for possibles errors with 
+    occurrences inside grid cells and to manually check for possibles errors with 
 	an interactive shiny application.
 License: MIT + file LICENSE
 Encoding: UTF-8

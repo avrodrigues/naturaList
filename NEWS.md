@@ -1,3 +1,6 @@
+# naturaList 0.4.3
+* documentation update
+
 # naturaList 0.4.2
 * documentation update
 

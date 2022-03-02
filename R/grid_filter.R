@@ -50,7 +50,7 @@
 #'
 #' @examples
 #'
-#' data("A.setose")
+#' data("A.setosa")
 #' data(speciaLists)
 #'
 #' occ.class <- classify_occ(A.setosa, speciaLists)
@@ -139,6 +139,10 @@ grid_filter <- function(occ.cl,
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
   if(!natList_column){
     stop("occurrences must has 'naturaList_levels' classification.")
+  }
+
+  if(nrow(occ.cl) == 1){
+    return(occ.cl)
   }
 
   od1 <- occ.cl[order(occ.cl[,year], decreasing = T),]

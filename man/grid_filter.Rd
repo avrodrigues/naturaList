@@ -103,7 +103,7 @@ in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
 
-data("A.setose")
+data("A.setosa")
 data(speciaLists)
 
 occ.class <- classify_occ(A.setosa, speciaLists)
