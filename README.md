@@ -4,9 +4,9 @@
 
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/naturaList)](https://cran.r-project.org/package=naturaList)
-
-[![R-CMD-check](https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg)](https://github.com/avrodrigues/naturaList/actions)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/naturaList)](https://cran.r-project.org/package=naturaList) [![R-CMD-check](https://github.com/avrodrigues/naturaList/workflows/R-CMD-check/badge.svg)](https://github.com/avrodrigues/naturaList/actions) 
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/naturaList)](https://cran.r-project.org/package=naturaList) 
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/naturaList)](https://cran.r-project.org/package=naturaList)
 
 
 <!-- badges: end -->
