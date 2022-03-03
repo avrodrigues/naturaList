@@ -103,12 +103,15 @@ in species identification made by \code{\link{classify_occ}} function.
 }
 \examples{
 
+
 data("A.setosa")
-data(speciaLists)
+data("speciaLists")
 
 occ.class <- classify_occ(A.setosa, speciaLists)
 occ.grid <- grid_filter(occ.class)
-occ.grid
+head(occ.grid, 10)
+
+
 
 }
 \seealso{

@@ -76,7 +76,7 @@ environmental space" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">naturaList</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -242,18 +242,19 @@ degrees.</p></td>
     <div class='dont-index'><p><code><a href='define_env_space.html'>define_env_space</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/edzer/sp/'>sp</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/raster'>raster</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Carregando pacotes exigidos: sp</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/edzer/sp/'>sp</a></span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"cyathea.br"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"speciaLists"</span><span class='op'>)</span> <span class='co'># list of specialists</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"cyathea.br"</span><span class='op'>)</span> <span class='co'># occurrence dataset</span>
+
 
 <span class='co'># classify</span>
 <span class='va'>occ.cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='classify_occ.html'>classify_occ</a></span><span class='op'>(</span><span class='va'>cyathea.br</span>, <span class='va'>speciaLists</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/raster/man/ncell.html'>nrow</a></span><span class='op'>(</span><span class='va'>occ.cl</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 3851</div><div class='input'>
+
 <span class='co'># delimit the geographic space</span>
 <span class='co'># land area</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"BR"</span><span class='op'>)</span>
@@ -264,14 +265,14 @@ degrees.</p></td>
 
 
 <span class='co'># load climate data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"r.temp.prec"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"r.temp.prec"</span><span class='op'>)</span> <span class='co'># mean temperature and annual precipitation</span>
 <span class='va'>df.temp.prec</span> <span class='op'>&lt;-</span> <span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r.temp.prec</span><span class='op'>)</span>
 
 <span class='co'>### Define the environmental space for analysis</span>
 <span class='co'># this function will create a boundary of available environmental space,</span>
 <span class='co'># analogous to the continent boundary in the geographical space</span>
 <span class='va'>env.space</span> <span class='op'>&lt;-</span> <span class='fu'><a href='define_env_space.html'>define_env_space</a></span><span class='op'>(</span><span class='va'>df.temp.prec</span>, buffer.size <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span>
-</div><div class='img'><img src='clean_eval-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
 <span class='co'># filter by year to be consistent with the environmental data</span>
 <span class='va'>occ.class.1970</span> <span class='op'>&lt;-</span>  <span class='va'>occ.cl</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>&gt;=</span> <span class='fl'>1970</span><span class='op'>)</span>
@@ -281,56 +282,10 @@ degrees.</p></td>
                       env.space <span class='op'>=</span> <span class='va'>env.space</span>,
                       geo.space <span class='op'>=</span> <span class='va'>BR</span>,
                       r <span class='op'>=</span> <span class='va'>r.temp.prec</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Calculating metrics before cleaning</span></div><div class='output co'>#&gt; <span class='message'>..Step 1 - Geographical space</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'sf' was built under R version 4.0.5</span></div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1</span></div><div class='output co'>#&gt; <span class='message'>..Step 2 - Enviromental space</span></div><div class='output co'>#&gt; <span class='message'>Calculating metrics after cleaning</span></div><div class='output co'>#&gt; <span class='message'>..Step 1 - Geographical space</span></div><div class='output co'>#&gt; <span class='message'>..Step 2 - Enviromental space</span></div><div class='output co'>#&gt; <span class='message'>Preparing outputs</span></div><div class='output co'>#&gt; <span class='message'>DONE!</span></div><div class='input'>
+
 <span class='co'>#area results</span>
-<span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>area</span>
-</div><div class='output co'>#&gt;                          r.geo.area r.env.area
-#&gt; Cyathea abbreviata             0.79       0.34
-#&gt; Cyathea andina                 0.00       0.00
-#&gt; Cyathea aterrima               0.00       0.00
-#&gt; Cyathea atrocastanea           0.91       0.39
-#&gt; Cyathea atrovirens             0.21       0.58
-#&gt; Cyathea axillaris              0.84       0.98
-#&gt; Cyathea bipinnatifida          0.17       0.59
-#&gt; Cyathea corcovadensis          0.95       0.95
-#&gt; Cyathea cyatheoides            0.00       0.12
-#&gt; Cyathea delgadii               0.41       0.79
-#&gt; Cyathea demissa                0.00       0.00
-#&gt; Cyathea dichromatolepis        0.61       0.96
-#&gt; Cyathea feeana                 0.06       0.18
-#&gt; Cyathea gardneri               0.04       0.18
-#&gt; Cyathea glaziovii              0.97       0.97
-#&gt; Cyathea hirsuta                0.08       0.68
-#&gt; Cyathea hymenophylloides       0.19       0.24
-#&gt; Cyathea iheringii              0.00       0.00
-#&gt; Cyathea incognita              0.00       0.00
-#&gt; Cyathea lasiosora              0.00       0.00
-#&gt; Cyathea lechleri               0.00       0.00
-#&gt; Cyathea macrocarpa             0.00       0.00
-#&gt; Cyathea macrosora              0.01       0.05
-#&gt; Cyathea marginalis             0.00       0.00
-#&gt; Cyathea mexiae                 0.00       0.00
-#&gt; Cyathea microdonta             0.52       0.53
-#&gt; Cyathea miersii                0.25       0.25
-#&gt; Cyathea multiflora             0.01       0.13
-#&gt; Cyathea myriotricha            1.00       1.00
-#&gt; Cyathea nigra                  0.00       0.00
-#&gt; Cyathea oblonga                0.00       0.00
-#&gt; Cyathea phalerata              0.35       0.70
-#&gt; Cyathea pilosissima            0.00       0.00
-#&gt; Cyathea platylepis             0.00       0.00
-#&gt; Cyathea poeppigii              1.00       1.00
-#&gt; Cyathea praecincta             0.24       0.70
-#&gt; Cyathea pungens                0.79       0.56
-#&gt; Cyathea rufa                   0.13       0.38
-#&gt; Cyathea spectabilis            0.00       0.00
-#&gt; Cyathea subincisa              1.00       1.00
-#&gt; Cyathea surinamensis           0.26       0.34
-#&gt; Cyathea thysanolepis           0.00       0.00
-#&gt; Cyathea tortuosa               0.00       0.00
-#&gt; Cyathea traillii               0.00       0.00
-#&gt; Cyathea uleana                 0.99       0.61
-#&gt; Cyathea villosa                0.64       0.69</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/headtail.html'>head</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>area</span><span class='op'>)</span>
+
 
 <span class='co'>### richness maps</span>
 <span class='co'>## it makes sense if there are more than one species</span>
@@ -340,8 +295,8 @@ degrees.</p></td>
                                                 <span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>rich</span><span class='op'>$</span><span class='va'>rich.AC</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>rich.before.clean</span><span class='op'>)</span>
-</div><div class='img'><img src='clean_eval-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>rich.after.clean</span><span class='op'>)</span>
-</div><div class='img'><img src='clean_eval-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>rich.after.clean</span><span class='op'>)</span>
+
 <span class='co'>### species area map</span>
 <span class='va'>comp.bc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>comp</span><span class='op'>$</span><span class='va'>comp.BC</span><span class='op'>)</span>
 <span class='va'>comp.ac</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>cl.eval</span><span class='op'>$</span><span class='va'>comp</span><span class='op'>$</span><span class='va'>comp.AC</span><span class='op'>)</span>
@@ -352,8 +307,8 @@ degrees.</p></td>
                                             <span class='va'>comp.ac</span><span class='op'>$</span><span class='va'>`Cyathea villosa`</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>c.villosa.bc</span><span class='op'>)</span>
-</div><div class='img'><img src='clean_eval-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>c.villosa.ac</span><span class='op'>)</span>
-</div><div class='img'><img src='clean_eval-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
+<span class='fu'>raster</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>c.villosa.ac</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>

@@ -1,3 +1,6 @@
+# naturaList 0.5.0
+* grid_filter function was recoded. The new code is faster than the older version, but it could produce different results from older version. 
+
 # naturaList 0.4.3
 * documentation update
 
