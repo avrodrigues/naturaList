@@ -50,13 +50,16 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #'
 #' data("A.setosa")
 #' data("speciaLists")
 #'
 #' occ.class <- classify_occ(A.setosa, speciaLists)
 #' occ.grid <- grid_filter(occ.class)
-#' head(occ.grid, 10)
+#'
+#' }
+#'
 #'
 #'
 #'

@@ -25,6 +25,17 @@ and 1 Note:
 *      Note: found 5 marked Latin-1 strings
        Note: found 7187 marked UTF-8 strings
 
+## Windows Server 2022, R-devel, 64 bit (r-hub)
+
+Notes:
+* checking examples ... NOTE
+Examples with CPU (user + system) or elapsed time > 5s
+            user system elapsed
+grid_filter 5.84   0.14    5.98
+
+This is the only server that the example did not pass. 
+
+
 ## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-rub)
 
 OK
