@@ -1,12 +1,12 @@
 ## Test environments
-* local Windows 10, R 4.0.3
-* macOS-latest (github-actions), R 4.1.2 
+* local Windows 10, R 4.1.3
+* macOS  11.6.5 20G527 (github-actions), R 4.1.3  
 * Windows Server 2022, R-devel, 64 bit (r-hub)
-* Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-rub)
+* Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-hub)
 * Fedora Linux, R-devel, clang, gfortran (r-hub)
 
 ## R CMD check results
-## local Windows 10, R 4.0.3 
+## local Windows 10, R 4.1.3
 
 there was 1 Warning:
 'qpdf' is needed for checks on size reduction of PDFs
@@ -20,23 +20,14 @@ there were 2 Warnings:
 * dir.exists(dir) is not TRUEdir.exists(dir) is not TRUEdir.exists(dir) is not TRUEdir.exists(dir) is not TRUE
   Package vignettes without corresponding single PDF/HTML  
   
-and 1 Note:
-
-*      Note: found 5 marked Latin-1 strings
-       Note: found 7187 marked UTF-8 strings
-
 ## Windows Server 2022, R-devel, 64 bit (r-hub)
 
-Notes:
-* checking examples ... NOTE
-Examples with CPU (user + system) or elapsed time > 5s
-            user system elapsed
-grid_filter 5.84   0.14    5.98
+Note:
+* checking for detritus in the temp directory ... NOTE
+Found the following files/directories:
+  'lastMiKTeXException'
 
-This is the only server that the example did not pass. 
-
-
-## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-rub)
+## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-hub)
 
 OK
 
