@@ -12,3 +12,4 @@
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^vignettes/wc10$
+^CRAN-SUBMISSION$
