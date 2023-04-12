@@ -1,4 +1,5 @@
-# naturaList 0.5.0.9000
+# naturaList 0.5.1
+* it includes the env_grid_filter function. The function select the best classified species occurrence regarding the species identification reliability in the environmental space. 
 
 
 # naturaList 0.5.0
