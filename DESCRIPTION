@@ -39,7 +39,8 @@ Imports:
     htmltools,
     methods,
     rlang,
-    tm
+    tm,
+    stringi
 Suggests: 
     knitr,
     rmarkdown,

@@ -28,7 +28,6 @@ test_that("Create the collums correctly", {
 
 })
 
-
 test_that("Create the rows correctly when there is some accent mark", {
   expect_equal(
     create_spec_df("Arthur Vinícius Rodrigues"),
