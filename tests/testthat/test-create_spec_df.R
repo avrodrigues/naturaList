@@ -54,3 +54,16 @@ test_that("Create the cols correctely when have some abbreviated name",{
   )
 })
 
+test_that("Keep the upper and lower case as specified by the user and ignore lower case in 'Abbrev' columns", {
+  expect_equal(
+    create_spec_df("Arthur de Rodrigues"),
+    data.frame(
+      LastName = "Rodrigues",
+      Name1 = "Arthur",
+      Name2 = "de",
+      Abbrev1 = "A"
+      )
+    )
+})
+
+
