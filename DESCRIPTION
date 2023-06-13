@@ -45,8 +45,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    rgeos,
-    rgdal,
     rnaturalearth,
     lwgeom,
     shinyLP,
