@@ -8,7 +8,7 @@
 #'   classified by \code{\link{classify_occ}} function.
 #' @param grid.resolution numeric vector with width and height of grid cell in
 #'   decimal degrees.
-#' @param r raster from which the grid cell resolution is derived.
+#' @param r an object of class 'RasterLayer' or 'SpatRaster' from which the grid cell are used for select the most reliable occurrence.
 #' @param occurrence.id column name of \code{occ} with link or code for the
 #'  occurrence record. See in
 #'  \href{https://dwc.tdwg.org/terms/#dwc:occurrenceID}{Darwin Core Format}
@@ -144,7 +144,7 @@ grid_filter <- function(occ.cl,
   }
 
 
-# initial checkings -------------------------------------------------------
+# initial checking -------------------------------------------------------
 
 
   natList_column <- "naturaList_levels" %in% colnames(occ.cl)
@@ -155,7 +155,7 @@ grid_filter <- function(occ.cl,
   spp <- unique(occ.cl[,species])
 
   if(length(spp) > 1){
-    stop("there is more than 1 species in 'occ.cl'. Please, use 'grid_filter' with one species at a time. You can create a loop for filter more species.")
+    stop("there is more than 1 species in 'occ.cl'. Please, use 'grid_filter' with only one species at a time. You can create a loop for filter more species.")
   }
 
   if(nrow(occ.cl) == 1){
@@ -163,26 +163,49 @@ grid_filter <- function(occ.cl,
   }
 
   if(!is.null(r)){
-    if(!inherits(r, what =  "RasterLayer")){stop("'r' must be of class RasterLayer")}
+    if(!inherits(r, what =  c("RasterLayer", "SpatRaster"))){
+      stop("'r' must be of class 'RasterLayer' or 'SpatRaster'")
+      }
   }
 
   if(is.null(r)){
+    # {raster} version ----
 
-    spt.spp_DF <- sp::SpatialPointsDataFrame(
-      occ.cl[,c(decimal.longitude, decimal.latitude)], occ.cl)
+    # spt.spp_DF <- sp::SpatialPointsDataFrame(
+    #   occ.cl[,c(decimal.longitude, decimal.latitude)], occ.cl)
+    #
+    # ext <- raster::extent(spt.spp_DF)[1:4]
+    #
+    # new.ext <- c(ext[1] - grid.resolution[1],
+    #              ext[2] + grid.resolution[2],
+    #              ext[3] - grid.resolution[1],
+    #              ext[4] + grid.resolution[2])
+    #
+    # r <- raster::raster(resolution = grid.resolution, ext = raster::extent(new.ext))
 
-    ext <- raster::extent(spt.spp_DF)[1:4]
+
+    # {terra} version ----
+    ext <- c(range(occ.cl[,decimal.longitude]), range(occ.cl[,decimal.latitude]))
 
     new.ext <- c(ext[1] - grid.resolution[1],
                  ext[2] + grid.resolution[2],
                  ext[3] - grid.resolution[1],
                  ext[4] + grid.resolution[2])
 
-    r <- raster::raster(resolution = grid.resolution, ext = raster::extent(new.ext))
+    r <- terra::rast(extent = new.ext, resolution = grid.resolution)
   }
 
   occ.xy <- as.matrix(occ.cl[,c(decimal.longitude, decimal.latitude)])
-  occ.cell <- dplyr::mutate(occ.cl, cell = raster::cellFromXY(r, occ.xy))
+
+  if(!inherits(r, what =  "RasterLayer")){
+    occ.cell <- dplyr::mutate(occ.cl, cell = raster::cellFromXY(r, occ.xy))
+  }
+
+  if(!inherits(r, what =  "SpatRaster"))
+  {
+    occ.cell <- dplyr::mutate(occ.cl, cell = terra::cellFromXY(r, occ.xy))
+  }
+
   cols.occ <- names(occ.cl)
 
   occ.grid <- occ.cell %>%
@@ -190,9 +213,8 @@ grid_filter <- function(occ.cl,
     dplyr::group_by(.data$cell) %>%
     dplyr::slice_head(n = 1) %>%
     dplyr::ungroup() %>%
-    dplyr::select(cols.occ) %>%
+    dplyr::select(all_of(cols.occ)) %>%
     as.data.frame()
 
-  return(occ.grid)
-
+ return(occ.grid)
 }

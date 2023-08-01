@@ -40,7 +40,8 @@ Imports:
     methods,
     rlang,
     tm,
-    stringi
+    stringi,
+    terra
 Suggests: 
     knitr,
     rmarkdown,
