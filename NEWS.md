@@ -1,14 +1,3 @@
-# naturaList 0.6.0
-
-In this version we implement a transition from {raster} to {terra} packages.
-
-
-It can change the output of the functions bellow:
-
-`grid_filter` - It could present different output compared to the previous versions of the {naturaLIst} if the user provides only the resolution argument. If the user provides a raster layer (as used to get environment information) there is no difference in the output between versions. 
-
-
-
 # naturaList 0.5.1
 * it includes the env_grid_filter function. The function select the best classified species occurrence regarding the species identification reliability in the environmental space. 
 

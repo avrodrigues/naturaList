@@ -38,7 +38,7 @@ classified by \code{\link{classify_occ}} function.}
 \item{grid.resolution}{numeric vector with width and height of grid cell in
 decimal degrees.}
 
-\item{r}{an object of class 'RasterLayer' or 'SpatRaster' from which the grid cell are used for select the most reliable occurrence.}
+\item{r}{raster from which the grid cell resolution is derived.}
 
 \item{institution.code}{column name of \code{occ.cl} with the name (or acronym)
 in use by the institution having custody of the object(s) or information
