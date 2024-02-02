@@ -185,7 +185,10 @@ grid_filter <- function(occ.cl,
 
 
     # {terra} version ----
-    ext <- c(range(occ.cl[,decimal.longitude]), range(occ.cl[,decimal.latitude]))
+
+    ext <- c(range(occ.cl[,decimal.longitude]),
+             range(occ.cl[,decimal.latitude])
+             )
 
     new.ext <- c(ext[1] - grid.resolution[1],
                  ext[2] + grid.resolution[2],

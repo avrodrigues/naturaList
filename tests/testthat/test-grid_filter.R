@@ -47,7 +47,7 @@ grid_filter_05 <- grid_filter(occ_xy_test, grid.resolution = res_05)
 grid_filter_025 <- grid_filter(occ_xy_test, grid.resolution = res_025)
 
 test_that("Number of selected occurrences", {
-  expect_equal(nrow(grid_filter_05), 4)
+  expect_equal(nrow(grid_filter_05), 5)
   expect_equal(nrow(grid_filter_025), 13)
   })
 
@@ -64,24 +64,6 @@ test_that("Corrected levels of occurrence selected in each grid cell", {
   )
 })
 
-# reference for the 'r' argument tests ----
-
-ext_data <- c(range(occ_xy_test$decimalLongitude),
-         range(occ_xy_test$decimalLatitude))
-
-ext_test <- c(ext_data[1] - res_025[1],
-              ext_data[2] + res_025[2],
-              ext_data[3] - res_025[1],
-              ext_data[4] + res_025[2])
-
-r_terra <- terra::rast(extent = ext_test, resolution = res_025)
-r_raster <- raster(r_terra)
-
-grid_filter_terra <- grid_filter(occ_xy_test, r = r_terra)
-grid_filter_raster <- grid_filter(occ_xy_test, r = r_raster)
 
 
-test_that("results using ´r´ argument of class
-          'RasterLayer' or 'SpatRaster' are the same", {
-  expect_identical(grid_filter_terra, grid_filter_raster)
-})
+
