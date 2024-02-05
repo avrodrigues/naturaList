@@ -7,13 +7,16 @@
 * win-builder
 
 ## R CMD check results
-## local Windows 10, R 4.2.2
 
-Ok
+## local Windows 10, R 4.1.3 (date 05-02-2024)
+
+everything ok
+
 
 ## macOS  12.6.4 21G526 (github-actions), R 4.2.3 
 
 there were 2 Warnings and 2 notes:
+
 
  ❯ checking files in ‘vignettes’ ... WARNING
   Files in the 'vignettes' directory but no files in 'inst/doc':
@@ -42,18 +45,22 @@ there were 2 Warnings and 2 notes:
 
 Ok
   
-## Windows Server 2022, R-devel, 64 bit (r-hub)
+## Windows Server 2022, R-devel, 64 bit (r-hub) (05-02-24)
+3 Notes:
 
-Note:
-* checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
+❯ checking for non-standard things in the check directory ... NOTE
+  Found the following files/directories:
+    ''NULL''
 
-## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-hub)
+❯ checking for detritus in the temp directory ... NOTE
+  Found the following files/directories:
+    'lastMiKTeXException'
+
+## Ubuntu Linux 20.04.1 LTS, R-release, GCC (r-hub) (05-02-24)
 
 OK
 
-## Fedora Linux, R-devel, clang, gfortran (r-hub)
+## Fedora Linux, R-devel, clang, gfortran (r-hub) (05-02-24)
 
 OK
 
