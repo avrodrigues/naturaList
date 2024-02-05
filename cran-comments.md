@@ -6,10 +6,9 @@
 * Fedora Linux, R-devel, clang, gfortran (r-hub)
 
 ## R CMD check results
-## local Windows 10, R 4.1.3
+## local Windows 10, R 4.1.3 (date 02-02-2024)
 
-there was 1 Warning:
-'qpdf' is needed for checks on size reduction of PDFs
+everything ok
 
 ## macOS-latest (at github-actions 02-03-2022), R 4.1.2 
 
